@@ -38,7 +38,7 @@ License: <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0</a
 
 For 3rd party integration with CRO
 
-## list_locations
+## <img src="images/get24.png" style="height:12px"></img> List locations for tenant.
 
 <a id="opIdlist_locations"></a>
 
@@ -186,8 +186,6 @@ func main() {
 
 `GET /location`
 
-*List locations for tenant.*
-
 List locations for tenant.
 
 <h3 id="list_locations-parameters">Parameters</h3>
@@ -219,12 +217,12 @@ List locations for tenant.
 
 <h3 id="list_locations-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|List of locations|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Inline|List of locations|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <h3 id="list_locations-responseschema">Response Schema</h3>
 
@@ -243,7 +241,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## list_locations_options
+## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlist_locations_options"></a>
 
@@ -377,15 +375,13 @@ func main() {
 
 `OPTIONS /location`
 
-*HTTP options*
-
 List HTTP operations.
 
 <h3 id="list_locations_options-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -399,7 +395,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## list_locations_head
+## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlist_locations_head"></a>
 
@@ -541,8 +537,6 @@ func main() {
 
 `HEAD /location`
 
-*HTTP head*
-
 HTTP head
 
 <h3 id="list_locations_head-parameters">Parameters</h3>
@@ -557,9 +551,9 @@ HTTP head
 
 <h3 id="list_locations_head-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -572,7 +566,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## get_location
+## <img src="images/get24.png" style="height:12px"></img> Get info for specified location.
 
 <a id="opIdget_location"></a>
 
@@ -720,8 +714,6 @@ func main() {
 
 `GET /location/{location_id}`
 
-*Get location info.*
-
 Get info for specified location.
 
 <h3 id="get_location-parameters">Parameters</h3>
@@ -754,19 +746,19 @@ Get info for specified location.
 
 <h3 id="get_location-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Location info.|[LocationModel](#schemalocationmodel)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[LocationModel](#schemalocationmodel)|Location info.|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
 
-## location_options
+## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlocation_options"></a>
 
@@ -900,8 +892,6 @@ func main() {
 
 `OPTIONS /location/{location_id}`
 
-*HTTP options*
-
 List HTTP operations.
 
 <h3 id="location_options-parameters">Parameters</h3>
@@ -916,9 +906,9 @@ List HTTP operations.
 
 <h3 id="location_options-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -932,7 +922,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## location_head
+## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlocation_head"></a>
 
@@ -1074,8 +1064,6 @@ func main() {
 
 `HEAD /location/{location_id}`
 
-*HTTP head*
-
 HTTP head
 
 <h3 id="location_head-parameters">Parameters</h3>
@@ -1093,9 +1081,9 @@ HTTP head
 
 <h3 id="location_head-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -1108,7 +1096,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## list_jobs_for_location
+## <img src="images/get24.png" style="height:12px"></img> List jobs for location.
 
 <a id="opIdlist_jobs_for_location"></a>
 
@@ -1256,8 +1244,6 @@ func main() {
 
 `GET /location/{location_id}/job`
 
-*List jobs for location.*
-
 List jobs for location.
 
 <h3 id="list_jobs_for_location-parameters">Parameters</h3>
@@ -1362,11 +1348,11 @@ List jobs for location.
         "cluster": 1,
         "customer_id": 1,
         "description": "A description",
-        "dispatched_on": "2019-01-03T00:40:25.280Z",
+        "dispatched_on": "2019-01-04T00:06:55.225Z",
         "id": 1,
         "is_returned": false,
-        "last_activity_on": "2019-01-03T00:40:25.280Z",
-        "last_rental_invoice_on": "2019-01-03T00:40:25.280Z",
+        "last_activity_on": "2019-01-04T00:06:55.225Z",
+        "last_rental_invoice_on": "2019-01-04T00:06:55.225Z",
         "latitude": 54.235,
         "location": {
           "id": 1,
@@ -1378,7 +1364,7 @@ List jobs for location.
         "longitude": 127.123,
         "number": "REF100",
         "quantity": 1,
-        "returned_on": "2019-01-03T00:40:25.280Z"
+        "returned_on": "2019-01-04T00:06:55.225Z"
       },
       "asset_type": {
         "deleted": false,
@@ -1414,15 +1400,15 @@ List jobs for location.
             "is_shipping": true
           }
         ],
-        "created_on": "2019-01-03T00:40:25.281Z",
+        "created_on": "2019-01-04T00:06:55.225Z",
         "id": 9,
         "locations": [
           {
-            "created_on": "2019-01-03T00:40:25.281Z",
+            "created_on": "2019-01-04T00:06:55.225Z",
             "customer_id": 9,
             "is_active": true,
             "is_commercial": false,
-            "last_edited": "2019-01-03T00:40:25.281Z",
+            "last_edited": "2019-01-04T00:06:55.225Z",
             "location_id": 1,
             "note": "string",
             "reference_number": "string",
@@ -1508,19 +1494,19 @@ List jobs for location.
 
 <h3 id="list_jobs_for_location-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|List of jobs for location.|[JobListModel](#schemajoblistmodel)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[JobListModel](#schemajoblistmodel)|List of jobs for location.|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
 
-## location_jobs_options
+## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlocation_jobs_options"></a>
 
@@ -1654,8 +1640,6 @@ func main() {
 
 `OPTIONS /location/{location_id}/job`
 
-*HTTP options*
-
 List HTTP operations.
 
 <h3 id="location_jobs_options-parameters">Parameters</h3>
@@ -1670,9 +1654,9 @@ List HTTP operations.
 
 <h3 id="location_jobs_options-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -1686,7 +1670,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## list_jobs_head
+## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlist_jobs_head"></a>
 
@@ -1828,8 +1812,6 @@ func main() {
 
 `HEAD /location/{location_id}/job`
 
-*HTTP head*
-
 HTTP head
 
 <h3 id="list_jobs_head-parameters">Parameters</h3>
@@ -1847,9 +1829,9 @@ HTTP head
 
 <h3 id="list_jobs_head-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -1862,7 +1844,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## get_job
+## <img src="images/get24.png" style="height:12px"></img> Get specified job.
 
 <a id="opIdget_job"></a>
 
@@ -2010,8 +1992,6 @@ func main() {
 
 `GET /location/{location_id}/job/{job_id}`
 
-*Get specified job.*
-
 Get specified job.
 
 <h3 id="get_job-parameters">Parameters</h3>
@@ -2109,11 +2089,11 @@ Get specified job.
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-03T00:40:25.284Z",
+    "dispatched_on": "2019-01-04T00:06:55.230Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-03T00:40:25.284Z",
-    "last_rental_invoice_on": "2019-01-03T00:40:25.284Z",
+    "last_activity_on": "2019-01-04T00:06:55.230Z",
+    "last_rental_invoice_on": "2019-01-04T00:06:55.230Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -2125,7 +2105,7 @@ Get specified job.
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-03T00:40:25.284Z"
+    "returned_on": "2019-01-04T00:06:55.230Z"
   },
   "asset_type": {
     "deleted": false,
@@ -2161,15 +2141,15 @@ Get specified job.
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-03T00:40:25.284Z",
+    "created_on": "2019-01-04T00:06:55.230Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-03T00:40:25.284Z",
+        "created_on": "2019-01-04T00:06:55.230Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-03T00:40:25.284Z",
+        "last_edited": "2019-01-04T00:06:55.230Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -2251,19 +2231,19 @@ Get specified job.
 
 <h3 id="get_job-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|JobModel|[JobModel](#schemajobmodel)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[JobModel](#schemajobmodel)|JobModel|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
 
-## dispatch_job
+## <img src="images/patch24.png" style="height:12px"></img> Dispatch job.
 
 <a id="opIddispatch_job"></a>
 
@@ -2412,8 +2392,6 @@ func main() {
 
 `PATCH /location/{location_id}/job/{job_id}`
 
-*Dispatch job.*
-
 Dispatch job.
 
 <h3 id="dispatch_job-parameters">Parameters</h3>
@@ -2509,19 +2487,19 @@ Dispatch job.
 
 <h3 id="dispatch_job-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|UpdatedJobModel|[UpdatedJobModel](#schemaupdatedjobmodel)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[UpdatedJobModel](#schemaupdatedjobmodel)|UpdatedJobModel|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
 
-## get_job_options
+## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdget_job_options"></a>
 
@@ -2655,8 +2633,6 @@ func main() {
 
 `OPTIONS /location/{location_id}/job/{job_id}`
 
-*HTTP options*
-
 List HTTP operations.
 
 <h3 id="get_job_options-parameters">Parameters</h3>
@@ -2674,9 +2650,9 @@ List HTTP operations.
 
 <h3 id="get_job_options-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -2690,7 +2666,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## get_job_head
+## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdget_job_head"></a>
 
@@ -2832,8 +2808,6 @@ func main() {
 
 `HEAD /location/{location_id}/job/{job_id}`
 
-*HTTP head*
-
 HTTP head
 
 <h3 id="get_job_head-parameters">Parameters</h3>
@@ -2854,9 +2828,9 @@ HTTP head
 
 <h3 id="get_job_head-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -2869,7 +2843,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## list_trucks_for_location
+## <img src="images/get24.png" style="height:12px"></img> List trucks for location.
 
 <a id="opIdlist_trucks_for_location"></a>
 
@@ -3017,8 +2991,6 @@ func main() {
 
 `GET /location/{location_id}/truck`
 
-*List trucks for location.*
-
 List trucks for location.
 
 <h3 id="list_trucks_for_location-parameters">Parameters</h3>
@@ -3065,19 +3037,19 @@ List trucks for location.
 
 <h3 id="list_trucks_for_location-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|List of trucks for location.|[TruckListModel](#schematrucklistmodel)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[TruckListModel](#schematrucklistmodel)|List of trucks for location.|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
 
-## list_trucks_options
+## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlist_trucks_options"></a>
 
@@ -3211,8 +3183,6 @@ func main() {
 
 `OPTIONS /location/{location_id}/truck`
 
-*HTTP options*
-
 List HTTP operations.
 
 <h3 id="list_trucks_options-parameters">Parameters</h3>
@@ -3227,9 +3197,9 @@ List HTTP operations.
 
 <h3 id="list_trucks_options-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -3243,7 +3213,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## list_trucks_head
+## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlist_trucks_head"></a>
 
@@ -3385,8 +3355,6 @@ func main() {
 
 `HEAD /location/{location_id}/truck`
 
-*HTTP head*
-
 HTTP head
 
 <h3 id="list_trucks_head-parameters">Parameters</h3>
@@ -3404,9 +3372,9 @@ HTTP head
 
 <h3 id="list_trucks_head-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -3419,7 +3387,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## get_truck
+## <img src="images/get24.png" style="height:12px"></img> Get truck info.
 
 <a id="opIdget_truck"></a>
 
@@ -3567,8 +3535,6 @@ func main() {
 
 `GET /location/{location_id}/truck/{truck_id}`
 
-*Get truck info.*
-
 Get truck info.
 
 <h3 id="get_truck-parameters">Parameters</h3>
@@ -3608,19 +3574,19 @@ Get truck info.
 
 <h3 id="get_truck-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Truck info.|string|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|string|Truck info.|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
 
-## set_truck_driver
+## <img src="images/patch24.png" style="height:12px"></img> Set driver for truck.
 
 <a id="opIdset_truck_driver"></a>
 
@@ -3769,8 +3735,6 @@ func main() {
 
 `PATCH /location/{location_id}/truck/{truck_id}`
 
-*Set driver for truck.*
-
 Set driver for truck.
 
 <h3 id="set_truck_driver-parameters">Parameters</h3>
@@ -3815,19 +3779,19 @@ Set driver for truck.
 
 <h3 id="set_truck_driver-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Updated truck profile.|[TruckModel](#schematruckmodel)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[TruckModel](#schematruckmodel)|Updated truck profile.|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
 
-## get_truck_options
+## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdget_truck_options"></a>
 
@@ -3961,8 +3925,6 @@ func main() {
 
 `OPTIONS /location/{location_id}/truck/{truck_id}`
 
-*HTTP options*
-
 List HTTP operations.
 
 <h3 id="get_truck_options-parameters">Parameters</h3>
@@ -3980,9 +3942,9 @@ List HTTP operations.
 
 <h3 id="get_truck_options-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -3996,7 +3958,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## get_truck_head
+## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdget_truck_head"></a>
 
@@ -4138,8 +4100,6 @@ func main() {
 
 `HEAD /location/{location_id}/truck/{truck_id}`
 
-*HTTP head*
-
 HTTP head
 
 <h3 id="get_truck_head-parameters">Parameters</h3>
@@ -4160,9 +4120,9 @@ HTTP head
 
 <h3 id="get_truck_head-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -4175,7 +4135,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## list_drivers_for_location
+## <img src="images/get24.png" style="height:12px"></img> List drivers for location.
 
 <a id="opIdlist_drivers_for_location"></a>
 
@@ -4323,8 +4283,6 @@ func main() {
 
 `GET /location/{location_id}/driver`
 
-*List drivers for location.*
-
 List drivers for location.
 
 <h3 id="list_drivers_for_location-parameters">Parameters</h3>
@@ -4377,19 +4335,19 @@ List drivers for location.
 
 <h3 id="list_drivers_for_location-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|List of drivers for location.|[DriverListModel](#schemadriverlistmodel)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[DriverListModel](#schemadriverlistmodel)|List of drivers for location.|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
 
-## list_drivers_options
+## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlist_drivers_options"></a>
 
@@ -4523,8 +4481,6 @@ func main() {
 
 `OPTIONS /location/{location_id}/driver`
 
-*HTTP options*
-
 List HTTP operations.
 
 <h3 id="list_drivers_options-parameters">Parameters</h3>
@@ -4539,9 +4495,9 @@ List HTTP operations.
 
 <h3 id="list_drivers_options-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -4555,7 +4511,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## list_drivers_head
+## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlist_drivers_head"></a>
 
@@ -4697,8 +4653,6 @@ func main() {
 
 `HEAD /location/{location_id}/driver`
 
-*HTTP head*
-
 HTTP head
 
 <h3 id="list_drivers_head-parameters">Parameters</h3>
@@ -4716,9 +4670,9 @@ HTTP head
 
 <h3 id="list_drivers_head-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -4731,7 +4685,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## list_customers_for_location
+## <img src="images/get24.png" style="height:12px"></img> List customers for location.
 
 <a id="opIdlist_customers_for_location"></a>
 
@@ -4879,8 +4833,6 @@ func main() {
 
 `GET /location/{location_id}/customer`
 
-*List customers for location.*
-
 List customers for location.
 
 <h3 id="list_customers_for_location-parameters">Parameters</h3>
@@ -4961,19 +4913,19 @@ List customers for location.
 
 <h3 id="list_customers_for_location-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Paged result sef of customers for location.|[ListCustomerResultModel](#schemalistcustomerresultmodel)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ListCustomerResultModel](#schemalistcustomerresultmodel)|Paged result sef of customers for location.|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
 
-## list_customers_options
+## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlist_customers_options"></a>
 
@@ -5107,8 +5059,6 @@ func main() {
 
 `OPTIONS /location/{location_id}/customer`
 
-*HTTP options*
-
 List HTTP operations.
 
 <h3 id="list_customers_options-parameters">Parameters</h3>
@@ -5123,9 +5073,9 @@ List HTTP operations.
 
 <h3 id="list_customers_options-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -5139,7 +5089,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## list_customers_head
+## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlist_customers_head"></a>
 
@@ -5281,8 +5231,6 @@ func main() {
 
 `HEAD /location/{location_id}/customer`
 
-*HTTP head*
-
 HTTP head
 
 <h3 id="list_customers_head-parameters">Parameters</h3>
@@ -5300,9 +5248,9 @@ HTTP head
 
 <h3 id="list_customers_head-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -5315,7 +5263,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## list_haulers
+## <img src="images/get24.png" style="height:12px"></img> List third party haulers for tenant.
 
 <a id="opIdlist_haulers"></a>
 
@@ -5463,8 +5411,6 @@ func main() {
 
 `GET /hauler`
 
-*List third party haulers.*
-
 List third party haulers for tenant.
 
 <h3 id="list_haulers-parameters">Parameters</h3>
@@ -5500,19 +5446,19 @@ List third party haulers for tenant.
 
 <h3 id="list_haulers-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|List of third party haulers for tenant.|[HaulerListModel](#schemahaulerlistmodel)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[HaulerListModel](#schemahaulerlistmodel)|List of third party haulers for tenant.|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
 
-## create_third_party_hauler
+## <img src="images/post24.png" style="height:12px"></img> Create 3rd Party hauler profile.
 
 <a id="opIdcreate_third_party_hauler"></a>
 
@@ -5664,8 +5610,6 @@ func main() {
 
 `POST /hauler`
 
-*Create 3rd Party Hauler*
-
 Create 3rd Party hauler profile.
 
 <h3 id="create_third_party_hauler-parameters">Parameters</h3>
@@ -5770,11 +5714,11 @@ Usernames must conform to the addr-spec defined in RFC 5322.
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-03T00:40:25.292Z",
+    "dispatched_on": "2019-01-04T00:06:55.240Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-03T00:40:25.292Z",
-    "last_rental_invoice_on": "2019-01-03T00:40:25.292Z",
+    "last_activity_on": "2019-01-04T00:06:55.240Z",
+    "last_rental_invoice_on": "2019-01-04T00:06:55.240Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -5786,7 +5730,7 @@ Usernames must conform to the addr-spec defined in RFC 5322.
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-03T00:40:25.292Z"
+    "returned_on": "2019-01-04T00:06:55.240Z"
   },
   "asset_type": {
     "deleted": false,
@@ -5822,15 +5766,15 @@ Usernames must conform to the addr-spec defined in RFC 5322.
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-03T00:40:25.292Z",
+    "created_on": "2019-01-04T00:06:55.240Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-03T00:40:25.292Z",
+        "created_on": "2019-01-04T00:06:55.240Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-03T00:40:25.292Z",
+        "last_edited": "2019-01-04T00:06:55.240Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -5912,19 +5856,19 @@ Usernames must conform to the addr-spec defined in RFC 5322.
 
 <h3 id="create_third_party_hauler-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Third party hauler profile.|[JobModel](#schemajobmodel)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[JobModel](#schemajobmodel)|Third party hauler profile.|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
 
-## list_haulers_options
+## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlist_haulers_options"></a>
 
@@ -6059,8 +6003,6 @@ func main() {
 
 `OPTIONS /hauler`
 
-*HTTP options*
-
 List HTTP operations.
 
 <h3 id="list_haulers_options-parameters">Parameters</h3>
@@ -6075,9 +6017,9 @@ List HTTP operations.
 
 <h3 id="list_haulers_options-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -6091,7 +6033,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## list_haulers_head
+## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlist_haulers_head"></a>
 
@@ -6234,8 +6176,6 @@ func main() {
 
 `HEAD /hauler`
 
-*HTTP head*
-
 HTTP head
 
 <h3 id="list_haulers_head-parameters">Parameters</h3>
@@ -6253,9 +6193,9 @@ HTTP head
 
 <h3 id="list_haulers_head-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -6268,7 +6208,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## get_hauler
+## <img src="images/post24.png" style="height:12px"></img> Create hauler connection.
 
 <a id="opIdget_hauler"></a>
 
@@ -6417,8 +6357,6 @@ func main() {
 
 `POST /hauler/{hauler_id}/connection`
 
-*Create hauler connection.*
-
 Create hauler connection.
 
 <h3 id="get_hauler-parameters">Parameters</h3>
@@ -6444,7 +6382,7 @@ Create hauler connection.
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-03T00:40:25.294Z",
+  "approved_on": "2019-01-04T00:06:55.241Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -6452,7 +6390,7 @@ Create hauler connection.
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-03T00:40:25.294Z"
+  "requested_on": "2019-01-04T00:06:55.242Z"
 }
 ```
 
@@ -6460,19 +6398,19 @@ Create hauler connection.
 
 <h3 id="get_hauler-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Hauler with given UUID.|[HaulerConnectionModel](#schemahaulerconnectionmodel)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[HaulerConnectionModel](#schemahaulerconnectionmodel)|Hauler with given UUID.|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
 
-## get_hauler_options
+## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdget_hauler_options"></a>
 
@@ -6606,8 +6544,6 @@ func main() {
 
 `OPTIONS /hauler/{hauler_id}`
 
-*HTTP options*
-
 List HTTP operations.
 
 <h3 id="get_hauler_options-parameters">Parameters</h3>
@@ -6622,9 +6558,9 @@ List HTTP operations.
 
 <h3 id="get_hauler_options-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -6638,7 +6574,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## get_hauler_head
+## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdget_hauler_head"></a>
 
@@ -6780,8 +6716,6 @@ func main() {
 
 `HEAD /hauler/{hauler_id}`
 
-*HTTP head*
-
 HTTP head
 
 <h3 id="get_hauler_head-parameters">Parameters</h3>
@@ -6799,9 +6733,9 @@ HTTP head
 
 <h3 id="get_hauler_head-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -6814,7 +6748,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## list_hauler_connections
+## <img src="images/get24.png" style="height:12px"></img> Hauler profile.
 
 <a id="opIdlist_hauler_connections"></a>
 
@@ -6962,8 +6896,6 @@ func main() {
 
 `GET /hauler/{hauler_id}/connection`
 
-*List hauler connections.*
-
 Hauler profile.
 
 <h3 id="list_hauler_connections-parameters">Parameters</h3>
@@ -6986,7 +6918,7 @@ Hauler profile.
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-03T00:40:25.295Z",
+  "approved_on": "2019-01-04T00:06:55.242Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -6994,7 +6926,7 @@ Hauler profile.
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-03T00:40:25.295Z"
+  "requested_on": "2019-01-04T00:06:55.242Z"
 }
 ```
 
@@ -7002,19 +6934,19 @@ Hauler profile.
 
 <h3 id="list_hauler_connections-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|List|[HaulerConnectionModel](#schemahaulerconnectionmodel)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|One or more invalid input parameters.|string|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Missing x-tenant-id header or user not authorized for specified tenant.|string|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found. Commonly due to missing or extra parameters.|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[HaulerConnectionModel](#schemahaulerconnectionmodel)|List|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
 
-## get_hauler_connection_options
+## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdget_hauler_connection_options"></a>
 
@@ -7148,8 +7080,6 @@ func main() {
 
 `OPTIONS /hauler/{hauler_id}/connection`
 
-*HTTP options*
-
 List HTTP operations.
 
 <h3 id="get_hauler_connection_options-parameters">Parameters</h3>
@@ -7164,9 +7094,9 @@ List HTTP operations.
 
 <h3 id="get_hauler_connection_options-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -7180,7 +7110,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## get_hauler_connection_head
+## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdget_hauler_connection_head"></a>
 
@@ -7322,8 +7252,6 @@ func main() {
 
 `HEAD /hauler/{hauler_id}/connection`
 
-*HTTP head*
-
 HTTP head
 
 <h3 id="get_hauler_connection_head-parameters">Parameters</h3>
@@ -7341,9 +7269,9 @@ HTTP head
 
 <h3 id="get_hauler_connection_head-responses">Responses</h3>
 
-|Status|Meaning|Description|Schema|
+|Status|Meaning|Schema|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Empty body.|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
 
 ### Response Headers
 
@@ -7373,9 +7301,9 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|string(datetime)|false|none|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT)|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|*anonymous*|string(datetime)|true|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT)|
 
 <h2 id="tocSuuid">UUID</h2>
 
@@ -7391,9 +7319,9 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|string(uuid)|false|none|UUID|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|*anonymous*|string(uuid)|true|UUID|
 
 <h2 id="tocSrecordid">RecordId</h2>
 
@@ -7409,9 +7337,9 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|integer(int64)|false|none|Record identifier.|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|*anonymous*|integer(int64)|true|Record identifier.|
 
 <h2 id="tocSaddressmodel">AddressModel</h2>
 
@@ -7436,19 +7364,19 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|country|string|false|none|none|
-|id|integer(int64)|false|none|none|
-|latitude|number(float)|false|none|none|
-|line_1|string|false|none|none|
-|line_2|string|false|none|none|
-|line_3|string|false|none|none|
-|line_4|string|false|none|none|
-|locality|string|false|none|none|
-|longitude|number(float)|false|none|none|
-|postcode|string|false|none|none|
-|region|string|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|country|string|true|none|
+|id|integer(int64)|true|none|
+|latitude|number(float)|true|none|
+|line_1|string|true|none|
+|line_2|string|true|none|
+|line_3|string|true|none|
+|line_4|string|true|none|
+|locality|string|true|none|
+|longitude|number(float)|true|none|
+|postcode|string|true|none|
+|region|string|true|none|
 
 <h2 id="tocSassettypemodel">AssetTypeModel</h2>
 
@@ -7470,16 +7398,16 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|deleted|boolean|false|none|none|
-|id|integer(int64)|false|none|none|
-|is_default|boolean|false|none|none|
-|location_id|integer(int64)|false|none|none|
-|name|string|false|none|none|
-|quantity|integer(int64)|false|none|none|
-|require_numbers|boolean|false|none|none|
-|weight|integer(int64)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|deleted|boolean|true|none|
+|id|integer(int64)|true|none|
+|is_default|boolean|true|none|
+|location_id|integer(int64)|true|none|
+|name|string|true|none|
+|quantity|integer(int64)|true|none|
+|require_numbers|boolean|true|none|
+|weight|integer(int64)|true|none|
 
 <h2 id="tocSbasejobmodel">BaseJobModel</h2>
 
@@ -7551,66 +7479,66 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|arrived_at_dest|string(datetime)|false|none|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Entered by driver for dispatcher and customer. Asset arrival at destination time. Only applicable for jobs with a valid dump destination.|
-|arrived_on|string(datetime)\|null|false|none|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Drive start time entered by driver for dispatcher and customer (arrived at job slider).|
-|asset_dropped|integer(int64)\|null|false|none|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types 'D', 'E'.|
-|asset_id|integer(int64)\|null|false|none|Applicable to job types 'E', 'P', 'R'.|
-|asset_quantity|integer(int64)|false|none|How many assets are being serviced within a cluster (for jobs assigned to an asset cluster). For jobs dispatched by routes, or manually dispatched route stops, this value is 0 or 1.|
-|asset_type_id|integer(int64)|false|none|Selected asset for the job (job types 'D', 'L', 'E').|
-|completed_by|integer(int64)|false|none|Dispatcher or driver id.|
-|completed_by_driver|boolean|false|none|If TRUE, completed by driver. If FALSE, completed by dispatcher.|
-|completed_on|string(datetime)\|null|false|none|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Job completion time (must be in the past).|
-|confirmed_on|string(datetime)\|null|false|none|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Must be in the past.|
-|created_by_id|integer(int64)\|null|false|none|Customer, dispatcher, or driver id.|
-|created_with_portal|boolean|false|none|Unused field|
-|customer_id|integer(int64)|false|none|Customer identifier.|
-|customer_notes|string\|null|false|none|Notes entered by customers to communicate with dispatchers.|
-|departed_on|string(datetime)|false|none|Unused/deprecated|
-|desired_asset_desc|string\|null|false|none|Free-form text entered by dispatchers and drivers to be used as the future asset description.|
-|dispatch_priority|string\|null|false|none|Entered by dispatchers to determine dispatch order. Can be 'H', 'M', 'L' (High, Medium, Low).|
-|dispatched_by_route|integer(int64)\|null|false|none|Route id of dispatching route (or NULL if not dispatched by a route).|
-|dispatched_on|string(datetime)\|null|false|none|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time the job is assigned to a truck.|
-|dispatcher_notes|string\|null|false|none|Entered by dispatchers, read by drivers and dispatchers.|
-|do_confirm|boolean|false|none|Tell dispatcher that a customer should be contacted before job is dispatched.|
-|driver_notes|string\|null|false|none|Entered by drivers when completing or failing a job for dispatchers.|
-|dropped_number|string|false|none|Unused/deprecated|
-|dump_location_id|integer(int64)\|null|false|none|Asset or asset cluster dump location identifier (e.g. trash bin needs  dumped before returning from customer).|
-|dumped_on|string(datetime)\|null|false|none|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Dump request completion date.|
-|end_time|string(datetime)\|null|false|none|Future estimated time of job completion.|
-|fail_reason|string\|null|false|none|Failure description selected by a driver for use by dispatchers.|
-|final_location_id|integer(int64)\|null|false|none|Final location identifier. Used by dispatchers for prioritizing jobs. Used by drivers to know where to leave the asset on job completion.|
-|flags|string\|null|false|none|Job notes.|
-|id|integer(int64)|false|none|Job identifier.|
-|invoice_notes|string\|null|false|none|Invoice notes from the billing system.|
-|is_completed|boolean|false|none|Job completion flag set by dispatchers and drivers.|
-|is_declined|boolean|false|none|Job completion flag set by dispatchers and drivers.|
-|is_deleted|boolean|false|none|Indicates whether job is still valid.|
-|is_failed|boolean|false|none|Set by drivers and dispatchers to indicate a failed job.|
-|is_paid|boolean|false|none|Unused/deprecated|
-|job_group_id|integer(int64)\|null|false|none|Job group identifier for group jobs (vs service, exchange, etc.).|
-|location_id|integer(int64)|false|none|Owning location for the job.|
-|merged_with_route|integer(int64)\|null|false|none|Assigned by dispatchers for dispatchers and drivers.|
-|original_schedule_date|string(datetime)|false|none|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Original scheduling date.|
-|pickup_date|string(datetime)\|null|false|none|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) A pickup job is scheduled for this date upon job completion. If the asset or cluster is assigned to a route stop, the route stop will be deleted. Must be in the future.|
-|priority|integer(int64)|false|none|Assigned by dispatchers for job order completion determination for drivers.|
-|reference_number|string\|null|false|none|Provider-specific billing/reporting field.|
-|removed_number|string|false|none|Unused/deprecated|
-|requested_on|string(datetime)|false|none|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Job creation date.|
-|require_image|boolean|false|none|Set by dispatchers and drivers, requires drivers to upload one or more job images before completion.|
-|require_material|boolean|false|none|Set by dispatchers and drivers, requires drivers to set a material before completing a job.|
-|require_signature|boolean|false|none|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion.|
-|require_weights|boolean|false|none|Set by disptachers and drivers, requires drivers to set material weights before job completion.|
-|schedule_date|string(datetime)|false|none|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Scheduled job completion date.|
-|start_location_id|integer(int64)\|null|false|none|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers.|
-|start_time|string(datetime)\|null|false|none|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time customer has requested job start, set by dispatchers for dispatchers and drivers.|
-|third_party_hauler_id|[UUID](#schemauuid)|false|none|UUID|
-|times_failed|integer(int64)|false|none|Number of times a job has been attempted and failed.|
-|times_rolled_over|integer(int64)|false|none|Tracks job age in days for dispatchers.|
-|truck_id|integer(int64)\|null|false|none|Set by dispatchers to determine job visibility for drivers.|
-|type|string|false|none|Set by dispatchers and customers. Represents physical actions to execute on job start. 'D', 'E', 'L', 'P', 'R'|
-|weighed_on|string(datetime)\|null|false|none|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time of truck weight entry.|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|arrived_at_dest|string(datetime)|true|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Entered by driver for dispatcher and customer. Asset arrival at destination time. Only applicable for jobs with a valid dump destination.|
+|arrived_on|string(datetime)|true|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Drive start time entered by driver for dispatcher and customer (arrived at job slider).|
+|asset_dropped|integer(int64)|true|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types 'D', 'E'.|
+|asset_id|integer(int64)|true|Applicable to job types 'E', 'P', 'R'.|
+|asset_quantity|integer(int64)|true|How many assets are being serviced within a cluster (for jobs assigned to an asset cluster). For jobs dispatched by routes, or manually dispatched route stops, this value is 0 or 1.|
+|asset_type_id|integer(int64)|false|Selected asset for the job (job types 'D', 'L', 'E').|
+|completed_by|integer(int64)|false|Dispatcher or driver id.|
+|completed_by_driver|boolean|false|If TRUE, completed by driver. If FALSE, completed by dispatcher.|
+|completed_on|string(datetime)|true|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Job completion time (must be in the past).|
+|confirmed_on|string(datetime)|true|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Must be in the past.|
+|created_by_id|integer(int64)|true|Customer, dispatcher, or driver id.|
+|created_with_portal|boolean|false|Unused field|
+|customer_id|integer(int64)|false|Customer identifier.|
+|customer_notes|string|true|Notes entered by customers to communicate with dispatchers.|
+|departed_on|string(datetime)|true|Unused/deprecated|
+|desired_asset_desc|string|true|Free-form text entered by dispatchers and drivers to be used as the future asset description.|
+|dispatch_priority|string|true|Entered by dispatchers to determine dispatch order. Can be 'H', 'M', 'L' (High, Medium, Low).|
+|dispatched_by_route|integer(int64)|true|Route id of dispatching route (or NULL if not dispatched by a route).|
+|dispatched_on|string(datetime)|true|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time the job is assigned to a truck.|
+|dispatcher_notes|string|true|Entered by dispatchers, read by drivers and dispatchers.|
+|do_confirm|boolean|false|Tell dispatcher that a customer should be contacted before job is dispatched.|
+|driver_notes|string|true|Entered by drivers when completing or failing a job for dispatchers.|
+|dropped_number|string|false|Unused/deprecated|
+|dump_location_id|integer(int64)|true|Asset or asset cluster dump location identifier (e.g. trash bin needs  dumped before returning from customer).|
+|dumped_on|string(datetime)|true|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Dump request completion date.|
+|end_time|string(datetime)|true|Future estimated time of job completion.|
+|fail_reason|string|true|Failure description selected by a driver for use by dispatchers.|
+|final_location_id|integer(int64)|true|Final location identifier. Used by dispatchers for prioritizing jobs. Used by drivers to know where to leave the asset on job completion.|
+|flags|string|true|Job notes.|
+|id|integer(int64)|false|Job identifier.|
+|invoice_notes|string|true|Invoice notes from the billing system.|
+|is_completed|boolean|false|Job completion flag set by dispatchers and drivers.|
+|is_declined|boolean|false|Job completion flag set by dispatchers and drivers.|
+|is_deleted|boolean|false|Indicates whether job is still valid.|
+|is_failed|boolean|false|Set by drivers and dispatchers to indicate a failed job.|
+|is_paid|boolean|true|Unused/deprecated|
+|job_group_id|integer(int64)|true|Job group identifier for group jobs (vs service, exchange, etc.).|
+|location_id|integer(int64)|false|Owning location for the job.|
+|merged_with_route|integer(int64)|true|Assigned by dispatchers for dispatchers and drivers.|
+|original_schedule_date|string(datetime)|false|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Original scheduling date.|
+|pickup_date|string(datetime)|true|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) A pickup job is scheduled for this date upon job completion. If the asset or cluster is assigned to a route stop, the route stop will be deleted. Must be in the future.|
+|priority|integer(int64)|false|Assigned by dispatchers for job order completion determination for drivers.|
+|reference_number|string|true|Provider-specific billing/reporting field.|
+|removed_number|string|true|Unused/deprecated|
+|requested_on|string(datetime)|false|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Job creation date.|
+|require_image|boolean|false|Set by dispatchers and drivers, requires drivers to upload one or more job images before completion.|
+|require_material|boolean|false|Set by dispatchers and drivers, requires drivers to set a material before completing a job.|
+|require_signature|boolean|false|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion.|
+|require_weights|boolean|false|Set by disptachers and drivers, requires drivers to set material weights before job completion.|
+|schedule_date|string(datetime)|false|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Scheduled job completion date.|
+|start_location_id|integer(int64)|true|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers.|
+|start_time|string(datetime)|true|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time customer has requested job start, set by dispatchers for dispatchers and drivers.|
+|third_party_hauler_id|[UUID](#schemauuid)|true|UUID|
+|times_failed|integer(int64)|false|Number of times a job has been attempted and failed.|
+|times_rolled_over|integer(int64)|false|Tracks job age in days for dispatchers.|
+|truck_id|integer(int64)|true|Set by dispatchers to determine job visibility for drivers.|
+|type|string|false|Set by dispatchers and customers. Represents physical actions to execute on job start. 'D', 'E', 'L', 'P', 'R'|
+|weighed_on|string(datetime)|true|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time of truck weight entry.|
 
 <h2 id="tocScustomeraddressmodel">CustomerAddressModel</h2>
 
@@ -7643,15 +7571,15 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|address|[AddressModel](#schemaaddressmodel)|false|none|none|
-|address_id|integer(int64)|false|none|none|
-|customer_id|integer(int64)|false|none|none|
-|is_active|boolean|false|none|none|
-|is_billing|boolean|false|none|none|
-|is_physical|boolean|false|none|none|
-|is_shipping|boolean|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|address|[AddressModel](#schemaaddressmodel)|true|none|
+|address_id|integer(int64)|true|none|
+|customer_id|integer(int64)|true|none|
+|is_active|boolean|true|none|
+|is_billing|boolean|true|none|
+|is_physical|boolean|true|none|
+|is_shipping|boolean|true|none|
 
 <h2 id="tocScustomermodel">CustomerModel</h2>
 
@@ -7682,15 +7610,15 @@ ISO 8601 DateTime Format (GMT)
       "is_shipping": true
     }
   ],
-  "created_on": "2019-01-03T00:40:25.298Z",
+  "created_on": "2019-01-04T00:06:55.247Z",
   "id": 9,
   "locations": [
     {
-      "created_on": "2019-01-03T00:40:25.298Z",
+      "created_on": "2019-01-04T00:06:55.247Z",
       "customer_id": 9,
       "is_active": true,
       "is_commercial": false,
-      "last_edited": "2019-01-03T00:40:25.298Z",
+      "last_edited": "2019-01-04T00:06:55.247Z",
       "location_id": 1,
       "note": "string",
       "reference_number": "string",
@@ -7707,14 +7635,14 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|addresses|[[CustomerAddressModel](#schemacustomeraddressmodel)]|false|none|none|
-|created_on|string(datetime)|false|none|none|
-|id|integer(int64)|false|none|none|
-|locations|[[JobLocationModel](#schemajoblocationmodel)]|false|none|none|
-|name|string(byte)|false|none|none|
-|parent_id|integer(int64)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|addresses|[[CustomerAddressModel](#schemacustomeraddressmodel)]|true|none|
+|created_on|string(datetime)|true|none|
+|id|integer(int64)|true|none|
+|locations|[[JobLocationModel](#schemajoblocationmodel)]|true|none|
+|name|string(byte)|true|none|
+|parent_id|integer(int64)|true|none|
 
 <h2 id="tocSdriverlistmodel">DriverListModel</h2>
 
@@ -7752,13 +7680,13 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|current_limit|integer(int64)|false|none|none|
-|current_page|integer(int64)|false|none|none|
-|results|[[DriverModel](#schemadrivermodel)]|false|none|none|
-|total_count|integer(int64)|false|none|none|
-|total_pages|integer(int64)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|current_limit|integer(int64)|true|none|
+|current_page|integer(int64)|true|none|
+|results|[[DriverModel](#schemadrivermodel)]|true|none|
+|total_count|integer(int64)|true|none|
+|total_pages|integer(int64)|true|none|
 
 <h2 id="tocSdrivermodel">DriverModel</h2>
 
@@ -7788,24 +7716,24 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|address|string|false|none|none|
-|can_convert_to_group|boolean|false|none|none|
-|can_create_requests|boolean|false|none|none|
-|can_edit_requests|boolean|false|none|none|
-|can_reposition_asset|boolean|false|none|none|
-|city|string|false|none|none|
-|disable_shift_tracking|boolean|false|none|none|
-|email|string|false|none|none|
-|id|integer(int64)|false|none|none|
-|license_number|string|false|none|none|
-|location_id|integer(int64)|false|none|none|
-|name|string|false|none|none|
-|phone_number|string|false|none|none|
-|state|string|false|none|none|
-|third_party_hauler_id|[UUID](#schemauuid)|false|none|UUID|
-|zip|string|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|address|string|true|none|
+|can_convert_to_group|boolean|true|none|
+|can_create_requests|boolean|true|none|
+|can_edit_requests|boolean|true|none|
+|can_reposition_asset|boolean|true|none|
+|city|string|true|none|
+|disable_shift_tracking|boolean|true|none|
+|email|string|true|none|
+|id|integer(int64)|true|none|
+|license_number|string|true|none|
+|location_id|integer(int64)|true|none|
+|name|string|true|none|
+|phone_number|string|true|none|
+|state|string|true|none|
+|third_party_hauler_id|[UUID](#schemauuid)|true|UUID|
+|zip|string|true|none|
 
 <h2 id="tocShaulerconnectionmodel">HaulerConnectionModel</h2>
 
@@ -7814,7 +7742,7 @@ ISO 8601 DateTime Format (GMT)
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-03T00:40:25.299Z",
+  "approved_on": "2019-01-04T00:06:55.248Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -7822,25 +7750,25 @@ ISO 8601 DateTime Format (GMT)
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-03T00:40:25.299Z"
+  "requested_on": "2019-01-04T00:06:55.248Z"
 }
 
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|approved_by|integer(int64)|false|none|none|
-|approved_on|string(datetime)|false|none|none|
-|denied_on|string|false|none|none|
-|is_approved|boolean|false|none|none|
-|location_id|integer(int64)|false|none|none|
-|provider_email|string|false|none|none|
-|provider_id|integer(int64)|false|none|none|
-|provider_name|string|false|none|none|
-|provider_phone|string|false|none|none|
-|requested_on|string(datetime)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|approved_by|integer(int64)|true|none|
+|approved_on|string(datetime)|true|none|
+|denied_on|string|true|none|
+|is_approved|boolean|true|none|
+|location_id|integer(int64)|true|none|
+|provider_email|string|true|none|
+|provider_id|integer(int64)|true|none|
+|provider_name|string|true|none|
+|provider_phone|string|true|none|
+|requested_on|string(datetime)|true|none|
 
 <h2 id="tocShaulerlistmodel">HaulerListModel</h2>
 
@@ -7864,13 +7792,13 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|current_limit|integer(int64)|false|none|none|
-|current_page|integer(int64)|false|none|none|
-|results|[[HaulerModel](#schemahaulermodel)]|false|none|none|
-|total_count|integer(int64)|false|none|none|
-|total_pages|integer(int64)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|current_limit|integer(int64)|true|none|
+|current_page|integer(int64)|true|none|
+|results|[[HaulerModel](#schemahaulermodel)]|true|none|
+|total_count|integer(int64)|true|none|
+|total_pages|integer(int64)|true|none|
 
 <h2 id="tocShaulermodel">HaulerModel</h2>
 
@@ -7886,10 +7814,10 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|id|[UUID](#schemauuid)|false|none|UUID|
-|name|string|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|id|[UUID](#schemauuid)|true|UUID|
+|name|string|true|none|
 
 <h2 id="tocSjoblistmodel">JobListModel</h2>
 
@@ -7974,11 +7902,11 @@ ISO 8601 DateTime Format (GMT)
         "cluster": 1,
         "customer_id": 1,
         "description": "A description",
-        "dispatched_on": "2019-01-03T00:40:25.300Z",
+        "dispatched_on": "2019-01-04T00:06:55.248Z",
         "id": 1,
         "is_returned": false,
-        "last_activity_on": "2019-01-03T00:40:25.300Z",
-        "last_rental_invoice_on": "2019-01-03T00:40:25.300Z",
+        "last_activity_on": "2019-01-04T00:06:55.248Z",
+        "last_rental_invoice_on": "2019-01-04T00:06:55.248Z",
         "latitude": 54.235,
         "location": {
           "id": 1,
@@ -7990,7 +7918,7 @@ ISO 8601 DateTime Format (GMT)
         "longitude": 127.123,
         "number": "REF100",
         "quantity": 1,
-        "returned_on": "2019-01-03T00:40:25.300Z"
+        "returned_on": "2019-01-04T00:06:55.248Z"
       },
       "asset_type": {
         "deleted": false,
@@ -8026,15 +7954,15 @@ ISO 8601 DateTime Format (GMT)
             "is_shipping": true
           }
         ],
-        "created_on": "2019-01-03T00:40:25.300Z",
+        "created_on": "2019-01-04T00:06:55.248Z",
         "id": 9,
         "locations": [
           {
-            "created_on": "2019-01-03T00:40:25.300Z",
+            "created_on": "2019-01-04T00:06:55.248Z",
             "customer_id": 9,
             "is_active": true,
             "is_commercial": false,
-            "last_edited": "2019-01-03T00:40:25.300Z",
+            "last_edited": "2019-01-04T00:06:55.248Z",
             "location_id": 1,
             "note": "string",
             "reference_number": "string",
@@ -8119,13 +8047,13 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|current_limit|integer(int64)|false|none|none|
-|current_page|integer(int64)|false|none|none|
-|results|[[JobModel](#schemajobmodel)]|false|none|none|
-|total_count|integer(int64)|false|none|none|
-|total_pages|integer(int64)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|current_limit|integer(int64)|true|none|
+|current_page|integer(int64)|true|none|
+|results|[[JobModel](#schemajobmodel)]|true|none|
+|total_count|integer(int64)|true|none|
+|total_pages|integer(int64)|true|none|
 
 <h2 id="tocSjoblocationmodel">JobLocationModel</h2>
 
@@ -8133,11 +8061,11 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "created_on": "2019-01-03T00:40:25.302Z",
+  "created_on": "2019-01-04T00:06:55.250Z",
   "customer_id": 9,
   "is_active": true,
   "is_commercial": false,
-  "last_edited": "2019-01-03T00:40:25.302Z",
+  "last_edited": "2019-01-04T00:06:55.250Z",
   "location_id": 1,
   "note": "string",
   "reference_number": "string",
@@ -8150,19 +8078,19 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|created_on|string(datetime)|false|none|none|
-|customer_id|integer(int64)|false|none|none|
-|is_active|boolean|false|none|none|
-|is_commercial|boolean|false|none|none|
-|last_edited|string(datetime)|false|none|none|
-|location_id|integer(int64)|false|none|none|
-|note|string|false|none|none|
-|reference_number|string|false|none|none|
-|renewal_date|string|false|none|none|
-|sales_rep|string|false|none|none|
-|suspension_id|string|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|created_on|string(datetime)|true|none|
+|customer_id|integer(int64)|true|none|
+|is_active|boolean|true|none|
+|is_commercial|boolean|true|none|
+|last_edited|string(datetime)|true|none|
+|location_id|integer(int64)|true|none|
+|note|string|true|none|
+|reference_number|string|true|none|
+|renewal_date|string|true|none|
+|sales_rep|string|true|none|
+|suspension_id|string|true|none|
 
 <h2 id="tocSjobmodel">JobModel</h2>
 
@@ -8243,11 +8171,11 @@ ISO 8601 DateTime Format (GMT)
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-03T00:40:25.303Z",
+    "dispatched_on": "2019-01-04T00:06:55.250Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-03T00:40:25.303Z",
-    "last_rental_invoice_on": "2019-01-03T00:40:25.303Z",
+    "last_activity_on": "2019-01-04T00:06:55.250Z",
+    "last_rental_invoice_on": "2019-01-04T00:06:55.250Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -8259,7 +8187,7 @@ ISO 8601 DateTime Format (GMT)
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-03T00:40:25.303Z"
+    "returned_on": "2019-01-04T00:06:55.250Z"
   },
   "asset_type": {
     "deleted": false,
@@ -8295,15 +8223,15 @@ ISO 8601 DateTime Format (GMT)
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-03T00:40:25.303Z",
+    "created_on": "2019-01-04T00:06:55.250Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-03T00:40:25.303Z",
+        "created_on": "2019-01-04T00:06:55.250Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-03T00:40:25.303Z",
+        "last_edited": "2019-01-04T00:06:55.250Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -8386,22 +8314,22 @@ ISO 8601 DateTime Format (GMT)
 
 *allOf*
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[BaseJobModel](#schemabasejobmodel)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|*anonymous*|[BaseJobModel](#schemabasejobmodel)|true|none|
 
 *and*
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|object|false|none|none|
-|» asset|[AssetModel](#schemaassetmodel)|false|none|none|
-|» asset_type|[AssetTypeModel](#schemaassettypemodel)|false|none|none|
-|» customer|[CustomerModel](#schemacustomermodel)|false|none|none|
-|» dump_location|[DestinationModel](#schemadestinationmodel)|false|none|none|
-|» final_location|[DestinationModel](#schemadestinationmodel)|false|none|none|
-|» start_location|[DestinationModel](#schemadestinationmodel)|false|none|none|
-|» third_party_hauler_id|[UUID](#schemauuid)|false|none|UUID|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|*anonymous*|object|true|none|
+|» asset|[AssetModel](#schemaassetmodel)|true|none|
+|» asset_type|[AssetTypeModel](#schemaassettypemodel)|true|none|
+|» customer|[CustomerModel](#schemacustomermodel)|true|none|
+|» dump_location|[DestinationModel](#schemadestinationmodel)|true|none|
+|» final_location|[DestinationModel](#schemadestinationmodel)|true|none|
+|» start_location|[DestinationModel](#schemadestinationmodel)|true|none|
+|» third_party_hauler_id|[UUID](#schemauuid)|true|UUID|
 
 <h2 id="tocSlocationmodel">LocationModel</h2>
 
@@ -8419,12 +8347,12 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|id|integer(int64)|false|none|none|
-|is_active|boolean|false|none|none|
-|name|string|false|none|none|
-|test|string(byte)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|id|integer(int64)|true|none|
+|is_active|boolean|true|none|
+|name|string|true|none|
+|test|string(byte)|true|none|
 
 <h2 id="tocStrucklistmodel">TruckListModel</h2>
 
@@ -8456,13 +8384,13 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|current_limit|integer(int64)|false|none|none|
-|current_page|integer(int64)|false|none|none|
-|results|[[TruckModel](#schematruckmodel)]|false|none|none|
-|total_count|integer(int64)|false|none|none|
-|total_pages|integer(int64)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|current_limit|integer(int64)|true|none|
+|current_page|integer(int64)|true|none|
+|results|[[TruckModel](#schematruckmodel)]|true|none|
+|total_count|integer(int64)|true|none|
+|total_pages|integer(int64)|true|none|
 
 <h2 id="tocStruckmodel">TruckModel</h2>
 
@@ -8486,18 +8414,18 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|driver_id|integer(int64)|false|none|none|
-|id|integer(int64)|false|none|none|
-|location_id|integer(int64)|false|none|none|
-|name|string|false|none|none|
-|notes|string|false|none|none|
-|out_of_service|boolean|false|none|none|
-|require_odometer|boolean|false|none|none|
-|third_party_hauler_id|[UUID](#schemauuid)|false|none|UUID|
-|type|string|false|none|none|
-|weight|integer(int64)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|driver_id|integer(int64)|true|none|
+|id|integer(int64)|true|none|
+|location_id|integer(int64)|true|none|
+|name|string|true|none|
+|notes|string|true|none|
+|out_of_service|boolean|true|none|
+|require_odometer|boolean|true|none|
+|third_party_hauler_id|[UUID](#schemauuid)|true|UUID|
+|type|string|true|none|
+|weight|integer(int64)|true|none|
 
 <h2 id="tocSupdatedjobmodel">UpdatedJobModel</h2>
 
@@ -8571,15 +8499,15 @@ ISO 8601 DateTime Format (GMT)
 
 *allOf*
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[BaseJobModel](#schemabasejobmodel)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|*anonymous*|[BaseJobModel](#schemabasejobmodel)|true|none|
 
 *and*
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|object|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|*anonymous*|object|true|none|
 
 <h2 id="tocSassetmodel">AssetModel</h2>
 
@@ -8601,11 +8529,11 @@ ISO 8601 DateTime Format (GMT)
   "cluster": 1,
   "customer_id": 1,
   "description": "A description",
-  "dispatched_on": "2019-01-03T00:40:25.306Z",
+  "dispatched_on": "2019-01-04T00:06:55.254Z",
   "id": 1,
   "is_returned": false,
-  "last_activity_on": "2019-01-03T00:40:25.306Z",
-  "last_rental_invoice_on": "2019-01-03T00:40:25.307Z",
+  "last_activity_on": "2019-01-04T00:06:55.254Z",
+  "last_rental_invoice_on": "2019-01-04T00:06:55.254Z",
   "latitude": 54.235,
   "location": {
     "id": 1,
@@ -8617,32 +8545,32 @@ ISO 8601 DateTime Format (GMT)
   "longitude": 127.123,
   "number": "REF100",
   "quantity": 1,
-  "returned_on": "2019-01-03T00:40:25.307Z"
+  "returned_on": "2019-01-04T00:06:55.254Z"
 }
 
 ```
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|asset_type|[AssetTypeModel](#schemaassettypemodel)|false|none|none|
-|asset_type_id|integer(int64)|false|none|none|
-|cluster|integer(int64)|false|none|none|
-|customer_id|integer(int64)|false|none|none|
-|description|string|false|none|none|
-|dispatched_on|string(datetime)|false|none|none|
-|id|integer(int64)|false|none|none|
-|is_returned|boolean|false|none|none|
-|last_activity_on|string(datetime)|false|none|none|
-|last_rental_invoice_on|string(datetime)|false|none|none|
-|latitude|number(float)|false|none|none|
-|location|[LocationModel](#schemalocationmodel)|false|none|none|
-|location_id|integer(int64)|false|none|none|
-|longitude|number(float)|false|none|none|
-|number|string|false|none|none|
-|quantity|integer(int64)|false|none|none|
-|returned_on|string(datetime)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|asset_type|[AssetTypeModel](#schemaassettypemodel)|true|none|
+|asset_type_id|integer(int64)|true|none|
+|cluster|integer(int64)|true|none|
+|customer_id|integer(int64)|true|none|
+|description|string|true|none|
+|dispatched_on|string(datetime)|true|none|
+|id|integer(int64)|true|none|
+|is_returned|boolean|true|none|
+|last_activity_on|string(datetime)|true|none|
+|last_rental_invoice_on|string(datetime)|true|none|
+|latitude|number(float)|true|none|
+|location|[LocationModel](#schemalocationmodel)|true|none|
+|location_id|integer(int64)|true|none|
+|longitude|number(float)|true|none|
+|number|string|true|none|
+|quantity|integer(int64)|true|none|
+|returned_on|string(datetime)|true|none|
 
 <h2 id="tocSlistcustomerresultmodel">ListCustomerResultModel</h2>
 
@@ -8708,13 +8636,13 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|current_limit|integer(int64)|false|none|none|
-|current_page|integer(int64)|false|none|none|
-|results|[[CustomerResultModel](#schemacustomerresultmodel)]|false|none|none|
-|total_count|integer(int64)|false|none|none|
-|total_pages|integer(int64)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|current_limit|integer(int64)|true|none|
+|current_page|integer(int64)|true|none|
+|results|[[CustomerResultModel](#schemacustomerresultmodel)]|true|none|
+|total_count|integer(int64)|true|none|
+|total_pages|integer(int64)|true|none|
 
 <h2 id="tocSdestinationmodel">DestinationModel</h2>
 
@@ -8747,22 +8675,22 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|address|string|false|none|none|
-|city|string|false|none|none|
-|contact_email|string|false|none|none|
-|contact_name|string|false|none|none|
-|contact_phone|string|false|none|none|
-|id|integer(int64)|false|none|none|
-|is_holding_yard|boolean|false|none|none|
-|latitude|number(float)|false|none|none|
-|location|[LocationModel](#schemalocationmodel)|false|none|none|
-|location_id|integer(int64)|false|none|none|
-|longitude|number(float)|false|none|none|
-|name|string|false|none|none|
-|state|string|false|none|none|
-|zip|string|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|address|string|true|none|
+|city|string|true|none|
+|contact_email|string|true|none|
+|contact_name|string|true|none|
+|contact_phone|string|true|none|
+|id|integer(int64)|true|none|
+|is_holding_yard|boolean|true|none|
+|latitude|number(float)|true|none|
+|location|[LocationModel](#schemalocationmodel)|true|none|
+|location_id|integer(int64)|true|none|
+|longitude|number(float)|true|none|
+|name|string|true|none|
+|state|string|true|none|
+|zip|string|true|none|
 
 <h2 id="tocScustomerresultaddressmodel">CustomerResultAddressModel</h2>
 
@@ -8790,22 +8718,22 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|country|string|false|none|none|
-|is_active|boolean|false|none|none|
-|is_billing|boolean|false|none|none|
-|is_physical|boolean|false|none|none|
-|is_shipping|boolean|false|none|none|
-|latitude|number(float)|false|none|none|
-|line_1|string|false|none|none|
-|line_2|string|false|none|none|
-|line_3|string|false|none|none|
-|line_4|string|false|none|none|
-|locality|string|false|none|none|
-|longitude|number(float)|false|none|none|
-|postcode|string|false|none|none|
-|region|string|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|country|string|true|none|
+|is_active|boolean|true|none|
+|is_billing|boolean|true|none|
+|is_physical|boolean|true|none|
+|is_shipping|boolean|true|none|
+|latitude|number(float)|true|none|
+|line_1|string|true|none|
+|line_2|string|true|none|
+|line_3|string|true|none|
+|line_4|string|true|none|
+|locality|string|true|none|
+|longitude|number(float)|true|none|
+|postcode|string|true|none|
+|region|string|true|none|
 
 <h2 id="tocScustomerresultcontactmodel">CustomerResultContactModel</h2>
 
@@ -8828,17 +8756,17 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|email|string|false|none|none|
-|fax|string|false|none|none|
-|name|string|false|none|none|
-|notify_on_acknowledged_request|boolean|false|none|none|
-|notify_on_completed_request|boolean|false|none|none|
-|notify_on_dispatched_request|boolean|false|none|none|
-|notify_on_failed_request|boolean|false|none|none|
-|notify_on_new_request|boolean|false|none|none|
-|number|string|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|email|string|true|none|
+|fax|string|true|none|
+|name|string|true|none|
+|notify_on_acknowledged_request|boolean|true|none|
+|notify_on_completed_request|boolean|true|none|
+|notify_on_dispatched_request|boolean|true|none|
+|notify_on_failed_request|boolean|true|none|
+|notify_on_new_request|boolean|true|none|
+|number|string|true|none|
 
 <h2 id="tocScustomerresultmodel">CustomerResultModel</h2>
 
@@ -8896,21 +8824,21 @@ ISO 8601 DateTime Format (GMT)
 
 ### Properties
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|addresses|[[CustomerResultAddressModel](#schemacustomerresultaddressmodel)]|false|none|none|
-|contacts|[[CustomerResultContactModel](#schemacustomerresultcontactmodel)]|false|none|none|
-|created_on|string(datetime)|false|none|none|
-|customer_id|integer(int64)|false|none|none|
-|is_active|boolean|false|none|none|
-|is_commercial|boolean|false|none|none|
-|last_edited|string(datetime)|false|none|none|
-|location_id|integer(int64)|false|none|none|
-|name|string|false|none|none|
-|note|string|false|none|none|
-|parent_id|integer(int64)|false|none|none|
-|reference_number|string|false|none|none|
-|renewal_date|string(datetime)|false|none|none|
-|sales_rep|string|false|none|none|
-|suspension_id|integer(int64)|false|none|none|
+|Name|Type|Nullable|Description|
+|---|---|---|---|---|--|
+|addresses|[[CustomerResultAddressModel](#schemacustomerresultaddressmodel)]|true|none|
+|contacts|[[CustomerResultContactModel](#schemacustomerresultcontactmodel)]|true|none|
+|created_on|string(datetime)|true|none|
+|customer_id|integer(int64)|true|none|
+|is_active|boolean|true|none|
+|is_commercial|boolean|true|none|
+|last_edited|string(datetime)|true|none|
+|location_id|integer(int64)|true|none|
+|name|string|true|none|
+|note|string|true|none|
+|parent_id|integer(int64)|true|none|
+|reference_number|string|true|none|
+|renewal_date|string(datetime)|true|none|
+|sales_rep|string|true|none|
+|suspension_id|integer(int64)|true|none|
 
