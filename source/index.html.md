@@ -34,11 +34,11 @@ License: <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0</a
 
 - HTTP Authentication, scheme: bearer 
 
-<h1 id="cro-software-api-third-party">third-party</h1>
+<h1 id="cro-software-api-dispatch">Dispatch</h1>
 
 For 3rd party integration with CRO
 
-## <img src="images/get24.png" style="height:12px"></img> List locations for tenant.
+## Locations
 
 <a id="opIdlist_locations"></a>
 
@@ -184,19 +184,15 @@ func main() {
 
 ```
 
-`GET /location`
+### GET /location
 
 List locations for tenant.
 
-<h3 id="list_locations-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
 
 > Example responses
 
@@ -215,7 +211,7 @@ List locations for tenant.
 
 > 400 Response
 
-<h3 id="list_locations-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -224,7 +220,7 @@ List locations for tenant.
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
 
-<h3 id="list_locations-responseschema">Response Schema</h3>
+<h3 id="undefined-responseschema">Response Schema</h3>
 
 Status Code **200**
 
@@ -240,8 +236,6 @@ Status Code **200**
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlist_locations_options"></a>
 
@@ -373,11 +367,11 @@ func main() {
 
 ```
 
-`OPTIONS /location`
+### OPTIONS /location
 
 List HTTP operations.
 
-<h3 id="list_locations_options-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -394,8 +388,6 @@ List HTTP operations.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlist_locations_head"></a>
 
@@ -535,21 +527,17 @@ func main() {
 
 ```
 
-`HEAD /location`
+### HEAD /location
 
 HTTP head
 
-<h3 id="list_locations_head-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-<h3 id="list_locations_head-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -566,7 +554,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## <img src="images/get24.png" style="height:12px"></img> Get info for specified location.
+## Location
 
 <a id="opIdget_location"></a>
 
@@ -712,22 +700,16 @@ func main() {
 
 ```
 
-`GET /location/{location_id}`
+### GET /location/{location_id}
 
 Get info for specified location.
 
-<h3 id="get_location-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
 
 > Example responses
 
@@ -744,7 +726,7 @@ Get info for specified location.
 
 > 400 Response
 
-<h3 id="get_location-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -757,8 +739,6 @@ Get info for specified location.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlocation_options"></a>
 
@@ -890,21 +870,17 @@ func main() {
 
 ```
 
-`OPTIONS /location/{location_id}`
+### OPTIONS /location/{location_id}
 
 List HTTP operations.
 
-<h3 id="location_options-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 
-#### Detailed descriptions
-
-**location_id**: Location identifier.
-
-<h3 id="location_options-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -921,8 +897,6 @@ List HTTP operations.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlocation_head"></a>
 
@@ -1062,24 +1036,18 @@ func main() {
 
 ```
 
-`HEAD /location/{location_id}`
+### HEAD /location/{location_id}
 
 HTTP head
 
-<h3 id="location_head-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
-
-<h3 id="location_head-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -1096,7 +1064,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## <img src="images/get24.png" style="height:12px"></img> List jobs for location.
+## Jobs
 
 <a id="opIdlist_jobs_for_location"></a>
 
@@ -1242,11 +1210,11 @@ func main() {
 
 ```
 
-`GET /location/{location_id}/job`
+### GET /location/{location_id}/job
 
 List jobs for location.
 
-<h3 id="list_jobs_for_location-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -1254,16 +1222,6 @@ List jobs for location.
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 |page_limit|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 < PageLimit < 1000.|
 |page_index|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
-
-**page_limit**: Maximum number of results to include for paged queries. 0 < PageLimit < 1000.
-
-**page_index**: Dataset page number to retrieve. First page is 1.
 
 > Example responses
 
@@ -1348,11 +1306,11 @@ List jobs for location.
         "cluster": 1,
         "customer_id": 1,
         "description": "A description",
-        "dispatched_on": "2019-01-04T00:06:55.225Z",
+        "dispatched_on": "2019-01-04T20:56:01.857Z",
         "id": 1,
         "is_returned": false,
-        "last_activity_on": "2019-01-04T00:06:55.225Z",
-        "last_rental_invoice_on": "2019-01-04T00:06:55.225Z",
+        "last_activity_on": "2019-01-04T20:56:01.857Z",
+        "last_rental_invoice_on": "2019-01-04T20:56:01.857Z",
         "latitude": 54.235,
         "location": {
           "id": 1,
@@ -1364,7 +1322,7 @@ List jobs for location.
         "longitude": 127.123,
         "number": "REF100",
         "quantity": 1,
-        "returned_on": "2019-01-04T00:06:55.225Z"
+        "returned_on": "2019-01-04T20:56:01.857Z"
       },
       "asset_type": {
         "deleted": false,
@@ -1400,15 +1358,15 @@ List jobs for location.
             "is_shipping": true
           }
         ],
-        "created_on": "2019-01-04T00:06:55.225Z",
+        "created_on": "2019-01-04T20:56:01.858Z",
         "id": 9,
         "locations": [
           {
-            "created_on": "2019-01-04T00:06:55.225Z",
+            "created_on": "2019-01-04T20:56:01.858Z",
             "customer_id": 9,
             "is_active": true,
             "is_commercial": false,
-            "last_edited": "2019-01-04T00:06:55.225Z",
+            "last_edited": "2019-01-04T20:56:01.858Z",
             "location_id": 1,
             "note": "string",
             "reference_number": "string",
@@ -1492,7 +1450,7 @@ List jobs for location.
 
 > 400 Response
 
-<h3 id="list_jobs_for_location-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -1505,8 +1463,6 @@ List jobs for location.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlocation_jobs_options"></a>
 
@@ -1638,21 +1594,17 @@ func main() {
 
 ```
 
-`OPTIONS /location/{location_id}/job`
+### OPTIONS /location/{location_id}/job
 
 List HTTP operations.
 
-<h3 id="location_jobs_options-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 
-#### Detailed descriptions
-
-**location_id**: Location identifier.
-
-<h3 id="location_jobs_options-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -1669,8 +1621,6 @@ List HTTP operations.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlist_jobs_head"></a>
 
@@ -1810,24 +1760,18 @@ func main() {
 
 ```
 
-`HEAD /location/{location_id}/job`
+### HEAD /location/{location_id}/job
 
 HTTP head
 
-<h3 id="list_jobs_head-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
-
-<h3 id="list_jobs_head-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -1844,7 +1788,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## <img src="images/get24.png" style="height:12px"></img> Get specified job.
+## Job
 
 <a id="opIdget_job"></a>
 
@@ -1990,25 +1934,17 @@ func main() {
 
 ```
 
-`GET /location/{location_id}/job/{job_id}`
+### GET /location/{location_id}/job/{job_id}
 
 Get specified job.
 
-<h3 id="get_job-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 |job_id|path|[RecordId](#schemarecordid)|true|Job identifier (internal).|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
-
-**job_id**: Job identifier (internal).
 
 > Example responses
 
@@ -2089,11 +2025,11 @@ Get specified job.
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-04T00:06:55.230Z",
+    "dispatched_on": "2019-01-04T20:56:01.862Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-04T00:06:55.230Z",
-    "last_rental_invoice_on": "2019-01-04T00:06:55.230Z",
+    "last_activity_on": "2019-01-04T20:56:01.862Z",
+    "last_rental_invoice_on": "2019-01-04T20:56:01.862Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -2105,7 +2041,7 @@ Get specified job.
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-04T00:06:55.230Z"
+    "returned_on": "2019-01-04T20:56:01.862Z"
   },
   "asset_type": {
     "deleted": false,
@@ -2141,15 +2077,15 @@ Get specified job.
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-04T00:06:55.230Z",
+    "created_on": "2019-01-04T20:56:01.862Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-04T00:06:55.230Z",
+        "created_on": "2019-01-04T20:56:01.862Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-04T00:06:55.230Z",
+        "last_edited": "2019-01-04T20:56:01.862Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -2229,7 +2165,7 @@ Get specified job.
 
 > 400 Response
 
-<h3 id="get_job-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -2242,8 +2178,6 @@ Get specified job.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/patch24.png" style="height:12px"></img> Dispatch job.
 
 <a id="opIddispatch_job"></a>
 
@@ -2390,11 +2324,11 @@ func main() {
 
 ```
 
-`PATCH /location/{location_id}/job/{job_id}`
+### PATCH /location/{location_id}/job/{job_id}
 
 Dispatch job.
 
-<h3 id="dispatch_job-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -2403,18 +2337,6 @@ Dispatch job.
 |job_id|path|[RecordId](#schemarecordid)|true|Job identifier (internal).|
 |truck_id|query|[RecordId](#schemarecordid)|true|Truck identifier (internal).|
 |future_job_schedule_date|query|[DateTime](#schemadatetime)|false|Future dispatch time for job.|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
-
-**job_id**: Job identifier (internal).
-
-**truck_id**: Truck identifier (internal).
-
-**future_job_schedule_date**: Future dispatch time for job.
 
 > Example responses
 
@@ -2485,7 +2407,7 @@ Dispatch job.
 
 > 400 Response
 
-<h3 id="dispatch_job-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -2498,8 +2420,6 @@ Dispatch job.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdget_job_options"></a>
 
@@ -2631,24 +2551,18 @@ func main() {
 
 ```
 
-`OPTIONS /location/{location_id}/job/{job_id}`
+### OPTIONS /location/{location_id}/job/{job_id}
 
 List HTTP operations.
 
-<h3 id="get_job_options-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 |job_id|path|[RecordId](#schemarecordid)|true|Job identifier (internal).|
 
-#### Detailed descriptions
-
-**location_id**: Location identifier.
-
-**job_id**: Job identifier (internal).
-
-<h3 id="get_job_options-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -2665,8 +2579,6 @@ List HTTP operations.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdget_job_head"></a>
 
@@ -2806,11 +2718,11 @@ func main() {
 
 ```
 
-`HEAD /location/{location_id}/job/{job_id}`
+### HEAD /location/{location_id}/job/{job_id}
 
 HTTP head
 
-<h3 id="get_job_head-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -2818,15 +2730,7 @@ HTTP head
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 |job_id|path|[RecordId](#schemarecordid)|true|Job identifier (internal).|
 
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
-
-**job_id**: Job identifier (internal).
-
-<h3 id="get_job_head-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -2843,7 +2747,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## <img src="images/get24.png" style="height:12px"></img> List trucks for location.
+## Trucks
 
 <a id="opIdlist_trucks_for_location"></a>
 
@@ -2989,22 +2893,16 @@ func main() {
 
 ```
 
-`GET /location/{location_id}/truck`
+### GET /location/{location_id}/truck
 
 List trucks for location.
 
-<h3 id="list_trucks_for_location-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
 
 > Example responses
 
@@ -3035,7 +2933,7 @@ List trucks for location.
 
 > 400 Response
 
-<h3 id="list_trucks_for_location-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -3048,8 +2946,6 @@ List trucks for location.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlist_trucks_options"></a>
 
@@ -3181,21 +3077,17 @@ func main() {
 
 ```
 
-`OPTIONS /location/{location_id}/truck`
+### OPTIONS /location/{location_id}/truck
 
 List HTTP operations.
 
-<h3 id="list_trucks_options-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 
-#### Detailed descriptions
-
-**location_id**: Location identifier.
-
-<h3 id="list_trucks_options-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -3212,8 +3104,6 @@ List HTTP operations.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlist_trucks_head"></a>
 
@@ -3353,24 +3243,18 @@ func main() {
 
 ```
 
-`HEAD /location/{location_id}/truck`
+### HEAD /location/{location_id}/truck
 
 HTTP head
 
-<h3 id="list_trucks_head-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
-
-<h3 id="list_trucks_head-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -3387,7 +3271,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## <img src="images/get24.png" style="height:12px"></img> Get truck info.
+## Truck
 
 <a id="opIdget_truck"></a>
 
@@ -3533,25 +3417,17 @@ func main() {
 
 ```
 
-`GET /location/{location_id}/truck/{truck_id}`
+### GET /location/{location_id}/truck/{truck_id}
 
 Get truck info.
 
-<h3 id="get_truck-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 |truck_id|path|[RecordId](#schemarecordid)|true|Truck identifier (internal).|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
-
-**truck_id**: Truck identifier (internal).
 
 > Example responses
 
@@ -3572,7 +3448,7 @@ Get truck info.
 }
 ```
 
-<h3 id="get_truck-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -3585,8 +3461,6 @@ Get truck info.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/patch24.png" style="height:12px"></img> Set driver for truck.
 
 <a id="opIdset_truck_driver"></a>
 
@@ -3733,11 +3607,11 @@ func main() {
 
 ```
 
-`PATCH /location/{location_id}/truck/{truck_id}`
+### PATCH /location/{location_id}/truck/{truck_id}
 
 Set driver for truck.
 
-<h3 id="set_truck_driver-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -3745,16 +3619,6 @@ Set driver for truck.
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 |truck_id|path|[RecordId](#schemarecordid)|true|Truck identifier (internal).|
 |driver_id|query|[RecordId](#schemarecordid)|true|Location identifier (internal).|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
-
-**truck_id**: Truck identifier (internal).
-
-**driver_id**: Location identifier (internal).
 
 > Example responses
 
@@ -3777,7 +3641,7 @@ Set driver for truck.
 
 > 400 Response
 
-<h3 id="set_truck_driver-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -3790,8 +3654,6 @@ Set driver for truck.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdget_truck_options"></a>
 
@@ -3923,24 +3785,18 @@ func main() {
 
 ```
 
-`OPTIONS /location/{location_id}/truck/{truck_id}`
+### OPTIONS /location/{location_id}/truck/{truck_id}
 
 List HTTP operations.
 
-<h3 id="get_truck_options-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 |truck_id|path|[RecordId](#schemarecordid)|true|Truck identifier (internal).|
 
-#### Detailed descriptions
-
-**location_id**: Location identifier.
-
-**truck_id**: Truck identifier (internal).
-
-<h3 id="get_truck_options-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -3957,8 +3813,6 @@ List HTTP operations.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdget_truck_head"></a>
 
@@ -4098,11 +3952,11 @@ func main() {
 
 ```
 
-`HEAD /location/{location_id}/truck/{truck_id}`
+### HEAD /location/{location_id}/truck/{truck_id}
 
 HTTP head
 
-<h3 id="get_truck_head-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -4110,15 +3964,7 @@ HTTP head
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 |truck_id|path|[RecordId](#schemarecordid)|true|Truck identifier (internal).|
 
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
-
-**truck_id**: Truck identifier (internal).
-
-<h3 id="get_truck_head-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -4135,7 +3981,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## <img src="images/get24.png" style="height:12px"></img> List drivers for location.
+## Drivers
 
 <a id="opIdlist_drivers_for_location"></a>
 
@@ -4281,22 +4127,16 @@ func main() {
 
 ```
 
-`GET /location/{location_id}/driver`
+### GET /location/{location_id}/driver
 
 List drivers for location.
 
-<h3 id="list_drivers_for_location-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
 
 > Example responses
 
@@ -4333,7 +4173,7 @@ List drivers for location.
 
 > 400 Response
 
-<h3 id="list_drivers_for_location-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -4346,8 +4186,6 @@ List drivers for location.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlist_drivers_options"></a>
 
@@ -4479,21 +4317,17 @@ func main() {
 
 ```
 
-`OPTIONS /location/{location_id}/driver`
+### OPTIONS /location/{location_id}/driver
 
 List HTTP operations.
 
-<h3 id="list_drivers_options-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 
-#### Detailed descriptions
-
-**location_id**: Location identifier.
-
-<h3 id="list_drivers_options-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -4510,8 +4344,6 @@ List HTTP operations.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlist_drivers_head"></a>
 
@@ -4651,24 +4483,18 @@ func main() {
 
 ```
 
-`HEAD /location/{location_id}/driver`
+### HEAD /location/{location_id}/driver
 
 HTTP head
 
-<h3 id="list_drivers_head-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
-
-<h3 id="list_drivers_head-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -4685,7 +4511,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## <img src="images/get24.png" style="height:12px"></img> List customers for location.
+## Customers
 
 <a id="opIdlist_customers_for_location"></a>
 
@@ -4831,22 +4657,16 @@ func main() {
 
 ```
 
-`GET /location/{location_id}/customer`
+### GET /location/{location_id}/customer
 
 List customers for location.
 
-<h3 id="list_customers_for_location-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
 
 > Example responses
 
@@ -4911,7 +4731,7 @@ List customers for location.
 
 > 400 Response
 
-<h3 id="list_customers_for_location-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -4924,8 +4744,6 @@ List customers for location.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlist_customers_options"></a>
 
@@ -5057,21 +4875,17 @@ func main() {
 
 ```
 
-`OPTIONS /location/{location_id}/customer`
+### OPTIONS /location/{location_id}/customer
 
 List HTTP operations.
 
-<h3 id="list_customers_options-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 
-#### Detailed descriptions
-
-**location_id**: Location identifier.
-
-<h3 id="list_customers_options-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -5088,8 +4902,6 @@ List HTTP operations.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlist_customers_head"></a>
 
@@ -5229,24 +5041,18 @@ func main() {
 
 ```
 
-`HEAD /location/{location_id}/customer`
+### HEAD /location/{location_id}/customer
 
 HTTP head
 
-<h3 id="list_customers_head-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |location_id|path|[RecordId](#schemarecordid)|true|Location identifier.|
 
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**location_id**: Location identifier.
-
-<h3 id="list_customers_head-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -5263,7 +5069,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## <img src="images/get24.png" style="height:12px"></img> List third party haulers for tenant.
+## Haulers
 
 <a id="opIdlist_haulers"></a>
 
@@ -5409,19 +5215,15 @@ func main() {
 
 ```
 
-`GET /hauler`
+### GET /hauler
 
 List third party haulers for tenant.
 
-<h3 id="list_haulers-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
 
 > Example responses
 
@@ -5444,7 +5246,7 @@ List third party haulers for tenant.
 
 > 400 Response
 
-<h3 id="list_haulers-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -5457,8 +5259,6 @@ List third party haulers for tenant.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/post24.png" style="height:12px"></img> Create 3rd Party hauler profile.
 
 <a id="opIdcreate_third_party_hauler"></a>
 
@@ -5608,11 +5408,11 @@ func main() {
 
 ```
 
-`POST /hauler`
+### POST /hauler
 
 Create 3rd Party hauler profile.
 
-<h3 id="create_third_party_hauler-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -5621,19 +5421,6 @@ Create 3rd Party hauler profile.
 |username|query|string(email)|true|The email address registered for an account. Access control is based on the username.|
 |password|query|string(password)|true|ASCII string. Min length 6, max length 32. |
 |recaptcha|query|string(recaptcha)|true|ReCaptcha string.|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**company_name**: The comapny identifier issued at account creation. All caps, no spaces, no special characters.
-
-**username**: The email address registered for an account. Access control is based on the username.
-Usernames must conform to the addr-spec defined in RFC 5322.
-
-**password**: ASCII string. Min length 6, max length 32. 
-
-**recaptcha**: ReCaptcha string.
 
 > Example responses
 
@@ -5714,11 +5501,11 @@ Usernames must conform to the addr-spec defined in RFC 5322.
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-04T00:06:55.240Z",
+    "dispatched_on": "2019-01-04T20:56:01.870Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-04T00:06:55.240Z",
-    "last_rental_invoice_on": "2019-01-04T00:06:55.240Z",
+    "last_activity_on": "2019-01-04T20:56:01.870Z",
+    "last_rental_invoice_on": "2019-01-04T20:56:01.870Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -5730,7 +5517,7 @@ Usernames must conform to the addr-spec defined in RFC 5322.
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-04T00:06:55.240Z"
+    "returned_on": "2019-01-04T20:56:01.870Z"
   },
   "asset_type": {
     "deleted": false,
@@ -5766,15 +5553,15 @@ Usernames must conform to the addr-spec defined in RFC 5322.
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-04T00:06:55.240Z",
+    "created_on": "2019-01-04T20:56:01.870Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-04T00:06:55.240Z",
+        "created_on": "2019-01-04T20:56:01.870Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-04T00:06:55.240Z",
+        "last_edited": "2019-01-04T20:56:01.870Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -5854,7 +5641,7 @@ Usernames must conform to the addr-spec defined in RFC 5322.
 
 > 400 Response
 
-<h3 id="create_third_party_hauler-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -5867,8 +5654,6 @@ Usernames must conform to the addr-spec defined in RFC 5322.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdlist_haulers_options"></a>
 
@@ -6001,21 +5786,17 @@ func main() {
 
 ```
 
-`OPTIONS /hauler`
+### OPTIONS /hauler
 
 List HTTP operations.
 
-<h3 id="list_haulers_options-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |company_name|query|string(stringIdentifier)|true|The comapny identifier issued at account creation. All caps, no spaces, no special characters.|
 
-#### Detailed descriptions
-
-**company_name**: The comapny identifier issued at account creation. All caps, no spaces, no special characters.
-
-<h3 id="list_haulers_options-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -6032,8 +5813,6 @@ List HTTP operations.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdlist_haulers_head"></a>
 
@@ -6174,24 +5953,18 @@ func main() {
 
 ```
 
-`HEAD /hauler`
+### HEAD /hauler
 
 HTTP head
 
-<h3 id="list_haulers_head-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |company_name|query|string(stringIdentifier)|true|The comapny identifier issued at account creation. All caps, no spaces, no special characters.|
 
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**company_name**: The comapny identifier issued at account creation. All caps, no spaces, no special characters.
-
-<h3 id="list_haulers_head-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -6208,7 +5981,705 @@ To perform this operation, you must be authenticated by means of one of the foll
 bearerAuth
 </aside>
 
-## <img src="images/post24.png" style="height:12px"></img> Create hauler connection.
+## Hauler
+
+<a id="opIdget_hauler"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET http://localhost:8003/hauler/{hauler_id} \
+  -H 'Accept: application/json' \
+  -H 'X-TENANT-ID: 1' \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```http
+GET http://localhost:8003/hauler/{hauler_id} HTTP/1.1
+Host: localhost:8003
+Accept: application/json
+X-TENANT-ID: 1
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'X-TENANT-ID':'1',
+  'Authorization':'Bearer {access-token}'
+
+};
+
+$.ajax({
+  url: 'http://localhost:8003/hauler/{hauler_id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'X-TENANT-ID':'1',
+  'Authorization':'Bearer {access-token}'
+
+};
+
+fetch('http://localhost:8003/hauler/{hauler_id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'X-TENANT-ID' => '1',
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.get 'http://localhost:8003/hauler/{hauler_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'X-TENANT-ID': '1',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('http://localhost:8003/hauler/{hauler_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("http://localhost:8003/hauler/{hauler_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "X-TENANT-ID": []string{"1"},
+        "Authorization": []string{"Bearer {access-token}"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "http://localhost:8003/hauler/{hauler_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+### GET /hauler/{hauler_id}
+
+Hauler profile.
+
+<h3 id="undefined-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
+|hauler_id|path|[UUID](#schemauuid)|true|Hauler identifier.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
+  "name": "SMS594"
+}
+```
+
+> 400 Response
+
+<h3 id="undefined-responses">Responses</h3>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[HaulerModel](#schemahaulermodel)|Hauler profile.|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+bearerAuth
+</aside>
+
+<a id="opIdget_hauler_options"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X OPTIONS http://localhost:8003/hauler/{hauler_id} \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```http
+OPTIONS http://localhost:8003/hauler/{hauler_id} HTTP/1.1
+Host: localhost:8003
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}'
+
+};
+
+$.ajax({
+  url: 'http://localhost:8003/hauler/{hauler_id}',
+  method: 'options',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+
+};
+
+fetch('http://localhost:8003/hauler/{hauler_id}',
+{
+  method: 'OPTIONS',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.options 'http://localhost:8003/hauler/{hauler_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.options('http://localhost:8003/hauler/{hauler_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("http://localhost:8003/hauler/{hauler_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("OPTIONS");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Authorization": []string{"Bearer {access-token}"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("OPTIONS", "http://localhost:8003/hauler/{hauler_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+### OPTIONS /hauler/{hauler_id}
+
+List HTTP operations.
+
+<h3 id="undefined-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|hauler_id|path|[UUID](#schemauuid)|true|Hauler identifier.|
+
+<h3 id="undefined-responses">Responses</h3>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Access-Control-Allow-Headers|string||Comma separated list of access control headers.|
+|200|Access-Control-Allow-Methods|string||Comma separated list of allowed HTTP methods for this endpoint.|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+bearerAuth
+</aside>
+
+<a id="opIdget_hauler_head"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X HEAD http://localhost:8003/hauler/{hauler_id} \
+  -H 'X-TENANT-ID: 1' \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```http
+HEAD http://localhost:8003/hauler/{hauler_id} HTTP/1.1
+Host: localhost:8003
+
+X-TENANT-ID: 1
+
+```
+
+```javascript
+var headers = {
+  'X-TENANT-ID':'1',
+  'Authorization':'Bearer {access-token}'
+
+};
+
+$.ajax({
+  url: 'http://localhost:8003/hauler/{hauler_id}',
+  method: 'head',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'X-TENANT-ID':'1',
+  'Authorization':'Bearer {access-token}'
+
+};
+
+fetch('http://localhost:8003/hauler/{hauler_id}',
+{
+  method: 'HEAD',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'X-TENANT-ID' => '1',
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.head 'http://localhost:8003/hauler/{hauler_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'X-TENANT-ID': '1',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.head('http://localhost:8003/hauler/{hauler_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("http://localhost:8003/hauler/{hauler_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("HEAD");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "X-TENANT-ID": []string{"1"},
+        "Authorization": []string{"Bearer {access-token}"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("HEAD", "http://localhost:8003/hauler/{hauler_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+### HEAD /hauler/{hauler_id}
+
+HTTP head
+
+<h3 id="undefined-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
+|hauler_id|path|[UUID](#schemauuid)|true|Hauler identifier.|
+
+<h3 id="undefined-responses">Responses</h3>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Access-Control-Allow-Methods|string||Comma separated list of allowed HTTP methods for this endpoint.|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+bearerAuth
+</aside>
+
+## Hauler Connections
+
+<a id="opIdlist_hauler_connections"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET http://localhost:8003/hauler/{hauler_id}/connection \
+  -H 'Accept: application/json' \
+  -H 'X-TENANT-ID: 1' \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```http
+GET http://localhost:8003/hauler/{hauler_id}/connection HTTP/1.1
+Host: localhost:8003
+Accept: application/json
+X-TENANT-ID: 1
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'X-TENANT-ID':'1',
+  'Authorization':'Bearer {access-token}'
+
+};
+
+$.ajax({
+  url: 'http://localhost:8003/hauler/{hauler_id}/connection',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'X-TENANT-ID':'1',
+  'Authorization':'Bearer {access-token}'
+
+};
+
+fetch('http://localhost:8003/hauler/{hauler_id}/connection',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'X-TENANT-ID' => '1',
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.get 'http://localhost:8003/hauler/{hauler_id}/connection',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'X-TENANT-ID': '1',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('http://localhost:8003/hauler/{hauler_id}/connection', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("http://localhost:8003/hauler/{hauler_id}/connection");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "X-TENANT-ID": []string{"1"},
+        "Authorization": []string{"Bearer {access-token}"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "http://localhost:8003/hauler/{hauler_id}/connection", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+### GET /hauler/{hauler_id}/connection
+
+Hauler profile.
+
+<h3 id="undefined-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
+|hauler_id|path|[UUID](#schemauuid)|true|Hauler identifier.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "approved_by": 1,
+  "approved_on": "2019-01-04T20:56:01.872Z",
+  "denied_on": "string",
+  "is_approved": true,
+  "location_id": 1,
+  "provider_email": "test_hauler@crosoftware.net",
+  "provider_id": 2,
+  "provider_name": "CRO Scrap - Sequim",
+  "provider_phone": "na",
+  "requested_on": "2019-01-04T20:56:01.872Z"
+}
+```
+
+> 400 Response
+
+<h3 id="undefined-responses">Responses</h3>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[HaulerConnectionModel](#schemahaulerconnectionmodel)|List|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+bearerAuth
+</aside>
 
 <a id="opIdget_hauler"></a>
 
@@ -6355,25 +6826,17 @@ func main() {
 
 ```
 
-`POST /hauler/{hauler_id}/connection`
+### POST /hauler/{hauler_id}/connection
 
 Create hauler connection.
 
-<h3 id="get_hauler-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |hauler_id|path|[UUID](#schemauuid)|true|Hauler identifier.|
 |tenant_code|query|string(tenantCode)|true|<YardCode>+<LocationId>. The YardCode is an identifier assigned at account creation.|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**hauler_id**: Hauler identifier.
-
-**tenant_code**: <YardCode>+<LocationId>. The YardCode is an identifier assigned at account creation.
 
 > Example responses
 
@@ -6382,7 +6845,7 @@ Create hauler connection.
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-04T00:06:55.241Z",
+  "approved_on": "2019-01-04T20:56:01.873Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -6390,13 +6853,13 @@ Create hauler connection.
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-04T00:06:55.242Z"
+  "requested_on": "2019-01-04T20:56:01.873Z"
 }
 ```
 
 > 400 Response
 
-<h3 id="get_hauler-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -6409,544 +6872,6 @@ Create hauler connection.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
-
-<a id="opIdget_hauler_options"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X OPTIONS http://localhost:8003/hauler/{hauler_id} \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```http
-OPTIONS http://localhost:8003/hauler/{hauler_id} HTTP/1.1
-Host: localhost:8003
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}'
-
-};
-
-$.ajax({
-  url: 'http://localhost:8003/hauler/{hauler_id}',
-  method: 'options',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('http://localhost:8003/hauler/{hauler_id}',
-{
-  method: 'OPTIONS',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.options 'http://localhost:8003/hauler/{hauler_id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.options('http://localhost:8003/hauler/{hauler_id}', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://localhost:8003/hauler/{hauler_id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("OPTIONS");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("OPTIONS", "http://localhost:8003/hauler/{hauler_id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`OPTIONS /hauler/{hauler_id}`
-
-List HTTP operations.
-
-<h3 id="get_hauler_options-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|hauler_id|path|[UUID](#schemauuid)|true|Hauler identifier.|
-
-#### Detailed descriptions
-
-**hauler_id**: Hauler identifier.
-
-<h3 id="get_hauler_options-responses">Responses</h3>
-
-|Status|Meaning|Schema|Description|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
-
-### Response Headers
-
-|Status|Header|Type|Format|Description|
-|---|---|---|---|---|
-|200|Access-Control-Allow-Headers|string||Comma separated list of access control headers.|
-|200|Access-Control-Allow-Methods|string||Comma separated list of allowed HTTP methods for this endpoint.|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-bearerAuth
-</aside>
-
-## <img src="images/head24.png" style="height:12px"></img> HTTP head
-
-<a id="opIdget_hauler_head"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X HEAD http://localhost:8003/hauler/{hauler_id} \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```http
-HEAD http://localhost:8003/hauler/{hauler_id} HTTP/1.1
-Host: localhost:8003
-
-X-TENANT-ID: 1
-
-```
-
-```javascript
-var headers = {
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-$.ajax({
-  url: 'http://localhost:8003/hauler/{hauler_id}',
-  method: 'head',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('http://localhost:8003/hauler/{hauler_id}',
-{
-  method: 'HEAD',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.head 'http://localhost:8003/hauler/{hauler_id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.head('http://localhost:8003/hauler/{hauler_id}', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://localhost:8003/hauler/{hauler_id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("HEAD");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("HEAD", "http://localhost:8003/hauler/{hauler_id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`HEAD /hauler/{hauler_id}`
-
-HTTP head
-
-<h3 id="get_hauler_head-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
-|hauler_id|path|[UUID](#schemauuid)|true|Hauler identifier.|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**hauler_id**: Hauler identifier.
-
-<h3 id="get_hauler_head-responses">Responses</h3>
-
-|Status|Meaning|Schema|Description|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Empty body.|
-
-### Response Headers
-
-|Status|Header|Type|Format|Description|
-|---|---|---|---|---|
-|200|Access-Control-Allow-Methods|string||Comma separated list of allowed HTTP methods for this endpoint.|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-bearerAuth
-</aside>
-
-## <img src="images/get24.png" style="height:12px"></img> Hauler profile.
-
-<a id="opIdlist_hauler_connections"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://localhost:8003/hauler/{hauler_id}/connection \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```http
-GET http://localhost:8003/hauler/{hauler_id}/connection HTTP/1.1
-Host: localhost:8003
-Accept: application/json
-X-TENANT-ID: 1
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-$.ajax({
-  url: 'http://localhost:8003/hauler/{hauler_id}/connection',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('http://localhost:8003/hauler/{hauler_id}/connection',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.get 'http://localhost:8003/hauler/{hauler_id}/connection',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.get('http://localhost:8003/hauler/{hauler_id}/connection', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://localhost:8003/hauler/{hauler_id}/connection");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:8003/hauler/{hauler_id}/connection", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /hauler/{hauler_id}/connection`
-
-Hauler profile.
-
-<h3 id="list_hauler_connections-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
-|hauler_id|path|[UUID](#schemauuid)|true|Hauler identifier.|
-
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**hauler_id**: Hauler identifier.
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "approved_by": 1,
-  "approved_on": "2019-01-04T00:06:55.242Z",
-  "denied_on": "string",
-  "is_approved": true,
-  "location_id": 1,
-  "provider_email": "test_hauler@crosoftware.net",
-  "provider_id": 2,
-  "provider_name": "CRO Scrap - Sequim",
-  "provider_phone": "na",
-  "requested_on": "2019-01-04T00:06:55.242Z"
-}
-```
-
-> 400 Response
-
-<h3 id="list_hauler_connections-responses">Responses</h3>
-
-|Status|Meaning|Schema|Description|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[HaulerConnectionModel](#schemahaulerconnectionmodel)|List|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-bearerAuth
-</aside>
-
-## <img src="images/options24.png" style="height:12px"></img> List HTTP operations.
 
 <a id="opIdget_hauler_connection_options"></a>
 
@@ -7078,21 +7003,17 @@ func main() {
 
 ```
 
-`OPTIONS /hauler/{hauler_id}/connection`
+### OPTIONS /hauler/{hauler_id}/connection
 
 List HTTP operations.
 
-<h3 id="get_hauler_connection_options-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |hauler_id|path|[UUID](#schemauuid)|true|Hauler identifier.|
 
-#### Detailed descriptions
-
-**hauler_id**: Hauler identifier.
-
-<h3 id="get_hauler_connection_options-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -7109,8 +7030,6 @@ List HTTP operations.
 To perform this operation, you must be authenticated by means of one of the following methods:
 bearerAuth
 </aside>
-
-## <img src="images/head24.png" style="height:12px"></img> HTTP head
 
 <a id="opIdget_hauler_connection_head"></a>
 
@@ -7250,24 +7169,18 @@ func main() {
 
 ```
 
-`HEAD /hauler/{hauler_id}/connection`
+### HEAD /hauler/{hauler_id}/connection
 
 HTTP head
 
-<h3 id="get_hauler_connection_head-parameters">Parameters</h3>
+<h3 id="undefined-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |X-TENANT-ID|header|integer(int64)|true|Tenant identifier.|
 |hauler_id|path|[UUID](#schemauuid)|true|Hauler identifier.|
 
-#### Detailed descriptions
-
-**X-TENANT-ID**: Tenant identifier.
-
-**hauler_id**: Hauler identifier.
-
-<h3 id="get_hauler_connection_head-responses">Responses</h3>
+<h3 id="undefined-responses">Responses</h3>
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
@@ -7610,15 +7523,15 @@ ISO 8601 DateTime Format (GMT)
       "is_shipping": true
     }
   ],
-  "created_on": "2019-01-04T00:06:55.247Z",
+  "created_on": "2019-01-04T20:56:01.876Z",
   "id": 9,
   "locations": [
     {
-      "created_on": "2019-01-04T00:06:55.247Z",
+      "created_on": "2019-01-04T20:56:01.876Z",
       "customer_id": 9,
       "is_active": true,
       "is_commercial": false,
-      "last_edited": "2019-01-04T00:06:55.247Z",
+      "last_edited": "2019-01-04T20:56:01.876Z",
       "location_id": 1,
       "note": "string",
       "reference_number": "string",
@@ -7742,7 +7655,7 @@ ISO 8601 DateTime Format (GMT)
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-04T00:06:55.248Z",
+  "approved_on": "2019-01-04T20:56:01.877Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -7750,7 +7663,7 @@ ISO 8601 DateTime Format (GMT)
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-04T00:06:55.248Z"
+  "requested_on": "2019-01-04T20:56:01.877Z"
 }
 
 ```
@@ -7902,11 +7815,11 @@ ISO 8601 DateTime Format (GMT)
         "cluster": 1,
         "customer_id": 1,
         "description": "A description",
-        "dispatched_on": "2019-01-04T00:06:55.248Z",
+        "dispatched_on": "2019-01-04T20:56:01.878Z",
         "id": 1,
         "is_returned": false,
-        "last_activity_on": "2019-01-04T00:06:55.248Z",
-        "last_rental_invoice_on": "2019-01-04T00:06:55.248Z",
+        "last_activity_on": "2019-01-04T20:56:01.878Z",
+        "last_rental_invoice_on": "2019-01-04T20:56:01.878Z",
         "latitude": 54.235,
         "location": {
           "id": 1,
@@ -7918,7 +7831,7 @@ ISO 8601 DateTime Format (GMT)
         "longitude": 127.123,
         "number": "REF100",
         "quantity": 1,
-        "returned_on": "2019-01-04T00:06:55.248Z"
+        "returned_on": "2019-01-04T20:56:01.878Z"
       },
       "asset_type": {
         "deleted": false,
@@ -7954,15 +7867,15 @@ ISO 8601 DateTime Format (GMT)
             "is_shipping": true
           }
         ],
-        "created_on": "2019-01-04T00:06:55.248Z",
+        "created_on": "2019-01-04T20:56:01.878Z",
         "id": 9,
         "locations": [
           {
-            "created_on": "2019-01-04T00:06:55.248Z",
+            "created_on": "2019-01-04T20:56:01.878Z",
             "customer_id": 9,
             "is_active": true,
             "is_commercial": false,
-            "last_edited": "2019-01-04T00:06:55.248Z",
+            "last_edited": "2019-01-04T20:56:01.878Z",
             "location_id": 1,
             "note": "string",
             "reference_number": "string",
@@ -8061,11 +7974,11 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "created_on": "2019-01-04T00:06:55.250Z",
+  "created_on": "2019-01-04T20:56:01.882Z",
   "customer_id": 9,
   "is_active": true,
   "is_commercial": false,
-  "last_edited": "2019-01-04T00:06:55.250Z",
+  "last_edited": "2019-01-04T20:56:01.883Z",
   "location_id": 1,
   "note": "string",
   "reference_number": "string",
@@ -8171,11 +8084,11 @@ ISO 8601 DateTime Format (GMT)
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-04T00:06:55.250Z",
+    "dispatched_on": "2019-01-04T20:56:01.883Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-04T00:06:55.250Z",
-    "last_rental_invoice_on": "2019-01-04T00:06:55.250Z",
+    "last_activity_on": "2019-01-04T20:56:01.883Z",
+    "last_rental_invoice_on": "2019-01-04T20:56:01.883Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -8187,7 +8100,7 @@ ISO 8601 DateTime Format (GMT)
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-04T00:06:55.250Z"
+    "returned_on": "2019-01-04T20:56:01.883Z"
   },
   "asset_type": {
     "deleted": false,
@@ -8223,15 +8136,15 @@ ISO 8601 DateTime Format (GMT)
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-04T00:06:55.250Z",
+    "created_on": "2019-01-04T20:56:01.883Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-04T00:06:55.250Z",
+        "created_on": "2019-01-04T20:56:01.883Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-04T00:06:55.250Z",
+        "last_edited": "2019-01-04T20:56:01.883Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -8529,11 +8442,11 @@ ISO 8601 DateTime Format (GMT)
   "cluster": 1,
   "customer_id": 1,
   "description": "A description",
-  "dispatched_on": "2019-01-04T00:06:55.254Z",
+  "dispatched_on": "2019-01-04T20:56:01.887Z",
   "id": 1,
   "is_returned": false,
-  "last_activity_on": "2019-01-04T00:06:55.254Z",
-  "last_rental_invoice_on": "2019-01-04T00:06:55.254Z",
+  "last_activity_on": "2019-01-04T20:56:01.887Z",
+  "last_rental_invoice_on": "2019-01-04T20:56:01.887Z",
   "latitude": 54.235,
   "location": {
     "id": 1,
@@ -8545,7 +8458,7 @@ ISO 8601 DateTime Format (GMT)
   "longitude": 127.123,
   "number": "REF100",
   "quantity": 1,
-  "returned_on": "2019-01-04T00:06:55.254Z"
+  "returned_on": "2019-01-04T20:56:01.888Z"
 }
 
 ```
