@@ -389,10 +389,22 @@ html, body {
     border-top: none;
   }
 
-  h3, h4, h5, h6, .path {
+  .property-div {
+  float: left;
+  background-color: red;
+  }
+
+  h3, h4, h5, h6 {
     @extend %header-font;
     font-size: 15px;
     margin-top: 2.5em;
+    margin-bottom: 0.8em;
+  }
+
+  .property-name {
+    @extend %header-font;
+    font-size: 18px;
+    margin-top: 4em;
     margin-bottom: 0.8em;
   }
 
