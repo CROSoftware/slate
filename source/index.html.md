@@ -17,20 +17,49 @@ headingLevel: 2
 
 ---
 
-<h1 id="cro-software-api">CRO Software API v0.0.1</h1>
+<h1 id="cro-software-api">CRO Software API v0</h1>
 
 Build on & integrate with CRO Software.
 
-Base URLs:
-
-* <a href="http://localhost:8003">http://localhost:8003</a>
-
 Email: <a href="mailto:develop@crosoftware.net">Support</a> 
-License: <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0</a>
 
 # Authentication
 
-- HTTP Authentication, scheme: bearer 
+**oAuth2 authentication.**
+
+To obtain an access token, your CRO API client must complete an OAuth 2.0 flow.
+The access token must be passed as an [Authorization: Bearer &lt;token&gt;] header with each request.
+
+- Flow: authorizationCode
+    - Authorization URL = [http://auth.crosandbox.com/oauth2/auth](http://auth.crosandbox.com/oauth2/auth)
+    - Token URL = [http://auth.crosandbox.com/oauth2/token](http://auth.crosandbox.com/oauth2/token)
+
+|Scope|Scope Description|
+|---|---|
+|api|CRO API access|
+
+- Flow: implicit
+    - Authorization URL = [http://auth.crosandbox.com/oauth2/auth](http://auth.crosandbox.com/oauth2/auth)
+
+|Scope|Scope Description|
+|---|---|
+|api|CRO API access|
+
+- Flow: password
+
+    - Token URL = [http://auth.crosandbox.com/oauth2/token](http://auth.crosandbox.com/oauth2/token)
+
+|Scope|Scope Description|
+|---|---|
+|api|CRO API access|
+
+- Flow: clientCredentials
+
+    - Token URL = [http://auth.crosandbox.com/oauth2/token](http://auth.crosandbox.com/oauth2/token)
+
+|Scope|Scope Description|
+|---|---|
+|api|CRO API access|
 
 <h1 id="cro-software-api-dispatch">Dispatch</h1>
 
@@ -44,7 +73,7 @@ For 3rd party integration with CRO
 
 ```shell
 # You can also use wget
-curl -X GET http://localhost:8003/location/{location_id}/customer \
+curl -X GET /location/{location_id}/customer \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -52,8 +81,8 @@ curl -X GET http://localhost:8003/location/{location_id}/customer \
 ```
 
 ```http
-GET http://localhost:8003/location/{location_id}/customer HTTP/1.1
-Host: localhost:8003
+GET /location/{location_id}/customer HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -68,7 +97,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/location/{location_id}/customer',
+  url: '/location/{location_id}/customer',
   method: 'get',
 
   headers: headers,
@@ -89,7 +118,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/location/{location_id}/customer',
+fetch('/location/{location_id}/customer',
 {
   method: 'GET',
 
@@ -113,7 +142,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.get 'http://localhost:8003/location/{location_id}/customer',
+result = RestClient.get '/location/{location_id}/customer',
   params: {
   }, headers: headers
 
@@ -129,7 +158,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('http://localhost:8003/location/{location_id}/customer', params={
+r = requests.get('/location/{location_id}/customer', params={
 
 }, headers = headers)
 
@@ -138,7 +167,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/location/{location_id}/customer");
+URL obj = new URL("/location/{location_id}/customer");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -172,7 +201,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:8003/location/{location_id}/customer", data)
+    req, err := http.NewRequest("GET", "/location/{location_id}/customer", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -227,7 +256,7 @@ List customers for location.
       ],
       "contacts": [
         {
-          "email": "nathan@crosoftware.com",
+          "email": "develop@crosoftware.com",
           "fax": "(360) 716-1968",
           "name": "John Doe",
           "notify_on_acknowledged_request": false,
@@ -238,17 +267,17 @@ List customers for location.
           "number": "1-111-111-1111"
         }
       ],
-      "created_on": "2019-01-08T00:00:22.129Z",
+      "created_on": "2019-01-10T17:43:53.149Z",
       "customer_id": 1,
       "is_active": false,
       "is_commercial": false,
-      "last_edited": "2019-01-08T00:00:22.129Z",
+      "last_edited": "2019-01-10T17:43:53.149Z",
       "location_id": 1,
-      "name": "HOLINC001",
-      "note": "Service Location of Holland Inc.",
+      "name": "DEMOCO001",
+      "note": "Service Location of DemoCo Inc.",
       "parent_id": 1,
       "reference_number": "Ref#100",
-      "renewal_date": "2019-01-08T00:00:22.129Z",
+      "renewal_date": "2019-01-10T17:43:53.149Z",
       "sales_rep": "John Doe",
       "suspension_id": 1
     }
@@ -277,7 +306,7 @@ List customers for location.
 
 ```shell
 # You can also use wget
-curl -X GET http://localhost:8003/location/{location_id}/driver/{driver_id} \
+curl -X GET /location/{location_id}/driver/{driver_id} \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -285,8 +314,8 @@ curl -X GET http://localhost:8003/location/{location_id}/driver/{driver_id} \
 ```
 
 ```http
-GET http://localhost:8003/location/{location_id}/driver/{driver_id} HTTP/1.1
-Host: localhost:8003
+GET /location/{location_id}/driver/{driver_id} HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -301,7 +330,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/location/{location_id}/driver/{driver_id}',
+  url: '/location/{location_id}/driver/{driver_id}',
   method: 'get',
 
   headers: headers,
@@ -322,7 +351,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/location/{location_id}/driver/{driver_id}',
+fetch('/location/{location_id}/driver/{driver_id}',
 {
   method: 'GET',
 
@@ -346,7 +375,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.get 'http://localhost:8003/location/{location_id}/driver/{driver_id}',
+result = RestClient.get '/location/{location_id}/driver/{driver_id}',
   params: {
   }, headers: headers
 
@@ -362,7 +391,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('http://localhost:8003/location/{location_id}/driver/{driver_id}', params={
+r = requests.get('/location/{location_id}/driver/{driver_id}', params={
 
 }, headers = headers)
 
@@ -371,7 +400,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/location/{location_id}/driver/{driver_id}");
+URL obj = new URL("/location/{location_id}/driver/{driver_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -405,7 +434,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:8003/location/{location_id}/driver/{driver_id}", data)
+    req, err := http.NewRequest("GET", "/location/{location_id}/driver/{driver_id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -471,7 +500,7 @@ Get driver info.
 
 ```shell
 # You can also use wget
-curl -X GET http://localhost:8003/location/{location_id}/driver \
+curl -X GET /location/{location_id}/driver \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -479,8 +508,8 @@ curl -X GET http://localhost:8003/location/{location_id}/driver \
 ```
 
 ```http
-GET http://localhost:8003/location/{location_id}/driver HTTP/1.1
-Host: localhost:8003
+GET /location/{location_id}/driver HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -495,7 +524,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/location/{location_id}/driver',
+  url: '/location/{location_id}/driver',
   method: 'get',
 
   headers: headers,
@@ -516,7 +545,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/location/{location_id}/driver',
+fetch('/location/{location_id}/driver',
 {
   method: 'GET',
 
@@ -540,7 +569,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.get 'http://localhost:8003/location/{location_id}/driver',
+result = RestClient.get '/location/{location_id}/driver',
   params: {
   }, headers: headers
 
@@ -556,7 +585,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('http://localhost:8003/location/{location_id}/driver', params={
+r = requests.get('/location/{location_id}/driver', params={
 
 }, headers = headers)
 
@@ -565,7 +594,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/location/{location_id}/driver");
+URL obj = new URL("/location/{location_id}/driver");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -599,7 +628,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:8003/location/{location_id}/driver", data)
+    req, err := http.NewRequest("GET", "/location/{location_id}/driver", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -676,7 +705,7 @@ List drivers for location.
 
 ```shell
 # You can also use wget
-curl -X POST http://localhost:8003/hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string \
+curl -X POST /hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -684,8 +713,8 @@ curl -X POST http://localhost:8003/hauler?company_name=Cro%20Scrap&username=test
 ```
 
 ```http
-POST http://localhost:8003/hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string HTTP/1.1
-Host: localhost:8003
+POST /hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -700,7 +729,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/hauler',
+  url: '/hauler',
   method: 'post',
   data: '?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string',
   headers: headers,
@@ -721,7 +750,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string',
+fetch('/hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string',
 {
   method: 'POST',
 
@@ -745,7 +774,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.post 'http://localhost:8003/hauler',
+result = RestClient.post '/hauler',
   params: {
   'company_name' => 'string(stringIdentifier)',
 'username' => 'string(email)',
@@ -765,7 +794,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.post('http://localhost:8003/hauler', params={
+r = requests.post('/hauler', params={
   'company_name': 'Cro Scrap',  'username': 'test_user@crosoftware.net',  'password': 'AnExample!Password1000',  'recaptcha': 'string'
 }, headers = headers)
 
@@ -774,7 +803,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string");
+URL obj = new URL("/hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -808,7 +837,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://localhost:8003/hauler", data)
+    req, err := http.NewRequest("POST", "/hauler", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -840,32 +869,32 @@ Create 3rd Party hauler profile.
 
 ```json
 {
-  "arrived_at_dest": "2019-01-08T00:00:22.134Z",
-  "arrived_on": "2019-01-08T00:00:22.134Z",
+  "arrived_at_dest": "2019-01-10T17:43:53.154Z",
+  "arrived_on": "2019-01-10T17:43:53.154Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-08T00:00:22.134Z",
-  "confirmed_on": "2019-01-08T00:00:22.134Z",
+  "completed_on": "2019-01-10T17:43:53.154Z",
+  "confirmed_on": "2019-01-10T17:43:53.154Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-08T00:00:22.134Z",
+  "departed_on": "2019-01-10T17:43:53.154Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-08T00:00:22.134Z",
+  "dispatched_on": "2019-01-10T17:43:53.154Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-08T00:00:22.134Z",
-  "end_time": "2019-01-08T00:00:22.134Z",
+  "dumped_on": "2019-01-10T17:43:53.154Z",
+  "end_time": "2019-01-10T17:43:53.154Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -879,25 +908,25 @@ Create 3rd Party hauler profile.
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-08T00:00:22.135Z",
-  "pickup_date": "2019-01-08T00:00:22.135Z",
+  "original_schedule_date": "2019-01-10T17:43:53.155Z",
+  "pickup_date": "2019-01-10T17:43:53.155Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-08T00:00:22.135Z",
+  "requested_on": "2019-01-10T17:43:53.155Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-08T00:00:22.135Z",
+  "schedule_date": "2019-01-10T17:43:53.155Z",
   "start_location_id": 1,
-  "start_time": "2019-01-08T00:00:22.135Z",
+  "start_time": "2019-01-10T17:43:53.155Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-08T00:00:22.135Z",
+  "weighed_on": "2019-01-10T17:43:53.155Z",
   "asset": {
     "asset_type": {
       "deleted": false,
@@ -913,11 +942,11 @@ Create 3rd Party hauler profile.
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-08T00:00:22.135Z",
+    "dispatched_on": "2019-01-10T17:43:53.155Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-08T00:00:22.135Z",
-    "last_rental_invoice_on": "2019-01-08T00:00:22.135Z",
+    "last_activity_on": "2019-01-10T17:43:53.155Z",
+    "last_rental_invoice_on": "2019-01-10T17:43:53.155Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -928,7 +957,7 @@ Create 3rd Party hauler profile.
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-08T00:00:22.135Z"
+    "returned_on": "2019-01-10T17:43:53.155Z"
   },
   "asset_type": {
     "deleted": false,
@@ -964,15 +993,15 @@ Create 3rd Party hauler profile.
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-08T00:00:22.135Z",
+    "created_on": "2019-01-10T17:43:53.155Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-08T00:00:22.135Z",
+        "created_on": "2019-01-10T17:43:53.155Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-08T00:00:22.135Z",
+        "last_edited": "2019-01-10T17:43:53.155Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -1064,7 +1093,7 @@ Create 3rd Party hauler profile.
 
 ```shell
 # You can also use wget
-curl -X POST http://localhost:8003/hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1 \
+curl -X POST /hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1 \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -1072,8 +1101,8 @@ curl -X POST http://localhost:8003/hauler/{hauler_id}/connection?tenant_code=CRO
 ```
 
 ```http
-POST http://localhost:8003/hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1 HTTP/1.1
-Host: localhost:8003
+POST /hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1 HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -1088,7 +1117,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/hauler/{hauler_id}/connection',
+  url: '/hauler/{hauler_id}/connection',
   method: 'post',
   data: '?tenant_code=CROSCRAP%2B1',
   headers: headers,
@@ -1109,7 +1138,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1',
+fetch('/hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1',
 {
   method: 'POST',
 
@@ -1133,7 +1162,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.post 'http://localhost:8003/hauler/{hauler_id}/connection',
+result = RestClient.post '/hauler/{hauler_id}/connection',
   params: {
   'tenant_code' => 'string(tenantCode)'
 }, headers: headers
@@ -1150,7 +1179,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.post('http://localhost:8003/hauler/{hauler_id}/connection', params={
+r = requests.post('/hauler/{hauler_id}/connection', params={
   'tenant_code': 'CROSCRAP+1'
 }, headers = headers)
 
@@ -1159,7 +1188,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1");
+URL obj = new URL("/hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1193,7 +1222,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://localhost:8003/hauler/{hauler_id}/connection", data)
+    req, err := http.NewRequest("POST", "/hauler/{hauler_id}/connection", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1224,7 +1253,7 @@ Create hauler connection.
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-08T00:00:22.138Z",
+  "approved_on": "2019-01-10T17:43:53.158Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -1232,7 +1261,7 @@ Create hauler connection.
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-08T00:00:22.138Z"
+  "requested_on": "2019-01-10T17:43:53.158Z"
 }
 ```
 
@@ -1253,7 +1282,7 @@ Create hauler connection.
 
 ```shell
 # You can also use wget
-curl -X GET http://localhost:8003/hauler/{hauler_id} \
+curl -X GET /hauler/{hauler_id} \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -1261,8 +1290,8 @@ curl -X GET http://localhost:8003/hauler/{hauler_id} \
 ```
 
 ```http
-GET http://localhost:8003/hauler/{hauler_id} HTTP/1.1
-Host: localhost:8003
+GET /hauler/{hauler_id} HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -1277,7 +1306,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/hauler/{hauler_id}',
+  url: '/hauler/{hauler_id}',
   method: 'get',
 
   headers: headers,
@@ -1298,7 +1327,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/hauler/{hauler_id}',
+fetch('/hauler/{hauler_id}',
 {
   method: 'GET',
 
@@ -1322,7 +1351,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.get 'http://localhost:8003/hauler/{hauler_id}',
+result = RestClient.get '/hauler/{hauler_id}',
   params: {
   }, headers: headers
 
@@ -1338,7 +1367,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('http://localhost:8003/hauler/{hauler_id}', params={
+r = requests.get('/hauler/{hauler_id}', params={
 
 }, headers = headers)
 
@@ -1347,7 +1376,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/hauler/{hauler_id}");
+URL obj = new URL("/hauler/{hauler_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1381,7 +1410,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:8003/hauler/{hauler_id}", data)
+    req, err := http.NewRequest("GET", "/hauler/{hauler_id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1432,7 +1461,7 @@ Hauler profile.
 
 ```shell
 # You can also use wget
-curl -X GET http://localhost:8003/hauler \
+curl -X GET /hauler \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -1440,8 +1469,8 @@ curl -X GET http://localhost:8003/hauler \
 ```
 
 ```http
-GET http://localhost:8003/hauler HTTP/1.1
-Host: localhost:8003
+GET /hauler HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -1456,7 +1485,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/hauler',
+  url: '/hauler',
   method: 'get',
 
   headers: headers,
@@ -1477,7 +1506,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/hauler',
+fetch('/hauler',
 {
   method: 'GET',
 
@@ -1501,7 +1530,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.get 'http://localhost:8003/hauler',
+result = RestClient.get '/hauler',
   params: {
   }, headers: headers
 
@@ -1517,7 +1546,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('http://localhost:8003/hauler', params={
+r = requests.get('/hauler', params={
 
 }, headers = headers)
 
@@ -1526,7 +1555,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/hauler");
+URL obj = new URL("/hauler");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1560,7 +1589,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:8003/hauler", data)
+    req, err := http.NewRequest("GET", "/hauler", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1620,7 +1649,7 @@ List third party haulers for tenant.
 
 ```shell
 # You can also use wget
-curl -X GET http://localhost:8003/hauler/{hauler_id}/connection \
+curl -X GET /hauler/{hauler_id}/connection \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -1628,8 +1657,8 @@ curl -X GET http://localhost:8003/hauler/{hauler_id}/connection \
 ```
 
 ```http
-GET http://localhost:8003/hauler/{hauler_id}/connection HTTP/1.1
-Host: localhost:8003
+GET /hauler/{hauler_id}/connection HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -1644,7 +1673,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/hauler/{hauler_id}/connection',
+  url: '/hauler/{hauler_id}/connection',
   method: 'get',
 
   headers: headers,
@@ -1665,7 +1694,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/hauler/{hauler_id}/connection',
+fetch('/hauler/{hauler_id}/connection',
 {
   method: 'GET',
 
@@ -1689,7 +1718,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.get 'http://localhost:8003/hauler/{hauler_id}/connection',
+result = RestClient.get '/hauler/{hauler_id}/connection',
   params: {
   }, headers: headers
 
@@ -1705,7 +1734,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('http://localhost:8003/hauler/{hauler_id}/connection', params={
+r = requests.get('/hauler/{hauler_id}/connection', params={
 
 }, headers = headers)
 
@@ -1714,7 +1743,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/hauler/{hauler_id}/connection");
+URL obj = new URL("/hauler/{hauler_id}/connection");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1748,7 +1777,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:8003/hauler/{hauler_id}/connection", data)
+    req, err := http.NewRequest("GET", "/hauler/{hauler_id}/connection", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1780,7 +1809,7 @@ List of 3rd party haulers.
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-08T00:00:22.139Z",
+  "approved_on": "2019-01-10T17:43:53.159Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -1788,7 +1817,7 @@ List of 3rd party haulers.
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-08T00:00:22.139Z"
+  "requested_on": "2019-01-10T17:43:53.159Z"
 }
 ```
 
@@ -1811,7 +1840,7 @@ List of 3rd party haulers.
 
 ```shell
 # You can also use wget
-curl -X PATCH http://localhost:8003/location/{location_id}/job/{job_id}?truck_id=0 \
+curl -X PATCH /location/{location_id}/job/{job_id}?truck_id=0 \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -1819,8 +1848,8 @@ curl -X PATCH http://localhost:8003/location/{location_id}/job/{job_id}?truck_id
 ```
 
 ```http
-PATCH http://localhost:8003/location/{location_id}/job/{job_id}?truck_id=0 HTTP/1.1
-Host: localhost:8003
+PATCH /location/{location_id}/job/{job_id}?truck_id=0 HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -1835,7 +1864,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/location/{location_id}/job/{job_id}',
+  url: '/location/{location_id}/job/{job_id}',
   method: 'patch',
   data: '?truck_id=0',
   headers: headers,
@@ -1856,7 +1885,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/location/{location_id}/job/{job_id}?truck_id=0',
+fetch('/location/{location_id}/job/{job_id}?truck_id=0',
 {
   method: 'PATCH',
 
@@ -1880,7 +1909,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.patch 'http://localhost:8003/location/{location_id}/job/{job_id}',
+result = RestClient.patch '/location/{location_id}/job/{job_id}',
   params: {
   'truck_id' => 'integer(int64)'
 }, headers: headers
@@ -1897,7 +1926,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.patch('http://localhost:8003/location/{location_id}/job/{job_id}', params={
+r = requests.patch('/location/{location_id}/job/{job_id}', params={
   'truck_id': '0'
 }, headers = headers)
 
@@ -1906,7 +1935,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/location/{location_id}/job/{job_id}?truck_id=0");
+URL obj = new URL("/location/{location_id}/job/{job_id}?truck_id=0");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -1940,7 +1969,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "http://localhost:8003/location/{location_id}/job/{job_id}", data)
+    req, err := http.NewRequest("PATCH", "/location/{location_id}/job/{job_id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1972,32 +2001,32 @@ Dispatch job.
 
 ```json
 {
-  "arrived_at_dest": "2019-01-08T00:00:22.140Z",
-  "arrived_on": "2019-01-08T00:00:22.140Z",
+  "arrived_at_dest": "2019-01-10T17:43:53.160Z",
+  "arrived_on": "2019-01-10T17:43:53.160Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-08T00:00:22.140Z",
-  "confirmed_on": "2019-01-08T00:00:22.140Z",
+  "completed_on": "2019-01-10T17:43:53.160Z",
+  "confirmed_on": "2019-01-10T17:43:53.160Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-08T00:00:22.140Z",
+  "departed_on": "2019-01-10T17:43:53.160Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-08T00:00:22.140Z",
+  "dispatched_on": "2019-01-10T17:43:53.160Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-08T00:00:22.140Z",
-  "end_time": "2019-01-08T00:00:22.140Z",
+  "dumped_on": "2019-01-10T17:43:53.160Z",
+  "end_time": "2019-01-10T17:43:53.160Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -2011,25 +2040,25 @@ Dispatch job.
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-08T00:00:22.140Z",
-  "pickup_date": "2019-01-08T00:00:22.140Z",
+  "original_schedule_date": "2019-01-10T17:43:53.160Z",
+  "pickup_date": "2019-01-10T17:43:53.160Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-08T00:00:22.140Z",
+  "requested_on": "2019-01-10T17:43:53.160Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-08T00:00:22.140Z",
+  "schedule_date": "2019-01-10T17:43:53.160Z",
   "start_location_id": 1,
-  "start_time": "2019-01-08T00:00:22.140Z",
+  "start_time": "2019-01-10T17:43:53.160Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-08T00:00:22.140Z"
+  "weighed_on": "2019-01-10T17:43:53.160Z"
 }
 ```
 
@@ -2050,7 +2079,7 @@ Dispatch job.
 
 ```shell
 # You can also use wget
-curl -X GET http://localhost:8003/location/{location_id}/job/{job_id} \
+curl -X GET /location/{location_id}/job/{job_id} \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -2058,8 +2087,8 @@ curl -X GET http://localhost:8003/location/{location_id}/job/{job_id} \
 ```
 
 ```http
-GET http://localhost:8003/location/{location_id}/job/{job_id} HTTP/1.1
-Host: localhost:8003
+GET /location/{location_id}/job/{job_id} HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -2074,7 +2103,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/location/{location_id}/job/{job_id}',
+  url: '/location/{location_id}/job/{job_id}',
   method: 'get',
 
   headers: headers,
@@ -2095,7 +2124,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/location/{location_id}/job/{job_id}',
+fetch('/location/{location_id}/job/{job_id}',
 {
   method: 'GET',
 
@@ -2119,7 +2148,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.get 'http://localhost:8003/location/{location_id}/job/{job_id}',
+result = RestClient.get '/location/{location_id}/job/{job_id}',
   params: {
   }, headers: headers
 
@@ -2135,7 +2164,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('http://localhost:8003/location/{location_id}/job/{job_id}', params={
+r = requests.get('/location/{location_id}/job/{job_id}', params={
 
 }, headers = headers)
 
@@ -2144,7 +2173,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/location/{location_id}/job/{job_id}");
+URL obj = new URL("/location/{location_id}/job/{job_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2178,7 +2207,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:8003/location/{location_id}/job/{job_id}", data)
+    req, err := http.NewRequest("GET", "/location/{location_id}/job/{job_id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -2208,32 +2237,32 @@ Get specified job.
 
 ```json
 {
-  "arrived_at_dest": "2019-01-08T00:00:22.141Z",
-  "arrived_on": "2019-01-08T00:00:22.141Z",
+  "arrived_at_dest": "2019-01-10T17:43:53.162Z",
+  "arrived_on": "2019-01-10T17:43:53.162Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-08T00:00:22.141Z",
-  "confirmed_on": "2019-01-08T00:00:22.141Z",
+  "completed_on": "2019-01-10T17:43:53.162Z",
+  "confirmed_on": "2019-01-10T17:43:53.162Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-08T00:00:22.141Z",
+  "departed_on": "2019-01-10T17:43:53.162Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-08T00:00:22.141Z",
+  "dispatched_on": "2019-01-10T17:43:53.162Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-08T00:00:22.141Z",
-  "end_time": "2019-01-08T00:00:22.141Z",
+  "dumped_on": "2019-01-10T17:43:53.162Z",
+  "end_time": "2019-01-10T17:43:53.162Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -2247,25 +2276,25 @@ Get specified job.
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-08T00:00:22.141Z",
-  "pickup_date": "2019-01-08T00:00:22.141Z",
+  "original_schedule_date": "2019-01-10T17:43:53.162Z",
+  "pickup_date": "2019-01-10T17:43:53.162Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-08T00:00:22.141Z",
+  "requested_on": "2019-01-10T17:43:53.162Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-08T00:00:22.141Z",
+  "schedule_date": "2019-01-10T17:43:53.162Z",
   "start_location_id": 1,
-  "start_time": "2019-01-08T00:00:22.141Z",
+  "start_time": "2019-01-10T17:43:53.162Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-08T00:00:22.141Z",
+  "weighed_on": "2019-01-10T17:43:53.162Z",
   "asset": {
     "asset_type": {
       "deleted": false,
@@ -2281,11 +2310,11 @@ Get specified job.
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-08T00:00:22.141Z",
+    "dispatched_on": "2019-01-10T17:43:53.162Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-08T00:00:22.141Z",
-    "last_rental_invoice_on": "2019-01-08T00:00:22.141Z",
+    "last_activity_on": "2019-01-10T17:43:53.162Z",
+    "last_rental_invoice_on": "2019-01-10T17:43:53.162Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -2296,7 +2325,7 @@ Get specified job.
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-08T00:00:22.141Z"
+    "returned_on": "2019-01-10T17:43:53.162Z"
   },
   "asset_type": {
     "deleted": false,
@@ -2332,15 +2361,15 @@ Get specified job.
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-08T00:00:22.141Z",
+    "created_on": "2019-01-10T17:43:53.162Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-08T00:00:22.141Z",
+        "created_on": "2019-01-10T17:43:53.162Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-08T00:00:22.141Z",
+        "last_edited": "2019-01-10T17:43:53.162Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -2432,7 +2461,7 @@ Get specified job.
 
 ```shell
 # You can also use wget
-curl -X GET http://localhost:8003/location/{location_id}/job \
+curl -X GET /location/{location_id}/job \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -2440,8 +2469,8 @@ curl -X GET http://localhost:8003/location/{location_id}/job \
 ```
 
 ```http
-GET http://localhost:8003/location/{location_id}/job HTTP/1.1
-Host: localhost:8003
+GET /location/{location_id}/job HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -2456,7 +2485,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/location/{location_id}/job',
+  url: '/location/{location_id}/job',
   method: 'get',
 
   headers: headers,
@@ -2477,7 +2506,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/location/{location_id}/job',
+fetch('/location/{location_id}/job',
 {
   method: 'GET',
 
@@ -2501,7 +2530,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.get 'http://localhost:8003/location/{location_id}/job',
+result = RestClient.get '/location/{location_id}/job',
   params: {
   }, headers: headers
 
@@ -2517,7 +2546,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('http://localhost:8003/location/{location_id}/job', params={
+r = requests.get('/location/{location_id}/job', params={
 
 }, headers = headers)
 
@@ -2526,7 +2555,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/location/{location_id}/job");
+URL obj = new URL("/location/{location_id}/job");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2560,7 +2589,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:8003/location/{location_id}/job", data)
+    req, err := http.NewRequest("GET", "/location/{location_id}/job", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -2595,32 +2624,32 @@ List jobs for location.
   "current_page": 1,
   "results": [
     {
-      "arrived_at_dest": "2019-01-08T00:00:22.143Z",
-      "arrived_on": "2019-01-08T00:00:22.143Z",
+      "arrived_at_dest": "2019-01-10T17:43:53.164Z",
+      "arrived_on": "2019-01-10T17:43:53.164Z",
       "asset_dropped": 1,
       "asset_id": 1,
       "asset_quantity": 1,
       "asset_type_id": 1,
       "completed_by": 1,
       "completed_by_driver": false,
-      "completed_on": "2019-01-08T00:00:22.143Z",
-      "confirmed_on": "2019-01-08T00:00:22.143Z",
+      "completed_on": "2019-01-10T17:43:53.164Z",
+      "confirmed_on": "2019-01-10T17:43:53.164Z",
       "created_by_id": 1,
       "created_with_portal": false,
       "customer_id": 9,
       "customer_notes": "Some customer notes",
-      "departed_on": "2019-01-08T00:00:22.143Z",
+      "departed_on": "2019-01-10T17:43:53.164Z",
       "desired_asset_desc": "An asset description.",
       "dispatch_priority": "H",
       "dispatched_by_route": 1,
-      "dispatched_on": "2019-01-08T00:00:22.143Z",
+      "dispatched_on": "2019-01-10T17:43:53.165Z",
       "dispatcher_notes": "Some dispatcher notes",
       "do_confirm": false,
       "driver_notes": "Some driver notes",
       "dropped_number": "Unused/deprecated field",
       "dump_location_id": 1,
-      "dumped_on": "2019-01-08T00:00:22.144Z",
-      "end_time": "2019-01-08T00:00:22.144Z",
+      "dumped_on": "2019-01-10T17:43:53.165Z",
+      "end_time": "2019-01-10T17:43:53.165Z",
       "fail_reason": "Failure reason",
       "final_location_id": 1,
       "flags": "Job notes",
@@ -2634,25 +2663,25 @@ List jobs for location.
       "job_group_id": 1,
       "location_id": 1,
       "merged_with_route": 1,
-      "original_schedule_date": "2019-01-08T00:00:22.144Z",
-      "pickup_date": "2019-01-08T00:00:22.144Z",
+      "original_schedule_date": "2019-01-10T17:43:53.165Z",
+      "pickup_date": "2019-01-10T17:43:53.165Z",
       "priority": -1,
       "reference_number": null,
       "removed_number": "string",
-      "requested_on": "2019-01-08T00:00:22.144Z",
+      "requested_on": "2019-01-10T17:43:53.165Z",
       "require_image": false,
       "require_material": false,
       "require_signature": false,
       "require_weights": false,
-      "schedule_date": "2019-01-08T00:00:22.144Z",
+      "schedule_date": "2019-01-10T17:43:53.165Z",
       "start_location_id": 1,
-      "start_time": "2019-01-08T00:00:22.144Z",
+      "start_time": "2019-01-10T17:43:53.165Z",
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
       "times_failed": 0,
       "times_rolled_over": 0,
       "truck_id": 1,
       "type": "D",
-      "weighed_on": "2019-01-08T00:00:22.144Z",
+      "weighed_on": "2019-01-10T17:43:53.165Z",
       "asset": {
         "asset_type": {
           "deleted": false,
@@ -2668,11 +2697,11 @@ List jobs for location.
         "cluster": 1,
         "customer_id": 1,
         "description": "A description",
-        "dispatched_on": "2019-01-08T00:00:22.144Z",
+        "dispatched_on": "2019-01-10T17:43:53.165Z",
         "id": 1,
         "is_returned": false,
-        "last_activity_on": "2019-01-08T00:00:22.144Z",
-        "last_rental_invoice_on": "2019-01-08T00:00:22.144Z",
+        "last_activity_on": "2019-01-10T17:43:53.165Z",
+        "last_rental_invoice_on": "2019-01-10T17:43:53.165Z",
         "latitude": 54.235,
         "location": {
           "id": 1,
@@ -2683,7 +2712,7 @@ List jobs for location.
         "longitude": 127.123,
         "number": "REF100",
         "quantity": 1,
-        "returned_on": "2019-01-08T00:00:22.144Z"
+        "returned_on": "2019-01-10T17:43:53.165Z"
       },
       "asset_type": {
         "deleted": false,
@@ -2719,15 +2748,15 @@ List jobs for location.
             "is_shipping": true
           }
         ],
-        "created_on": "2019-01-08T00:00:22.144Z",
+        "created_on": "2019-01-10T17:43:53.165Z",
         "id": 9,
         "locations": [
           {
-            "created_on": "2019-01-08T00:00:22.144Z",
+            "created_on": "2019-01-10T17:43:53.165Z",
             "customer_id": 9,
             "is_active": true,
             "is_commercial": false,
-            "last_edited": "2019-01-08T00:00:22.144Z",
+            "last_edited": "2019-01-10T17:43:53.165Z",
             "location_id": 1,
             "note": "string",
             "reference_number": "string",
@@ -2825,7 +2854,7 @@ List jobs for location.
 
 ```shell
 # You can also use wget
-curl -X GET http://localhost:8003/location/{location_id} \
+curl -X GET /location/{location_id} \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -2833,8 +2862,8 @@ curl -X GET http://localhost:8003/location/{location_id} \
 ```
 
 ```http
-GET http://localhost:8003/location/{location_id} HTTP/1.1
-Host: localhost:8003
+GET /location/{location_id} HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -2849,7 +2878,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/location/{location_id}',
+  url: '/location/{location_id}',
   method: 'get',
 
   headers: headers,
@@ -2870,7 +2899,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/location/{location_id}',
+fetch('/location/{location_id}',
 {
   method: 'GET',
 
@@ -2894,7 +2923,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.get 'http://localhost:8003/location/{location_id}',
+result = RestClient.get '/location/{location_id}',
   params: {
   }, headers: headers
 
@@ -2910,7 +2939,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('http://localhost:8003/location/{location_id}', params={
+r = requests.get('/location/{location_id}', params={
 
 }, headers = headers)
 
@@ -2919,7 +2948,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/location/{location_id}");
+URL obj = new URL("/location/{location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2953,7 +2982,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:8003/location/{location_id}", data)
+    req, err := http.NewRequest("GET", "/location/{location_id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -3005,7 +3034,7 @@ Get info for specified location.
 
 ```shell
 # You can also use wget
-curl -X GET http://localhost:8003/location \
+curl -X GET /location \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -3013,8 +3042,8 @@ curl -X GET http://localhost:8003/location \
 ```
 
 ```http
-GET http://localhost:8003/location HTTP/1.1
-Host: localhost:8003
+GET /location HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -3029,7 +3058,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/location',
+  url: '/location',
   method: 'get',
 
   headers: headers,
@@ -3050,7 +3079,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/location',
+fetch('/location',
 {
   method: 'GET',
 
@@ -3074,7 +3103,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.get 'http://localhost:8003/location',
+result = RestClient.get '/location',
   params: {
   }, headers: headers
 
@@ -3090,7 +3119,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('http://localhost:8003/location', params={
+r = requests.get('/location', params={
 
 }, headers = headers)
 
@@ -3099,7 +3128,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/location");
+URL obj = new URL("/location");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3133,7 +3162,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:8003/location", data)
+    req, err := http.NewRequest("GET", "/location", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -3196,7 +3225,7 @@ List locations for tenant.
 
 ```shell
 # You can also use wget
-curl -X GET http://localhost:8003/location/{location_id}/truck/{truck_id} \
+curl -X GET /location/{location_id}/truck/{truck_id} \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -3204,8 +3233,8 @@ curl -X GET http://localhost:8003/location/{location_id}/truck/{truck_id} \
 ```
 
 ```http
-GET http://localhost:8003/location/{location_id}/truck/{truck_id} HTTP/1.1
-Host: localhost:8003
+GET /location/{location_id}/truck/{truck_id} HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -3220,7 +3249,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/location/{location_id}/truck/{truck_id}',
+  url: '/location/{location_id}/truck/{truck_id}',
   method: 'get',
 
   headers: headers,
@@ -3241,7 +3270,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/location/{location_id}/truck/{truck_id}',
+fetch('/location/{location_id}/truck/{truck_id}',
 {
   method: 'GET',
 
@@ -3265,7 +3294,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.get 'http://localhost:8003/location/{location_id}/truck/{truck_id}',
+result = RestClient.get '/location/{location_id}/truck/{truck_id}',
   params: {
   }, headers: headers
 
@@ -3281,7 +3310,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('http://localhost:8003/location/{location_id}/truck/{truck_id}', params={
+r = requests.get('/location/{location_id}/truck/{truck_id}', params={
 
 }, headers = headers)
 
@@ -3290,7 +3319,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/location/{location_id}/truck/{truck_id}");
+URL obj = new URL("/location/{location_id}/truck/{truck_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3324,7 +3353,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:8003/location/{location_id}/truck/{truck_id}", data)
+    req, err := http.NewRequest("GET", "/location/{location_id}/truck/{truck_id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -3357,12 +3386,12 @@ Get truck info.
   "driver_id": 1,
   "id": 2,
   "location_id": 1,
-  "name": "ZachTruck",
+  "name": "AnExampleTruck",
   "notes": "Sequim",
   "out_of_service": false,
   "require_odometer": false,
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "type": "AwesomeTRUCK Rolloff",
+  "type": "Example Truck Rolloff",
   "weight": 18678
 }
 ```
@@ -3382,7 +3411,7 @@ Get truck info.
 
 ```shell
 # You can also use wget
-curl -X GET http://localhost:8003/location/{location_id}/truck \
+curl -X GET /location/{location_id}/truck \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -3390,8 +3419,8 @@ curl -X GET http://localhost:8003/location/{location_id}/truck \
 ```
 
 ```http
-GET http://localhost:8003/location/{location_id}/truck HTTP/1.1
-Host: localhost:8003
+GET /location/{location_id}/truck HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -3406,7 +3435,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/location/{location_id}/truck',
+  url: '/location/{location_id}/truck',
   method: 'get',
 
   headers: headers,
@@ -3427,7 +3456,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/location/{location_id}/truck',
+fetch('/location/{location_id}/truck',
 {
   method: 'GET',
 
@@ -3451,7 +3480,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.get 'http://localhost:8003/location/{location_id}/truck',
+result = RestClient.get '/location/{location_id}/truck',
   params: {
   }, headers: headers
 
@@ -3467,7 +3496,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('http://localhost:8003/location/{location_id}/truck', params={
+r = requests.get('/location/{location_id}/truck', params={
 
 }, headers = headers)
 
@@ -3476,7 +3505,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/location/{location_id}/truck");
+URL obj = new URL("/location/{location_id}/truck");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3510,7 +3539,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:8003/location/{location_id}/truck", data)
+    req, err := http.NewRequest("GET", "/location/{location_id}/truck", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -3548,12 +3577,12 @@ List trucks for location.
       "driver_id": 1,
       "id": 2,
       "location_id": 1,
-      "name": "ZachTruck",
+      "name": "AnExampleTruck",
       "notes": "Sequim",
       "out_of_service": false,
       "require_odometer": false,
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-      "type": "AwesomeTRUCK Rolloff",
+      "type": "Example Truck Rolloff",
       "weight": 18678
     }
   ],
@@ -3579,7 +3608,7 @@ List trucks for location.
 
 ```shell
 # You can also use wget
-curl -X PATCH http://localhost:8003/location/{location_id}/truck/{truck_id}?driver_id=0 \
+curl -X PATCH /location/{location_id}/truck/{truck_id}?driver_id=0 \
   -H 'Accept: application/json' \
   -H 'X-TENANT-ID: 1' \
   -H 'Authorization: Bearer {access-token}'
@@ -3587,8 +3616,8 @@ curl -X PATCH http://localhost:8003/location/{location_id}/truck/{truck_id}?driv
 ```
 
 ```http
-PATCH http://localhost:8003/location/{location_id}/truck/{truck_id}?driver_id=0 HTTP/1.1
-Host: localhost:8003
+PATCH /location/{location_id}/truck/{truck_id}?driver_id=0 HTTP/1.1
+
 Accept: application/json
 X-TENANT-ID: 1
 
@@ -3603,7 +3632,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'http://localhost:8003/location/{location_id}/truck/{truck_id}',
+  url: '/location/{location_id}/truck/{truck_id}',
   method: 'patch',
   data: '?driver_id=0',
   headers: headers,
@@ -3624,7 +3653,7 @@ const headers = {
 
 };
 
-fetch('http://localhost:8003/location/{location_id}/truck/{truck_id}?driver_id=0',
+fetch('/location/{location_id}/truck/{truck_id}?driver_id=0',
 {
   method: 'PATCH',
 
@@ -3648,7 +3677,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.patch 'http://localhost:8003/location/{location_id}/truck/{truck_id}',
+result = RestClient.patch '/location/{location_id}/truck/{truck_id}',
   params: {
   'driver_id' => 'integer(int64)'
 }, headers: headers
@@ -3665,7 +3694,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.patch('http://localhost:8003/location/{location_id}/truck/{truck_id}', params={
+r = requests.patch('/location/{location_id}/truck/{truck_id}', params={
   'driver_id': '0'
 }, headers = headers)
 
@@ -3674,7 +3703,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("http://localhost:8003/location/{location_id}/truck/{truck_id}?driver_id=0");
+URL obj = new URL("/location/{location_id}/truck/{truck_id}?driver_id=0");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -3708,7 +3737,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "http://localhost:8003/location/{location_id}/truck/{truck_id}", data)
+    req, err := http.NewRequest("PATCH", "/location/{location_id}/truck/{truck_id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -3742,12 +3771,12 @@ Set driver for truck.
   "driver_id": 1,
   "id": 2,
   "location_id": 1,
-  "name": "ZachTruck",
+  "name": "AnExampleTruck",
   "notes": "Sequim",
   "out_of_service": false,
   "require_odometer": false,
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "type": "AwesomeTRUCK Rolloff",
+  "type": "Example Truck Rolloff",
   "weight": 18678
 }
 ```
@@ -3867,11 +3896,11 @@ ISO 8601 DateTime Format (GMT)
   "cluster": 1,
   "customer_id": 1,
   "description": "A description",
-  "dispatched_on": "2019-01-08T00:00:22.150Z",
+  "dispatched_on": "2019-01-10T17:43:53.172Z",
   "id": 1,
   "is_returned": false,
-  "last_activity_on": "2019-01-08T00:00:22.150Z",
-  "last_rental_invoice_on": "2019-01-08T00:00:22.150Z",
+  "last_activity_on": "2019-01-10T17:43:53.172Z",
+  "last_rental_invoice_on": "2019-01-10T17:43:53.172Z",
   "latitude": 54.235,
   "location": {
     "id": 1,
@@ -3882,7 +3911,7 @@ ISO 8601 DateTime Format (GMT)
   "longitude": 127.123,
   "number": "REF100",
   "quantity": 1,
-  "returned_on": "2019-01-08T00:00:22.150Z"
+  "returned_on": "2019-01-10T17:43:53.172Z"
 }
 
 ```
@@ -3942,32 +3971,32 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "arrived_at_dest": "2019-01-08T00:00:22.151Z",
-  "arrived_on": "2019-01-08T00:00:22.151Z",
+  "arrived_at_dest": "2019-01-10T17:43:53.172Z",
+  "arrived_on": "2019-01-10T17:43:53.172Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-08T00:00:22.151Z",
-  "confirmed_on": "2019-01-08T00:00:22.151Z",
+  "completed_on": "2019-01-10T17:43:53.173Z",
+  "confirmed_on": "2019-01-10T17:43:53.173Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-08T00:00:22.151Z",
+  "departed_on": "2019-01-10T17:43:53.173Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-08T00:00:22.151Z",
+  "dispatched_on": "2019-01-10T17:43:53.173Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-08T00:00:22.151Z",
-  "end_time": "2019-01-08T00:00:22.151Z",
+  "dumped_on": "2019-01-10T17:43:53.173Z",
+  "end_time": "2019-01-10T17:43:53.173Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -3981,25 +4010,25 @@ ISO 8601 DateTime Format (GMT)
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-08T00:00:22.151Z",
-  "pickup_date": "2019-01-08T00:00:22.151Z",
+  "original_schedule_date": "2019-01-10T17:43:53.173Z",
+  "pickup_date": "2019-01-10T17:43:53.173Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-08T00:00:22.151Z",
+  "requested_on": "2019-01-10T17:43:53.173Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-08T00:00:22.151Z",
+  "schedule_date": "2019-01-10T17:43:53.173Z",
   "start_location_id": 1,
-  "start_time": "2019-01-08T00:00:22.151Z",
+  "start_time": "2019-01-10T17:43:53.173Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-08T00:00:22.151Z"
+  "weighed_on": "2019-01-10T17:43:53.173Z"
 }
 
 ```
@@ -4133,15 +4162,15 @@ ISO 8601 DateTime Format (GMT)
       "is_shipping": true
     }
   ],
-  "created_on": "2019-01-08T00:00:22.153Z",
+  "created_on": "2019-01-10T17:43:53.174Z",
   "id": 9,
   "locations": [
     {
-      "created_on": "2019-01-08T00:00:22.153Z",
+      "created_on": "2019-01-10T17:43:53.174Z",
       "customer_id": 9,
       "is_active": true,
       "is_commercial": false,
-      "last_edited": "2019-01-08T00:00:22.153Z",
+      "last_edited": "2019-01-10T17:43:53.174Z",
       "location_id": 1,
       "note": "string",
       "reference_number": "string",
@@ -4212,7 +4241,7 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "email": "nathan@crosoftware.com",
+  "email": "develop@crosoftware.com",
   "fax": "(360) 716-1968",
   "name": "John Doe",
   "notify_on_acknowledged_request": false,
@@ -4263,7 +4292,7 @@ ISO 8601 DateTime Format (GMT)
   ],
   "contacts": [
     {
-      "email": "nathan@crosoftware.com",
+      "email": "develop@crosoftware.com",
       "fax": "(360) 716-1968",
       "name": "John Doe",
       "notify_on_acknowledged_request": false,
@@ -4274,17 +4303,17 @@ ISO 8601 DateTime Format (GMT)
       "number": "1-111-111-1111"
     }
   ],
-  "created_on": "2019-01-08T00:00:22.153Z",
+  "created_on": "2019-01-10T17:43:53.175Z",
   "customer_id": 1,
   "is_active": false,
   "is_commercial": false,
-  "last_edited": "2019-01-08T00:00:22.153Z",
+  "last_edited": "2019-01-10T17:43:53.175Z",
   "location_id": 1,
-  "name": "HOLINC001",
-  "note": "Service Location of Holland Inc.",
+  "name": "DEMOCO001",
+  "note": "Service Location of DemoCo Inc.",
   "parent_id": 1,
   "reference_number": "Ref#100",
-  "renewal_date": "2019-01-08T00:00:22.153Z",
+  "renewal_date": "2019-01-10T17:43:53.175Z",
   "sales_rep": "John Doe",
   "suspension_id": 1
 }
@@ -4448,7 +4477,7 @@ ISO 8601 DateTime Format (GMT)
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-08T00:00:22.155Z",
+  "approved_on": "2019-01-10T17:43:53.176Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -4456,7 +4485,7 @@ ISO 8601 DateTime Format (GMT)
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-08T00:00:22.155Z"
+  "requested_on": "2019-01-10T17:43:53.176Z"
 }
 
 ```
@@ -4529,32 +4558,32 @@ ISO 8601 DateTime Format (GMT)
   "current_page": 1,
   "results": [
     {
-      "arrived_at_dest": "2019-01-08T00:00:22.156Z",
-      "arrived_on": "2019-01-08T00:00:22.156Z",
+      "arrived_at_dest": "2019-01-10T17:43:53.178Z",
+      "arrived_on": "2019-01-10T17:43:53.178Z",
       "asset_dropped": 1,
       "asset_id": 1,
       "asset_quantity": 1,
       "asset_type_id": 1,
       "completed_by": 1,
       "completed_by_driver": false,
-      "completed_on": "2019-01-08T00:00:22.156Z",
-      "confirmed_on": "2019-01-08T00:00:22.156Z",
+      "completed_on": "2019-01-10T17:43:53.178Z",
+      "confirmed_on": "2019-01-10T17:43:53.178Z",
       "created_by_id": 1,
       "created_with_portal": false,
       "customer_id": 9,
       "customer_notes": "Some customer notes",
-      "departed_on": "2019-01-08T00:00:22.156Z",
+      "departed_on": "2019-01-10T17:43:53.178Z",
       "desired_asset_desc": "An asset description.",
       "dispatch_priority": "H",
       "dispatched_by_route": 1,
-      "dispatched_on": "2019-01-08T00:00:22.156Z",
+      "dispatched_on": "2019-01-10T17:43:53.178Z",
       "dispatcher_notes": "Some dispatcher notes",
       "do_confirm": false,
       "driver_notes": "Some driver notes",
       "dropped_number": "Unused/deprecated field",
       "dump_location_id": 1,
-      "dumped_on": "2019-01-08T00:00:22.156Z",
-      "end_time": "2019-01-08T00:00:22.156Z",
+      "dumped_on": "2019-01-10T17:43:53.178Z",
+      "end_time": "2019-01-10T17:43:53.178Z",
       "fail_reason": "Failure reason",
       "final_location_id": 1,
       "flags": "Job notes",
@@ -4568,25 +4597,25 @@ ISO 8601 DateTime Format (GMT)
       "job_group_id": 1,
       "location_id": 1,
       "merged_with_route": 1,
-      "original_schedule_date": "2019-01-08T00:00:22.156Z",
-      "pickup_date": "2019-01-08T00:00:22.156Z",
+      "original_schedule_date": "2019-01-10T17:43:53.178Z",
+      "pickup_date": "2019-01-10T17:43:53.178Z",
       "priority": -1,
       "reference_number": null,
       "removed_number": "string",
-      "requested_on": "2019-01-08T00:00:22.156Z",
+      "requested_on": "2019-01-10T17:43:53.178Z",
       "require_image": false,
       "require_material": false,
       "require_signature": false,
       "require_weights": false,
-      "schedule_date": "2019-01-08T00:00:22.156Z",
+      "schedule_date": "2019-01-10T17:43:53.178Z",
       "start_location_id": 1,
-      "start_time": "2019-01-08T00:00:22.156Z",
+      "start_time": "2019-01-10T17:43:53.178Z",
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
       "times_failed": 0,
       "times_rolled_over": 0,
       "truck_id": 1,
       "type": "D",
-      "weighed_on": "2019-01-08T00:00:22.156Z",
+      "weighed_on": "2019-01-10T17:43:53.178Z",
       "asset": {
         "asset_type": {
           "deleted": false,
@@ -4602,11 +4631,11 @@ ISO 8601 DateTime Format (GMT)
         "cluster": 1,
         "customer_id": 1,
         "description": "A description",
-        "dispatched_on": "2019-01-08T00:00:22.156Z",
+        "dispatched_on": "2019-01-10T17:43:53.179Z",
         "id": 1,
         "is_returned": false,
-        "last_activity_on": "2019-01-08T00:00:22.156Z",
-        "last_rental_invoice_on": "2019-01-08T00:00:22.156Z",
+        "last_activity_on": "2019-01-10T17:43:53.179Z",
+        "last_rental_invoice_on": "2019-01-10T17:43:53.179Z",
         "latitude": 54.235,
         "location": {
           "id": 1,
@@ -4617,7 +4646,7 @@ ISO 8601 DateTime Format (GMT)
         "longitude": 127.123,
         "number": "REF100",
         "quantity": 1,
-        "returned_on": "2019-01-08T00:00:22.156Z"
+        "returned_on": "2019-01-10T17:43:53.179Z"
       },
       "asset_type": {
         "deleted": false,
@@ -4653,15 +4682,15 @@ ISO 8601 DateTime Format (GMT)
             "is_shipping": true
           }
         ],
-        "created_on": "2019-01-08T00:00:22.156Z",
+        "created_on": "2019-01-10T17:43:53.179Z",
         "id": 9,
         "locations": [
           {
-            "created_on": "2019-01-08T00:00:22.156Z",
+            "created_on": "2019-01-10T17:43:53.179Z",
             "customer_id": 9,
             "is_active": true,
             "is_commercial": false,
-            "last_edited": "2019-01-08T00:00:22.156Z",
+            "last_edited": "2019-01-10T17:43:53.179Z",
             "location_id": 1,
             "note": "string",
             "reference_number": "string",
@@ -4755,11 +4784,11 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "created_on": "2019-01-08T00:00:22.160Z",
+  "created_on": "2019-01-10T17:43:53.182Z",
   "customer_id": 9,
   "is_active": true,
   "is_commercial": false,
-  "last_edited": "2019-01-08T00:00:22.160Z",
+  "last_edited": "2019-01-10T17:43:53.182Z",
   "location_id": 1,
   "note": "string",
   "reference_number": "string",
@@ -4790,32 +4819,32 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "arrived_at_dest": "2019-01-08T00:00:22.160Z",
-  "arrived_on": "2019-01-08T00:00:22.160Z",
+  "arrived_at_dest": "2019-01-10T17:43:53.182Z",
+  "arrived_on": "2019-01-10T17:43:53.182Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-08T00:00:22.160Z",
-  "confirmed_on": "2019-01-08T00:00:22.160Z",
+  "completed_on": "2019-01-10T17:43:53.182Z",
+  "confirmed_on": "2019-01-10T17:43:53.182Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-08T00:00:22.160Z",
+  "departed_on": "2019-01-10T17:43:53.182Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-08T00:00:22.160Z",
+  "dispatched_on": "2019-01-10T17:43:53.182Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-08T00:00:22.160Z",
-  "end_time": "2019-01-08T00:00:22.160Z",
+  "dumped_on": "2019-01-10T17:43:53.182Z",
+  "end_time": "2019-01-10T17:43:53.182Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -4829,25 +4858,25 @@ ISO 8601 DateTime Format (GMT)
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-08T00:00:22.160Z",
-  "pickup_date": "2019-01-08T00:00:22.160Z",
+  "original_schedule_date": "2019-01-10T17:43:53.182Z",
+  "pickup_date": "2019-01-10T17:43:53.182Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-08T00:00:22.160Z",
+  "requested_on": "2019-01-10T17:43:53.182Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-08T00:00:22.160Z",
+  "schedule_date": "2019-01-10T17:43:53.182Z",
   "start_location_id": 1,
-  "start_time": "2019-01-08T00:00:22.160Z",
+  "start_time": "2019-01-10T17:43:53.182Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-08T00:00:22.161Z",
+  "weighed_on": "2019-01-10T17:43:53.182Z",
   "asset": {
     "asset_type": {
       "deleted": false,
@@ -4863,11 +4892,11 @@ ISO 8601 DateTime Format (GMT)
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-08T00:00:22.161Z",
+    "dispatched_on": "2019-01-10T17:43:53.182Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-08T00:00:22.161Z",
-    "last_rental_invoice_on": "2019-01-08T00:00:22.161Z",
+    "last_activity_on": "2019-01-10T17:43:53.182Z",
+    "last_rental_invoice_on": "2019-01-10T17:43:53.182Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -4878,7 +4907,7 @@ ISO 8601 DateTime Format (GMT)
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-08T00:00:22.161Z"
+    "returned_on": "2019-01-10T17:43:53.182Z"
   },
   "asset_type": {
     "deleted": false,
@@ -4914,15 +4943,15 @@ ISO 8601 DateTime Format (GMT)
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-08T00:00:22.161Z",
+    "created_on": "2019-01-10T17:43:53.183Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-08T00:00:22.161Z",
+        "created_on": "2019-01-10T17:43:53.183Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-08T00:00:22.161Z",
+        "last_edited": "2019-01-10T17:43:53.183Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -5047,7 +5076,7 @@ ISO 8601 DateTime Format (GMT)
       ],
       "contacts": [
         {
-          "email": "nathan@crosoftware.com",
+          "email": "develop@crosoftware.com",
           "fax": "(360) 716-1968",
           "name": "John Doe",
           "notify_on_acknowledged_request": false,
@@ -5058,17 +5087,17 @@ ISO 8601 DateTime Format (GMT)
           "number": "1-111-111-1111"
         }
       ],
-      "created_on": "2019-01-08T00:00:22.164Z",
+      "created_on": "2019-01-10T17:43:53.186Z",
       "customer_id": 1,
       "is_active": false,
       "is_commercial": false,
-      "last_edited": "2019-01-08T00:00:22.164Z",
+      "last_edited": "2019-01-10T17:43:53.186Z",
       "location_id": 1,
-      "name": "HOLINC001",
-      "note": "Service Location of Holland Inc.",
+      "name": "DEMOCO001",
+      "note": "Service Location of DemoCo Inc.",
       "parent_id": 1,
       "reference_number": "Ref#100",
-      "renewal_date": "2019-01-08T00:00:22.164Z",
+      "renewal_date": "2019-01-10T17:43:53.186Z",
       "sales_rep": "John Doe",
       "suspension_id": 1
     }
@@ -5148,12 +5177,12 @@ ISO 8601 DateTime Format (GMT)
       "driver_id": 1,
       "id": 2,
       "location_id": 1,
-      "name": "ZachTruck",
+      "name": "AnExampleTruck",
       "notes": "Sequim",
       "out_of_service": false,
       "require_odometer": false,
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-      "type": "AwesomeTRUCK Rolloff",
+      "type": "Example Truck Rolloff",
       "weight": 18678
     }
   ],
@@ -5180,12 +5209,12 @@ ISO 8601 DateTime Format (GMT)
   "driver_id": 1,
   "id": 2,
   "location_id": 1,
-  "name": "ZachTruck",
+  "name": "AnExampleTruck",
   "notes": "Sequim",
   "out_of_service": false,
   "require_odometer": false,
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "type": "AwesomeTRUCK Rolloff",
+  "type": "Example Truck Rolloff",
   "weight": 18678
 }
 
@@ -5210,32 +5239,32 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "arrived_at_dest": "2019-01-08T00:00:22.165Z",
-  "arrived_on": "2019-01-08T00:00:22.165Z",
+  "arrived_at_dest": "2019-01-10T17:43:53.188Z",
+  "arrived_on": "2019-01-10T17:43:53.188Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-08T00:00:22.165Z",
-  "confirmed_on": "2019-01-08T00:00:22.165Z",
+  "completed_on": "2019-01-10T17:43:53.188Z",
+  "confirmed_on": "2019-01-10T17:43:53.188Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-08T00:00:22.165Z",
+  "departed_on": "2019-01-10T17:43:53.188Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-08T00:00:22.165Z",
+  "dispatched_on": "2019-01-10T17:43:53.188Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-08T00:00:22.165Z",
-  "end_time": "2019-01-08T00:00:22.165Z",
+  "dumped_on": "2019-01-10T17:43:53.188Z",
+  "end_time": "2019-01-10T17:43:53.188Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -5249,25 +5278,25 @@ ISO 8601 DateTime Format (GMT)
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-08T00:00:22.165Z",
-  "pickup_date": "2019-01-08T00:00:22.165Z",
+  "original_schedule_date": "2019-01-10T17:43:53.188Z",
+  "pickup_date": "2019-01-10T17:43:53.188Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-08T00:00:22.165Z",
+  "requested_on": "2019-01-10T17:43:53.188Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-08T00:00:22.165Z",
+  "schedule_date": "2019-01-10T17:43:53.188Z",
   "start_location_id": 1,
-  "start_time": "2019-01-08T00:00:22.165Z",
+  "start_time": "2019-01-10T17:43:53.188Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-08T00:00:22.165Z"
+  "weighed_on": "2019-01-10T17:43:53.188Z"
 }
 
 ```
