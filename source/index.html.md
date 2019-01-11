@@ -31,15 +31,15 @@ To obtain an access token, your CRO API client must complete an OAuth 2.0 flow.
 The access token must be passed as an [Authorization: Bearer &lt;token&gt;] header with each request.
 
 - Flow: authorizationCode
-    - Authorization URL = [http://auth.crosandbox.com/oauth2/auth](http://auth.crosandbox.com/oauth2/auth)
-    - Token URL = [http://auth.crosandbox.com/oauth2/token](http://auth.crosandbox.com/oauth2/token)
+    - Authorization URL = [https://auth.crosandbox.com/oauth2/auth](https://auth.crosandbox.com/oauth2/auth)
+    - Token URL = [https://auth.crosandbox.com/oauth2/token](https://auth.crosandbox.com/oauth2/token)
 
 |Scope|Scope Description|
 |---|---|
 |api|CRO API access|
 
 - Flow: implicit
-    - Authorization URL = [http://auth.crosandbox.com/oauth2/auth](http://auth.crosandbox.com/oauth2/auth)
+    - Authorization URL = [https://auth.crosandbox.com/oauth2/auth](https://auth.crosandbox.com/oauth2/auth)
 
 |Scope|Scope Description|
 |---|---|
@@ -47,7 +47,7 @@ The access token must be passed as an [Authorization: Bearer &lt;token&gt;] head
 
 - Flow: password
 
-    - Token URL = [http://auth.crosandbox.com/oauth2/token](http://auth.crosandbox.com/oauth2/token)
+    - Token URL = [https://auth.crosandbox.com/oauth2/token](https://auth.crosandbox.com/oauth2/token)
 
 |Scope|Scope Description|
 |---|---|
@@ -55,7 +55,7 @@ The access token must be passed as an [Authorization: Bearer &lt;token&gt;] head
 
 - Flow: clientCredentials
 
-    - Token URL = [http://auth.crosandbox.com/oauth2/token](http://auth.crosandbox.com/oauth2/token)
+    - Token URL = [https://auth.crosandbox.com/oauth2/token](https://auth.crosandbox.com/oauth2/token)
 
 |Scope|Scope Description|
 |---|---|
@@ -267,17 +267,17 @@ List customers for location.
           "number": "1-111-111-1111"
         }
       ],
-      "created_on": "2019-01-10T17:43:53.149Z",
+      "created_on": "2019-01-11T00:35:21.232Z",
       "customer_id": 1,
       "is_active": false,
       "is_commercial": false,
-      "last_edited": "2019-01-10T17:43:53.149Z",
+      "last_edited": "2019-01-11T00:35:21.232Z",
       "location_id": 1,
       "name": "DEMOCO001",
       "note": "Service Location of DemoCo Inc.",
       "parent_id": 1,
       "reference_number": "Ref#100",
-      "renewal_date": "2019-01-10T17:43:53.149Z",
+      "renewal_date": "2019-01-11T00:35:21.232Z",
       "sales_rep": "John Doe",
       "suspension_id": 1
     }
@@ -869,32 +869,32 @@ Create 3rd Party hauler profile.
 
 ```json
 {
-  "arrived_at_dest": "2019-01-10T17:43:53.154Z",
-  "arrived_on": "2019-01-10T17:43:53.154Z",
+  "arrived_at_dest": "2019-01-11T00:35:21.238Z",
+  "arrived_on": "2019-01-11T00:35:21.238Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-10T17:43:53.154Z",
-  "confirmed_on": "2019-01-10T17:43:53.154Z",
+  "completed_on": "2019-01-11T00:35:21.238Z",
+  "confirmed_on": "2019-01-11T00:35:21.238Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-10T17:43:53.154Z",
+  "departed_on": "2019-01-11T00:35:21.238Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-10T17:43:53.154Z",
+  "dispatched_on": "2019-01-11T00:35:21.238Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-10T17:43:53.154Z",
-  "end_time": "2019-01-10T17:43:53.154Z",
+  "dumped_on": "2019-01-11T00:35:21.238Z",
+  "end_time": "2019-01-11T00:35:21.238Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -908,25 +908,25 @@ Create 3rd Party hauler profile.
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-10T17:43:53.155Z",
-  "pickup_date": "2019-01-10T17:43:53.155Z",
+  "original_schedule_date": "2019-01-11T00:35:21.238Z",
+  "pickup_date": "2019-01-11T00:35:21.238Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-10T17:43:53.155Z",
+  "requested_on": "2019-01-11T00:35:21.238Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-10T17:43:53.155Z",
+  "schedule_date": "2019-01-11T00:35:21.238Z",
   "start_location_id": 1,
-  "start_time": "2019-01-10T17:43:53.155Z",
+  "start_time": "2019-01-11T00:35:21.238Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-10T17:43:53.155Z",
+  "weighed_on": "2019-01-11T00:35:21.238Z",
   "asset": {
     "asset_type": {
       "deleted": false,
@@ -942,11 +942,11 @@ Create 3rd Party hauler profile.
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-10T17:43:53.155Z",
+    "dispatched_on": "2019-01-11T00:35:21.238Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-10T17:43:53.155Z",
-    "last_rental_invoice_on": "2019-01-10T17:43:53.155Z",
+    "last_activity_on": "2019-01-11T00:35:21.238Z",
+    "last_rental_invoice_on": "2019-01-11T00:35:21.238Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -957,7 +957,7 @@ Create 3rd Party hauler profile.
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-10T17:43:53.155Z"
+    "returned_on": "2019-01-11T00:35:21.238Z"
   },
   "asset_type": {
     "deleted": false,
@@ -993,15 +993,15 @@ Create 3rd Party hauler profile.
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-10T17:43:53.155Z",
+    "created_on": "2019-01-11T00:35:21.239Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-10T17:43:53.155Z",
+        "created_on": "2019-01-11T00:35:21.239Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-10T17:43:53.155Z",
+        "last_edited": "2019-01-11T00:35:21.239Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -1253,7 +1253,7 @@ Create hauler connection.
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-10T17:43:53.158Z",
+  "approved_on": "2019-01-11T00:35:21.243Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -1261,7 +1261,7 @@ Create hauler connection.
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-10T17:43:53.158Z"
+  "requested_on": "2019-01-11T00:35:21.243Z"
 }
 ```
 
@@ -1809,7 +1809,7 @@ List of 3rd party haulers.
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-10T17:43:53.159Z",
+  "approved_on": "2019-01-11T00:35:21.244Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -1817,7 +1817,7 @@ List of 3rd party haulers.
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-10T17:43:53.159Z"
+  "requested_on": "2019-01-11T00:35:21.244Z"
 }
 ```
 
@@ -2001,32 +2001,32 @@ Dispatch job.
 
 ```json
 {
-  "arrived_at_dest": "2019-01-10T17:43:53.160Z",
-  "arrived_on": "2019-01-10T17:43:53.160Z",
+  "arrived_at_dest": "2019-01-11T00:35:21.245Z",
+  "arrived_on": "2019-01-11T00:35:21.245Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-10T17:43:53.160Z",
-  "confirmed_on": "2019-01-10T17:43:53.160Z",
+  "completed_on": "2019-01-11T00:35:21.245Z",
+  "confirmed_on": "2019-01-11T00:35:21.245Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-10T17:43:53.160Z",
+  "departed_on": "2019-01-11T00:35:21.245Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-10T17:43:53.160Z",
+  "dispatched_on": "2019-01-11T00:35:21.245Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-10T17:43:53.160Z",
-  "end_time": "2019-01-10T17:43:53.160Z",
+  "dumped_on": "2019-01-11T00:35:21.245Z",
+  "end_time": "2019-01-11T00:35:21.245Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -2040,25 +2040,25 @@ Dispatch job.
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-10T17:43:53.160Z",
-  "pickup_date": "2019-01-10T17:43:53.160Z",
+  "original_schedule_date": "2019-01-11T00:35:21.245Z",
+  "pickup_date": "2019-01-11T00:35:21.245Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-10T17:43:53.160Z",
+  "requested_on": "2019-01-11T00:35:21.245Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-10T17:43:53.160Z",
+  "schedule_date": "2019-01-11T00:35:21.245Z",
   "start_location_id": 1,
-  "start_time": "2019-01-10T17:43:53.160Z",
+  "start_time": "2019-01-11T00:35:21.245Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-10T17:43:53.160Z"
+  "weighed_on": "2019-01-11T00:35:21.245Z"
 }
 ```
 
@@ -2237,32 +2237,32 @@ Get specified job.
 
 ```json
 {
-  "arrived_at_dest": "2019-01-10T17:43:53.162Z",
-  "arrived_on": "2019-01-10T17:43:53.162Z",
+  "arrived_at_dest": "2019-01-11T00:35:21.246Z",
+  "arrived_on": "2019-01-11T00:35:21.246Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-10T17:43:53.162Z",
-  "confirmed_on": "2019-01-10T17:43:53.162Z",
+  "completed_on": "2019-01-11T00:35:21.246Z",
+  "confirmed_on": "2019-01-11T00:35:21.246Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-10T17:43:53.162Z",
+  "departed_on": "2019-01-11T00:35:21.246Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-10T17:43:53.162Z",
+  "dispatched_on": "2019-01-11T00:35:21.246Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-10T17:43:53.162Z",
-  "end_time": "2019-01-10T17:43:53.162Z",
+  "dumped_on": "2019-01-11T00:35:21.246Z",
+  "end_time": "2019-01-11T00:35:21.246Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -2276,25 +2276,25 @@ Get specified job.
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-10T17:43:53.162Z",
-  "pickup_date": "2019-01-10T17:43:53.162Z",
+  "original_schedule_date": "2019-01-11T00:35:21.246Z",
+  "pickup_date": "2019-01-11T00:35:21.246Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-10T17:43:53.162Z",
+  "requested_on": "2019-01-11T00:35:21.246Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-10T17:43:53.162Z",
+  "schedule_date": "2019-01-11T00:35:21.246Z",
   "start_location_id": 1,
-  "start_time": "2019-01-10T17:43:53.162Z",
+  "start_time": "2019-01-11T00:35:21.246Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-10T17:43:53.162Z",
+  "weighed_on": "2019-01-11T00:35:21.246Z",
   "asset": {
     "asset_type": {
       "deleted": false,
@@ -2310,11 +2310,11 @@ Get specified job.
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-10T17:43:53.162Z",
+    "dispatched_on": "2019-01-11T00:35:21.246Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-10T17:43:53.162Z",
-    "last_rental_invoice_on": "2019-01-10T17:43:53.162Z",
+    "last_activity_on": "2019-01-11T00:35:21.246Z",
+    "last_rental_invoice_on": "2019-01-11T00:35:21.246Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -2325,7 +2325,7 @@ Get specified job.
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-10T17:43:53.162Z"
+    "returned_on": "2019-01-11T00:35:21.246Z"
   },
   "asset_type": {
     "deleted": false,
@@ -2361,15 +2361,15 @@ Get specified job.
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-10T17:43:53.162Z",
+    "created_on": "2019-01-11T00:35:21.246Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-10T17:43:53.162Z",
+        "created_on": "2019-01-11T00:35:21.246Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-10T17:43:53.162Z",
+        "last_edited": "2019-01-11T00:35:21.246Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -2624,32 +2624,32 @@ List jobs for location.
   "current_page": 1,
   "results": [
     {
-      "arrived_at_dest": "2019-01-10T17:43:53.164Z",
-      "arrived_on": "2019-01-10T17:43:53.164Z",
+      "arrived_at_dest": "2019-01-11T00:35:21.248Z",
+      "arrived_on": "2019-01-11T00:35:21.248Z",
       "asset_dropped": 1,
       "asset_id": 1,
       "asset_quantity": 1,
       "asset_type_id": 1,
       "completed_by": 1,
       "completed_by_driver": false,
-      "completed_on": "2019-01-10T17:43:53.164Z",
-      "confirmed_on": "2019-01-10T17:43:53.164Z",
+      "completed_on": "2019-01-11T00:35:21.248Z",
+      "confirmed_on": "2019-01-11T00:35:21.248Z",
       "created_by_id": 1,
       "created_with_portal": false,
       "customer_id": 9,
       "customer_notes": "Some customer notes",
-      "departed_on": "2019-01-10T17:43:53.164Z",
+      "departed_on": "2019-01-11T00:35:21.248Z",
       "desired_asset_desc": "An asset description.",
       "dispatch_priority": "H",
       "dispatched_by_route": 1,
-      "dispatched_on": "2019-01-10T17:43:53.165Z",
+      "dispatched_on": "2019-01-11T00:35:21.248Z",
       "dispatcher_notes": "Some dispatcher notes",
       "do_confirm": false,
       "driver_notes": "Some driver notes",
       "dropped_number": "Unused/deprecated field",
       "dump_location_id": 1,
-      "dumped_on": "2019-01-10T17:43:53.165Z",
-      "end_time": "2019-01-10T17:43:53.165Z",
+      "dumped_on": "2019-01-11T00:35:21.248Z",
+      "end_time": "2019-01-11T00:35:21.248Z",
       "fail_reason": "Failure reason",
       "final_location_id": 1,
       "flags": "Job notes",
@@ -2663,25 +2663,25 @@ List jobs for location.
       "job_group_id": 1,
       "location_id": 1,
       "merged_with_route": 1,
-      "original_schedule_date": "2019-01-10T17:43:53.165Z",
-      "pickup_date": "2019-01-10T17:43:53.165Z",
+      "original_schedule_date": "2019-01-11T00:35:21.248Z",
+      "pickup_date": "2019-01-11T00:35:21.248Z",
       "priority": -1,
       "reference_number": null,
       "removed_number": "string",
-      "requested_on": "2019-01-10T17:43:53.165Z",
+      "requested_on": "2019-01-11T00:35:21.249Z",
       "require_image": false,
       "require_material": false,
       "require_signature": false,
       "require_weights": false,
-      "schedule_date": "2019-01-10T17:43:53.165Z",
+      "schedule_date": "2019-01-11T00:35:21.249Z",
       "start_location_id": 1,
-      "start_time": "2019-01-10T17:43:53.165Z",
+      "start_time": "2019-01-11T00:35:21.249Z",
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
       "times_failed": 0,
       "times_rolled_over": 0,
       "truck_id": 1,
       "type": "D",
-      "weighed_on": "2019-01-10T17:43:53.165Z",
+      "weighed_on": "2019-01-11T00:35:21.249Z",
       "asset": {
         "asset_type": {
           "deleted": false,
@@ -2697,11 +2697,11 @@ List jobs for location.
         "cluster": 1,
         "customer_id": 1,
         "description": "A description",
-        "dispatched_on": "2019-01-10T17:43:53.165Z",
+        "dispatched_on": "2019-01-11T00:35:21.249Z",
         "id": 1,
         "is_returned": false,
-        "last_activity_on": "2019-01-10T17:43:53.165Z",
-        "last_rental_invoice_on": "2019-01-10T17:43:53.165Z",
+        "last_activity_on": "2019-01-11T00:35:21.249Z",
+        "last_rental_invoice_on": "2019-01-11T00:35:21.249Z",
         "latitude": 54.235,
         "location": {
           "id": 1,
@@ -2712,7 +2712,7 @@ List jobs for location.
         "longitude": 127.123,
         "number": "REF100",
         "quantity": 1,
-        "returned_on": "2019-01-10T17:43:53.165Z"
+        "returned_on": "2019-01-11T00:35:21.249Z"
       },
       "asset_type": {
         "deleted": false,
@@ -2748,15 +2748,15 @@ List jobs for location.
             "is_shipping": true
           }
         ],
-        "created_on": "2019-01-10T17:43:53.165Z",
+        "created_on": "2019-01-11T00:35:21.249Z",
         "id": 9,
         "locations": [
           {
-            "created_on": "2019-01-10T17:43:53.165Z",
+            "created_on": "2019-01-11T00:35:21.249Z",
             "customer_id": 9,
             "is_active": true,
             "is_commercial": false,
-            "last_edited": "2019-01-10T17:43:53.165Z",
+            "last_edited": "2019-01-11T00:35:21.249Z",
             "location_id": 1,
             "note": "string",
             "reference_number": "string",
@@ -3896,11 +3896,11 @@ ISO 8601 DateTime Format (GMT)
   "cluster": 1,
   "customer_id": 1,
   "description": "A description",
-  "dispatched_on": "2019-01-10T17:43:53.172Z",
+  "dispatched_on": "2019-01-11T00:35:21.255Z",
   "id": 1,
   "is_returned": false,
-  "last_activity_on": "2019-01-10T17:43:53.172Z",
-  "last_rental_invoice_on": "2019-01-10T17:43:53.172Z",
+  "last_activity_on": "2019-01-11T00:35:21.255Z",
+  "last_rental_invoice_on": "2019-01-11T00:35:21.255Z",
   "latitude": 54.235,
   "location": {
     "id": 1,
@@ -3911,7 +3911,7 @@ ISO 8601 DateTime Format (GMT)
   "longitude": 127.123,
   "number": "REF100",
   "quantity": 1,
-  "returned_on": "2019-01-10T17:43:53.172Z"
+  "returned_on": "2019-01-11T00:35:21.256Z"
 }
 
 ```
@@ -3971,32 +3971,32 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "arrived_at_dest": "2019-01-10T17:43:53.172Z",
-  "arrived_on": "2019-01-10T17:43:53.172Z",
+  "arrived_at_dest": "2019-01-11T00:35:21.257Z",
+  "arrived_on": "2019-01-11T00:35:21.257Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-10T17:43:53.173Z",
-  "confirmed_on": "2019-01-10T17:43:53.173Z",
+  "completed_on": "2019-01-11T00:35:21.257Z",
+  "confirmed_on": "2019-01-11T00:35:21.257Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-10T17:43:53.173Z",
+  "departed_on": "2019-01-11T00:35:21.257Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-10T17:43:53.173Z",
+  "dispatched_on": "2019-01-11T00:35:21.257Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-10T17:43:53.173Z",
-  "end_time": "2019-01-10T17:43:53.173Z",
+  "dumped_on": "2019-01-11T00:35:21.257Z",
+  "end_time": "2019-01-11T00:35:21.257Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -4010,25 +4010,25 @@ ISO 8601 DateTime Format (GMT)
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-10T17:43:53.173Z",
-  "pickup_date": "2019-01-10T17:43:53.173Z",
+  "original_schedule_date": "2019-01-11T00:35:21.257Z",
+  "pickup_date": "2019-01-11T00:35:21.257Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-10T17:43:53.173Z",
+  "requested_on": "2019-01-11T00:35:21.257Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-10T17:43:53.173Z",
+  "schedule_date": "2019-01-11T00:35:21.257Z",
   "start_location_id": 1,
-  "start_time": "2019-01-10T17:43:53.173Z",
+  "start_time": "2019-01-11T00:35:21.257Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-10T17:43:53.173Z"
+  "weighed_on": "2019-01-11T00:35:21.257Z"
 }
 
 ```
@@ -4162,15 +4162,15 @@ ISO 8601 DateTime Format (GMT)
       "is_shipping": true
     }
   ],
-  "created_on": "2019-01-10T17:43:53.174Z",
+  "created_on": "2019-01-11T00:35:21.260Z",
   "id": 9,
   "locations": [
     {
-      "created_on": "2019-01-10T17:43:53.174Z",
+      "created_on": "2019-01-11T00:35:21.260Z",
       "customer_id": 9,
       "is_active": true,
       "is_commercial": false,
-      "last_edited": "2019-01-10T17:43:53.174Z",
+      "last_edited": "2019-01-11T00:35:21.260Z",
       "location_id": 1,
       "note": "string",
       "reference_number": "string",
@@ -4303,17 +4303,17 @@ ISO 8601 DateTime Format (GMT)
       "number": "1-111-111-1111"
     }
   ],
-  "created_on": "2019-01-10T17:43:53.175Z",
+  "created_on": "2019-01-11T00:35:21.261Z",
   "customer_id": 1,
   "is_active": false,
   "is_commercial": false,
-  "last_edited": "2019-01-10T17:43:53.175Z",
+  "last_edited": "2019-01-11T00:35:21.261Z",
   "location_id": 1,
   "name": "DEMOCO001",
   "note": "Service Location of DemoCo Inc.",
   "parent_id": 1,
   "reference_number": "Ref#100",
-  "renewal_date": "2019-01-10T17:43:53.175Z",
+  "renewal_date": "2019-01-11T00:35:21.261Z",
   "sales_rep": "John Doe",
   "suspension_id": 1
 }
@@ -4477,7 +4477,7 @@ ISO 8601 DateTime Format (GMT)
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-10T17:43:53.176Z",
+  "approved_on": "2019-01-11T00:35:21.262Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -4485,7 +4485,7 @@ ISO 8601 DateTime Format (GMT)
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-10T17:43:53.176Z"
+  "requested_on": "2019-01-11T00:35:21.262Z"
 }
 
 ```
@@ -4558,32 +4558,32 @@ ISO 8601 DateTime Format (GMT)
   "current_page": 1,
   "results": [
     {
-      "arrived_at_dest": "2019-01-10T17:43:53.178Z",
-      "arrived_on": "2019-01-10T17:43:53.178Z",
+      "arrived_at_dest": "2019-01-11T00:35:21.263Z",
+      "arrived_on": "2019-01-11T00:35:21.263Z",
       "asset_dropped": 1,
       "asset_id": 1,
       "asset_quantity": 1,
       "asset_type_id": 1,
       "completed_by": 1,
       "completed_by_driver": false,
-      "completed_on": "2019-01-10T17:43:53.178Z",
-      "confirmed_on": "2019-01-10T17:43:53.178Z",
+      "completed_on": "2019-01-11T00:35:21.263Z",
+      "confirmed_on": "2019-01-11T00:35:21.263Z",
       "created_by_id": 1,
       "created_with_portal": false,
       "customer_id": 9,
       "customer_notes": "Some customer notes",
-      "departed_on": "2019-01-10T17:43:53.178Z",
+      "departed_on": "2019-01-11T00:35:21.263Z",
       "desired_asset_desc": "An asset description.",
       "dispatch_priority": "H",
       "dispatched_by_route": 1,
-      "dispatched_on": "2019-01-10T17:43:53.178Z",
+      "dispatched_on": "2019-01-11T00:35:21.263Z",
       "dispatcher_notes": "Some dispatcher notes",
       "do_confirm": false,
       "driver_notes": "Some driver notes",
       "dropped_number": "Unused/deprecated field",
       "dump_location_id": 1,
-      "dumped_on": "2019-01-10T17:43:53.178Z",
-      "end_time": "2019-01-10T17:43:53.178Z",
+      "dumped_on": "2019-01-11T00:35:21.263Z",
+      "end_time": "2019-01-11T00:35:21.263Z",
       "fail_reason": "Failure reason",
       "final_location_id": 1,
       "flags": "Job notes",
@@ -4597,25 +4597,25 @@ ISO 8601 DateTime Format (GMT)
       "job_group_id": 1,
       "location_id": 1,
       "merged_with_route": 1,
-      "original_schedule_date": "2019-01-10T17:43:53.178Z",
-      "pickup_date": "2019-01-10T17:43:53.178Z",
+      "original_schedule_date": "2019-01-11T00:35:21.263Z",
+      "pickup_date": "2019-01-11T00:35:21.263Z",
       "priority": -1,
       "reference_number": null,
       "removed_number": "string",
-      "requested_on": "2019-01-10T17:43:53.178Z",
+      "requested_on": "2019-01-11T00:35:21.263Z",
       "require_image": false,
       "require_material": false,
       "require_signature": false,
       "require_weights": false,
-      "schedule_date": "2019-01-10T17:43:53.178Z",
+      "schedule_date": "2019-01-11T00:35:21.263Z",
       "start_location_id": 1,
-      "start_time": "2019-01-10T17:43:53.178Z",
+      "start_time": "2019-01-11T00:35:21.263Z",
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
       "times_failed": 0,
       "times_rolled_over": 0,
       "truck_id": 1,
       "type": "D",
-      "weighed_on": "2019-01-10T17:43:53.178Z",
+      "weighed_on": "2019-01-11T00:35:21.263Z",
       "asset": {
         "asset_type": {
           "deleted": false,
@@ -4631,11 +4631,11 @@ ISO 8601 DateTime Format (GMT)
         "cluster": 1,
         "customer_id": 1,
         "description": "A description",
-        "dispatched_on": "2019-01-10T17:43:53.179Z",
+        "dispatched_on": "2019-01-11T00:35:21.263Z",
         "id": 1,
         "is_returned": false,
-        "last_activity_on": "2019-01-10T17:43:53.179Z",
-        "last_rental_invoice_on": "2019-01-10T17:43:53.179Z",
+        "last_activity_on": "2019-01-11T00:35:21.263Z",
+        "last_rental_invoice_on": "2019-01-11T00:35:21.263Z",
         "latitude": 54.235,
         "location": {
           "id": 1,
@@ -4646,7 +4646,7 @@ ISO 8601 DateTime Format (GMT)
         "longitude": 127.123,
         "number": "REF100",
         "quantity": 1,
-        "returned_on": "2019-01-10T17:43:53.179Z"
+        "returned_on": "2019-01-11T00:35:21.263Z"
       },
       "asset_type": {
         "deleted": false,
@@ -4682,15 +4682,15 @@ ISO 8601 DateTime Format (GMT)
             "is_shipping": true
           }
         ],
-        "created_on": "2019-01-10T17:43:53.179Z",
+        "created_on": "2019-01-11T00:35:21.263Z",
         "id": 9,
         "locations": [
           {
-            "created_on": "2019-01-10T17:43:53.179Z",
+            "created_on": "2019-01-11T00:35:21.263Z",
             "customer_id": 9,
             "is_active": true,
             "is_commercial": false,
-            "last_edited": "2019-01-10T17:43:53.179Z",
+            "last_edited": "2019-01-11T00:35:21.263Z",
             "location_id": 1,
             "note": "string",
             "reference_number": "string",
@@ -4784,11 +4784,11 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "created_on": "2019-01-10T17:43:53.182Z",
+  "created_on": "2019-01-11T00:35:21.270Z",
   "customer_id": 9,
   "is_active": true,
   "is_commercial": false,
-  "last_edited": "2019-01-10T17:43:53.182Z",
+  "last_edited": "2019-01-11T00:35:21.270Z",
   "location_id": 1,
   "note": "string",
   "reference_number": "string",
@@ -4819,32 +4819,32 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "arrived_at_dest": "2019-01-10T17:43:53.182Z",
-  "arrived_on": "2019-01-10T17:43:53.182Z",
+  "arrived_at_dest": "2019-01-11T00:35:21.270Z",
+  "arrived_on": "2019-01-11T00:35:21.270Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-10T17:43:53.182Z",
-  "confirmed_on": "2019-01-10T17:43:53.182Z",
+  "completed_on": "2019-01-11T00:35:21.270Z",
+  "confirmed_on": "2019-01-11T00:35:21.270Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-10T17:43:53.182Z",
+  "departed_on": "2019-01-11T00:35:21.270Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-10T17:43:53.182Z",
+  "dispatched_on": "2019-01-11T00:35:21.270Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-10T17:43:53.182Z",
-  "end_time": "2019-01-10T17:43:53.182Z",
+  "dumped_on": "2019-01-11T00:35:21.270Z",
+  "end_time": "2019-01-11T00:35:21.270Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -4858,25 +4858,25 @@ ISO 8601 DateTime Format (GMT)
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-10T17:43:53.182Z",
-  "pickup_date": "2019-01-10T17:43:53.182Z",
+  "original_schedule_date": "2019-01-11T00:35:21.270Z",
+  "pickup_date": "2019-01-11T00:35:21.270Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-10T17:43:53.182Z",
+  "requested_on": "2019-01-11T00:35:21.270Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-10T17:43:53.182Z",
+  "schedule_date": "2019-01-11T00:35:21.270Z",
   "start_location_id": 1,
-  "start_time": "2019-01-10T17:43:53.182Z",
+  "start_time": "2019-01-11T00:35:21.270Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-10T17:43:53.182Z",
+  "weighed_on": "2019-01-11T00:35:21.270Z",
   "asset": {
     "asset_type": {
       "deleted": false,
@@ -4892,11 +4892,11 @@ ISO 8601 DateTime Format (GMT)
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-10T17:43:53.182Z",
+    "dispatched_on": "2019-01-11T00:35:21.270Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-10T17:43:53.182Z",
-    "last_rental_invoice_on": "2019-01-10T17:43:53.182Z",
+    "last_activity_on": "2019-01-11T00:35:21.270Z",
+    "last_rental_invoice_on": "2019-01-11T00:35:21.270Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -4907,7 +4907,7 @@ ISO 8601 DateTime Format (GMT)
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-10T17:43:53.182Z"
+    "returned_on": "2019-01-11T00:35:21.270Z"
   },
   "asset_type": {
     "deleted": false,
@@ -4943,15 +4943,15 @@ ISO 8601 DateTime Format (GMT)
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-10T17:43:53.183Z",
+    "created_on": "2019-01-11T00:35:21.272Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-10T17:43:53.183Z",
+        "created_on": "2019-01-11T00:35:21.272Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-10T17:43:53.183Z",
+        "last_edited": "2019-01-11T00:35:21.272Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -5087,17 +5087,17 @@ ISO 8601 DateTime Format (GMT)
           "number": "1-111-111-1111"
         }
       ],
-      "created_on": "2019-01-10T17:43:53.186Z",
+      "created_on": "2019-01-11T00:35:21.276Z",
       "customer_id": 1,
       "is_active": false,
       "is_commercial": false,
-      "last_edited": "2019-01-10T17:43:53.186Z",
+      "last_edited": "2019-01-11T00:35:21.276Z",
       "location_id": 1,
       "name": "DEMOCO001",
       "note": "Service Location of DemoCo Inc.",
       "parent_id": 1,
       "reference_number": "Ref#100",
-      "renewal_date": "2019-01-10T17:43:53.186Z",
+      "renewal_date": "2019-01-11T00:35:21.276Z",
       "sales_rep": "John Doe",
       "suspension_id": 1
     }
@@ -5239,32 +5239,32 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "arrived_at_dest": "2019-01-10T17:43:53.188Z",
-  "arrived_on": "2019-01-10T17:43:53.188Z",
+  "arrived_at_dest": "2019-01-11T00:35:21.278Z",
+  "arrived_on": "2019-01-11T00:35:21.278Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-10T17:43:53.188Z",
-  "confirmed_on": "2019-01-10T17:43:53.188Z",
+  "completed_on": "2019-01-11T00:35:21.278Z",
+  "confirmed_on": "2019-01-11T00:35:21.278Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-10T17:43:53.188Z",
+  "departed_on": "2019-01-11T00:35:21.278Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-10T17:43:53.188Z",
+  "dispatched_on": "2019-01-11T00:35:21.278Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-10T17:43:53.188Z",
-  "end_time": "2019-01-10T17:43:53.188Z",
+  "dumped_on": "2019-01-11T00:35:21.278Z",
+  "end_time": "2019-01-11T00:35:21.278Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -5278,25 +5278,25 @@ ISO 8601 DateTime Format (GMT)
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-10T17:43:53.188Z",
-  "pickup_date": "2019-01-10T17:43:53.188Z",
+  "original_schedule_date": "2019-01-11T00:35:21.278Z",
+  "pickup_date": "2019-01-11T00:35:21.278Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-10T17:43:53.188Z",
+  "requested_on": "2019-01-11T00:35:21.278Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-10T17:43:53.188Z",
+  "schedule_date": "2019-01-11T00:35:21.278Z",
   "start_location_id": 1,
-  "start_time": "2019-01-10T17:43:53.188Z",
+  "start_time": "2019-01-11T00:35:21.278Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-10T17:43:53.188Z"
+  "weighed_on": "2019-01-11T00:35:21.278Z"
 }
 
 ```
