@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="https://crosoftware.net/cro/yard/CSS/img/icon.png">
     <title>CRO Software API</title>
 
     <style>
@@ -324,9 +325,6 @@
                     <a href="#tocSuuid" class="toc-h2 toc-link" data-title="UUID">UUID</a>
                   </li>
                   <li>
-                    <a href="#tocSrecordid" class="toc-h2 toc-link" data-title="RecordId">RecordId</a>
-                  </li>
-                  <li>
                     <a href="#tocSaddressmodel" class="toc-h2 toc-link" data-title="AddressModel">AddressModel</a>
                   </li>
                   <li>
@@ -366,12 +364,6 @@
                     <a href="#tocShaulerconnectionmodel" class="toc-h2 toc-link" data-title="HaulerConnectionModel">HaulerConnectionModel</a>
                   </li>
                   <li>
-                    <a href="#tocShaulerlistmodel" class="toc-h2 toc-link" data-title="HaulerListModel">HaulerListModel</a>
-                  </li>
-                  <li>
-                    <a href="#tocShaulermodel" class="toc-h2 toc-link" data-title="HaulerModel">HaulerModel</a>
-                  </li>
-                  <li>
                     <a href="#tocSjoblistmodel" class="toc-h2 toc-link" data-title="JobListModel">JobListModel</a>
                   </li>
                   <li>
@@ -388,6 +380,12 @@
                   </li>
                   <li>
                     <a href="#tocSlocationmodel" class="toc-h2 toc-link" data-title="LocationModel">LocationModel</a>
+                  </li>
+                  <li>
+                    <a href="#tocSthirdpartyhaulerlistmodel" class="toc-h2 toc-link" data-title="ThirdPartyHaulerListModel">ThirdPartyHaulerListModel</a>
+                  </li>
+                  <li>
+                    <a href="#tocSthirdpartyhaulermodel" class="toc-h2 toc-link" data-title="ThirdPartyHaulerModel">ThirdPartyHaulerModel</a>
                   </li>
                   <li>
                     <a href="#tocStrucklistmodel" class="toc-h2 toc-link" data-title="TruckListModel">TruckListModel</a>
@@ -711,17 +709,17 @@ X-TENANT-ID: 1
           </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1-111-111-1111"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.232Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.845Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"is_commercial"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.232Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.845Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEMOCO001"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Service Location of DemoCo Inc."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"parent_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ref#100"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"renewal_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.232Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"renewal_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.845Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"sales_rep"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"suspension_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1417,210 +1415,8 @@ X-TENANT-ID: 1
 <p>200 Response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"asset_dropped"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"asset_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"asset_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"asset_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"completed_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"completed_by_driver"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_by_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_with_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"customer_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some customer notes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"desired_asset_desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An asset description."</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dispatch_priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dispatched_by_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dispatcher_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some dispatcher notes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"do_confirm"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"driver_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some driver notes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dropped_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unused/deprecated field"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dump_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fail_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failure reason"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"final_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"flags"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Job notes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"invoice_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some invoice notes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"is_completed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"is_declined"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"is_deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"is_failed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"is_paid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"job_group_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"merged_with_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"removed_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"require_image"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"require_material"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"require_signature"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"require_weights"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"start_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"third_party_hauler_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"times_failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"times_rolled_over"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"truck_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"asset_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"is_default"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 yrd"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"require_numbers"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mi">3245</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"asset_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cluster"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A description"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"is_returned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"last_activity_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"last_rental_invoice_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.235</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sequim"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">127.123</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REF100"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"returned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.238Z"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"asset_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"is_default"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 yrd"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"require_numbers"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mi">3245</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usa"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">48.0854948</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"line_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"610 N 5th Ave"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"line_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"P.O. Box 123"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"line_3"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suite 1"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"line_4"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1st Floor"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"locality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sequim"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-123.11221510000001</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="mi">98382</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WA"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"address_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"is_billing"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"is_physical"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"is_shipping"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.239Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.239Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"is_commercial"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.239Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"renewal_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"sales_rep"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"suspension_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YMCA"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"parent_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"dump_location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Sequim Ave."</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sequim"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"contact_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"support@crosoftware.net"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"contact_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"contact_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(706) 360-7109"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"is_holding_yard"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">128.123</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sequim"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.234</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A Destination"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Washington"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="mi">98368</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"final_location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Sequim Ave."</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sequim"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"contact_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"support@crosoftware.net"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"contact_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"contact_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(706) 360-7109"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"is_holding_yard"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">128.123</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sequim"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.234</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A Destination"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Washington"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="mi">98368</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"start_location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Sequim Ave."</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sequim"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"contact_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"support@crosoftware.net"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"contact_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"contact_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(706) 360-7109"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"is_holding_yard"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">128.123</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sequim"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.234</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A Destination"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Washington"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="mi">98368</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EXCOID"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -1640,7 +1436,7 @@ X-TENANT-ID: 1
 <tr>
 <td><code>200</code></td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td><a href="#schemajobmodel">JobModel</a></td>
+<td><a href="#schemathirdpartyhaulermodel">ThirdPartyHaulerModel</a></td>
 <td>Third party hauler profile.</td>
 </tr>
 <tr>
@@ -1831,7 +1627,7 @@ X-TENANT-ID: 1
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"approved_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.243Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"approved_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.849Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"denied_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"is_approved"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -1839,7 +1635,7 @@ X-TENANT-ID: 1
   </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"provider_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRO Scrap - Sequim"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"provider_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"na"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.243Z"</span><span class="w">
+  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.849Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -2042,7 +1838,7 @@ X-TENANT-ID: 1
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SMS594"</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EXCOID"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -2062,7 +1858,7 @@ X-TENANT-ID: 1
 <tr>
 <td><code>200</code></td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td><a href="#schemahaulermodel">HaulerModel</a></td>
+<td><a href="#schemathirdpartyhaulermodel">ThirdPartyHaulerModel</a></td>
 <td>Hauler profile.</td>
 </tr>
 <tr>
@@ -2256,7 +2052,7 @@ X-TENANT-ID: 1
   </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SMS594"</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EXCOID"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"total_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -2280,7 +2076,7 @@ X-TENANT-ID: 1
 <tr>
 <td><code>200</code></td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td><a href="#schemahaulerlistmodel">HaulerListModel</a></td>
+<td><a href="#schemathirdpartyhaulerlistmodel">ThirdPartyHaulerListModel</a></td>
 <td>List of third party haulers for tenant.</td>
 </tr>
 <tr>
@@ -2477,7 +2273,7 @@ X-TENANT-ID: 1
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"approved_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.244Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"approved_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.855Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"denied_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"is_approved"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -2485,7 +2281,7 @@ X-TENANT-ID: 1
   </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"provider_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRO Scrap - Sequim"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"provider_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"na"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.244Z"</span><span class="w">
+  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.855Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -2709,32 +2505,32 @@ X-TENANT-ID: 1
 <p>200 Response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.856Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.856Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_dropped"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"completed_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"completed_by_driver"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.856Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.856Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_by_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_with_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
   </span><span class="s2">"customer_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some customer notes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.856Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"desired_asset_desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An asset description."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatch_priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatched_by_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.856Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatcher_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some dispatcher notes"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"do_confirm"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"driver_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some driver notes"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dropped_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unused/deprecated field"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dump_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.856Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.856Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"fail_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failure reason"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"final_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"flags"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Job notes"</span><span class="p">,</span><span class="w">
@@ -2748,25 +2544,25 @@ X-TENANT-ID: 1
   </span><span class="s2">"job_group_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"merged_with_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.856Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.856Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"removed_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.856Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_image"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_material"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_signature"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_weights"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.856Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"start_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.856Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"third_party_hauler_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"times_failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"times_rolled_over"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"truck_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.245Z"</span><span class="w">
+  </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.857Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -2975,32 +2771,32 @@ X-TENANT-ID: 1
 <p>200 Response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_dropped"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"completed_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"completed_by_driver"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_by_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_with_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
   </span><span class="s2">"customer_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some customer notes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"desired_asset_desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An asset description."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatch_priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatched_by_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatcher_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some dispatcher notes"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"do_confirm"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"driver_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some driver notes"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dropped_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unused/deprecated field"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dump_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"fail_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failure reason"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"final_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"flags"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Job notes"</span><span class="p">,</span><span class="w">
@@ -3014,25 +2810,25 @@ X-TENANT-ID: 1
   </span><span class="s2">"job_group_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"merged_with_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"removed_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_image"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_material"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_signature"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_weights"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"start_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"third_party_hauler_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"times_failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"times_rolled_over"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"truck_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"asset_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -3048,11 +2844,11 @@ X-TENANT-ID: 1
     </span><span class="s2">"cluster"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A description"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_returned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"last_activity_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"last_rental_invoice_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_activity_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_rental_invoice_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.235</span><span class="p">,</span><span class="w">
     </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -3063,7 +2859,7 @@ X-TENANT-ID: 1
     </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">127.123</span><span class="p">,</span><span class="w">
     </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REF100"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"returned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="w">
+    </span><span class="s2">"returned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"asset_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -3099,15 +2895,15 @@ X-TENANT-ID: 1
         </span><span class="s2">"is_shipping"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
     </span><span class="s2">"locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
         </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"is_commercial"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.246Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.860Z"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -3398,32 +3194,32 @@ X-TENANT-ID: 1
   </span><span class="s2">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.248Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.248Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"asset_dropped"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"asset_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"asset_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"asset_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"completed_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"completed_by_driver"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.248Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.248Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"created_by_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"created_with_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
       </span><span class="s2">"customer_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some customer notes"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.248Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"desired_asset_desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An asset description."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"dispatch_priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"dispatched_by_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.248Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"dispatcher_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some dispatcher notes"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"do_confirm"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"driver_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some driver notes"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"dropped_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unused/deprecated field"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"dump_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.248Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.248Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"fail_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failure reason"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"final_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"flags"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Job notes"</span><span class="p">,</span><span class="w">
@@ -3437,25 +3233,25 @@ X-TENANT-ID: 1
       </span><span class="s2">"job_group_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"merged_with_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.248Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.248Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"removed_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.249Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"require_image"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"require_material"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"require_signature"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"require_weights"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.249Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"start_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.249Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"third_party_hauler_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"times_failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"times_rolled_over"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"truck_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.249Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"asset_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -3471,11 +3267,11 @@ X-TENANT-ID: 1
         </span><span class="s2">"cluster"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A description"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.249Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"is_returned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last_activity_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.249Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last_rental_invoice_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.249Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last_activity_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last_rental_invoice_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.235</span><span class="p">,</span><span class="w">
         </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -3486,7 +3282,7 @@ X-TENANT-ID: 1
         </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">127.123</span><span class="p">,</span><span class="w">
         </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REF100"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"returned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.249Z"</span><span class="w">
+        </span><span class="s2">"returned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"asset_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -3522,15 +3318,15 @@ X-TENANT-ID: 1
             </span><span class="s2">"is_shipping"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">],</span><span class="w">
-        </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.249Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
         </span><span class="s2">"locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.249Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_commercial"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.249Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.863Z"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
             </span><span class="s2">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -4791,29 +4587,6 @@ ISO 8601 DateTime Format (GMT)
 </tr>
 </tbody></table>
 
-<h2 id="tocSrecordid">RecordId</h2>
-<pre class="highlight json tab-json"><code><span class="mi">1</span><span class="w">
-
-</span></code></pre>
-<p><a id="schemarecordid"></a></p>
-
-<p>*Record identifier.
-*</p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>-</code></td>
-<td>integer(int64)</td>
-<td>Record identifier.</td>
-</tr>
-</tbody></table>
-
 <h2 id="tocSaddressmodel">AddressModel</h2>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usa"</span><span class="p">,</span><span class="w">
@@ -4912,11 +4685,11 @@ ISO 8601 DateTime Format (GMT)
   </span><span class="s2">"cluster"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A description"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.255Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.870Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"is_returned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"last_activity_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.255Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"last_rental_invoice_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.255Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_activity_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.870Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_rental_invoice_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.870Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.235</span><span class="p">,</span><span class="w">
   </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -4927,7 +4700,7 @@ ISO 8601 DateTime Format (GMT)
   </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">127.123</span><span class="p">,</span><span class="w">
   </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REF100"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"returned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.256Z"</span><span class="w">
+  </span><span class="s2">"returned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.870Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
@@ -5093,32 +4866,32 @@ ISO 8601 DateTime Format (GMT)
 
 <h2 id="tocSbasejobmodel">BaseJobModel</h2>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.871Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.871Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_dropped"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"completed_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"completed_by_driver"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.871Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.871Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_by_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_with_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
   </span><span class="s2">"customer_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some customer notes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.871Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"desired_asset_desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An asset description."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatch_priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatched_by_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.872Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatcher_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some dispatcher notes"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"do_confirm"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"driver_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some driver notes"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dropped_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unused/deprecated field"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dump_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.872Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.872Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"fail_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failure reason"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"final_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"flags"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Job notes"</span><span class="p">,</span><span class="w">
@@ -5132,25 +4905,25 @@ ISO 8601 DateTime Format (GMT)
   </span><span class="s2">"job_group_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"merged_with_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.872Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.872Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"removed_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.872Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_image"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_material"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_signature"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_weights"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.872Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"start_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.872Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"third_party_hauler_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"times_failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"times_rolled_over"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"truck_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.257Z"</span><span class="w">
+  </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.872Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
@@ -5550,15 +5323,15 @@ ISO 8601 DateTime Format (GMT)
       </span><span class="s2">"is_shipping"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.260Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.874Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
   </span><span class="s2">"locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.260Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.874Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
       </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="s2">"is_commercial"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.260Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.874Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -5816,17 +5589,17 @@ ISO 8601 DateTime Format (GMT)
       </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1-111-111-1111"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.261Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.875Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"is_commercial"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.261Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.875Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEMOCO001"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Service Location of DemoCo Inc."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"parent_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ref#100"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"renewal_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.261Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"renewal_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.875Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"sales_rep"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"suspension_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -6202,7 +5975,7 @@ ISO 8601 DateTime Format (GMT)
 <h2 id="tocShaulerconnectionmodel">HaulerConnectionModel</h2>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"approved_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.262Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"approved_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.877Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"denied_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"is_approved"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -6210,7 +5983,7 @@ ISO 8601 DateTime Format (GMT)
   </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"provider_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRO Scrap - Sequim"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"provider_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"na"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.262Z"</span><span class="w">
+  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.877Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
@@ -6275,117 +6048,38 @@ ISO 8601 DateTime Format (GMT)
 </tr>
 </tbody></table>
 
-<h2 id="tocShaulerlistmodel">HaulerListModel</h2>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"current_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SMS594"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"total_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre>
-<p><a id="schemahaulerlistmodel"></a></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>current_limit</code></td>
-<td>integer(int64)</td>
-<td>-</td>
-</tr>
-<tr>
-<td><code>current_page</code></td>
-<td>integer(int64)</td>
-<td>-</td>
-</tr>
-<tr>
-<td><code>results</code></td>
-<td>array[<a href="#schemahaulermodel">HaulerModel</a>]</td>
-<td>-</td>
-</tr>
-<tr>
-<td><code>total_count</code></td>
-<td>integer(int64)</td>
-<td>-</td>
-</tr>
-<tr>
-<td><code>total_pages</code></td>
-<td>integer(int64)</td>
-<td>-</td>
-</tr>
-</tbody></table>
-
-<h2 id="tocShaulermodel">HaulerModel</h2>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SMS594"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre>
-<p><a id="schemahaulermodel"></a></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>id</code></td>
-<td><a href="#schemauuid">UUID</a></td>
-<td>UUID</td>
-</tr>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>-</td>
-</tr>
-</tbody></table>
-
 <h2 id="tocSjoblistmodel">JobListModel</h2>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"current_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"asset_dropped"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"asset_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"asset_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"asset_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"completed_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"completed_by_driver"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"created_by_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"created_with_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
       </span><span class="s2">"customer_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some customer notes"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"desired_asset_desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An asset description."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"dispatch_priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"dispatched_by_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"dispatcher_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some dispatcher notes"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"do_confirm"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"driver_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some driver notes"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"dropped_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unused/deprecated field"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"dump_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"fail_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failure reason"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"final_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"flags"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Job notes"</span><span class="p">,</span><span class="w">
@@ -6399,25 +6093,25 @@ ISO 8601 DateTime Format (GMT)
       </span><span class="s2">"job_group_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"merged_with_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"removed_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"require_image"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"require_material"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"require_signature"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"require_weights"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"start_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"third_party_hauler_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"times_failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"times_rolled_over"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"truck_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"asset_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -6433,11 +6127,11 @@ ISO 8601 DateTime Format (GMT)
         </span><span class="s2">"cluster"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A description"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"is_returned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last_activity_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last_rental_invoice_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last_activity_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last_rental_invoice_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.235</span><span class="p">,</span><span class="w">
         </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -6448,7 +6142,7 @@ ISO 8601 DateTime Format (GMT)
         </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">127.123</span><span class="p">,</span><span class="w">
         </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REF100"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"returned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="w">
+        </span><span class="s2">"returned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"asset_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -6484,15 +6178,15 @@ ISO 8601 DateTime Format (GMT)
             </span><span class="s2">"is_shipping"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">],</span><span class="w">
-        </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
         </span><span class="s2">"locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_commercial"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.263Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.878Z"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
             </span><span class="s2">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -6609,11 +6303,11 @@ ISO 8601 DateTime Format (GMT)
 
 <h2 id="tocSjoblocationmodel">JobLocationModel</h2>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
   </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"is_commercial"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -6691,32 +6385,32 @@ ISO 8601 DateTime Format (GMT)
 
 <h2 id="tocSjobmodel">JobModel</h2>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_dropped"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"completed_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"completed_by_driver"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_by_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_with_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
   </span><span class="s2">"customer_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some customer notes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"desired_asset_desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An asset description."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatch_priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatched_by_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatcher_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some dispatcher notes"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"do_confirm"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"driver_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some driver notes"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dropped_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unused/deprecated field"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dump_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"fail_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failure reason"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"final_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"flags"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Job notes"</span><span class="p">,</span><span class="w">
@@ -6730,25 +6424,25 @@ ISO 8601 DateTime Format (GMT)
   </span><span class="s2">"job_group_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"merged_with_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"removed_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_image"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_material"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_signature"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_weights"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"start_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"third_party_hauler_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"times_failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"times_rolled_over"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"truck_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"asset_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -6764,11 +6458,11 @@ ISO 8601 DateTime Format (GMT)
     </span><span class="s2">"cluster"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A description"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_returned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"last_activity_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"last_rental_invoice_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_activity_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_rental_invoice_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">54.235</span><span class="p">,</span><span class="w">
     </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -6779,7 +6473,7 @@ ISO 8601 DateTime Format (GMT)
     </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">127.123</span><span class="p">,</span><span class="w">
     </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REF100"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"returned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.270Z"</span><span class="w">
+    </span><span class="s2">"returned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"asset_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -6815,15 +6509,15 @@ ISO 8601 DateTime Format (GMT)
         </span><span class="s2">"is_shipping"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.272Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
     </span><span class="s2">"locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.272Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
         </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"is_commercial"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.272Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.880Z"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -7004,17 +6698,17 @@ ISO 8601 DateTime Format (GMT)
           </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1-111-111-1111"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.276Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.882Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"is_commercial"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.276Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last_edited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.882Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEMOCO001"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Service Location of DemoCo Inc."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"parent_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ref#100"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"renewal_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.276Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"renewal_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.882Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"sales_rep"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"suspension_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -7138,6 +6832,85 @@ ISO 8601 DateTime Format (GMT)
 <td><code>is_active</code></td>
 <td>boolean</td>
 <td>-</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>-</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocSthirdpartyhaulerlistmodel">ThirdPartyHaulerListModel</h2>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"current_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EXCOID"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"total_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p><a id="schemathirdpartyhaulerlistmodel"></a></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>current_limit</code></td>
+<td>integer(int64)</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>current_page</code></td>
+<td>integer(int64)</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>results</code></td>
+<td>array[<a href="#schemathirdpartyhaulermodel">ThirdPartyHaulerModel</a>]</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>total_count</code></td>
+<td>integer(int64)</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>total_pages</code></td>
+<td>integer(int64)</td>
+<td>-</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocSthirdpartyhaulermodel">ThirdPartyHaulerModel</h2>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EXCOID"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p><a id="schemathirdpartyhaulermodel"></a></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>id</code></td>
+<td><a href="#schemauuid">UUID</a></td>
+<td>UUID</td>
 </tr>
 <tr>
 <td><code>name</code></td>
@@ -7283,32 +7056,32 @@ ISO 8601 DateTime Format (GMT)
 
 <h2 id="tocSupdatedjobmodel">UpdatedJobModel</h2>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"arrived_at_dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.887Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"arrived_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.887Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_dropped"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"asset_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"completed_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"completed_by_driver"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"completed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.887Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"confirmed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.887Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_by_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_with_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
   </span><span class="s2">"customer_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some customer notes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"departed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.887Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"desired_asset_desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An asset description."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatch_priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatched_by_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"dispatched_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.888Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dispatcher_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some dispatcher notes"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"do_confirm"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"driver_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some driver notes"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dropped_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unused/deprecated field"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"dump_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"dumped_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.888Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.888Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"fail_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failure reason"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"final_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"flags"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Job notes"</span><span class="p">,</span><span class="w">
@@ -7322,25 +7095,25 @@ ISO 8601 DateTime Format (GMT)
   </span><span class="s2">"job_group_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"merged_with_route"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original_schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.888Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"pickup_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.888Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"reference_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"removed_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"requested_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.888Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_image"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_material"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_signature"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"require_weights"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schedule_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.888Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"start_location_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.888Z"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"third_party_hauler_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d78911-e1fa-4adc-9b22-3b48dda30522"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"times_failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"times_rolled_over"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"truck_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T00:35:21.278Z"</span><span class="w">
+  </span><span class="s2">"weighed_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-11T01:04:55.888Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
