@@ -1,14 +1,12 @@
 ---
 title: CRO Software API
 language_tabs:
+  - csharp: 'C# 2.0'
   - shell: Shell
-  - http: HTTP
-  - javascript: JavaScript
-  - javascript--nodejs: Node.JS
+  - javascript: JS
   - ruby: Ruby
   - python: Python
   - java: Java
-  - go: Go
 toc_footers: []
 includes: []
 search: true
@@ -20,6 +18,10 @@ headingLevel: 2
 <h1 id="cro-software-api">CRO Software API v0</h1>
 
 Build on & integrate with CRO Software.
+
+Base URLs:
+
+* <a href="https://api.crosoftware.net">https://api.crosoftware.net</a>
 
 Email: <a href="mailto:develop@crosoftware.net">Support</a> 
 
@@ -71,33 +73,52 @@ For 3rd party integration with CRO
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /location/{location_id}/customer \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/customer";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
 ```
 
-```http
-GET /location/{location_id}/customer HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location/{location_id}/customer \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/location/{location_id}/customer',
+  url: 'https://api.crosoftware.net/location/{location_id}/customer',
   method: 'get',
 
   headers: headers,
@@ -108,43 +129,21 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/location/{location_id}/customer',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get '/location/{location_id}/customer',
+result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/customer',
   params: {
-  }, headers: headers
+  'Authorization' => 'string',
+'X-TENANT-ID' => 'integer(int64)',
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -154,11 +153,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.get('/location/{location_id}/customer', params={
+r = requests.get('https://api.crosoftware.net/location/{location_id}/customer', params={
 
 }, headers = headers)
 
@@ -167,7 +166,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/location/{location_id}/customer");
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -183,34 +182,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/location/{location_id}/customer", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `GET /location/{location_id}/customer`
 
 <a id="opIdlist_customers_for_location"></a>
@@ -221,6 +192,7 @@ List customers for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
@@ -267,17 +239,17 @@ List customers for location.
           "number": "1-111-111-1111"
         }
       ],
-      "created_on": "2019-01-11T01:04:55.845Z",
+      "created_on": "2019-02-01T22:43:09.190Z",
       "customer_id": 1,
       "is_active": false,
       "is_commercial": false,
-      "last_edited": "2019-01-11T01:04:55.845Z",
+      "last_edited": "2019-02-01T22:43:09.190Z",
       "location_id": 1,
       "name": "DEMOCO001",
       "note": "Service Location of DemoCo Inc.",
       "parent_id": 1,
       "reference_number": "Ref#100",
-      "renewal_date": "2019-01-11T01:04:55.845Z",
+      "renewal_date": "2019-02-01T22:43:09.190Z",
       "sales_rep": "John Doe",
       "suspension_id": 1
     }
@@ -304,33 +276,52 @@ List customers for location.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /location/{location_id}/driver/{driver_id} \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/driver/{driver_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
 ```
 
-```http
-GET /location/{location_id}/driver/{driver_id} HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location/{location_id}/driver/{driver_id} \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/location/{location_id}/driver/{driver_id}',
+  url: 'https://api.crosoftware.net/location/{location_id}/driver/{driver_id}',
   method: 'get',
 
   headers: headers,
@@ -341,43 +332,21 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/location/{location_id}/driver/{driver_id}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get '/location/{location_id}/driver/{driver_id}',
+result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/driver/{driver_id}',
   params: {
-  }, headers: headers
+  'Authorization' => 'string',
+'X-TENANT-ID' => 'integer(int64)',
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -387,11 +356,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.get('/location/{location_id}/driver/{driver_id}', params={
+r = requests.get('https://api.crosoftware.net/location/{location_id}/driver/{driver_id}', params={
 
 }, headers = headers)
 
@@ -400,7 +369,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/location/{location_id}/driver/{driver_id}");
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/driver/{driver_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -416,34 +385,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/location/{location_id}/driver/{driver_id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `GET /location/{location_id}/driver/{driver_id}`
 
 <a id="opIdget_driver"></a>
@@ -454,6 +395,7 @@ Get driver info.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`driver_id`|path|integer(int64)|true|Driver identifier (internal).|
@@ -498,33 +440,52 @@ Get driver info.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /location/{location_id}/driver \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/driver";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
 ```
 
-```http
-GET /location/{location_id}/driver HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location/{location_id}/driver \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/location/{location_id}/driver',
+  url: 'https://api.crosoftware.net/location/{location_id}/driver',
   method: 'get',
 
   headers: headers,
@@ -535,43 +496,21 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/location/{location_id}/driver',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get '/location/{location_id}/driver',
+result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/driver',
   params: {
-  }, headers: headers
+  'Authorization' => 'string',
+'X-TENANT-ID' => 'integer(int64)',
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -581,11 +520,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.get('/location/{location_id}/driver', params={
+r = requests.get('https://api.crosoftware.net/location/{location_id}/driver', params={
 
 }, headers = headers)
 
@@ -594,7 +533,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/location/{location_id}/driver");
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/driver");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -610,34 +549,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/location/{location_id}/driver", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `GET /location/{location_id}/driver`
 
 <a id="opIdlist_drivers_for_location"></a>
@@ -648,6 +559,7 @@ List drivers for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
@@ -703,64 +615,63 @@ List drivers for location.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X POST /hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/hauler";
+
+          // Headers
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          // Parameters
+          NameValueCollection parameters = new NameValueCollection();
+          parameters.Add("company_name", "Cro Scrap");
+          parameters.Add("username", "test_user@crosoftware.net");
+          parameters.Add("password", "AnExample!Password1000");
+          parameters.Add("recaptcha", "<recaptcha-string>");
+          
+          byte[] json = client.UploadValues(url, "POST", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
 ```
 
-```http
-POST /hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X POST https://api.crosoftware.net/hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=%3Crecaptcha-string%3E \
+  -H 'Accept: application/json' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/hauler',
+  url: 'https://api.crosoftware.net/hauler',
   method: 'post',
-  data: '?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string',
+  data: '?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=%3Crecaptcha-string%3E',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
   }
 })
-
-```
-
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
 
 ```
 
@@ -770,16 +681,12 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.post '/hauler',
+result = RestClient.post 'https://api.crosoftware.net/hauler',
   params: {
-  'company_name' => 'string(stringIdentifier)',
-'username' => 'string(email)',
-'password' => 'string(password)',
-'recaptcha' => 'string(recaptcha)'
+  'X-TENANT-ID' => 'integer(int64)',
 }, headers: headers
 
 p JSON.parse(result)
@@ -790,12 +697,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'X-TENANT-ID': '1'
 }
 
-r = requests.post('/hauler', params={
-  'company_name': 'Cro Scrap',  'username': 'test_user@crosoftware.net',  'password': 'AnExample!Password1000',  'recaptcha': 'string'
+r = requests.post('https://api.crosoftware.net/hauler', params={
+  'company_name': 'Cro Scrap',  'username': 'test_user@crosoftware.net',  'password': 'AnExample!Password1000',  'recaptcha': '<recaptcha-string>'
 }, headers = headers)
 
 print r.json()
@@ -803,7 +709,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=string");
+URL obj = new URL("https://api.crosoftware.net/hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=%3Crecaptcha-string%3E");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -819,39 +725,15 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "/hauler", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `POST /hauler`
 
 <a id="opIdcreate_third_party_hauler"></a>
 
 Create 3rd Party hauler profile.
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 <h4 id="undefined-parameters">Parameters</h4>
 
@@ -889,33 +771,56 @@ Create 3rd Party hauler profile.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X POST /hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1 \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/hauler/{hauler_id}/connection";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          // Parameters
+          NameValueCollection parameters = new NameValueCollection();
+          parameters.Add("tenant_code", "CROSCRAP+1");
+          
+          byte[] json = client.UploadValues(url, "POST", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
 ```
 
-```http
-POST /hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1 HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X POST https://api.crosoftware.net/hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1 \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/hauler/{hauler_id}/connection',
+  url: 'https://api.crosoftware.net/hauler/{hauler_id}/connection',
   method: 'post',
   data: '?tenant_code=CROSCRAP%2B1',
   headers: headers,
@@ -926,43 +831,20 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.post '/hauler/{hauler_id}/connection',
+result = RestClient.post 'https://api.crosoftware.net/hauler/{hauler_id}/connection',
   params: {
-  'tenant_code' => 'string(tenantCode)'
+  'Authorization' => 'string'
+'X-TENANT-ID' => 'integer(int64)',
 }, headers: headers
 
 p JSON.parse(result)
@@ -973,11 +855,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.post('/hauler/{hauler_id}/connection', params={
+r = requests.post('https://api.crosoftware.net/hauler/{hauler_id}/connection', params={
   'tenant_code': 'CROSCRAP+1'
 }, headers = headers)
 
@@ -986,7 +868,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1");
+URL obj = new URL("https://api.crosoftware.net/hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1002,34 +884,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "/hauler/{hauler_id}/connection", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `POST /hauler/{hauler_id}/connection`
 
 <a id="opIdget_hauler"></a>
@@ -1040,6 +894,7 @@ Create hauler connection.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`hauler_id`|path|[UUID](#schemauuid)|true|Hauler identifier.|
 |`tenant_code`|query|string(tenantCode)|true|&lt;YardCode&gt;+&lt;LocationId&gt;. The YardCode is an identifier assigned at account creation.|
@@ -1051,7 +906,7 @@ Create hauler connection.
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-11T01:04:55.849Z",
+  "approved_on": "2019-02-01T22:43:09.194Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -1059,7 +914,7 @@ Create hauler connection.
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-11T01:04:55.849Z"
+  "requested_on": "2019-02-01T22:43:09.194Z"
 }
 ```
 
@@ -1078,33 +933,52 @@ Create hauler connection.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /hauler/{hauler_id} \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/hauler/{hauler_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
 ```
 
-```http
-GET /hauler/{hauler_id} HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/hauler/{hauler_id} \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/hauler/{hauler_id}',
+  url: 'https://api.crosoftware.net/hauler/{hauler_id}',
   method: 'get',
 
   headers: headers,
@@ -1115,43 +989,21 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/hauler/{hauler_id}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get '/hauler/{hauler_id}',
+result = RestClient.get 'https://api.crosoftware.net/hauler/{hauler_id}',
   params: {
-  }, headers: headers
+  'Authorization' => 'string',
+'X-TENANT-ID' => 'integer(int64)',
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -1161,11 +1013,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.get('/hauler/{hauler_id}', params={
+r = requests.get('https://api.crosoftware.net/hauler/{hauler_id}', params={
 
 }, headers = headers)
 
@@ -1174,7 +1026,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/hauler/{hauler_id}");
+URL obj = new URL("https://api.crosoftware.net/hauler/{hauler_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1190,34 +1042,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/hauler/{hauler_id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `GET /hauler/{hauler_id}`
 
 <a id="opIdget_hauler"></a>
@@ -1228,6 +1052,7 @@ Hauler profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`hauler_id`|path|[UUID](#schemauuid)|true|Hauler identifier.|
 
@@ -1257,33 +1082,52 @@ Hauler profile.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /hauler \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/hauler";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
 ```
 
-```http
-GET /hauler HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/hauler \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/hauler',
+  url: 'https://api.crosoftware.net/hauler',
   method: 'get',
 
   headers: headers,
@@ -1294,43 +1138,21 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/hauler',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get '/hauler',
+result = RestClient.get 'https://api.crosoftware.net/hauler',
   params: {
-  }, headers: headers
+  'Authorization' => 'string',
+'X-TENANT-ID' => 'integer(int64)',
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -1340,11 +1162,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.get('/hauler', params={
+r = requests.get('https://api.crosoftware.net/hauler', params={
 
 }, headers = headers)
 
@@ -1353,7 +1175,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/hauler");
+URL obj = new URL("https://api.crosoftware.net/hauler");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1369,34 +1191,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/hauler", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `GET /hauler`
 
 <a id="opIdlist_haulers"></a>
@@ -1407,6 +1201,7 @@ List third party haulers for tenant.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
 |`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
@@ -1445,33 +1240,52 @@ List third party haulers for tenant.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /hauler/{hauler_id}/connection \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/hauler/{hauler_id}/connection";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
 ```
 
-```http
-GET /hauler/{hauler_id}/connection HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/hauler/{hauler_id}/connection \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/hauler/{hauler_id}/connection',
+  url: 'https://api.crosoftware.net/hauler/{hauler_id}/connection',
   method: 'get',
 
   headers: headers,
@@ -1482,43 +1296,21 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/hauler/{hauler_id}/connection',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get '/hauler/{hauler_id}/connection',
+result = RestClient.get 'https://api.crosoftware.net/hauler/{hauler_id}/connection',
   params: {
-  }, headers: headers
+  'Authorization' => 'string',
+'X-TENANT-ID' => 'integer(int64)',
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -1528,11 +1320,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.get('/hauler/{hauler_id}/connection', params={
+r = requests.get('https://api.crosoftware.net/hauler/{hauler_id}/connection', params={
 
 }, headers = headers)
 
@@ -1541,7 +1333,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/hauler/{hauler_id}/connection");
+URL obj = new URL("https://api.crosoftware.net/hauler/{hauler_id}/connection");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1557,34 +1349,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/hauler/{hauler_id}/connection", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `GET /hauler/{hauler_id}/connection`
 
 <a id="opIdlist_hauler_connections"></a>
@@ -1595,6 +1359,7 @@ List of 3rd party haulers.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`hauler_id`|path|[UUID](#schemauuid)|true|Hauler identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
@@ -1607,7 +1372,7 @@ List of 3rd party haulers.
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-11T01:04:55.855Z",
+  "approved_on": "2019-02-01T22:43:09.197Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -1615,7 +1380,7 @@ List of 3rd party haulers.
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-11T01:04:55.855Z"
+  "requested_on": "2019-02-01T22:43:09.197Z"
 }
 ```
 
@@ -1636,33 +1401,56 @@ List of 3rd party haulers.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X PATCH /location/{location_id}/job/{job_id}?truck_id=0 \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/job/{job_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          // Parameters
+          NameValueCollection parameters = new NameValueCollection();
+          parameters.Add("truck_id", "0");
+          
+          byte[] json = client.UploadValues(url, "POST", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
 ```
 
-```http
-PATCH /location/{location_id}/job/{job_id}?truck_id=0 HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X PATCH https://api.crosoftware.net/location/{location_id}/job/{job_id}?truck_id=0 \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/location/{location_id}/job/{job_id}',
+  url: 'https://api.crosoftware.net/location/{location_id}/job/{job_id}',
   method: 'patch',
   data: '?truck_id=0',
   headers: headers,
@@ -1673,43 +1461,20 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/location/{location_id}/job/{job_id}?truck_id=0',
-{
-  method: 'PATCH',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.patch '/location/{location_id}/job/{job_id}',
+result = RestClient.patch 'https://api.crosoftware.net/location/{location_id}/job/{job_id}',
   params: {
-  'truck_id' => 'integer(int64)'
+  'Authorization' => 'string'
+'X-TENANT-ID' => 'integer(int64)',
 }, headers: headers
 
 p JSON.parse(result)
@@ -1720,11 +1485,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.patch('/location/{location_id}/job/{job_id}', params={
+r = requests.patch('https://api.crosoftware.net/location/{location_id}/job/{job_id}', params={
   'truck_id': '0'
 }, headers = headers)
 
@@ -1733,7 +1498,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/location/{location_id}/job/{job_id}?truck_id=0");
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/job/{job_id}?truck_id=0");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -1749,34 +1514,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "/location/{location_id}/job/{job_id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `PATCH /location/{location_id}/job/{job_id}`
 
 <a id="opIddispatch_job"></a>
@@ -1787,6 +1524,7 @@ Dispatch job.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`job_id`|path|integer(int64)|true|Job identifier (internal).|
@@ -1799,32 +1537,32 @@ Dispatch job.
 
 ```json
 {
-  "arrived_at_dest": "2019-01-11T01:04:55.856Z",
-  "arrived_on": "2019-01-11T01:04:55.856Z",
+  "arrived_at_dest": "2019-02-01T22:43:09.198Z",
+  "arrived_on": "2019-02-01T22:43:09.198Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-11T01:04:55.856Z",
-  "confirmed_on": "2019-01-11T01:04:55.856Z",
+  "completed_on": "2019-02-01T22:43:09.198Z",
+  "confirmed_on": "2019-02-01T22:43:09.198Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-11T01:04:55.856Z",
+  "departed_on": "2019-02-01T22:43:09.198Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-11T01:04:55.856Z",
+  "dispatched_on": "2019-02-01T22:43:09.198Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-11T01:04:55.856Z",
-  "end_time": "2019-01-11T01:04:55.856Z",
+  "dumped_on": "2019-02-01T22:43:09.198Z",
+  "end_time": "2019-02-01T22:43:09.198Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -1838,25 +1576,25 @@ Dispatch job.
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-11T01:04:55.856Z",
-  "pickup_date": "2019-01-11T01:04:55.856Z",
+  "original_schedule_date": "2019-02-01T22:43:09.198Z",
+  "pickup_date": "2019-02-01T22:43:09.198Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-11T01:04:55.856Z",
+  "requested_on": "2019-02-01T22:43:09.198Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-11T01:04:55.856Z",
+  "schedule_date": "2019-02-01T22:43:09.198Z",
   "start_location_id": 1,
-  "start_time": "2019-01-11T01:04:55.856Z",
+  "start_time": "2019-02-01T22:43:09.198Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-11T01:04:55.857Z"
+  "weighed_on": "2019-02-01T22:43:09.198Z"
 }
 ```
 
@@ -1875,33 +1613,52 @@ Dispatch job.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /location/{location_id}/job/{job_id} \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/job/{job_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
 ```
 
-```http
-GET /location/{location_id}/job/{job_id} HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location/{location_id}/job/{job_id} \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/location/{location_id}/job/{job_id}',
+  url: 'https://api.crosoftware.net/location/{location_id}/job/{job_id}',
   method: 'get',
 
   headers: headers,
@@ -1912,43 +1669,21 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/location/{location_id}/job/{job_id}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get '/location/{location_id}/job/{job_id}',
+result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/job/{job_id}',
   params: {
-  }, headers: headers
+  'Authorization' => 'string',
+'X-TENANT-ID' => 'integer(int64)',
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -1958,11 +1693,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.get('/location/{location_id}/job/{job_id}', params={
+r = requests.get('https://api.crosoftware.net/location/{location_id}/job/{job_id}', params={
 
 }, headers = headers)
 
@@ -1971,7 +1706,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/location/{location_id}/job/{job_id}");
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/job/{job_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1987,34 +1722,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/location/{location_id}/job/{job_id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `GET /location/{location_id}/job/{job_id}`
 
 <a id="opIdget_job"></a>
@@ -2025,6 +1732,7 @@ Get specified job.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`job_id`|path|integer(int64)|true|Job identifier (internal).|
@@ -2035,32 +1743,32 @@ Get specified job.
 
 ```json
 {
-  "arrived_at_dest": "2019-01-11T01:04:55.860Z",
-  "arrived_on": "2019-01-11T01:04:55.860Z",
+  "arrived_at_dest": "2019-02-01T22:43:09.200Z",
+  "arrived_on": "2019-02-01T22:43:09.200Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-11T01:04:55.860Z",
-  "confirmed_on": "2019-01-11T01:04:55.860Z",
+  "completed_on": "2019-02-01T22:43:09.200Z",
+  "confirmed_on": "2019-02-01T22:43:09.200Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-11T01:04:55.860Z",
+  "departed_on": "2019-02-01T22:43:09.200Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-11T01:04:55.860Z",
+  "dispatched_on": "2019-02-01T22:43:09.200Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-11T01:04:55.860Z",
-  "end_time": "2019-01-11T01:04:55.860Z",
+  "dumped_on": "2019-02-01T22:43:09.200Z",
+  "end_time": "2019-02-01T22:43:09.200Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -2074,25 +1782,25 @@ Get specified job.
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-11T01:04:55.860Z",
-  "pickup_date": "2019-01-11T01:04:55.860Z",
+  "original_schedule_date": "2019-02-01T22:43:09.200Z",
+  "pickup_date": "2019-02-01T22:43:09.200Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-11T01:04:55.860Z",
+  "requested_on": "2019-02-01T22:43:09.200Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-11T01:04:55.860Z",
+  "schedule_date": "2019-02-01T22:43:09.200Z",
   "start_location_id": 1,
-  "start_time": "2019-01-11T01:04:55.860Z",
+  "start_time": "2019-02-01T22:43:09.200Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-11T01:04:55.860Z",
+  "weighed_on": "2019-02-01T22:43:09.200Z",
   "asset": {
     "asset_type": {
       "deleted": false,
@@ -2108,11 +1816,11 @@ Get specified job.
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-11T01:04:55.860Z",
+    "dispatched_on": "2019-02-01T22:43:09.200Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-11T01:04:55.860Z",
-    "last_rental_invoice_on": "2019-01-11T01:04:55.860Z",
+    "last_activity_on": "2019-02-01T22:43:09.200Z",
+    "last_rental_invoice_on": "2019-02-01T22:43:09.200Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -2123,7 +1831,7 @@ Get specified job.
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-11T01:04:55.860Z"
+    "returned_on": "2019-02-01T22:43:09.200Z"
   },
   "asset_type": {
     "deleted": false,
@@ -2159,15 +1867,15 @@ Get specified job.
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-11T01:04:55.860Z",
+    "created_on": "2019-02-01T22:43:09.200Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-11T01:04:55.860Z",
+        "created_on": "2019-02-01T22:43:09.200Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-11T01:04:55.860Z",
+        "last_edited": "2019-02-01T22:43:09.200Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -2257,33 +1965,52 @@ Get specified job.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /location/{location_id}/job \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/job";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
 ```
 
-```http
-GET /location/{location_id}/job HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location/{location_id}/job \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/location/{location_id}/job',
+  url: 'https://api.crosoftware.net/location/{location_id}/job',
   method: 'get',
 
   headers: headers,
@@ -2294,43 +2021,21 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/location/{location_id}/job',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get '/location/{location_id}/job',
+result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/job',
   params: {
-  }, headers: headers
+  'Authorization' => 'string',
+'X-TENANT-ID' => 'integer(int64)',
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -2340,11 +2045,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.get('/location/{location_id}/job', params={
+r = requests.get('https://api.crosoftware.net/location/{location_id}/job', params={
 
 }, headers = headers)
 
@@ -2353,7 +2058,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/location/{location_id}/job");
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/job");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2369,34 +2074,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/location/{location_id}/job", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `GET /location/{location_id}/job`
 
 <a id="opIdlist_jobs_for_location"></a>
@@ -2407,6 +2084,7 @@ List jobs for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
@@ -2422,32 +2100,32 @@ List jobs for location.
   "current_page": 1,
   "results": [
     {
-      "arrived_at_dest": "2019-01-11T01:04:55.863Z",
-      "arrived_on": "2019-01-11T01:04:55.863Z",
+      "arrived_at_dest": "2019-02-01T22:43:09.202Z",
+      "arrived_on": "2019-02-01T22:43:09.202Z",
       "asset_dropped": 1,
       "asset_id": 1,
       "asset_quantity": 1,
       "asset_type_id": 1,
       "completed_by": 1,
       "completed_by_driver": false,
-      "completed_on": "2019-01-11T01:04:55.863Z",
-      "confirmed_on": "2019-01-11T01:04:55.863Z",
+      "completed_on": "2019-02-01T22:43:09.202Z",
+      "confirmed_on": "2019-02-01T22:43:09.202Z",
       "created_by_id": 1,
       "created_with_portal": false,
       "customer_id": 9,
       "customer_notes": "Some customer notes",
-      "departed_on": "2019-01-11T01:04:55.863Z",
+      "departed_on": "2019-02-01T22:43:09.202Z",
       "desired_asset_desc": "An asset description.",
       "dispatch_priority": "H",
       "dispatched_by_route": 1,
-      "dispatched_on": "2019-01-11T01:04:55.863Z",
+      "dispatched_on": "2019-02-01T22:43:09.202Z",
       "dispatcher_notes": "Some dispatcher notes",
       "do_confirm": false,
       "driver_notes": "Some driver notes",
       "dropped_number": "Unused/deprecated field",
       "dump_location_id": 1,
-      "dumped_on": "2019-01-11T01:04:55.863Z",
-      "end_time": "2019-01-11T01:04:55.863Z",
+      "dumped_on": "2019-02-01T22:43:09.202Z",
+      "end_time": "2019-02-01T22:43:09.202Z",
       "fail_reason": "Failure reason",
       "final_location_id": 1,
       "flags": "Job notes",
@@ -2461,25 +2139,25 @@ List jobs for location.
       "job_group_id": 1,
       "location_id": 1,
       "merged_with_route": 1,
-      "original_schedule_date": "2019-01-11T01:04:55.863Z",
-      "pickup_date": "2019-01-11T01:04:55.863Z",
+      "original_schedule_date": "2019-02-01T22:43:09.202Z",
+      "pickup_date": "2019-02-01T22:43:09.202Z",
       "priority": -1,
       "reference_number": null,
       "removed_number": "string",
-      "requested_on": "2019-01-11T01:04:55.863Z",
+      "requested_on": "2019-02-01T22:43:09.202Z",
       "require_image": false,
       "require_material": false,
       "require_signature": false,
       "require_weights": false,
-      "schedule_date": "2019-01-11T01:04:55.863Z",
+      "schedule_date": "2019-02-01T22:43:09.202Z",
       "start_location_id": 1,
-      "start_time": "2019-01-11T01:04:55.863Z",
+      "start_time": "2019-02-01T22:43:09.202Z",
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
       "times_failed": 0,
       "times_rolled_over": 0,
       "truck_id": 1,
       "type": "D",
-      "weighed_on": "2019-01-11T01:04:55.863Z",
+      "weighed_on": "2019-02-01T22:43:09.202Z",
       "asset": {
         "asset_type": {
           "deleted": false,
@@ -2495,11 +2173,11 @@ List jobs for location.
         "cluster": 1,
         "customer_id": 1,
         "description": "A description",
-        "dispatched_on": "2019-01-11T01:04:55.863Z",
+        "dispatched_on": "2019-02-01T22:43:09.203Z",
         "id": 1,
         "is_returned": false,
-        "last_activity_on": "2019-01-11T01:04:55.863Z",
-        "last_rental_invoice_on": "2019-01-11T01:04:55.863Z",
+        "last_activity_on": "2019-02-01T22:43:09.203Z",
+        "last_rental_invoice_on": "2019-02-01T22:43:09.203Z",
         "latitude": 54.235,
         "location": {
           "id": 1,
@@ -2510,7 +2188,7 @@ List jobs for location.
         "longitude": 127.123,
         "number": "REF100",
         "quantity": 1,
-        "returned_on": "2019-01-11T01:04:55.863Z"
+        "returned_on": "2019-02-01T22:43:09.203Z"
       },
       "asset_type": {
         "deleted": false,
@@ -2546,15 +2224,15 @@ List jobs for location.
             "is_shipping": true
           }
         ],
-        "created_on": "2019-01-11T01:04:55.863Z",
+        "created_on": "2019-02-01T22:43:09.203Z",
         "id": 9,
         "locations": [
           {
-            "created_on": "2019-01-11T01:04:55.863Z",
+            "created_on": "2019-02-01T22:43:09.203Z",
             "customer_id": 9,
             "is_active": true,
             "is_commercial": false,
-            "last_edited": "2019-01-11T01:04:55.863Z",
+            "last_edited": "2019-02-01T22:43:09.203Z",
             "location_id": 1,
             "note": "string",
             "reference_number": "string",
@@ -2650,33 +2328,52 @@ List jobs for location.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /location/{location_id} \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
 ```
 
-```http
-GET /location/{location_id} HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location/{location_id} \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/location/{location_id}',
+  url: 'https://api.crosoftware.net/location/{location_id}',
   method: 'get',
 
   headers: headers,
@@ -2687,43 +2384,21 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/location/{location_id}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get '/location/{location_id}',
+result = RestClient.get 'https://api.crosoftware.net/location/{location_id}',
   params: {
-  }, headers: headers
+  'Authorization' => 'string',
+'X-TENANT-ID' => 'integer(int64)',
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -2733,11 +2408,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.get('/location/{location_id}', params={
+r = requests.get('https://api.crosoftware.net/location/{location_id}', params={
 
 }, headers = headers)
 
@@ -2746,7 +2421,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/location/{location_id}");
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2762,34 +2437,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/location/{location_id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `GET /location/{location_id}`
 
 <a id="opIdget_location"></a>
@@ -2800,6 +2447,7 @@ Get info for specified location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 
@@ -2830,33 +2478,52 @@ Get info for specified location.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /location \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
 ```
 
-```http
-GET /location HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/location',
+  url: 'https://api.crosoftware.net/location',
   method: 'get',
 
   headers: headers,
@@ -2867,43 +2534,21 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/location',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get '/location',
+result = RestClient.get 'https://api.crosoftware.net/location',
   params: {
-  }, headers: headers
+  'Authorization' => 'string',
+'X-TENANT-ID' => 'integer(int64)',
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -2913,11 +2558,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.get('/location', params={
+r = requests.get('https://api.crosoftware.net/location', params={
 
 }, headers = headers)
 
@@ -2926,7 +2571,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/location");
+URL obj = new URL("https://api.crosoftware.net/location");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2942,34 +2587,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/location", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `GET /location`
 
 <a id="opIdlist_locations"></a>
@@ -2980,6 +2597,7 @@ List locations for tenant.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
 |`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
@@ -3021,33 +2639,52 @@ List locations for tenant.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /location/{location_id}/truck/{truck_id} \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/truck/{truck_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
 ```
 
-```http
-GET /location/{location_id}/truck/{truck_id} HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location/{location_id}/truck/{truck_id} \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/location/{location_id}/truck/{truck_id}',
+  url: 'https://api.crosoftware.net/location/{location_id}/truck/{truck_id}',
   method: 'get',
 
   headers: headers,
@@ -3058,43 +2695,21 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/location/{location_id}/truck/{truck_id}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get '/location/{location_id}/truck/{truck_id}',
+result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/truck/{truck_id}',
   params: {
-  }, headers: headers
+  'Authorization' => 'string',
+'X-TENANT-ID' => 'integer(int64)',
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -3104,11 +2719,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.get('/location/{location_id}/truck/{truck_id}', params={
+r = requests.get('https://api.crosoftware.net/location/{location_id}/truck/{truck_id}', params={
 
 }, headers = headers)
 
@@ -3117,7 +2732,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/location/{location_id}/truck/{truck_id}");
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/truck/{truck_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3133,34 +2748,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/location/{location_id}/truck/{truck_id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `GET /location/{location_id}/truck/{truck_id}`
 
 <a id="opIdget_truck"></a>
@@ -3171,6 +2758,7 @@ Get truck info.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`truck_id`|path|integer(int64)|true|Truck identifier (internal).|
@@ -3207,33 +2795,52 @@ Get truck info.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET /location/{location_id}/truck \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/truck";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
 ```
 
-```http
-GET /location/{location_id}/truck HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location/{location_id}/truck \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/location/{location_id}/truck',
+  url: 'https://api.crosoftware.net/location/{location_id}/truck',
   method: 'get',
 
   headers: headers,
@@ -3244,43 +2851,21 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/location/{location_id}/truck',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get '/location/{location_id}/truck',
+result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/truck',
   params: {
-  }, headers: headers
+  'Authorization' => 'string',
+'X-TENANT-ID' => 'integer(int64)',
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -3290,11 +2875,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.get('/location/{location_id}/truck', params={
+r = requests.get('https://api.crosoftware.net/location/{location_id}/truck', params={
 
 }, headers = headers)
 
@@ -3303,7 +2888,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/location/{location_id}/truck");
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/truck");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3319,34 +2904,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/location/{location_id}/truck", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `GET /location/{location_id}/truck`
 
 <a id="opIdlist_trucks_for_location"></a>
@@ -3357,6 +2914,7 @@ List trucks for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
@@ -3404,33 +2962,56 @@ List trucks for location.
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X PATCH /location/{location_id}/truck/{truck_id}?driver_id=0 \
-  -H 'Accept: application/json' \
-  -H 'X-TENANT-ID: 1' \
-  -H 'Authorization: Bearer {access-token}'
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
 
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/truck/{truck_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          // Parameters
+          NameValueCollection parameters = new NameValueCollection();
+          parameters.Add("driver_id", "0");
+          
+          byte[] json = client.UploadValues(url, "POST", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
 ```
 
-```http
-PATCH /location/{location_id}/truck/{truck_id}?driver_id=0 HTTP/1.1
-
-Accept: application/json
-X-TENANT-ID: 1
+```shell
+# You can also use wget
+curl -X PATCH https://api.crosoftware.net/location/{location_id}/truck/{truck_id}?driver_id=0 \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: '/location/{location_id}/truck/{truck_id}',
+  url: 'https://api.crosoftware.net/location/{location_id}/truck/{truck_id}',
   method: 'patch',
   data: '?driver_id=0',
   headers: headers,
@@ -3441,43 +3022,20 @@ $.ajax({
 
 ```
 
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'X-TENANT-ID':'1',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('/location/{location_id}/truck/{truck_id}?driver_id=0',
-{
-  method: 'PATCH',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
 ```ruby
 require 'rest-client'
 require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'X-TENANT-ID' => '1',
-  'Authorization' => 'Bearer {access-token}'
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
 }
 
-result = RestClient.patch '/location/{location_id}/truck/{truck_id}',
+result = RestClient.patch 'https://api.crosoftware.net/location/{location_id}/truck/{truck_id}',
   params: {
-  'driver_id' => 'integer(int64)'
+  'Authorization' => 'string'
+'X-TENANT-ID' => 'integer(int64)',
 }, headers: headers
 
 p JSON.parse(result)
@@ -3488,11 +3046,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-TENANT-ID': '1',
-  'Authorization': 'Bearer {access-token}'
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
 }
 
-r = requests.patch('/location/{location_id}/truck/{truck_id}', params={
+r = requests.patch('https://api.crosoftware.net/location/{location_id}/truck/{truck_id}', params={
   'driver_id': '0'
 }, headers = headers)
 
@@ -3501,7 +3059,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("/location/{location_id}/truck/{truck_id}?driver_id=0");
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/truck/{truck_id}?driver_id=0");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -3517,34 +3075,6 @@ System.out.println(response.toString());
 
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "X-TENANT-ID": []string{"1"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "/location/{location_id}/truck/{truck_id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
 `PATCH /location/{location_id}/truck/{truck_id}`
 
 <a id="opIdset_truck_driver"></a>
@@ -3555,6 +3085,7 @@ Set driver for truck.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`truck_id`|path|integer(int64)|true|Truck identifier (internal).|
@@ -3678,11 +3209,11 @@ ISO 8601 DateTime Format (GMT)
   "cluster": 1,
   "customer_id": 1,
   "description": "A description",
-  "dispatched_on": "2019-01-11T01:04:55.870Z",
+  "dispatched_on": "2019-02-01T22:43:09.209Z",
   "id": 1,
   "is_returned": false,
-  "last_activity_on": "2019-01-11T01:04:55.870Z",
-  "last_rental_invoice_on": "2019-01-11T01:04:55.870Z",
+  "last_activity_on": "2019-02-01T22:43:09.209Z",
+  "last_rental_invoice_on": "2019-02-01T22:43:09.209Z",
   "latitude": 54.235,
   "location": {
     "id": 1,
@@ -3693,7 +3224,7 @@ ISO 8601 DateTime Format (GMT)
   "longitude": 127.123,
   "number": "REF100",
   "quantity": 1,
-  "returned_on": "2019-01-11T01:04:55.870Z"
+  "returned_on": "2019-02-01T22:43:09.209Z"
 }
 
 ```
@@ -3753,32 +3284,32 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "arrived_at_dest": "2019-01-11T01:04:55.871Z",
-  "arrived_on": "2019-01-11T01:04:55.871Z",
+  "arrived_at_dest": "2019-02-01T22:43:09.210Z",
+  "arrived_on": "2019-02-01T22:43:09.210Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-11T01:04:55.871Z",
-  "confirmed_on": "2019-01-11T01:04:55.871Z",
+  "completed_on": "2019-02-01T22:43:09.210Z",
+  "confirmed_on": "2019-02-01T22:43:09.210Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-11T01:04:55.871Z",
+  "departed_on": "2019-02-01T22:43:09.210Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-11T01:04:55.872Z",
+  "dispatched_on": "2019-02-01T22:43:09.210Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-11T01:04:55.872Z",
-  "end_time": "2019-01-11T01:04:55.872Z",
+  "dumped_on": "2019-02-01T22:43:09.210Z",
+  "end_time": "2019-02-01T22:43:09.210Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -3792,25 +3323,25 @@ ISO 8601 DateTime Format (GMT)
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-11T01:04:55.872Z",
-  "pickup_date": "2019-01-11T01:04:55.872Z",
+  "original_schedule_date": "2019-02-01T22:43:09.210Z",
+  "pickup_date": "2019-02-01T22:43:09.210Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-11T01:04:55.872Z",
+  "requested_on": "2019-02-01T22:43:09.210Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-11T01:04:55.872Z",
+  "schedule_date": "2019-02-01T22:43:09.210Z",
   "start_location_id": 1,
-  "start_time": "2019-01-11T01:04:55.872Z",
+  "start_time": "2019-02-01T22:43:09.210Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-11T01:04:55.872Z"
+  "weighed_on": "2019-02-01T22:43:09.210Z"
 }
 
 ```
@@ -3944,15 +3475,15 @@ ISO 8601 DateTime Format (GMT)
       "is_shipping": true
     }
   ],
-  "created_on": "2019-01-11T01:04:55.874Z",
+  "created_on": "2019-02-01T22:43:09.211Z",
   "id": 9,
   "locations": [
     {
-      "created_on": "2019-01-11T01:04:55.874Z",
+      "created_on": "2019-02-01T22:43:09.211Z",
       "customer_id": 9,
       "is_active": true,
       "is_commercial": false,
-      "last_edited": "2019-01-11T01:04:55.874Z",
+      "last_edited": "2019-02-01T22:43:09.211Z",
       "location_id": 1,
       "note": "string",
       "reference_number": "string",
@@ -4085,17 +3616,17 @@ ISO 8601 DateTime Format (GMT)
       "number": "1-111-111-1111"
     }
   ],
-  "created_on": "2019-01-11T01:04:55.875Z",
+  "created_on": "2019-02-01T22:43:09.212Z",
   "customer_id": 1,
   "is_active": false,
   "is_commercial": false,
-  "last_edited": "2019-01-11T01:04:55.875Z",
+  "last_edited": "2019-02-01T22:43:09.212Z",
   "location_id": 1,
   "name": "DEMOCO001",
   "note": "Service Location of DemoCo Inc.",
   "parent_id": 1,
   "reference_number": "Ref#100",
-  "renewal_date": "2019-01-11T01:04:55.875Z",
+  "renewal_date": "2019-02-01T22:43:09.212Z",
   "sales_rep": "John Doe",
   "suspension_id": 1
 }
@@ -4259,7 +3790,7 @@ ISO 8601 DateTime Format (GMT)
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-01-11T01:04:55.877Z",
+  "approved_on": "2019-02-01T22:43:09.213Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -4267,7 +3798,7 @@ ISO 8601 DateTime Format (GMT)
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-01-11T01:04:55.877Z"
+  "requested_on": "2019-02-01T22:43:09.213Z"
 }
 
 ```
@@ -4295,32 +3826,32 @@ ISO 8601 DateTime Format (GMT)
   "current_page": 1,
   "results": [
     {
-      "arrived_at_dest": "2019-01-11T01:04:55.878Z",
-      "arrived_on": "2019-01-11T01:04:55.878Z",
+      "arrived_at_dest": "2019-02-01T22:43:09.213Z",
+      "arrived_on": "2019-02-01T22:43:09.213Z",
       "asset_dropped": 1,
       "asset_id": 1,
       "asset_quantity": 1,
       "asset_type_id": 1,
       "completed_by": 1,
       "completed_by_driver": false,
-      "completed_on": "2019-01-11T01:04:55.878Z",
-      "confirmed_on": "2019-01-11T01:04:55.878Z",
+      "completed_on": "2019-02-01T22:43:09.213Z",
+      "confirmed_on": "2019-02-01T22:43:09.213Z",
       "created_by_id": 1,
       "created_with_portal": false,
       "customer_id": 9,
       "customer_notes": "Some customer notes",
-      "departed_on": "2019-01-11T01:04:55.878Z",
+      "departed_on": "2019-02-01T22:43:09.213Z",
       "desired_asset_desc": "An asset description.",
       "dispatch_priority": "H",
       "dispatched_by_route": 1,
-      "dispatched_on": "2019-01-11T01:04:55.878Z",
+      "dispatched_on": "2019-02-01T22:43:09.213Z",
       "dispatcher_notes": "Some dispatcher notes",
       "do_confirm": false,
       "driver_notes": "Some driver notes",
       "dropped_number": "Unused/deprecated field",
       "dump_location_id": 1,
-      "dumped_on": "2019-01-11T01:04:55.878Z",
-      "end_time": "2019-01-11T01:04:55.878Z",
+      "dumped_on": "2019-02-01T22:43:09.213Z",
+      "end_time": "2019-02-01T22:43:09.213Z",
       "fail_reason": "Failure reason",
       "final_location_id": 1,
       "flags": "Job notes",
@@ -4334,25 +3865,25 @@ ISO 8601 DateTime Format (GMT)
       "job_group_id": 1,
       "location_id": 1,
       "merged_with_route": 1,
-      "original_schedule_date": "2019-01-11T01:04:55.878Z",
-      "pickup_date": "2019-01-11T01:04:55.878Z",
+      "original_schedule_date": "2019-02-01T22:43:09.213Z",
+      "pickup_date": "2019-02-01T22:43:09.213Z",
       "priority": -1,
       "reference_number": null,
       "removed_number": "string",
-      "requested_on": "2019-01-11T01:04:55.878Z",
+      "requested_on": "2019-02-01T22:43:09.213Z",
       "require_image": false,
       "require_material": false,
       "require_signature": false,
       "require_weights": false,
-      "schedule_date": "2019-01-11T01:04:55.878Z",
+      "schedule_date": "2019-02-01T22:43:09.213Z",
       "start_location_id": 1,
-      "start_time": "2019-01-11T01:04:55.878Z",
+      "start_time": "2019-02-01T22:43:09.213Z",
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
       "times_failed": 0,
       "times_rolled_over": 0,
       "truck_id": 1,
       "type": "D",
-      "weighed_on": "2019-01-11T01:04:55.878Z",
+      "weighed_on": "2019-02-01T22:43:09.213Z",
       "asset": {
         "asset_type": {
           "deleted": false,
@@ -4368,11 +3899,11 @@ ISO 8601 DateTime Format (GMT)
         "cluster": 1,
         "customer_id": 1,
         "description": "A description",
-        "dispatched_on": "2019-01-11T01:04:55.878Z",
+        "dispatched_on": "2019-02-01T22:43:09.213Z",
         "id": 1,
         "is_returned": false,
-        "last_activity_on": "2019-01-11T01:04:55.878Z",
-        "last_rental_invoice_on": "2019-01-11T01:04:55.878Z",
+        "last_activity_on": "2019-02-01T22:43:09.213Z",
+        "last_rental_invoice_on": "2019-02-01T22:43:09.213Z",
         "latitude": 54.235,
         "location": {
           "id": 1,
@@ -4383,7 +3914,7 @@ ISO 8601 DateTime Format (GMT)
         "longitude": 127.123,
         "number": "REF100",
         "quantity": 1,
-        "returned_on": "2019-01-11T01:04:55.878Z"
+        "returned_on": "2019-02-01T22:43:09.213Z"
       },
       "asset_type": {
         "deleted": false,
@@ -4419,15 +3950,15 @@ ISO 8601 DateTime Format (GMT)
             "is_shipping": true
           }
         ],
-        "created_on": "2019-01-11T01:04:55.878Z",
+        "created_on": "2019-02-01T22:43:09.214Z",
         "id": 9,
         "locations": [
           {
-            "created_on": "2019-01-11T01:04:55.878Z",
+            "created_on": "2019-02-01T22:43:09.214Z",
             "customer_id": 9,
             "is_active": true,
             "is_commercial": false,
-            "last_edited": "2019-01-11T01:04:55.878Z",
+            "last_edited": "2019-02-01T22:43:09.214Z",
             "location_id": 1,
             "note": "string",
             "reference_number": "string",
@@ -4521,11 +4052,11 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "created_on": "2019-01-11T01:04:55.880Z",
+  "created_on": "2019-02-01T22:43:09.215Z",
   "customer_id": 9,
   "is_active": true,
   "is_commercial": false,
-  "last_edited": "2019-01-11T01:04:55.880Z",
+  "last_edited": "2019-02-01T22:43:09.215Z",
   "location_id": 1,
   "note": "string",
   "reference_number": "string",
@@ -4556,32 +4087,32 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "arrived_at_dest": "2019-01-11T01:04:55.880Z",
-  "arrived_on": "2019-01-11T01:04:55.880Z",
+  "arrived_at_dest": "2019-02-01T22:43:09.215Z",
+  "arrived_on": "2019-02-01T22:43:09.215Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-11T01:04:55.880Z",
-  "confirmed_on": "2019-01-11T01:04:55.880Z",
+  "completed_on": "2019-02-01T22:43:09.215Z",
+  "confirmed_on": "2019-02-01T22:43:09.215Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-11T01:04:55.880Z",
+  "departed_on": "2019-02-01T22:43:09.215Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-11T01:04:55.880Z",
+  "dispatched_on": "2019-02-01T22:43:09.216Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-11T01:04:55.880Z",
-  "end_time": "2019-01-11T01:04:55.880Z",
+  "dumped_on": "2019-02-01T22:43:09.216Z",
+  "end_time": "2019-02-01T22:43:09.216Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -4595,25 +4126,25 @@ ISO 8601 DateTime Format (GMT)
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-11T01:04:55.880Z",
-  "pickup_date": "2019-01-11T01:04:55.880Z",
+  "original_schedule_date": "2019-02-01T22:43:09.216Z",
+  "pickup_date": "2019-02-01T22:43:09.216Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-11T01:04:55.880Z",
+  "requested_on": "2019-02-01T22:43:09.216Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-11T01:04:55.880Z",
+  "schedule_date": "2019-02-01T22:43:09.216Z",
   "start_location_id": 1,
-  "start_time": "2019-01-11T01:04:55.880Z",
+  "start_time": "2019-02-01T22:43:09.216Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-11T01:04:55.880Z",
+  "weighed_on": "2019-02-01T22:43:09.216Z",
   "asset": {
     "asset_type": {
       "deleted": false,
@@ -4629,11 +4160,11 @@ ISO 8601 DateTime Format (GMT)
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-01-11T01:04:55.880Z",
+    "dispatched_on": "2019-02-01T22:43:09.216Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-01-11T01:04:55.880Z",
-    "last_rental_invoice_on": "2019-01-11T01:04:55.880Z",
+    "last_activity_on": "2019-02-01T22:43:09.216Z",
+    "last_rental_invoice_on": "2019-02-01T22:43:09.216Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -4644,7 +4175,7 @@ ISO 8601 DateTime Format (GMT)
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-01-11T01:04:55.880Z"
+    "returned_on": "2019-02-01T22:43:09.216Z"
   },
   "asset_type": {
     "deleted": false,
@@ -4680,15 +4211,15 @@ ISO 8601 DateTime Format (GMT)
         "is_shipping": true
       }
     ],
-    "created_on": "2019-01-11T01:04:55.880Z",
+    "created_on": "2019-02-01T22:43:09.216Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-01-11T01:04:55.880Z",
+        "created_on": "2019-02-01T22:43:09.216Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-01-11T01:04:55.880Z",
+        "last_edited": "2019-02-01T22:43:09.216Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -4824,17 +4355,17 @@ ISO 8601 DateTime Format (GMT)
           "number": "1-111-111-1111"
         }
       ],
-      "created_on": "2019-01-11T01:04:55.882Z",
+      "created_on": "2019-02-01T22:43:09.217Z",
       "customer_id": 1,
       "is_active": false,
       "is_commercial": false,
-      "last_edited": "2019-01-11T01:04:55.882Z",
+      "last_edited": "2019-02-01T22:43:09.217Z",
       "location_id": 1,
       "name": "DEMOCO001",
       "note": "Service Location of DemoCo Inc.",
       "parent_id": 1,
       "reference_number": "Ref#100",
-      "renewal_date": "2019-01-11T01:04:55.882Z",
+      "renewal_date": "2019-02-01T22:43:09.217Z",
       "sales_rep": "John Doe",
       "suspension_id": 1
     }
@@ -5021,32 +4552,32 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "arrived_at_dest": "2019-01-11T01:04:55.887Z",
-  "arrived_on": "2019-01-11T01:04:55.887Z",
+  "arrived_at_dest": "2019-02-01T22:43:09.218Z",
+  "arrived_on": "2019-02-01T22:43:09.218Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-01-11T01:04:55.887Z",
-  "confirmed_on": "2019-01-11T01:04:55.887Z",
+  "completed_on": "2019-02-01T22:43:09.219Z",
+  "confirmed_on": "2019-02-01T22:43:09.219Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-01-11T01:04:55.887Z",
+  "departed_on": "2019-02-01T22:43:09.219Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-01-11T01:04:55.888Z",
+  "dispatched_on": "2019-02-01T22:43:09.219Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-01-11T01:04:55.888Z",
-  "end_time": "2019-01-11T01:04:55.888Z",
+  "dumped_on": "2019-02-01T22:43:09.219Z",
+  "end_time": "2019-02-01T22:43:09.219Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -5060,25 +4591,25 @@ ISO 8601 DateTime Format (GMT)
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-01-11T01:04:55.888Z",
-  "pickup_date": "2019-01-11T01:04:55.888Z",
+  "original_schedule_date": "2019-02-01T22:43:09.219Z",
+  "pickup_date": "2019-02-01T22:43:09.219Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-01-11T01:04:55.888Z",
+  "requested_on": "2019-02-01T22:43:09.219Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-01-11T01:04:55.888Z",
+  "schedule_date": "2019-02-01T22:43:09.219Z",
   "start_location_id": 1,
-  "start_time": "2019-01-11T01:04:55.888Z",
+  "start_time": "2019-02-01T22:43:09.219Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-01-11T01:04:55.888Z"
+  "weighed_on": "2019-02-01T22:43:09.219Z"
 }
 
 ```
