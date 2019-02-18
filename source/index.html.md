@@ -69,6 +69,542 @@ For 3rd party integration with CRO
 
 ## Customers
 
+### Create Customer
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/customer";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          // Parameters
+          NameValueCollection parameters = new NameValueCollection();
+          parameters.Add("customer_name", "string");
+          parameters.Add("sales_rep", "string");
+          parameters.Add("reference_number", "string");
+          parameters.Add("is_commercial", "string");
+          parameters.Add("customer_note", "string");
+          
+          byte[] json = client.UploadValues(url, "POST", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X POST https://api.crosoftware.net/location/{location_id}/customer?customer_name=string&sales_rep=string&reference_number=string&is_commercial=string&customer_note=string \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/location/{location_id}/customer',
+  method: 'post',
+  data: '?customer_name=string&sales_rep=string&reference_number=string&is_commercial=string&customer_note=string',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.post 'https://api.crosoftware.net/location/{location_id}/customer',
+  params: {
+  'customer_name' => 'string',
+'sales_rep' => 'string',
+'reference_number' => 'string',
+'is_commercial' => 'string',
+'customer_note' => 'string'
+}, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.post('https://api.crosoftware.net/location/{location_id}/customer', params={
+  'customer_name': 'string',  'sales_rep': 'string',  'reference_number': 'string',  'is_commercial': 'string',  'customer_note': 'string'
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer?customer_name=string&sales_rep=string&reference_number=string&is_commercial=string&customer_note=string");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`POST /location/{location_id}/customer`
+
+<a id="opIdcreate_customer_at_location"></a>
+
+Create customer at location.
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`customer_name`|query|string|true|Customer name.|
+|`sales_rep`|query|string|true|Sales rep.|
+|`reference_number`|query|string|true|Reference number.|
+|`is_commercial`|query|string|true|Commecial customer?|
+|`customer_note`|query|string|true|Customer notes.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "addresses": [
+    {
+      "country": "USA",
+      "is_active": true,
+      "is_billing": true,
+      "is_physical": false,
+      "is_shipping": false,
+      "latitude": 48.076273,
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": -123.117185,
+      "postcode": 98382,
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": false,
+      "notify_on_completed_request": false,
+      "notify_on_dispatched_request": false,
+      "notify_on_failed_request": false,
+      "notify_on_new_request": false,
+      "number": "1-111-111-1111"
+    }
+  ],
+  "created_on": "2019-02-18T15:53:55.850Z",
+  "customer_id": 1,
+  "is_active": false,
+  "is_commercial": false,
+  "last_edited": "2019-02-18T15:53:55.850Z",
+  "location_id": 1,
+  "name": "DEMOCO001",
+  "note": "Service Location of DemoCo Inc.",
+  "parent_id": 1,
+  "reference_number": "Ref#100",
+  "renewal_date": "2019-02-18T15:53:55.851Z",
+  "sales_rep": "John Doe",
+  "suspension_id": 1
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerResultModel](#schemacustomerresultmodel)|New customer profile for customer at given location.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### Delete Customer
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/customer/{customer_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          byte[] json = client.UploadValues(url, "DELETE", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.crosoftware.net/location/{location_id}/customer/{customer_id} \
+  -H 'Accept: text/plain' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'text/plain',
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'text/plain',
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.delete 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'text/plain',
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.delete('https://api.crosoftware.net/location/{location_id}/customer/{customer_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer/{customer_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`DELETE /location/{location_id}/customer/{customer_id}`
+
+<a id="opIddelete_customer_at_location"></a>
+
+Delete customer at location.
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+
+> Example responses
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Delete customer profile for customer at given location.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### Get Customer
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/customer/{customer_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location/{location_id}/customer/{customer_id} \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/location/{location_id}/customer/{customer_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer/{customer_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /location/{location_id}/customer/{customer_id}`
+
+<a id="opIdget_customer_for_location"></a>
+
+Get customer for location.
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "addresses": [
+    {
+      "country": "USA",
+      "is_active": true,
+      "is_billing": true,
+      "is_physical": false,
+      "is_shipping": false,
+      "latitude": 48.076273,
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": -123.117185,
+      "postcode": 98382,
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": false,
+      "notify_on_completed_request": false,
+      "notify_on_dispatched_request": false,
+      "notify_on_failed_request": false,
+      "notify_on_new_request": false,
+      "number": "1-111-111-1111"
+    }
+  ],
+  "created_on": "2019-02-18T15:53:55.853Z",
+  "customer_id": 1,
+  "is_active": false,
+  "is_commercial": false,
+  "last_edited": "2019-02-18T15:53:55.853Z",
+  "location_id": 1,
+  "name": "DEMOCO001",
+  "note": "Service Location of DemoCo Inc.",
+  "parent_id": 1,
+  "reference_number": "Ref#100",
+  "renewal_date": "2019-02-18T15:53:55.853Z",
+  "sales_rep": "John Doe",
+  "suspension_id": 1
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerResultModel](#schemacustomerresultmodel)|Customer profile for customer at given location.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
 ### List Customers
 
 > Code samples
@@ -141,9 +677,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/customer',
   params: {
-  'Authorization' => 'string',
-'X-TENANT-ID' => 'integer(int64)',
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -239,17 +773,17 @@ List customers for location.
           "number": "1-111-111-1111"
         }
       ],
-      "created_on": "2019-02-01T22:43:09.190Z",
+      "created_on": "2019-02-18T15:53:55.854Z",
       "customer_id": 1,
       "is_active": false,
       "is_commercial": false,
-      "last_edited": "2019-02-01T22:43:09.190Z",
+      "last_edited": "2019-02-18T15:53:55.854Z",
       "location_id": 1,
       "name": "DEMOCO001",
       "note": "Service Location of DemoCo Inc.",
       "parent_id": 1,
       "reference_number": "Ref#100",
-      "renewal_date": "2019-02-01T22:43:09.190Z",
+      "renewal_date": "2019-02-18T15:53:55.854Z",
       "sales_rep": "John Doe",
       "suspension_id": 1
     }
@@ -268,7 +802,215 @@ List customers for location.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ListCustomerResultModel](#schemalistcustomerresultmodel)|Paged result sef of customers for location.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### Update Customer
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/customer/{customer_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          // Parameters
+          NameValueCollection parameters = new NameValueCollection();
+          parameters.Add("customer_name", "string");
+          parameters.Add("sales_rep", "string");
+          parameters.Add("reference_number", "string");
+          parameters.Add("is_commercial", "string");
+          parameters.Add("customer_note", "string");
+          
+          byte[] json = client.UploadValues(url, "PATCH", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X PATCH https://api.crosoftware.net/location/{location_id}/customer/{customer_id}?customer_name=string&sales_rep=string&reference_number=string&is_commercial=string&customer_note=string \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  method: 'patch',
+  data: '?customer_name=string&sales_rep=string&reference_number=string&is_commercial=string&customer_note=string',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.patch 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  params: {
+  'customer_name' => 'string',
+'sales_rep' => 'string',
+'reference_number' => 'string',
+'is_commercial' => 'string',
+'customer_note' => 'string'
+}, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.patch('https://api.crosoftware.net/location/{location_id}/customer/{customer_id}', params={
+  'customer_name': 'string',  'sales_rep': 'string',  'reference_number': 'string',  'is_commercial': 'string',  'customer_note': 'string'
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer/{customer_id}?customer_name=string&sales_rep=string&reference_number=string&is_commercial=string&customer_note=string");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PATCH");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`PATCH /location/{location_id}/customer/{customer_id}`
+
+<a id="opIdupdate_customer_for_location"></a>
+
+Update customer at location.
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`customer_name`|query|string|true|Customer name.|
+|`sales_rep`|query|string|true|Sales rep.|
+|`reference_number`|query|string|true|Reference number.|
+|`is_commercial`|query|string|true|Commecial customer?|
+|`customer_note`|query|string|true|Customer notes.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "addresses": [
+    {
+      "country": "USA",
+      "is_active": true,
+      "is_billing": true,
+      "is_physical": false,
+      "is_shipping": false,
+      "latitude": 48.076273,
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": -123.117185,
+      "postcode": 98382,
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": false,
+      "notify_on_completed_request": false,
+      "notify_on_dispatched_request": false,
+      "notify_on_failed_request": false,
+      "notify_on_new_request": false,
+      "number": "1-111-111-1111"
+    }
+  ],
+  "created_on": "2019-02-18T15:53:55.856Z",
+  "customer_id": 1,
+  "is_active": false,
+  "is_commercial": false,
+  "last_edited": "2019-02-18T15:53:55.856Z",
+  "location_id": 1,
+  "name": "DEMOCO001",
+  "note": "Service Location of DemoCo Inc.",
+  "parent_id": 1,
+  "reference_number": "Ref#100",
+  "renewal_date": "2019-02-18T15:53:55.856Z",
+  "sales_rep": "John Doe",
+  "suspension_id": 1
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerResultModel](#schemacustomerresultmodel)|Updated customer profile for customer at given location.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ## Drivers
 
@@ -344,9 +1086,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/driver/{driver_id}',
   params: {
-  'Authorization' => 'string',
-'X-TENANT-ID' => 'integer(int64)',
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -434,7 +1174,7 @@ Get driver info.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[DriverModel](#schemadrivermodel)|Driver profile.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ### List Drivers
 
@@ -508,9 +1248,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/driver',
   params: {
-  'Authorization' => 'string',
-'X-TENANT-ID' => 'integer(int64)',
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -607,7 +1345,169 @@ List drivers for location.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[DriverListModel](#schemadriverlistmodel)|List of drivers for location.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+## GPS
+
+### Log GPS Event
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/gps_event";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          // Parameters
+          NameValueCollection parameters = new NameValueCollection();
+          parameters.Add("gps_event_json", "string");
+          
+          byte[] json = client.UploadValues(url, "POST", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X POST https://api.crosoftware.net/location/{location_id}/gps_event?gps_event_json=string \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/location/{location_id}/gps_event',
+  method: 'post',
+  data: '?gps_event_json=string',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.post 'https://api.crosoftware.net/location/{location_id}/gps_event',
+  params: {
+  'gps_event_json' => 'string(json)'
+}, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.post('https://api.crosoftware.net/location/{location_id}/gps_event', params={
+  'gps_event_json': 'string'
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/gps_event?gps_event_json=string");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`POST /location/{location_id}/gps_event`
+
+<a id="opIdlog_gps_event"></a>
+
+Log GPS event.
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`gps_event_json`|query|string(json)|true|{&quot;location&quot;:{&quot;coords&quot;:{&quot;speed&quot;:2.4100000000000001,&quot;longitude&quot;:-122.03255055,&quot;floor&quot;:0,&quot;latitude&quot;:37.33517518,&quot;accuracy&quot;:5,&quot;altitude_accuracy&quot;:-1,&quot;altitude&quot;:0,&quot;heading&quot;:184.56999999999999},&quot;extras&quot;:{},&quot;is_moving&quot;:true,&quot;odometer&quot;:77163.899999999994,&quot;uuid&quot;:&quot;81223611-D5FF-4C7E-9BCF-59595D1720AB&quot;,&quot;activity&quot;:{&quot;type&quot;:&quot;unknown&quot;,&quot;confidence&quot;:100},&quot;battery&quot;:{&quot;level&quot;:-1,&quot;is_charging&quot;:false},&quot;timestamp&quot;:&quot;2019-02-07T00:12:19.354Z&quot;}}|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "bearing": 184.57,
+  "created_on": "2019-02-18T15:53:55.859Z",
+  "device_name": "N/A",
+  "driver_id": 2,
+  "id": 3,
+  "latitude": 37.33517518,
+  "longitude": -122.03255055,
+  "truck_id": "string",
+  "velocity": 2.41
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[GpsEventModel](#schemagpseventmodel)|GPS event profile.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ## Haulers
 
@@ -686,7 +1586,10 @@ headers = {
 
 result = RestClient.post 'https://api.crosoftware.net/hauler',
   params: {
-  'X-TENANT-ID' => 'integer(int64)',
+  'company_name' => 'string(stringIdentifier)',
+'username' => 'string(email)',
+'password' => 'string(password)',
+'recaptcha' => 'string(recaptcha)'
 }, headers: headers
 
 p JSON.parse(result)
@@ -765,7 +1668,7 @@ This operation does not require authentication
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ThirdPartyHaulerModel](#schemathirdpartyhaulermodel)|Third party hauler profile.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ### Create Connection
 
@@ -843,8 +1746,7 @@ headers = {
 
 result = RestClient.post 'https://api.crosoftware.net/hauler/{hauler_id}/connection',
   params: {
-  'Authorization' => 'string'
-'X-TENANT-ID' => 'integer(int64)',
+  'tenant_code' => 'string(tenantCode)'
 }, headers: headers
 
 p JSON.parse(result)
@@ -906,7 +1808,7 @@ Create hauler connection.
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-02-01T22:43:09.194Z",
+  "approved_on": "2019-02-18T15:53:55.860Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -914,7 +1816,7 @@ Create hauler connection.
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-02-01T22:43:09.194Z"
+  "requested_on": "2019-02-18T15:53:55.860Z"
 }
 ```
 
@@ -927,7 +1829,7 @@ Create hauler connection.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[HaulerConnectionModel](#schemahaulerconnectionmodel)|Hauler with given UUID.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ### Get Hauler
 
@@ -1001,9 +1903,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/hauler/{hauler_id}',
   params: {
-  'Authorization' => 'string',
-'X-TENANT-ID' => 'integer(int64)',
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -1076,7 +1976,7 @@ Hauler profile.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ThirdPartyHaulerModel](#schemathirdpartyhaulermodel)|Hauler profile.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ### List 3rd Party Haulers
 
@@ -1150,9 +2050,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/hauler',
   params: {
-  'Authorization' => 'string',
-'X-TENANT-ID' => 'integer(int64)',
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -1234,7 +2132,7 @@ List third party haulers for tenant.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ThirdPartyHaulerListModel](#schemathirdpartyhaulerlistmodel)|List of third party haulers for tenant.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ### List Connections
 
@@ -1308,9 +2206,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/hauler/{hauler_id}/connection',
   params: {
-  'Authorization' => 'string',
-'X-TENANT-ID' => 'integer(int64)',
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -1372,7 +2268,7 @@ List of 3rd party haulers.
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-02-01T22:43:09.197Z",
+  "approved_on": "2019-02-18T15:53:55.861Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -1380,7 +2276,7 @@ List of 3rd party haulers.
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-02-01T22:43:09.197Z"
+  "requested_on": "2019-02-18T15:53:55.861Z"
 }
 ```
 
@@ -1393,7 +2289,7 @@ List of 3rd party haulers.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[HaulerConnectionModel](#schemahaulerconnectionmodel)|List|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ## Jobs
 
@@ -1425,7 +2321,7 @@ namespace CROSoftware
           NameValueCollection parameters = new NameValueCollection();
           parameters.Add("truck_id", "0");
           
-          byte[] json = client.UploadValues(url, "POST", parameters);
+          byte[] json = client.UploadValues(url, "PATCH", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -1473,8 +2369,7 @@ headers = {
 
 result = RestClient.patch 'https://api.crosoftware.net/location/{location_id}/job/{job_id}',
   params: {
-  'Authorization' => 'string'
-'X-TENANT-ID' => 'integer(int64)',
+  'truck_id' => 'integer(int64)'
 }, headers: headers
 
 p JSON.parse(result)
@@ -1537,32 +2432,32 @@ Dispatch job.
 
 ```json
 {
-  "arrived_at_dest": "2019-02-01T22:43:09.198Z",
-  "arrived_on": "2019-02-01T22:43:09.198Z",
+  "arrived_at_dest": "2019-02-18T15:53:55.861Z",
+  "arrived_on": "2019-02-18T15:53:55.861Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-02-01T22:43:09.198Z",
-  "confirmed_on": "2019-02-01T22:43:09.198Z",
+  "completed_on": "2019-02-18T15:53:55.861Z",
+  "confirmed_on": "2019-02-18T15:53:55.861Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-02-01T22:43:09.198Z",
+  "departed_on": "2019-02-18T15:53:55.861Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-02-01T22:43:09.198Z",
+  "dispatched_on": "2019-02-18T15:53:55.861Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-02-01T22:43:09.198Z",
-  "end_time": "2019-02-01T22:43:09.198Z",
+  "dumped_on": "2019-02-18T15:53:55.861Z",
+  "end_time": "2019-02-18T15:53:55.861Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -1576,25 +2471,25 @@ Dispatch job.
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-02-01T22:43:09.198Z",
-  "pickup_date": "2019-02-01T22:43:09.198Z",
+  "original_schedule_date": "2019-02-18T15:53:55.861Z",
+  "pickup_date": "2019-02-18T15:53:55.861Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-02-01T22:43:09.198Z",
+  "requested_on": "2019-02-18T15:53:55.861Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-02-01T22:43:09.198Z",
+  "schedule_date": "2019-02-18T15:53:55.862Z",
   "start_location_id": 1,
-  "start_time": "2019-02-01T22:43:09.198Z",
+  "start_time": "2019-02-18T15:53:55.862Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-02-01T22:43:09.198Z"
+  "weighed_on": "2019-02-18T15:53:55.862Z"
 }
 ```
 
@@ -1607,7 +2502,7 @@ Dispatch job.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[UpdatedJobModel](#schemaupdatedjobmodel)|UpdatedJobModel|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ### Get Job
 
@@ -1681,9 +2576,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/job/{job_id}',
   params: {
-  'Authorization' => 'string',
-'X-TENANT-ID' => 'integer(int64)',
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -1743,64 +2636,6 @@ Get specified job.
 
 ```json
 {
-  "arrived_at_dest": "2019-02-01T22:43:09.200Z",
-  "arrived_on": "2019-02-01T22:43:09.200Z",
-  "asset_dropped": 1,
-  "asset_id": 1,
-  "asset_quantity": 1,
-  "asset_type_id": 1,
-  "completed_by": 1,
-  "completed_by_driver": false,
-  "completed_on": "2019-02-01T22:43:09.200Z",
-  "confirmed_on": "2019-02-01T22:43:09.200Z",
-  "created_by_id": 1,
-  "created_with_portal": false,
-  "customer_id": 9,
-  "customer_notes": "Some customer notes",
-  "departed_on": "2019-02-01T22:43:09.200Z",
-  "desired_asset_desc": "An asset description.",
-  "dispatch_priority": "H",
-  "dispatched_by_route": 1,
-  "dispatched_on": "2019-02-01T22:43:09.200Z",
-  "dispatcher_notes": "Some dispatcher notes",
-  "do_confirm": false,
-  "driver_notes": "Some driver notes",
-  "dropped_number": "Unused/deprecated field",
-  "dump_location_id": 1,
-  "dumped_on": "2019-02-01T22:43:09.200Z",
-  "end_time": "2019-02-01T22:43:09.200Z",
-  "fail_reason": "Failure reason",
-  "final_location_id": 1,
-  "flags": "Job notes",
-  "id": 1,
-  "invoice_notes": "Some invoice notes",
-  "is_completed": false,
-  "is_declined": false,
-  "is_deleted": false,
-  "is_failed": false,
-  "is_paid": true,
-  "job_group_id": 1,
-  "location_id": 1,
-  "merged_with_route": 1,
-  "original_schedule_date": "2019-02-01T22:43:09.200Z",
-  "pickup_date": "2019-02-01T22:43:09.200Z",
-  "priority": -1,
-  "reference_number": null,
-  "removed_number": "string",
-  "requested_on": "2019-02-01T22:43:09.200Z",
-  "require_image": false,
-  "require_material": false,
-  "require_signature": false,
-  "require_weights": false,
-  "schedule_date": "2019-02-01T22:43:09.200Z",
-  "start_location_id": 1,
-  "start_time": "2019-02-01T22:43:09.200Z",
-  "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "times_failed": 0,
-  "times_rolled_over": 0,
-  "truck_id": 1,
-  "type": "D",
-  "weighed_on": "2019-02-01T22:43:09.200Z",
   "asset": {
     "asset_type": {
       "deleted": false,
@@ -1816,11 +2651,11 @@ Get specified job.
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-02-01T22:43:09.200Z",
+    "dispatched_on": "2019-02-18T15:53:55.867Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-02-01T22:43:09.200Z",
-    "last_rental_invoice_on": "2019-02-01T22:43:09.200Z",
+    "last_activity_on": "2019-02-18T15:53:55.867Z",
+    "last_rental_invoice_on": "2019-02-18T15:53:55.867Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -1831,7 +2666,7 @@ Get specified job.
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-02-01T22:43:09.200Z"
+    "returned_on": "2019-02-18T15:53:55.867Z"
   },
   "asset_type": {
     "deleted": false,
@@ -1867,15 +2702,15 @@ Get specified job.
         "is_shipping": true
       }
     ],
-    "created_on": "2019-02-01T22:43:09.200Z",
+    "created_on": "2019-02-18T15:53:55.867Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-02-01T22:43:09.200Z",
+        "created_on": "2019-02-18T15:53:55.867Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-02-01T22:43:09.200Z",
+        "last_edited": "2019-02-18T15:53:55.867Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -1946,7 +2781,65 @@ Get specified job.
     "name": "A Destination",
     "state": "Washington",
     "zip": 98368
-  }
+  },
+  "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
+  "arrived_at_dest": "2019-02-18T15:53:55.867Z",
+  "arrived_on": "2019-02-18T15:53:55.867Z",
+  "asset_dropped": 1,
+  "asset_id": 1,
+  "asset_quantity": 1,
+  "asset_type_id": 1,
+  "completed_by": 1,
+  "completed_by_driver": false,
+  "completed_on": "2019-02-18T15:53:55.867Z",
+  "confirmed_on": "2019-02-18T15:53:55.867Z",
+  "created_by_id": 1,
+  "created_with_portal": false,
+  "customer_id": 9,
+  "customer_notes": "Some customer notes",
+  "departed_on": "2019-02-18T15:53:55.867Z",
+  "desired_asset_desc": "An asset description.",
+  "dispatch_priority": "H",
+  "dispatched_by_route": 1,
+  "dispatched_on": "2019-02-18T15:53:55.867Z",
+  "dispatcher_notes": "Some dispatcher notes",
+  "do_confirm": false,
+  "driver_notes": "Some driver notes",
+  "dropped_number": "Unused/deprecated field",
+  "dump_location_id": 1,
+  "dumped_on": "2019-02-18T15:53:55.867Z",
+  "end_time": "2019-02-18T15:53:55.867Z",
+  "fail_reason": "Failure reason",
+  "final_location_id": 1,
+  "flags": "Job notes",
+  "id": 1,
+  "invoice_notes": "Some invoice notes",
+  "is_completed": false,
+  "is_declined": false,
+  "is_deleted": false,
+  "is_failed": false,
+  "is_paid": true,
+  "job_group_id": 1,
+  "location_id": 1,
+  "merged_with_route": 1,
+  "original_schedule_date": "2019-02-18T15:53:55.867Z",
+  "pickup_date": "2019-02-18T15:53:55.867Z",
+  "priority": -1,
+  "reference_number": null,
+  "removed_number": "string",
+  "requested_on": "2019-02-18T15:53:55.867Z",
+  "require_image": false,
+  "require_material": false,
+  "require_signature": false,
+  "require_weights": false,
+  "schedule_date": "2019-02-18T15:53:55.867Z",
+  "start_location_id": 1,
+  "start_time": "2019-02-18T15:53:55.867Z",
+  "times_failed": 0,
+  "times_rolled_over": 0,
+  "truck_id": 1,
+  "type": "D",
+  "weighed_on": "2019-02-18T15:53:55.867Z"
 }
 ```
 
@@ -1959,7 +2852,7 @@ Get specified job.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[JobModel](#schemajobmodel)|JobModel|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ### List jobs
 
@@ -2033,9 +2926,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/job',
   params: {
-  'Authorization' => 'string',
-'X-TENANT-ID' => 'integer(int64)',
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -2100,64 +2991,6 @@ List jobs for location.
   "current_page": 1,
   "results": [
     {
-      "arrived_at_dest": "2019-02-01T22:43:09.202Z",
-      "arrived_on": "2019-02-01T22:43:09.202Z",
-      "asset_dropped": 1,
-      "asset_id": 1,
-      "asset_quantity": 1,
-      "asset_type_id": 1,
-      "completed_by": 1,
-      "completed_by_driver": false,
-      "completed_on": "2019-02-01T22:43:09.202Z",
-      "confirmed_on": "2019-02-01T22:43:09.202Z",
-      "created_by_id": 1,
-      "created_with_portal": false,
-      "customer_id": 9,
-      "customer_notes": "Some customer notes",
-      "departed_on": "2019-02-01T22:43:09.202Z",
-      "desired_asset_desc": "An asset description.",
-      "dispatch_priority": "H",
-      "dispatched_by_route": 1,
-      "dispatched_on": "2019-02-01T22:43:09.202Z",
-      "dispatcher_notes": "Some dispatcher notes",
-      "do_confirm": false,
-      "driver_notes": "Some driver notes",
-      "dropped_number": "Unused/deprecated field",
-      "dump_location_id": 1,
-      "dumped_on": "2019-02-01T22:43:09.202Z",
-      "end_time": "2019-02-01T22:43:09.202Z",
-      "fail_reason": "Failure reason",
-      "final_location_id": 1,
-      "flags": "Job notes",
-      "id": 1,
-      "invoice_notes": "Some invoice notes",
-      "is_completed": false,
-      "is_declined": false,
-      "is_deleted": false,
-      "is_failed": false,
-      "is_paid": true,
-      "job_group_id": 1,
-      "location_id": 1,
-      "merged_with_route": 1,
-      "original_schedule_date": "2019-02-01T22:43:09.202Z",
-      "pickup_date": "2019-02-01T22:43:09.202Z",
-      "priority": -1,
-      "reference_number": null,
-      "removed_number": "string",
-      "requested_on": "2019-02-01T22:43:09.202Z",
-      "require_image": false,
-      "require_material": false,
-      "require_signature": false,
-      "require_weights": false,
-      "schedule_date": "2019-02-01T22:43:09.202Z",
-      "start_location_id": 1,
-      "start_time": "2019-02-01T22:43:09.202Z",
-      "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-      "times_failed": 0,
-      "times_rolled_over": 0,
-      "truck_id": 1,
-      "type": "D",
-      "weighed_on": "2019-02-01T22:43:09.202Z",
       "asset": {
         "asset_type": {
           "deleted": false,
@@ -2173,11 +3006,11 @@ List jobs for location.
         "cluster": 1,
         "customer_id": 1,
         "description": "A description",
-        "dispatched_on": "2019-02-01T22:43:09.203Z",
+        "dispatched_on": "2019-02-18T15:53:55.869Z",
         "id": 1,
         "is_returned": false,
-        "last_activity_on": "2019-02-01T22:43:09.203Z",
-        "last_rental_invoice_on": "2019-02-01T22:43:09.203Z",
+        "last_activity_on": "2019-02-18T15:53:55.869Z",
+        "last_rental_invoice_on": "2019-02-18T15:53:55.869Z",
         "latitude": 54.235,
         "location": {
           "id": 1,
@@ -2188,7 +3021,7 @@ List jobs for location.
         "longitude": 127.123,
         "number": "REF100",
         "quantity": 1,
-        "returned_on": "2019-02-01T22:43:09.203Z"
+        "returned_on": "2019-02-18T15:53:55.869Z"
       },
       "asset_type": {
         "deleted": false,
@@ -2224,15 +3057,15 @@ List jobs for location.
             "is_shipping": true
           }
         ],
-        "created_on": "2019-02-01T22:43:09.203Z",
+        "created_on": "2019-02-18T15:53:55.869Z",
         "id": 9,
         "locations": [
           {
-            "created_on": "2019-02-01T22:43:09.203Z",
+            "created_on": "2019-02-18T15:53:55.869Z",
             "customer_id": 9,
             "is_active": true,
             "is_commercial": false,
-            "last_edited": "2019-02-01T22:43:09.203Z",
+            "last_edited": "2019-02-18T15:53:55.869Z",
             "location_id": 1,
             "note": "string",
             "reference_number": "string",
@@ -2303,7 +3136,65 @@ List jobs for location.
         "name": "A Destination",
         "state": "Washington",
         "zip": 98368
-      }
+      },
+      "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
+      "arrived_at_dest": "2019-02-18T15:53:55.869Z",
+      "arrived_on": "2019-02-18T15:53:55.869Z",
+      "asset_dropped": 1,
+      "asset_id": 1,
+      "asset_quantity": 1,
+      "asset_type_id": 1,
+      "completed_by": 1,
+      "completed_by_driver": false,
+      "completed_on": "2019-02-18T15:53:55.869Z",
+      "confirmed_on": "2019-02-18T15:53:55.869Z",
+      "created_by_id": 1,
+      "created_with_portal": false,
+      "customer_id": 9,
+      "customer_notes": "Some customer notes",
+      "departed_on": "2019-02-18T15:53:55.869Z",
+      "desired_asset_desc": "An asset description.",
+      "dispatch_priority": "H",
+      "dispatched_by_route": 1,
+      "dispatched_on": "2019-02-18T15:53:55.869Z",
+      "dispatcher_notes": "Some dispatcher notes",
+      "do_confirm": false,
+      "driver_notes": "Some driver notes",
+      "dropped_number": "Unused/deprecated field",
+      "dump_location_id": 1,
+      "dumped_on": "2019-02-18T15:53:55.869Z",
+      "end_time": "2019-02-18T15:53:55.869Z",
+      "fail_reason": "Failure reason",
+      "final_location_id": 1,
+      "flags": "Job notes",
+      "id": 1,
+      "invoice_notes": "Some invoice notes",
+      "is_completed": false,
+      "is_declined": false,
+      "is_deleted": false,
+      "is_failed": false,
+      "is_paid": true,
+      "job_group_id": 1,
+      "location_id": 1,
+      "merged_with_route": 1,
+      "original_schedule_date": "2019-02-18T15:53:55.869Z",
+      "pickup_date": "2019-02-18T15:53:55.869Z",
+      "priority": -1,
+      "reference_number": null,
+      "removed_number": "string",
+      "requested_on": "2019-02-18T15:53:55.869Z",
+      "require_image": false,
+      "require_material": false,
+      "require_signature": false,
+      "require_weights": false,
+      "schedule_date": "2019-02-18T15:53:55.869Z",
+      "start_location_id": 1,
+      "start_time": "2019-02-18T15:53:55.869Z",
+      "times_failed": 0,
+      "times_rolled_over": 0,
+      "truck_id": 1,
+      "type": "D",
+      "weighed_on": "2019-02-18T15:53:55.869Z"
     }
   ],
   "total_count": 1,
@@ -2320,7 +3211,7 @@ List jobs for location.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[JobListModel](#schemajoblistmodel)|List of jobs for location.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ## Locations
 
@@ -2396,9 +3287,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/location/{location_id}',
   params: {
-  'Authorization' => 'string',
-'X-TENANT-ID' => 'integer(int64)',
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -2472,7 +3361,7 @@ Get info for specified location.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[LocationModel](#schemalocationmodel)|Location info.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ### List Locations
 
@@ -2546,9 +3435,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/location',
   params: {
-  'Authorization' => 'string',
-'X-TENANT-ID' => 'integer(int64)',
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -2631,7 +3518,175 @@ List locations for tenant.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[LocationListModel](#schemalocationlistmodel)|List of locations|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+## Tenants
+
+### List Tenants
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/tenant";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/tenant \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <jwt-access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/tenant',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <jwt-access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/tenant',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <jwt-access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/tenant', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/tenant");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /tenant`
+
+<a id="opIdlist_tenants"></a>
+
+List tenants for this user.
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
+|`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "current_limit": 100,
+  "current_page": 1,
+  "results": [
+    {
+      "address": "123 some st",
+      "city": "Sequim",
+      "code": "CROSCRAP",
+      "created_on": "2019-02-18T15:53:55.871Z",
+      "email": "test_admin@crosoftware.net",
+      "id": 1,
+      "is_active": true,
+      "name": "CRO Scrap",
+      "phone": 1234567890,
+      "state": "WA",
+      "truck_limit": "string",
+      "zip": 98360
+    }
+  ],
+  "total_count": 1,
+  "total_pages": 1
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ListTenantResultModel](#schemalisttenantresultmodel)|Paged list response of tenants.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ## Trucks
 
@@ -2707,9 +3762,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/truck/{truck_id}',
   params: {
-  'Authorization' => 'string',
-'X-TENANT-ID' => 'integer(int64)',
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -2789,7 +3842,7 @@ Get truck info.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|string|Truck info.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ### List Trucks
 
@@ -2863,9 +3916,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/truck',
   params: {
-  'Authorization' => 'string',
-'X-TENANT-ID' => 'integer(int64)',
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -2956,7 +4007,7 @@ List trucks for location.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[TruckListModel](#schematrucklistmodel)|List of trucks for location.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 ### Set Driver
 
@@ -2986,7 +4037,7 @@ namespace CROSoftware
           NameValueCollection parameters = new NameValueCollection();
           parameters.Add("driver_id", "0");
           
-          byte[] json = client.UploadValues(url, "POST", parameters);
+          byte[] json = client.UploadValues(url, "PATCH", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -3034,8 +4085,7 @@ headers = {
 
 result = RestClient.patch 'https://api.crosoftware.net/location/{location_id}/truck/{truck_id}',
   params: {
-  'Authorization' => 'string'
-'X-TENANT-ID' => 'integer(int64)',
+  'driver_id' => 'integer(int64)'
 }, headers: headers
 
 p JSON.parse(result)
@@ -3119,7 +4169,7 @@ Set driver for truck.
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[TruckModel](#schematruckmodel)|Updated truck profile.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found. Commonly due to missing or extra parameters.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
 # Schemas
 
@@ -3209,11 +4259,11 @@ ISO 8601 DateTime Format (GMT)
   "cluster": 1,
   "customer_id": 1,
   "description": "A description",
-  "dispatched_on": "2019-02-01T22:43:09.209Z",
+  "dispatched_on": "2019-02-18T15:53:55.874Z",
   "id": 1,
   "is_returned": false,
-  "last_activity_on": "2019-02-01T22:43:09.209Z",
-  "last_rental_invoice_on": "2019-02-01T22:43:09.209Z",
+  "last_activity_on": "2019-02-18T15:53:55.874Z",
+  "last_rental_invoice_on": "2019-02-18T15:53:55.874Z",
   "latitude": 54.235,
   "location": {
     "id": 1,
@@ -3224,7 +4274,7 @@ ISO 8601 DateTime Format (GMT)
   "longitude": 127.123,
   "number": "REF100",
   "quantity": 1,
-  "returned_on": "2019-02-01T22:43:09.209Z"
+  "returned_on": "2019-02-18T15:53:55.874Z"
 }
 
 ```
@@ -3279,135 +4329,6 @@ ISO 8601 DateTime Format (GMT)
 |`quantity`|integer(int64)|-|
 |`require_numbers`|boolean|-|
 |`weight`|integer(int64)|-|
-
-<h2 id="tocSbasejobmodel">BaseJobModel</h2>
-
-```json
-{
-  "arrived_at_dest": "2019-02-01T22:43:09.210Z",
-  "arrived_on": "2019-02-01T22:43:09.210Z",
-  "asset_dropped": 1,
-  "asset_id": 1,
-  "asset_quantity": 1,
-  "asset_type_id": 1,
-  "completed_by": 1,
-  "completed_by_driver": false,
-  "completed_on": "2019-02-01T22:43:09.210Z",
-  "confirmed_on": "2019-02-01T22:43:09.210Z",
-  "created_by_id": 1,
-  "created_with_portal": false,
-  "customer_id": 9,
-  "customer_notes": "Some customer notes",
-  "departed_on": "2019-02-01T22:43:09.210Z",
-  "desired_asset_desc": "An asset description.",
-  "dispatch_priority": "H",
-  "dispatched_by_route": 1,
-  "dispatched_on": "2019-02-01T22:43:09.210Z",
-  "dispatcher_notes": "Some dispatcher notes",
-  "do_confirm": false,
-  "driver_notes": "Some driver notes",
-  "dropped_number": "Unused/deprecated field",
-  "dump_location_id": 1,
-  "dumped_on": "2019-02-01T22:43:09.210Z",
-  "end_time": "2019-02-01T22:43:09.210Z",
-  "fail_reason": "Failure reason",
-  "final_location_id": 1,
-  "flags": "Job notes",
-  "id": 1,
-  "invoice_notes": "Some invoice notes",
-  "is_completed": false,
-  "is_declined": false,
-  "is_deleted": false,
-  "is_failed": false,
-  "is_paid": true,
-  "job_group_id": 1,
-  "location_id": 1,
-  "merged_with_route": 1,
-  "original_schedule_date": "2019-02-01T22:43:09.210Z",
-  "pickup_date": "2019-02-01T22:43:09.210Z",
-  "priority": -1,
-  "reference_number": null,
-  "removed_number": "string",
-  "requested_on": "2019-02-01T22:43:09.210Z",
-  "require_image": false,
-  "require_material": false,
-  "require_signature": false,
-  "require_weights": false,
-  "schedule_date": "2019-02-01T22:43:09.210Z",
-  "start_location_id": 1,
-  "start_time": "2019-02-01T22:43:09.210Z",
-  "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "times_failed": 0,
-  "times_rolled_over": 0,
-  "truck_id": 1,
-  "type": "D",
-  "weighed_on": "2019-02-01T22:43:09.210Z"
-}
-
-```
-
-<a id="schemabasejobmodel"></a>
-
-|Name|Type|Description|
-|---|---|---|
-|`arrived_at_dest`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Entered by driver for dispatcher and customer. Asset arrival at destination time. Only applicable for jobs with a valid dump destination.|
-|`arrived_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Drive start time entered by driver for dispatcher and customer (arrived at job slider).|
-|`asset_dropped`|integer(int64)|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types 'D', 'E'.|
-|`asset_id`|integer(int64)|Applicable to job types 'E', 'P', 'R'.|
-|`asset_quantity`|integer(int64)|How many assets are being serviced within a cluster (for jobs assigned to an asset cluster). For jobs dispatched by routes, or manually dispatched route stops, this value is 0 or 1.|
-|`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E').|
-|`completed_by`|integer(int64)|Dispatcher or driver id.|
-|`completed_by_driver`|boolean|If TRUE, completed by driver. If FALSE, completed by dispatcher.|
-|`completed_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Job completion time (must be in the past).|
-|`confirmed_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Must be in the past.|
-|`created_by_id`|integer(int64)|Customer, dispatcher, or driver id.|
-|`created_with_portal`|boolean|Unused field|
-|`customer_id`|integer(int64)|Customer identifier.|
-|`customer_notes`|string|Notes entered by customers to communicate with dispatchers.|
-|`departed_on`|string(datetime)|Unused/deprecated|
-|`desired_asset_desc`|string|Free-form text entered by dispatchers and drivers to be used as the future asset description.|
-|`dispatch_priority`|string|Entered by dispatchers to determine dispatch order. Can be 'H', 'M', 'L' (High, Medium, Low).|
-|`dispatched_by_route`|integer(int64)|Route id of dispatching route (or NULL if not dispatched by a route).|
-|`dispatched_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time the job is assigned to a truck.|
-|`dispatcher_notes`|string|Entered by dispatchers, read by drivers and dispatchers.|
-|`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched.|
-|`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers.|
-|`dropped_number`|string|Unused/deprecated|
-|`dump_location_id`|integer(int64)|Asset or asset cluster dump location identifier (e.g. trash bin needs  dumped before returning from customer).|
-|`dumped_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Dump request completion date.|
-|`end_time`|string(datetime)|Future estimated time of job completion.|
-|`fail_reason`|string|Failure description selected by a driver for use by dispatchers.|
-|`final_location_id`|integer(int64)|Final location identifier. Used by dispatchers for prioritizing jobs. Used by drivers to know where to leave the asset on job completion.|
-|`flags`|string|Job notes.|
-|`id`|integer(int64)|Job identifier.|
-|`invoice_notes`|string|Invoice notes from the billing system.|
-|`is_completed`|boolean|Job completion flag set by dispatchers and drivers.|
-|`is_declined`|boolean|Job completion flag set by dispatchers and drivers.|
-|`is_deleted`|boolean|Indicates whether job is still valid.|
-|`is_failed`|boolean|Set by drivers and dispatchers to indicate a failed job.|
-|`is_paid`|boolean|Unused/deprecated|
-|`job_group_id`|integer(int64)|Job group identifier for group jobs (vs service, exchange, etc.).|
-|`location_id`|integer(int64)|Owning location for the job.|
-|`merged_with_route`|integer(int64)|Assigned by dispatchers for dispatchers and drivers.|
-|`original_schedule_date`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Original scheduling date.|
-|`pickup_date`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) A pickup job is scheduled for this date upon job completion. If the asset or cluster is assigned to a route stop, the route stop will be deleted. Must be in the future.|
-|`priority`|integer(int64)|Assigned by dispatchers for job order completion determination for drivers.|
-|`reference_number`|string|Provider-specific billing/reporting field.|
-|`removed_number`|string|Unused/deprecated|
-|`requested_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Job creation date.|
-|`require_image`|boolean|Set by dispatchers and drivers, requires drivers to upload one or more job images before completion.|
-|`require_material`|boolean|Set by dispatchers and drivers, requires drivers to set a material before completing a job.|
-|`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion.|
-|`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion.|
-|`schedule_date`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Scheduled job completion date.|
-|`start_location_id`|integer(int64)|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers.|
-|`start_time`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time customer has requested job start, set by dispatchers for dispatchers and drivers.|
-|`third_party_hauler_id`|[UUID](#schemauuid)|UUID|
-|`times_failed`|integer(int64)|Number of times a job has been attempted and failed.|
-|`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers.|
-|`truck_id`|integer(int64)|Set by dispatchers to determine job visibility for drivers.|
-|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. 'D', 'E', 'L', 'P', 'R'|
-|`weighed_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time of truck weight entry.|
 
 <h2 id="tocScustomeraddressmodel">CustomerAddressModel</h2>
 
@@ -3475,15 +4396,15 @@ ISO 8601 DateTime Format (GMT)
       "is_shipping": true
     }
   ],
-  "created_on": "2019-02-01T22:43:09.211Z",
+  "created_on": "2019-02-18T15:53:55.875Z",
   "id": 9,
   "locations": [
     {
-      "created_on": "2019-02-01T22:43:09.211Z",
+      "created_on": "2019-02-18T15:53:55.875Z",
       "customer_id": 9,
       "is_active": true,
       "is_commercial": false,
-      "last_edited": "2019-02-01T22:43:09.211Z",
+      "last_edited": "2019-02-18T15:53:55.875Z",
       "location_id": 1,
       "note": "string",
       "reference_number": "string",
@@ -3616,17 +4537,17 @@ ISO 8601 DateTime Format (GMT)
       "number": "1-111-111-1111"
     }
   ],
-  "created_on": "2019-02-01T22:43:09.212Z",
+  "created_on": "2019-02-18T15:53:55.875Z",
   "customer_id": 1,
   "is_active": false,
   "is_commercial": false,
-  "last_edited": "2019-02-01T22:43:09.212Z",
+  "last_edited": "2019-02-18T15:53:55.875Z",
   "location_id": 1,
   "name": "DEMOCO001",
   "note": "Service Location of DemoCo Inc.",
   "parent_id": 1,
   "reference_number": "Ref#100",
-  "renewal_date": "2019-02-01T22:43:09.212Z",
+  "renewal_date": "2019-02-18T15:53:55.875Z",
   "sales_rep": "John Doe",
   "suspension_id": 1
 }
@@ -3785,12 +4706,43 @@ ISO 8601 DateTime Format (GMT)
 |`third_party_hauler_id`|[UUID](#schemauuid)|UUID|
 |`zip`|string|-|
 
+<h2 id="tocSgpseventmodel">GpsEventModel</h2>
+
+```json
+{
+  "bearing": 184.57,
+  "created_on": "2019-02-18T15:53:55.876Z",
+  "device_name": "N/A",
+  "driver_id": 2,
+  "id": 3,
+  "latitude": 37.33517518,
+  "longitude": -122.03255055,
+  "truck_id": "string",
+  "velocity": 2.41
+}
+
+```
+
+<a id="schemagpseventmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`bearing`|number(float)|-|
+|`created_on`|string(datetime)|-|
+|`device_name`|string|-|
+|`driver_id`|integer(int64)|-|
+|`id`|integer(int64)|-|
+|`latitude`|number(float)|-|
+|`longitude`|number(float)|-|
+|`truck_id`|string|-|
+|`velocity`|number(float)|-|
+
 <h2 id="tocShaulerconnectionmodel">HaulerConnectionModel</h2>
 
 ```json
 {
   "approved_by": 1,
-  "approved_on": "2019-02-01T22:43:09.213Z",
+  "approved_on": "2019-02-18T15:53:55.877Z",
   "denied_on": "string",
   "is_approved": true,
   "location_id": 1,
@@ -3798,7 +4750,7 @@ ISO 8601 DateTime Format (GMT)
   "provider_id": 2,
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-02-01T22:43:09.213Z"
+  "requested_on": "2019-02-18T15:53:55.877Z"
 }
 
 ```
@@ -3826,64 +4778,6 @@ ISO 8601 DateTime Format (GMT)
   "current_page": 1,
   "results": [
     {
-      "arrived_at_dest": "2019-02-01T22:43:09.213Z",
-      "arrived_on": "2019-02-01T22:43:09.213Z",
-      "asset_dropped": 1,
-      "asset_id": 1,
-      "asset_quantity": 1,
-      "asset_type_id": 1,
-      "completed_by": 1,
-      "completed_by_driver": false,
-      "completed_on": "2019-02-01T22:43:09.213Z",
-      "confirmed_on": "2019-02-01T22:43:09.213Z",
-      "created_by_id": 1,
-      "created_with_portal": false,
-      "customer_id": 9,
-      "customer_notes": "Some customer notes",
-      "departed_on": "2019-02-01T22:43:09.213Z",
-      "desired_asset_desc": "An asset description.",
-      "dispatch_priority": "H",
-      "dispatched_by_route": 1,
-      "dispatched_on": "2019-02-01T22:43:09.213Z",
-      "dispatcher_notes": "Some dispatcher notes",
-      "do_confirm": false,
-      "driver_notes": "Some driver notes",
-      "dropped_number": "Unused/deprecated field",
-      "dump_location_id": 1,
-      "dumped_on": "2019-02-01T22:43:09.213Z",
-      "end_time": "2019-02-01T22:43:09.213Z",
-      "fail_reason": "Failure reason",
-      "final_location_id": 1,
-      "flags": "Job notes",
-      "id": 1,
-      "invoice_notes": "Some invoice notes",
-      "is_completed": false,
-      "is_declined": false,
-      "is_deleted": false,
-      "is_failed": false,
-      "is_paid": true,
-      "job_group_id": 1,
-      "location_id": 1,
-      "merged_with_route": 1,
-      "original_schedule_date": "2019-02-01T22:43:09.213Z",
-      "pickup_date": "2019-02-01T22:43:09.213Z",
-      "priority": -1,
-      "reference_number": null,
-      "removed_number": "string",
-      "requested_on": "2019-02-01T22:43:09.213Z",
-      "require_image": false,
-      "require_material": false,
-      "require_signature": false,
-      "require_weights": false,
-      "schedule_date": "2019-02-01T22:43:09.213Z",
-      "start_location_id": 1,
-      "start_time": "2019-02-01T22:43:09.213Z",
-      "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-      "times_failed": 0,
-      "times_rolled_over": 0,
-      "truck_id": 1,
-      "type": "D",
-      "weighed_on": "2019-02-01T22:43:09.213Z",
       "asset": {
         "asset_type": {
           "deleted": false,
@@ -3899,11 +4793,11 @@ ISO 8601 DateTime Format (GMT)
         "cluster": 1,
         "customer_id": 1,
         "description": "A description",
-        "dispatched_on": "2019-02-01T22:43:09.213Z",
+        "dispatched_on": "2019-02-18T15:53:55.877Z",
         "id": 1,
         "is_returned": false,
-        "last_activity_on": "2019-02-01T22:43:09.213Z",
-        "last_rental_invoice_on": "2019-02-01T22:43:09.213Z",
+        "last_activity_on": "2019-02-18T15:53:55.877Z",
+        "last_rental_invoice_on": "2019-02-18T15:53:55.877Z",
         "latitude": 54.235,
         "location": {
           "id": 1,
@@ -3914,7 +4808,7 @@ ISO 8601 DateTime Format (GMT)
         "longitude": 127.123,
         "number": "REF100",
         "quantity": 1,
-        "returned_on": "2019-02-01T22:43:09.213Z"
+        "returned_on": "2019-02-18T15:53:55.877Z"
       },
       "asset_type": {
         "deleted": false,
@@ -3950,15 +4844,15 @@ ISO 8601 DateTime Format (GMT)
             "is_shipping": true
           }
         ],
-        "created_on": "2019-02-01T22:43:09.214Z",
+        "created_on": "2019-02-18T15:53:55.877Z",
         "id": 9,
         "locations": [
           {
-            "created_on": "2019-02-01T22:43:09.214Z",
+            "created_on": "2019-02-18T15:53:55.877Z",
             "customer_id": 9,
             "is_active": true,
             "is_commercial": false,
-            "last_edited": "2019-02-01T22:43:09.214Z",
+            "last_edited": "2019-02-18T15:53:55.877Z",
             "location_id": 1,
             "note": "string",
             "reference_number": "string",
@@ -4029,7 +4923,65 @@ ISO 8601 DateTime Format (GMT)
         "name": "A Destination",
         "state": "Washington",
         "zip": 98368
-      }
+      },
+      "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
+      "arrived_at_dest": "2019-02-18T15:53:55.877Z",
+      "arrived_on": "2019-02-18T15:53:55.877Z",
+      "asset_dropped": 1,
+      "asset_id": 1,
+      "asset_quantity": 1,
+      "asset_type_id": 1,
+      "completed_by": 1,
+      "completed_by_driver": false,
+      "completed_on": "2019-02-18T15:53:55.877Z",
+      "confirmed_on": "2019-02-18T15:53:55.877Z",
+      "created_by_id": 1,
+      "created_with_portal": false,
+      "customer_id": 9,
+      "customer_notes": "Some customer notes",
+      "departed_on": "2019-02-18T15:53:55.877Z",
+      "desired_asset_desc": "An asset description.",
+      "dispatch_priority": "H",
+      "dispatched_by_route": 1,
+      "dispatched_on": "2019-02-18T15:53:55.877Z",
+      "dispatcher_notes": "Some dispatcher notes",
+      "do_confirm": false,
+      "driver_notes": "Some driver notes",
+      "dropped_number": "Unused/deprecated field",
+      "dump_location_id": 1,
+      "dumped_on": "2019-02-18T15:53:55.877Z",
+      "end_time": "2019-02-18T15:53:55.877Z",
+      "fail_reason": "Failure reason",
+      "final_location_id": 1,
+      "flags": "Job notes",
+      "id": 1,
+      "invoice_notes": "Some invoice notes",
+      "is_completed": false,
+      "is_declined": false,
+      "is_deleted": false,
+      "is_failed": false,
+      "is_paid": true,
+      "job_group_id": 1,
+      "location_id": 1,
+      "merged_with_route": 1,
+      "original_schedule_date": "2019-02-18T15:53:55.877Z",
+      "pickup_date": "2019-02-18T15:53:55.877Z",
+      "priority": -1,
+      "reference_number": null,
+      "removed_number": "string",
+      "requested_on": "2019-02-18T15:53:55.877Z",
+      "require_image": false,
+      "require_material": false,
+      "require_signature": false,
+      "require_weights": false,
+      "schedule_date": "2019-02-18T15:53:55.877Z",
+      "start_location_id": 1,
+      "start_time": "2019-02-18T15:53:55.877Z",
+      "times_failed": 0,
+      "times_rolled_over": 0,
+      "truck_id": 1,
+      "type": "D",
+      "weighed_on": "2019-02-18T15:53:55.877Z"
     }
   ],
   "total_count": 1,
@@ -4052,11 +5004,11 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "created_on": "2019-02-01T22:43:09.215Z",
+  "created_on": "2019-02-18T15:53:55.878Z",
   "customer_id": 9,
   "is_active": true,
   "is_commercial": false,
-  "last_edited": "2019-02-01T22:43:09.215Z",
+  "last_edited": "2019-02-18T15:53:55.878Z",
   "location_id": 1,
   "note": "string",
   "reference_number": "string",
@@ -4087,64 +5039,6 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "arrived_at_dest": "2019-02-01T22:43:09.215Z",
-  "arrived_on": "2019-02-01T22:43:09.215Z",
-  "asset_dropped": 1,
-  "asset_id": 1,
-  "asset_quantity": 1,
-  "asset_type_id": 1,
-  "completed_by": 1,
-  "completed_by_driver": false,
-  "completed_on": "2019-02-01T22:43:09.215Z",
-  "confirmed_on": "2019-02-01T22:43:09.215Z",
-  "created_by_id": 1,
-  "created_with_portal": false,
-  "customer_id": 9,
-  "customer_notes": "Some customer notes",
-  "departed_on": "2019-02-01T22:43:09.215Z",
-  "desired_asset_desc": "An asset description.",
-  "dispatch_priority": "H",
-  "dispatched_by_route": 1,
-  "dispatched_on": "2019-02-01T22:43:09.216Z",
-  "dispatcher_notes": "Some dispatcher notes",
-  "do_confirm": false,
-  "driver_notes": "Some driver notes",
-  "dropped_number": "Unused/deprecated field",
-  "dump_location_id": 1,
-  "dumped_on": "2019-02-01T22:43:09.216Z",
-  "end_time": "2019-02-01T22:43:09.216Z",
-  "fail_reason": "Failure reason",
-  "final_location_id": 1,
-  "flags": "Job notes",
-  "id": 1,
-  "invoice_notes": "Some invoice notes",
-  "is_completed": false,
-  "is_declined": false,
-  "is_deleted": false,
-  "is_failed": false,
-  "is_paid": true,
-  "job_group_id": 1,
-  "location_id": 1,
-  "merged_with_route": 1,
-  "original_schedule_date": "2019-02-01T22:43:09.216Z",
-  "pickup_date": "2019-02-01T22:43:09.216Z",
-  "priority": -1,
-  "reference_number": null,
-  "removed_number": "string",
-  "requested_on": "2019-02-01T22:43:09.216Z",
-  "require_image": false,
-  "require_material": false,
-  "require_signature": false,
-  "require_weights": false,
-  "schedule_date": "2019-02-01T22:43:09.216Z",
-  "start_location_id": 1,
-  "start_time": "2019-02-01T22:43:09.216Z",
-  "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "times_failed": 0,
-  "times_rolled_over": 0,
-  "truck_id": 1,
-  "type": "D",
-  "weighed_on": "2019-02-01T22:43:09.216Z",
   "asset": {
     "asset_type": {
       "deleted": false,
@@ -4160,11 +5054,11 @@ ISO 8601 DateTime Format (GMT)
     "cluster": 1,
     "customer_id": 1,
     "description": "A description",
-    "dispatched_on": "2019-02-01T22:43:09.216Z",
+    "dispatched_on": "2019-02-18T15:53:55.879Z",
     "id": 1,
     "is_returned": false,
-    "last_activity_on": "2019-02-01T22:43:09.216Z",
-    "last_rental_invoice_on": "2019-02-01T22:43:09.216Z",
+    "last_activity_on": "2019-02-18T15:53:55.879Z",
+    "last_rental_invoice_on": "2019-02-18T15:53:55.879Z",
     "latitude": 54.235,
     "location": {
       "id": 1,
@@ -4175,7 +5069,7 @@ ISO 8601 DateTime Format (GMT)
     "longitude": 127.123,
     "number": "REF100",
     "quantity": 1,
-    "returned_on": "2019-02-01T22:43:09.216Z"
+    "returned_on": "2019-02-18T15:53:55.880Z"
   },
   "asset_type": {
     "deleted": false,
@@ -4211,15 +5105,15 @@ ISO 8601 DateTime Format (GMT)
         "is_shipping": true
       }
     ],
-    "created_on": "2019-02-01T22:43:09.216Z",
+    "created_on": "2019-02-18T15:53:55.880Z",
     "id": 9,
     "locations": [
       {
-        "created_on": "2019-02-01T22:43:09.216Z",
+        "created_on": "2019-02-18T15:53:55.880Z",
         "customer_id": 9,
         "is_active": true,
         "is_commercial": false,
-        "last_edited": "2019-02-01T22:43:09.216Z",
+        "last_edited": "2019-02-18T15:53:55.880Z",
         "location_id": 1,
         "note": "string",
         "reference_number": "string",
@@ -4290,31 +5184,137 @@ ISO 8601 DateTime Format (GMT)
     "name": "A Destination",
     "state": "Washington",
     "zip": 98368
-  }
+  },
+  "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
+  "arrived_at_dest": "2019-02-18T15:53:55.880Z",
+  "arrived_on": "2019-02-18T15:53:55.880Z",
+  "asset_dropped": 1,
+  "asset_id": 1,
+  "asset_quantity": 1,
+  "asset_type_id": 1,
+  "completed_by": 1,
+  "completed_by_driver": false,
+  "completed_on": "2019-02-18T15:53:55.880Z",
+  "confirmed_on": "2019-02-18T15:53:55.880Z",
+  "created_by_id": 1,
+  "created_with_portal": false,
+  "customer_id": 9,
+  "customer_notes": "Some customer notes",
+  "departed_on": "2019-02-18T15:53:55.880Z",
+  "desired_asset_desc": "An asset description.",
+  "dispatch_priority": "H",
+  "dispatched_by_route": 1,
+  "dispatched_on": "2019-02-18T15:53:55.880Z",
+  "dispatcher_notes": "Some dispatcher notes",
+  "do_confirm": false,
+  "driver_notes": "Some driver notes",
+  "dropped_number": "Unused/deprecated field",
+  "dump_location_id": 1,
+  "dumped_on": "2019-02-18T15:53:55.880Z",
+  "end_time": "2019-02-18T15:53:55.880Z",
+  "fail_reason": "Failure reason",
+  "final_location_id": 1,
+  "flags": "Job notes",
+  "id": 1,
+  "invoice_notes": "Some invoice notes",
+  "is_completed": false,
+  "is_declined": false,
+  "is_deleted": false,
+  "is_failed": false,
+  "is_paid": true,
+  "job_group_id": 1,
+  "location_id": 1,
+  "merged_with_route": 1,
+  "original_schedule_date": "2019-02-18T15:53:55.880Z",
+  "pickup_date": "2019-02-18T15:53:55.880Z",
+  "priority": -1,
+  "reference_number": null,
+  "removed_number": "string",
+  "requested_on": "2019-02-18T15:53:55.880Z",
+  "require_image": false,
+  "require_material": false,
+  "require_signature": false,
+  "require_weights": false,
+  "schedule_date": "2019-02-18T15:53:55.880Z",
+  "start_location_id": 1,
+  "start_time": "2019-02-18T15:53:55.881Z",
+  "times_failed": 0,
+  "times_rolled_over": 0,
+  "truck_id": 1,
+  "type": "D",
+  "weighed_on": "2019-02-18T15:53:55.881Z"
 }
 
 ```
 
 <a id="schemajobmodel"></a>
 
-*allOf*
-
 |Name|Type|Description|
 |---|---|---|
-|`-`|[BaseJobModel](#schemabasejobmodel)|-|
-
-*and*
-
-|Name|Type|Description|
-|---|---|---|
-|`-`|object|-|
-|`» asset`|[AssetModel](#schemaassetmodel)|-|
-|`» asset_type`|[AssetTypeModel](#schemaassettypemodel)|-|
-|`» customer`|[CustomerModel](#schemacustomermodel)|-|
-|`» dump_location`|[DestinationModel](#schemadestinationmodel)|-|
-|`» final_location`|[DestinationModel](#schemadestinationmodel)|-|
-|`» start_location`|[DestinationModel](#schemadestinationmodel)|-|
-|`» third_party_hauler_id`|[UUID](#schemauuid)|UUID|
+|`asset`|[AssetModel](#schemaassetmodel)|-|
+|`asset_type`|[AssetTypeModel](#schemaassettypemodel)|-|
+|`customer`|[CustomerModel](#schemacustomermodel)|-|
+|`dump_location`|[DestinationModel](#schemadestinationmodel)|-|
+|`final_location`|[DestinationModel](#schemadestinationmodel)|-|
+|`start_location`|[DestinationModel](#schemadestinationmodel)|-|
+|`third_party_hauler_id`|[UUID](#schemauuid)|UUID|
+|`arrived_at_dest`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Entered by driver for dispatcher and customer. Asset arrival at destination time. Only applicable for jobs with a valid dump destination.|
+|`arrived_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Drive start time entered by driver for dispatcher and customer (arrived at job slider).|
+|`asset_dropped`|integer(int64)|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types 'D', 'E'.|
+|`asset_id`|integer(int64)|Applicable to job types 'E', 'P', 'R'.|
+|`asset_quantity`|integer(int64)|How many assets are being serviced within a cluster (for jobs assigned to an asset cluster). For jobs dispatched by routes, or manually dispatched route stops, this value is 0 or 1.|
+|`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E').|
+|`completed_by`|integer(int64)|Dispatcher or driver id.|
+|`completed_by_driver`|boolean|If TRUE, completed by driver. If FALSE, completed by dispatcher.|
+|`completed_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Job completion time (must be in the past).|
+|`confirmed_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Must be in the past.|
+|`created_by_id`|integer(int64)|Customer, dispatcher, or driver id.|
+|`created_with_portal`|boolean|Unused field|
+|`customer_id`|integer(int64)|Customer identifier.|
+|`customer_notes`|string|Notes entered by customers to communicate with dispatchers.|
+|`departed_on`|string(datetime)|Unused/deprecated|
+|`desired_asset_desc`|string|Free-form text entered by dispatchers and drivers to be used as the future asset description.|
+|`dispatch_priority`|string|Entered by dispatchers to determine dispatch order. Can be 'H', 'M', 'L' (High, Medium, Low).|
+|`dispatched_by_route`|integer(int64)|Route id of dispatching route (or NULL if not dispatched by a route).|
+|`dispatched_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time the job is assigned to a truck.|
+|`dispatcher_notes`|string|Entered by dispatchers, read by drivers and dispatchers.|
+|`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched.|
+|`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers.|
+|`dropped_number`|string|Unused/deprecated|
+|`dump_location_id`|integer(int64)|Asset or asset cluster dump location identifier (e.g. trash bin needs  dumped before returning from customer).|
+|`dumped_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Dump request completion date.|
+|`end_time`|string(datetime)|Future estimated time of job completion.|
+|`fail_reason`|string|Failure description selected by a driver for use by dispatchers.|
+|`final_location_id`|integer(int64)|Final location identifier. Used by dispatchers for prioritizing jobs. Used by drivers to know where to leave the asset on job completion.|
+|`flags`|string|Job notes.|
+|`id`|integer(int64)|Job identifier.|
+|`invoice_notes`|string|Invoice notes from the billing system.|
+|`is_completed`|boolean|Job completion flag set by dispatchers and drivers.|
+|`is_declined`|boolean|Job completion flag set by dispatchers and drivers.|
+|`is_deleted`|boolean|Indicates whether job is still valid.|
+|`is_failed`|boolean|Set by drivers and dispatchers to indicate a failed job.|
+|`is_paid`|boolean|Unused/deprecated|
+|`job_group_id`|integer(int64)|Job group identifier for group jobs (vs service, exchange, etc.).|
+|`location_id`|integer(int64)|Owning location for the job.|
+|`merged_with_route`|integer(int64)|Assigned by dispatchers for dispatchers and drivers.|
+|`original_schedule_date`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Original scheduling date.|
+|`pickup_date`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) A pickup job is scheduled for this date upon job completion. If the asset or cluster is assigned to a route stop, the route stop will be deleted. Must be in the future.|
+|`priority`|integer(int64)|Assigned by dispatchers for job order completion determination for drivers.|
+|`reference_number`|string|Provider-specific billing/reporting field.|
+|`removed_number`|string|Unused/deprecated|
+|`requested_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Job creation date.|
+|`require_image`|boolean|Set by dispatchers and drivers, requires drivers to upload one or more job images before completion.|
+|`require_material`|boolean|Set by dispatchers and drivers, requires drivers to set a material before completing a job.|
+|`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion.|
+|`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion.|
+|`schedule_date`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Scheduled job completion date.|
+|`start_location_id`|integer(int64)|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers.|
+|`start_time`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time customer has requested job start, set by dispatchers for dispatchers and drivers.|
+|`times_failed`|integer(int64)|Number of times a job has been attempted and failed.|
+|`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers.|
+|`truck_id`|integer(int64)|Set by dispatchers to determine job visibility for drivers.|
+|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. 'D', 'E', 'L', 'P', 'R'|
+|`weighed_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time of truck weight entry.|
 
 <h2 id="tocSlistcustomerresultmodel">ListCustomerResultModel</h2>
 
@@ -4355,17 +5355,17 @@ ISO 8601 DateTime Format (GMT)
           "number": "1-111-111-1111"
         }
       ],
-      "created_on": "2019-02-01T22:43:09.217Z",
+      "created_on": "2019-02-18T15:53:55.883Z",
       "customer_id": 1,
       "is_active": false,
       "is_commercial": false,
-      "last_edited": "2019-02-01T22:43:09.217Z",
+      "last_edited": "2019-02-18T15:53:55.883Z",
       "location_id": 1,
       "name": "DEMOCO001",
       "note": "Service Location of DemoCo Inc.",
       "parent_id": 1,
       "reference_number": "Ref#100",
-      "renewal_date": "2019-02-01T22:43:09.217Z",
+      "renewal_date": "2019-02-18T15:53:55.883Z",
       "sales_rep": "John Doe",
       "suspension_id": 1
     }
@@ -4552,32 +5552,32 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "arrived_at_dest": "2019-02-01T22:43:09.218Z",
-  "arrived_on": "2019-02-01T22:43:09.218Z",
+  "arrived_at_dest": "2019-02-18T15:53:55.886Z",
+  "arrived_on": "2019-02-18T15:53:55.886Z",
   "asset_dropped": 1,
   "asset_id": 1,
   "asset_quantity": 1,
   "asset_type_id": 1,
   "completed_by": 1,
   "completed_by_driver": false,
-  "completed_on": "2019-02-01T22:43:09.219Z",
-  "confirmed_on": "2019-02-01T22:43:09.219Z",
+  "completed_on": "2019-02-18T15:53:55.886Z",
+  "confirmed_on": "2019-02-18T15:53:55.886Z",
   "created_by_id": 1,
   "created_with_portal": false,
   "customer_id": 9,
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-02-01T22:43:09.219Z",
+  "departed_on": "2019-02-18T15:53:55.886Z",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
   "dispatched_by_route": 1,
-  "dispatched_on": "2019-02-01T22:43:09.219Z",
+  "dispatched_on": "2019-02-18T15:53:55.886Z",
   "dispatcher_notes": "Some dispatcher notes",
   "do_confirm": false,
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
   "dump_location_id": 1,
-  "dumped_on": "2019-02-01T22:43:09.219Z",
-  "end_time": "2019-02-01T22:43:09.219Z",
+  "dumped_on": "2019-02-18T15:53:55.886Z",
+  "end_time": "2019-02-18T15:53:55.886Z",
   "fail_reason": "Failure reason",
   "final_location_id": 1,
   "flags": "Job notes",
@@ -4591,40 +5591,164 @@ ISO 8601 DateTime Format (GMT)
   "job_group_id": 1,
   "location_id": 1,
   "merged_with_route": 1,
-  "original_schedule_date": "2019-02-01T22:43:09.219Z",
-  "pickup_date": "2019-02-01T22:43:09.219Z",
+  "original_schedule_date": "2019-02-18T15:53:55.886Z",
+  "pickup_date": "2019-02-18T15:53:55.886Z",
   "priority": -1,
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-02-01T22:43:09.219Z",
+  "requested_on": "2019-02-18T15:53:55.886Z",
   "require_image": false,
   "require_material": false,
   "require_signature": false,
   "require_weights": false,
-  "schedule_date": "2019-02-01T22:43:09.219Z",
+  "schedule_date": "2019-02-18T15:53:55.886Z",
   "start_location_id": 1,
-  "start_time": "2019-02-01T22:43:09.219Z",
+  "start_time": "2019-02-18T15:53:55.886Z",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
   "times_failed": 0,
   "times_rolled_over": 0,
   "truck_id": 1,
   "type": "D",
-  "weighed_on": "2019-02-01T22:43:09.219Z"
+  "weighed_on": "2019-02-18T15:53:55.886Z"
 }
 
 ```
 
 <a id="schemaupdatedjobmodel"></a>
 
-*allOf*
+|Name|Type|Description|
+|---|---|---|
+|`arrived_at_dest`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Entered by driver for dispatcher and customer. Asset arrival at destination time. Only applicable for jobs with a valid dump destination.|
+|`arrived_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Drive start time entered by driver for dispatcher and customer (arrived at job slider).|
+|`asset_dropped`|integer(int64)|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types 'D', 'E'.|
+|`asset_id`|integer(int64)|Applicable to job types 'E', 'P', 'R'.|
+|`asset_quantity`|integer(int64)|How many assets are being serviced within a cluster (for jobs assigned to an asset cluster). For jobs dispatched by routes, or manually dispatched route stops, this value is 0 or 1.|
+|`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E').|
+|`completed_by`|integer(int64)|Dispatcher or driver id.|
+|`completed_by_driver`|boolean|If TRUE, completed by driver. If FALSE, completed by dispatcher.|
+|`completed_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Job completion time (must be in the past).|
+|`confirmed_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Must be in the past.|
+|`created_by_id`|integer(int64)|Customer, dispatcher, or driver id.|
+|`created_with_portal`|boolean|Unused field|
+|`customer_id`|integer(int64)|Customer identifier.|
+|`customer_notes`|string|Notes entered by customers to communicate with dispatchers.|
+|`departed_on`|string(datetime)|Unused/deprecated|
+|`desired_asset_desc`|string|Free-form text entered by dispatchers and drivers to be used as the future asset description.|
+|`dispatch_priority`|string|Entered by dispatchers to determine dispatch order. Can be 'H', 'M', 'L' (High, Medium, Low).|
+|`dispatched_by_route`|integer(int64)|Route id of dispatching route (or NULL if not dispatched by a route).|
+|`dispatched_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time the job is assigned to a truck.|
+|`dispatcher_notes`|string|Entered by dispatchers, read by drivers and dispatchers.|
+|`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched.|
+|`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers.|
+|`dropped_number`|string|Unused/deprecated|
+|`dump_location_id`|integer(int64)|Asset or asset cluster dump location identifier (e.g. trash bin needs  dumped before returning from customer).|
+|`dumped_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Dump request completion date.|
+|`end_time`|string(datetime)|Future estimated time of job completion.|
+|`fail_reason`|string|Failure description selected by a driver for use by dispatchers.|
+|`final_location_id`|integer(int64)|Final location identifier. Used by dispatchers for prioritizing jobs. Used by drivers to know where to leave the asset on job completion.|
+|`flags`|string|Job notes.|
+|`id`|integer(int64)|Job identifier.|
+|`invoice_notes`|string|Invoice notes from the billing system.|
+|`is_completed`|boolean|Job completion flag set by dispatchers and drivers.|
+|`is_declined`|boolean|Job completion flag set by dispatchers and drivers.|
+|`is_deleted`|boolean|Indicates whether job is still valid.|
+|`is_failed`|boolean|Set by drivers and dispatchers to indicate a failed job.|
+|`is_paid`|boolean|Unused/deprecated|
+|`job_group_id`|integer(int64)|Job group identifier for group jobs (vs service, exchange, etc.).|
+|`location_id`|integer(int64)|Owning location for the job.|
+|`merged_with_route`|integer(int64)|Assigned by dispatchers for dispatchers and drivers.|
+|`original_schedule_date`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Original scheduling date.|
+|`pickup_date`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) A pickup job is scheduled for this date upon job completion. If the asset or cluster is assigned to a route stop, the route stop will be deleted. Must be in the future.|
+|`priority`|integer(int64)|Assigned by dispatchers for job order completion determination for drivers.|
+|`reference_number`|string|Provider-specific billing/reporting field.|
+|`removed_number`|string|Unused/deprecated|
+|`requested_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Job creation date.|
+|`require_image`|boolean|Set by dispatchers and drivers, requires drivers to upload one or more job images before completion.|
+|`require_material`|boolean|Set by dispatchers and drivers, requires drivers to set a material before completing a job.|
+|`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion.|
+|`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion.|
+|`schedule_date`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Scheduled job completion date.|
+|`start_location_id`|integer(int64)|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers.|
+|`start_time`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time customer has requested job start, set by dispatchers for dispatchers and drivers.|
+|`third_party_hauler_id`|[UUID](#schemauuid)|UUID|
+|`times_failed`|integer(int64)|Number of times a job has been attempted and failed.|
+|`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers.|
+|`truck_id`|integer(int64)|Set by dispatchers to determine job visibility for drivers.|
+|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. 'D', 'E', 'L', 'P', 'R'|
+|`weighed_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time of truck weight entry.|
+
+<h2 id="tocSlisttenantresultmodel">ListTenantResultModel</h2>
+
+```json
+{
+  "current_limit": 100,
+  "current_page": 1,
+  "results": [
+    {
+      "address": "123 some st",
+      "city": "Sequim",
+      "code": "CROSCRAP",
+      "created_on": "2019-02-18T15:53:55.887Z",
+      "email": "test_admin@crosoftware.net",
+      "id": 1,
+      "is_active": true,
+      "name": "CRO Scrap",
+      "phone": 1234567890,
+      "state": "WA",
+      "truck_limit": "string",
+      "zip": 98360
+    }
+  ],
+  "total_count": 1,
+  "total_pages": 1
+}
+
+```
+
+<a id="schemalisttenantresultmodel"></a>
 
 |Name|Type|Description|
 |---|---|---|
-|`-`|[BaseJobModel](#schemabasejobmodel)|-|
+|`current_limit`|integer(int64)|-|
+|`current_page`|integer(int64)|-|
+|`results`|array[[TenantResultModel](#schematenantresultmodel)]|-|
+|`total_count`|integer(int64)|-|
+|`total_pages`|integer(int64)|-|
 
-*and*
+<h2 id="tocStenantresultmodel">TenantResultModel</h2>
+
+```json
+{
+  "address": "123 some st",
+  "city": "Sequim",
+  "code": "CROSCRAP",
+  "created_on": "2019-02-18T15:53:55.887Z",
+  "email": "test_admin@crosoftware.net",
+  "id": 1,
+  "is_active": true,
+  "name": "CRO Scrap",
+  "phone": 1234567890,
+  "state": "WA",
+  "truck_limit": "string",
+  "zip": 98360
+}
+
+```
+
+<a id="schematenantresultmodel"></a>
 
 |Name|Type|Description|
 |---|---|---|
-|`-`|object|-|
+|`address`|string|-|
+|`city`|string|-|
+|`code`|string(byte)|-|
+|`created_on`|string(datetime)|-|
+|`email`|string|-|
+|`id`|integer(int64)|-|
+|`is_active`|boolean|-|
+|`name`|string|-|
+|`phone`|string|-|
+|`state`|string|-|
+|`truck_limit`|string|-|
+|`zip`|string|-|
 
