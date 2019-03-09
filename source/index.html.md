@@ -67,9 +67,9 @@ The access token must be passed as an [Authorization: Bearer &lt;token&gt;] head
 
 For 3rd party integration with CRO
 
-## Customers
+## Customer Addresses
 
-### Create Customer
+### Add Address
 
 > Code samples
 
@@ -87,19 +87,11 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/customer";
+          String url = "https://api.crosoftware.net/customer/{customer_id}/address";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
-          
-          // Parameters
-          NameValueCollection parameters = new NameValueCollection();
-          parameters.Add("customer_name", "string");
-          parameters.Add("sales_rep", "string");
-          parameters.Add("reference_number", "string");
-          parameters.Add("is_commercial", "string");
-          parameters.Add("customer_note", "string");
           
           byte[] json = client.UploadValues(url, "POST", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
@@ -110,25 +102,27 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/location/{location_id}/customer?customer_name=string&sales_rep=string&reference_number=string&is_commercial=string&customer_note=string \
+curl -X POST https://api.crosoftware.net/customer/{customer_id}/address \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
+  'Content-Type':'application/json',
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/customer',
+  url: 'https://api.crosoftware.net/customer/{customer_id}/address',
   method: 'post',
-  data: '?customer_name=string&sales_rep=string&reference_number=string&is_commercial=string&customer_note=string',
+
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -142,19 +136,15 @@ require 'rest-client'
 require 'json'
 
 headers = {
+  'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.post 'https://api.crosoftware.net/location/{location_id}/customer',
+result = RestClient.post 'https://api.crosoftware.net/customer/{customer_id}/address',
   params: {
-  'customer_name' => 'string',
-'sales_rep' => 'string',
-'reference_number' => 'string',
-'is_commercial' => '[Boolean](#schemaboolean)',
-'customer_note' => 'string'
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -163,13 +153,14 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
+  'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
-r = requests.post('https://api.crosoftware.net/location/{location_id}/customer', params={
-  'customer_name': 'string',  'sales_rep': 'string',  'reference_number': 'string',  'is_commercial': 'string',  'customer_note': 'string'
+r = requests.post('https://api.crosoftware.net/customer/{customer_id}/address', params={
+
 }, headers = headers)
 
 print r.json()
@@ -177,7 +168,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer?customer_name=string&sales_rep=string&reference_number=string&is_commercial=string&customer_note=string");
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/address");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -193,24 +184,41 @@ System.out.println(response.toString());
 
 ```
 
-`POST /location/{location_id}/customer`
+`POST /customer/{customer_id}/address`
 
-<a id="opIdcreate_customer_at_location"></a>
+<a id="opIdadd_customer_address"></a>
 
-Create customer at location.
+Add customer address.
+
+> Body parameter
+
+```json
+{
+  "country": "US",
+  "is_billing": "True",
+  "is_shipping": "False",
+  "latitude": "46.881398",
+  "line_1": "643 Summer Breeze",
+  "line_2": "Suite 34",
+  "line_3": "2nd Door on Left",
+  "line_4": "Blue slot",
+  "locality": "Sequim",
+  "longitude": "-121.276566",
+  "postcode": "98382",
+  "region": "WA"
+}
+```
+
+ 
 
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
-|`location_id`|path|integer(int64)|true|Location identifier.|
-|`customer_name`|query|string|true|Customer name.|
-|`sales_rep`|query|string|true|Sales rep.|
-|`reference_number`|query|string|true|Reference number.|
-|`is_commercial`|query|[Boolean](#schemaboolean)|true|Commecial customer?|
-|`customer_note`|query|string|true|Customer notes.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`body`|body|[AddCustomerAddressProfileModel](#schemaaddcustomeraddressprofilemodel)|true||
 
 > Example responses
 
@@ -218,50 +226,20 @@ Create customer at location.
 
 ```json
 {
-  "addresses": [
-    {
-      "country": "USA",
-      "is_active": true,
-      "is_billing": true,
-      "is_physical": false,
-      "is_shipping": false,
-      "latitude": 48.076273,
-      "line_1": "643 Summer Breeze",
-      "line_2": "Suite 34",
-      "line_3": "2nd Door on Left",
-      "line_4": "Blue slot",
-      "locality": "Sequim",
-      "longitude": -123.117185,
-      "postcode": 98382,
-      "region": "WA"
-    }
-  ],
-  "contacts": [
-    {
-      "email": "develop@crosoftware.com",
-      "fax": "(360) 716-1968",
-      "name": "John Doe",
-      "notify_on_acknowledged_request": false,
-      "notify_on_completed_request": false,
-      "notify_on_dispatched_request": false,
-      "notify_on_failed_request": false,
-      "notify_on_new_request": false,
-      "number": "1-111-111-1111"
-    }
-  ],
-  "created_on": "2019-02-23T03:28:44.986Z",
-  "customer_id": 1,
-  "is_active": false,
-  "is_commercial": false,
-  "last_edited": "2019-02-23T03:28:44.986Z",
-  "location_id": 1,
-  "name": "DEMOCO001",
-  "note": "Service Location of DemoCo Inc.",
-  "parent_id": 1,
-  "reference_number": "Ref#100",
-  "renewal_date": "2019-02-23T03:28:44.986Z",
-  "sales_rep": "John Doe",
-  "suspension_id": 1
+  "address_id": "1",
+  "country": "US",
+  "is_billing": "True",
+  "is_physical": "True",
+  "is_shipping": "False",
+  "latitude": "46.881398",
+  "line_1": "643 Summer Breeze",
+  "line_2": "Suite 34",
+  "line_3": "2nd Door on Left",
+  "line_4": "Blue slot",
+  "locality": "Sequim",
+  "longitude": "-121.276566",
+  "postcode": "98382",
+  "region": "WA"
 }
 ```
 
@@ -271,12 +249,12 @@ Create customer at location.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerResultModel](#schemacustomerresultmodel)|New customer profile for customer at given location.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressModel](#schemacustomeraddressmodel)|Added customer address profile.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
 |`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
 
-### Delete Customer
+### Deactivate Address
 
 > Code samples
 
@@ -294,10 +272,10 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/customer/{customer_id}";
+          String url = "https://api.crosoftware.net/customer/{customer_id}/address/{address_id}";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           byte[] json = client.UploadValues(url, "DELETE", parameters);
@@ -309,23 +287,23 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X DELETE https://api.crosoftware.net/location/{location_id}/customer/{customer_id} \
-  -H 'Accept: text/plain' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+curl -X DELETE https://api.crosoftware.net/customer/{customer_id}/address/{address_id} \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
-  'Accept':'text/plain',
-  'Authorization':'bearer <jwt-access-token>',
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  url: 'https://api.crosoftware.net/customer/{customer_id}/address/{address_id}',
   method: 'delete',
 
   headers: headers,
@@ -341,12 +319,12 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'text/plain',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.delete 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+result = RestClient.delete 'https://api.crosoftware.net/customer/{customer_id}/address/{address_id}',
   params: {
   }, headers: headers
 
@@ -357,12 +335,12 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'text/plain',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
-r = requests.delete('https://api.crosoftware.net/location/{location_id}/customer/{customer_id}', params={
+r = requests.delete('https://api.crosoftware.net/customer/{customer_id}/address/{address_id}', params={
 
 }, headers = headers)
 
@@ -371,7 +349,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer/{customer_id}");
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/address/{address_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -387,22 +365,45 @@ System.out.println(response.toString());
 
 ```
 
-`DELETE /location/{location_id}/customer/{customer_id}`
+`DELETE /customer/{customer_id}/address/{address_id}`
 
-<a id="opIddelete_customer_at_location"></a>
+<a id="opIddeactivate_customer_address"></a>
 
-Delete customer at location.
+Deactivate (remove from use) customer address.
+
+ 
 
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
-|`location_id`|path|integer(int64)|true|Location identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`address_id`|path|integer(int64)|true|Address identifier.|
 
 > Example responses
+
+> 200 Response
+
+```json
+{
+  "address_id": "1",
+  "country": "US",
+  "is_billing": "True",
+  "is_physical": "True",
+  "is_shipping": "False",
+  "latitude": "46.881398",
+  "line_1": "643 Summer Breeze",
+  "line_2": "Suite 34",
+  "line_3": "2nd Door on Left",
+  "line_4": "Blue slot",
+  "locality": "Sequim",
+  "longitude": "-121.276566",
+  "postcode": "98382",
+  "region": "WA"
+}
+```
 
 > 400 Response
 
@@ -410,10 +411,2224 @@ Delete customer at location.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|None|Delete customer profile for customer at given location.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressModel](#schemacustomeraddressmodel)|Deactivated (removed from use) customer address.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
 |`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### Get Address
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/customer/{customer_id}/address/{address_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/customer/{customer_id}/address/{address_id} \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/customer/{customer_id}/address/{address_id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}/address/{address_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/customer/{customer_id}/address/{address_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/address/{address_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /customer/{customer_id}/address/{address_id}`
+
+<a id="opIdget_customer_address"></a>
+
+Customer address profile.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`address_id`|path|integer(int64)|true|Address identifier.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "address_id": "1",
+  "country": "US",
+  "is_billing": "True",
+  "is_physical": "True",
+  "is_shipping": "False",
+  "latitude": "46.881398",
+  "line_1": "643 Summer Breeze",
+  "line_2": "Suite 34",
+  "line_3": "2nd Door on Left",
+  "line_4": "Blue slot",
+  "locality": "Sequim",
+  "longitude": "-121.276566",
+  "postcode": "98382",
+  "region": "WA"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressModel](#schemacustomeraddressmodel)|Address Profile|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### List Addresses
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/customer/{customer_id}/address";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/customer/{customer_id}/address \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/customer/{customer_id}/address',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}/address',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/customer/{customer_id}/address', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/address");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /customer/{customer_id}/address`
+
+<a id="opIdlist_customer_addresses"></a>
+
+List of customer location settings.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
+|`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "current_limit": "1",
+  "current_page": "1",
+  "results": [
+    {
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "total_count": "1",
+  "total_pages": "1"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressListModel](#schemacustomeraddresslistmodel)|List|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### Update Address
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/customer/{customer_id}/address/{address_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          byte[] json = client.UploadValues(url, "PATCH", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X PATCH https://api.crosoftware.net/customer/{customer_id}/address/{address_id} \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/customer/{customer_id}/address/{address_id}',
+  method: 'patch',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.patch 'https://api.crosoftware.net/customer/{customer_id}/address/{address_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.patch('https://api.crosoftware.net/customer/{customer_id}/address/{address_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/address/{address_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PATCH");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`PATCH /customer/{customer_id}/address/{address_id}`
+
+<a id="opIdupdate_customer_address"></a>
+
+Update customer address.
+
+> Body parameter
+
+```json
+{
+  "country": "US",
+  "is_billing": "True",
+  "is_physical": "True",
+  "is_shipping": "False",
+  "latitude": "46.881398",
+  "line_1": "643 Summer Breeze",
+  "line_2": "Suite 34",
+  "line_3": "2nd Door on Left",
+  "line_4": "Blue slot",
+  "locality": "Sequim",
+  "longitude": "-121.276566",
+  "postcode": "98382",
+  "region": "WA"
+}
+```
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`address_id`|path|integer(int64)|true|Address identifier.|
+|`body`|body|[UpdateCustomerAddressProfileModel](#schemaupdatecustomeraddressprofilemodel)|true||
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "address_id": "1",
+  "country": "US",
+  "is_billing": "True",
+  "is_physical": "True",
+  "is_shipping": "False",
+  "latitude": "46.881398",
+  "line_1": "643 Summer Breeze",
+  "line_2": "Suite 34",
+  "line_3": "2nd Door on Left",
+  "line_4": "Blue slot",
+  "locality": "Sequim",
+  "longitude": "-121.276566",
+  "postcode": "98382",
+  "region": "WA"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressModel](#schemacustomeraddressmodel)|Updated customer address profile.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+## Customer Contacts
+
+### Add Contact
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/customer/{customer_id}/contact";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          byte[] json = client.UploadValues(url, "POST", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X POST https://api.crosoftware.net/customer/{customer_id}/contact \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/customer/{customer_id}/contact',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.post 'https://api.crosoftware.net/customer/{customer_id}/contact',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.post('https://api.crosoftware.net/customer/{customer_id}/contact', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/contact");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`POST /customer/{customer_id}/contact`
+
+<a id="opIdadd_customer_contact"></a>
+
+Add customer contact.
+
+> Body parameter
+
+```json
+{
+  "email": "develop@crosoftware.com",
+  "fax": "(360) 716-1968",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": "False",
+  "notify_on_completed_request": "False",
+  "notify_on_dispatched_request": "False",
+  "notify_on_failed_request": "False",
+  "notify_on_new_request": "False",
+  "number": "1-111-111-1111"
+}
+```
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`body`|body|[AddCustomerContactProfileModel](#schemaaddcustomercontactprofilemodel)|true||
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "contact_id": "1",
+  "email": "develop@crosoftware.com",
+  "fax": "(360) 716-1968",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": "False",
+  "notify_on_completed_request": "False",
+  "notify_on_dispatched_request": "False",
+  "notify_on_failed_request": "False",
+  "notify_on_new_request": "False",
+  "number": "1-111-111-1111"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerContactModel](#schemacustomercontactmodel)|Added customer contact profile.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### Get Contact
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id} \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /customer/{customer_id}/contact/{contact_id}`
+
+<a id="opIdget_customer_contact"></a>
+
+Customer contact profile.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`contact_id`|path|integer(int64)|true|Contact identifier.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "contact_id": "1",
+  "email": "develop@crosoftware.com",
+  "fax": "(360) 716-1968",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": "False",
+  "notify_on_completed_request": "False",
+  "notify_on_dispatched_request": "False",
+  "notify_on_failed_request": "False",
+  "notify_on_new_request": "False",
+  "number": "1-111-111-1111"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerContactModel](#schemacustomercontactmodel)|Contact Profile|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### List Contacts
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/customer/{customer_id}/contact";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/customer/{customer_id}/contact \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/customer/{customer_id}/contact',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}/contact',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/customer/{customer_id}/contact', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/contact");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /customer/{customer_id}/contact`
+
+<a id="opIdlist_customer_contacts"></a>
+
+List of customer contacts.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
+|`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "current_limit": "100",
+  "current_page": "1",
+  "results": [
+    {
+      "contact_id": "1",
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "total_count": "100",
+  "total_pages": "1"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerContactListModel](#schemacustomercontactlistmodel)|List|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### Update Contact
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          byte[] json = client.UploadValues(url, "PATCH", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X PATCH https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id} \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}',
+  method: 'patch',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.patch 'https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.patch('https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PATCH");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`PATCH /customer/{customer_id}/contact/{contact_id}`
+
+<a id="opIdupdate_customer_contact"></a>
+
+Update customer contact.
+
+> Body parameter
+
+```json
+{
+  "email": "develop@crosoftware.com",
+  "fax": "(360) 716-1968",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": "False",
+  "notify_on_completed_request": "False",
+  "notify_on_dispatched_request": "False",
+  "notify_on_failed_request": "False",
+  "notify_on_new_request": "False",
+  "number": "1-111-111-1111"
+}
+```
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`contact_id`|path|integer(int64)|true|Contact identifier.|
+|`body`|body|[UpdateCustomerContactProfileModel](#schemaupdatecustomercontactprofilemodel)|true||
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "contact_id": "1",
+  "email": "develop@crosoftware.com",
+  "fax": "(360) 716-1968",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": "False",
+  "notify_on_completed_request": "False",
+  "notify_on_dispatched_request": "False",
+  "notify_on_failed_request": "False",
+  "notify_on_new_request": "False",
+  "number": "1-111-111-1111"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerContactModel](#schemacustomercontactmodel)|Updated customer contact profile.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+## Customer Locations
+
+### Add Location
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/customer/{customer_id}/location/{location_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          byte[] json = client.UploadValues(url, "POST", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X POST https://api.crosoftware.net/customer/{customer_id}/location/{location_id} \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.post 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.post('https://api.crosoftware.net/customer/{customer_id}/location/{location_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/location/{location_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`POST /customer/{customer_id}/location/{location_id}`
+
+<a id="opIdadd_customer_location"></a>
+
+Add customer to location.
+
+> Body parameter
+
+```json
+{
+  "is_commercial": "True",
+  "note": "An example note",
+  "reference_number": "R100-10C",
+  "renewal_date": "2100-02-12T01:32:45.640000",
+  "sales_rep": "John Smith",
+  "suspension_id": "1"
+}
+```
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`body`|body|[AddCustomerLocationProfileModel](#schemaaddcustomerlocationprofilemodel)|true||
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "addresses": [
+    {
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "contact_id": "1",
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "created_on": "2019-03-08T16:40:37.647000",
+  "customer_id": "2",
+  "is_active": "True",
+  "is_commercial": "False",
+  "last_edited": "2019-03-08T16:40:37.647000",
+  "name": "Jane Smith",
+  "note": "An example note",
+  "parent_id": "1",
+  "reference_number": "1234",
+  "renewal_date": "2100-03-08T16:40:37.647000",
+  "sales_rep": "Jane Doe",
+  "suspension_id": "1"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|Added customer location profile.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### Deactivate Customer
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/customer/{customer_id}/location/{location_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          byte[] json = client.UploadValues(url, "DELETE", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.crosoftware.net/customer/{customer_id}/location/{location_id} \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.delete 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.delete('https://api.crosoftware.net/customer/{customer_id}/location/{location_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/location/{location_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`DELETE /customer/{customer_id}/location/{location_id}`
+
+<a id="opIddeactivate_customer_at_location"></a>
+
+Deactivate customer at location.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "addresses": [
+    {
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "contact_id": "1",
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "created_on": "2019-03-08T16:40:37.647000",
+  "customer_id": "2",
+  "is_active": "True",
+  "is_commercial": "False",
+  "last_edited": "2019-03-08T16:40:37.647000",
+  "name": "Jane Smith",
+  "note": "An example note",
+  "parent_id": "1",
+  "reference_number": "1234",
+  "renewal_date": "2100-03-08T16:40:37.647000",
+  "sales_rep": "Jane Doe",
+  "suspension_id": "1"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|Deactivated customer profile for customer at given location.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### Get Customer Location
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/customer/{customer_id}/location/{location_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/customer/{customer_id}/location/{location_id} \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/customer/{customer_id}/location/{location_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/location/{location_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /customer/{customer_id}/location/{location_id}`
+
+<a id="opIdget_customer_location"></a>
+
+Customer location settings for given location.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "addresses": [
+    {
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "contact_id": "1",
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "created_on": "2019-03-08T16:40:37.647000",
+  "customer_id": "2",
+  "is_active": "True",
+  "is_commercial": "False",
+  "last_edited": "2019-03-08T16:40:37.647000",
+  "name": "Jane Smith",
+  "note": "An example note",
+  "parent_id": "1",
+  "reference_number": "1234",
+  "renewal_date": "2100-03-08T16:40:37.647000",
+  "sales_rep": "Jane Doe",
+  "suspension_id": "1"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|Customer Location Profile|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### List Customer Locations
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/customer/{customer_id}/location";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/customer/{customer_id}/location \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/customer/{customer_id}/location',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}/location',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/customer/{customer_id}/location', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/location");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /customer/{customer_id}/location`
+
+<a id="opIdlist_customer_locations"></a>
+
+List of customer location settings.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
+|`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "current_limit": "100",
+  "current_page": "1",
+  "results": [
+    {
+      "addresses": [
+        {
+          "address_id": "1",
+          "country": "US",
+          "is_billing": "True",
+          "is_physical": "True",
+          "is_shipping": "False",
+          "latitude": "46.881398",
+          "line_1": "643 Summer Breeze",
+          "line_2": "Suite 34",
+          "line_3": "2nd Door on Left",
+          "line_4": "Blue slot",
+          "locality": "Sequim",
+          "longitude": "-121.276566",
+          "postcode": "98382",
+          "region": "WA"
+        }
+      ],
+      "contacts": [
+        {
+          "contact_id": "1",
+          "email": "develop@crosoftware.com",
+          "fax": "(360) 716-1968",
+          "name": "John Doe",
+          "notify_on_acknowledged_request": "False",
+          "notify_on_completed_request": "False",
+          "notify_on_dispatched_request": "False",
+          "notify_on_failed_request": "False",
+          "notify_on_new_request": "False",
+          "number": "1-111-111-1111"
+        }
+      ],
+      "created_on": "2019-03-08T16:40:37.647000",
+      "customer_id": "2",
+      "is_active": "True",
+      "is_commercial": "False",
+      "last_edited": "2019-03-08T16:40:37.647000",
+      "name": "Jane Smith",
+      "note": "An example note",
+      "parent_id": "1",
+      "reference_number": "1234",
+      "renewal_date": "2100-03-08T16:40:37.647000",
+      "sales_rep": "Jane Doe",
+      "suspension_id": "1"
+    }
+  ],
+  "total_count": "100",
+  "total_pages": "1"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationListModel](#schemacustomerlocationlistmodel)|Customer Location List|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### Update Location
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/customer/{customer_id}/location/{location_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          byte[] json = client.UploadValues(url, "PATCH", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X PATCH https://api.crosoftware.net/customer/{customer_id}/location/{location_id} \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+  method: 'patch',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.patch 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.patch('https://api.crosoftware.net/customer/{customer_id}/location/{location_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/location/{location_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PATCH");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`PATCH /customer/{customer_id}/location/{location_id}`
+
+<a id="opIdupdate_customer_location"></a>
+
+Update customer location settings.
+
+> Body parameter
+
+```json
+{
+  "is_commercial": "True",
+  "note": "An example note",
+  "reference_number": "R100-10C",
+  "renewal_date": "2100-02-12T01:32:45.640000",
+  "sales_rep": "John Smith",
+  "suspension_id": "1"
+}
+```
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`body`|body|[UpdateCustomerLocationProfileModel](#schemaupdatecustomerlocationprofilemodel)|true||
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "addresses": [
+    {
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "contact_id": "1",
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "created_on": "2019-03-08T16:40:37.647000",
+  "customer_id": "2",
+  "is_active": "True",
+  "is_commercial": "False",
+  "last_edited": "2019-03-08T16:40:37.647000",
+  "name": "Jane Smith",
+  "note": "An example note",
+  "parent_id": "1",
+  "reference_number": "1234",
+  "renewal_date": "2100-03-08T16:40:37.647000",
+  "sales_rep": "Jane Doe",
+  "suspension_id": "1"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|Added customer location profile.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+## Customers
 
 ### Get Customer
 
@@ -433,10 +2648,10 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/customer/{customer_id}";
+          String url = "https://api.crosoftware.net/customer/{customer_id}";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -448,9 +2663,9 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/location/{location_id}/customer/{customer_id} \
+curl -X GET https://api.crosoftware.net/customer/{customer_id} \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -458,13 +2673,13 @@ curl -X GET https://api.crosoftware.net/location/{location_id}/customer/{custome
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  url: 'https://api.crosoftware.net/customer/{customer_id}',
   method: 'get',
 
   headers: headers,
@@ -481,11 +2696,11 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}',
   params: {
   }, headers: headers
 
@@ -497,11 +2712,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/location/{location_id}/customer/{customer_id}', params={
+r = requests.get('https://api.crosoftware.net/customer/{customer_id}', params={
 
 }, headers = headers)
 
@@ -510,7 +2725,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer/{customer_id}");
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -526,19 +2741,20 @@ System.out.println(response.toString());
 
 ```
 
-`GET /location/{location_id}/customer/{customer_id}`
+`GET /customer/{customer_id}`
 
-<a id="opIdget_customer_for_location"></a>
+<a id="opIdget_customer"></a>
 
-Get customer for location.
+Customer profile.
+
+ 
 
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
-|`location_id`|path|integer(int64)|true|Location identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 
 > Example responses
@@ -549,48 +2765,53 @@ Get customer for location.
 {
   "addresses": [
     {
-      "country": "USA",
-      "is_active": true,
-      "is_billing": true,
-      "is_physical": false,
-      "is_shipping": false,
-      "latitude": 48.076273,
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
       "line_1": "643 Summer Breeze",
       "line_2": "Suite 34",
       "line_3": "2nd Door on Left",
       "line_4": "Blue slot",
       "locality": "Sequim",
-      "longitude": -123.117185,
-      "postcode": 98382,
+      "longitude": "-121.276566",
+      "postcode": "98382",
       "region": "WA"
     }
   ],
   "contacts": [
     {
+      "contact_id": "1",
       "email": "develop@crosoftware.com",
       "fax": "(360) 716-1968",
       "name": "John Doe",
-      "notify_on_acknowledged_request": false,
-      "notify_on_completed_request": false,
-      "notify_on_dispatched_request": false,
-      "notify_on_failed_request": false,
-      "notify_on_new_request": false,
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
       "number": "1-111-111-1111"
     }
   ],
-  "created_on": "2019-02-23T03:28:44.993Z",
-  "customer_id": 1,
-  "is_active": false,
-  "is_commercial": false,
-  "last_edited": "2019-02-23T03:28:44.993Z",
-  "location_id": 1,
-  "name": "DEMOCO001",
-  "note": "Service Location of DemoCo Inc.",
-  "parent_id": 1,
-  "reference_number": "Ref#100",
-  "renewal_date": "2019-02-23T03:28:44.993Z",
-  "sales_rep": "John Doe",
-  "suspension_id": 1
+  "customer_id": "1",
+  "locations": [
+    {
+      "created_on": "2019-02-12T01:32:45.980000",
+      "is_active": "True",
+      "is_commercial": "True",
+      "last_edited": "2019-02-12T01:32:45.990000",
+      "location_id": "1",
+      "note": "An example note",
+      "reference_number": "REF#A1631",
+      "renewal_date": "2019-10-02T00:00:00",
+      "sales_rep": "John Doe",
+      "suspension_id": "1"
+    }
+  ],
+  "name": "Sequim Waste Inc.",
+  "parent_id": "1"
 }
 ```
 
@@ -600,7 +2821,7 @@ Get customer for location.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerResultModel](#schemacustomerresultmodel)|Customer profile for customer at given location.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerModel](#schemacustomermodel)|Customer Profile|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
 |`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
@@ -623,10 +2844,10 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/customer";
+          String url = "https://api.crosoftware.net/customer";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -638,9 +2859,9 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/location/{location_id}/customer \
+curl -X GET https://api.crosoftware.net/customer \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -648,13 +2869,13 @@ curl -X GET https://api.crosoftware.net/location/{location_id}/customer \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/customer',
+  url: 'https://api.crosoftware.net/customer',
   method: 'get',
 
   headers: headers,
@@ -671,11 +2892,11 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/customer',
+result = RestClient.get 'https://api.crosoftware.net/customer',
   params: {
   }, headers: headers
 
@@ -687,11 +2908,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/location/{location_id}/customer', params={
+r = requests.get('https://api.crosoftware.net/customer', params={
 
 }, headers = headers)
 
@@ -700,7 +2921,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer");
+URL obj = new URL("https://api.crosoftware.net/customer");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -716,19 +2937,20 @@ System.out.println(response.toString());
 
 ```
 
-`GET /location/{location_id}/customer`
+`GET /customer`
 
-<a id="opIdlist_customers_for_location"></a>
+<a id="opIdlist_customers"></a>
 
-List customers for location.
+List of customers.
+
+ 
 
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
-|`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
 |`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
 
@@ -738,58 +2960,63 @@ List customers for location.
 
 ```json
 {
-  "current_limit": 100,
-  "current_page": 1,
+  "current_limit": "100",
+  "current_page": "1",
   "results": [
     {
       "addresses": [
         {
-          "country": "USA",
-          "is_active": true,
-          "is_billing": true,
-          "is_physical": false,
-          "is_shipping": false,
-          "latitude": 48.076273,
+          "address_id": "1",
+          "country": "US",
+          "is_billing": "True",
+          "is_physical": "True",
+          "is_shipping": "False",
+          "latitude": "46.881398",
           "line_1": "643 Summer Breeze",
           "line_2": "Suite 34",
           "line_3": "2nd Door on Left",
           "line_4": "Blue slot",
           "locality": "Sequim",
-          "longitude": -123.117185,
-          "postcode": 98382,
+          "longitude": "-121.276566",
+          "postcode": "98382",
           "region": "WA"
         }
       ],
       "contacts": [
         {
+          "contact_id": "1",
           "email": "develop@crosoftware.com",
           "fax": "(360) 716-1968",
           "name": "John Doe",
-          "notify_on_acknowledged_request": false,
-          "notify_on_completed_request": false,
-          "notify_on_dispatched_request": false,
-          "notify_on_failed_request": false,
-          "notify_on_new_request": false,
+          "notify_on_acknowledged_request": "False",
+          "notify_on_completed_request": "False",
+          "notify_on_dispatched_request": "False",
+          "notify_on_failed_request": "False",
+          "notify_on_new_request": "False",
           "number": "1-111-111-1111"
         }
       ],
-      "created_on": "2019-02-23T03:28:44.993Z",
-      "customer_id": 1,
-      "is_active": false,
-      "is_commercial": false,
-      "last_edited": "2019-02-23T03:28:44.993Z",
-      "location_id": 1,
-      "name": "DEMOCO001",
-      "note": "Service Location of DemoCo Inc.",
-      "parent_id": 1,
-      "reference_number": "Ref#100",
-      "renewal_date": "2019-02-23T03:28:44.993Z",
-      "sales_rep": "John Doe",
-      "suspension_id": 1
+      "customer_id": "1",
+      "locations": [
+        {
+          "created_on": "2019-02-12T01:32:45.980000",
+          "is_active": "True",
+          "is_commercial": "True",
+          "last_edited": "2019-02-12T01:32:45.990000",
+          "location_id": "1",
+          "note": "An example note",
+          "reference_number": "REF#A1631",
+          "renewal_date": "2019-10-02T00:00:00",
+          "sales_rep": "John Doe",
+          "suspension_id": "1"
+        }
+      ],
+      "name": "Sequim Waste Inc.",
+      "parent_id": "1"
     }
   ],
-  "total_count": 100,
-  "total_pages": 1
+  "total_count": "100",
+  "total_pages": "1"
 }
 ```
 
@@ -799,7 +3026,7 @@ List customers for location.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ListCustomerResultModel](#schemalistcustomerresultmodel)|Paged result sef of customers for location.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerListModel](#schemacustomerlistmodel)|List|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
 |`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
@@ -822,19 +3049,11 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/customer/{customer_id}";
+          String url = "https://api.crosoftware.net/customer/{customer_id}";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
-          
-          // Parameters
-          NameValueCollection parameters = new NameValueCollection();
-          parameters.Add("customer_name", "string");
-          parameters.Add("sales_rep", "string");
-          parameters.Add("reference_number", "string");
-          parameters.Add("is_commercial", "string");
-          parameters.Add("customer_note", "string");
           
           byte[] json = client.UploadValues(url, "PATCH", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
@@ -845,25 +3064,27 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X PATCH https://api.crosoftware.net/location/{location_id}/customer/{customer_id}?customer_name=string&sales_rep=string&reference_number=string&is_commercial=string&customer_note=string \
+curl -X PATCH https://api.crosoftware.net/customer/{customer_id} \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
+  'Content-Type':'application/json',
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  url: 'https://api.crosoftware.net/customer/{customer_id}',
   method: 'patch',
-  data: '?customer_name=string&sales_rep=string&reference_number=string&is_commercial=string&customer_note=string',
+
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -877,19 +3098,15 @@ require 'rest-client'
 require 'json'
 
 headers = {
+  'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.patch 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+result = RestClient.patch 'https://api.crosoftware.net/customer/{customer_id}',
   params: {
-  'customer_name' => 'string',
-'sales_rep' => 'string',
-'reference_number' => 'string',
-'is_commercial' => '[Boolean](#schemaboolean)',
-'customer_note' => 'string'
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -898,13 +3115,14 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
+  'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
-r = requests.patch('https://api.crosoftware.net/location/{location_id}/customer/{customer_id}', params={
-  'customer_name': 'string',  'sales_rep': 'string',  'reference_number': 'string',  'is_commercial': 'string',  'customer_note': 'string'
+r = requests.patch('https://api.crosoftware.net/customer/{customer_id}', params={
+
 }, headers = headers)
 
 print r.json()
@@ -912,7 +3130,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer/{customer_id}?customer_name=string&sales_rep=string&reference_number=string&is_commercial=string&customer_note=string");
+URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -928,25 +3146,32 @@ System.out.println(response.toString());
 
 ```
 
-`PATCH /location/{location_id}/customer/{customer_id}`
+`PATCH /customer/{customer_id}`
 
-<a id="opIdupdate_customer_for_location"></a>
+<a id="opIdupdate_customer"></a>
 
-Update customer at location.
+Update customer.
+
+> Body parameter
+
+```json
+{
+  "name": "Sequim Waste Inc.",
+  "parent_id": "1"
+}
+```
+
+ 
 
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
-|`customer_name`|query|string|true|Customer name.|
-|`sales_rep`|query|string|true|Sales rep.|
-|`reference_number`|query|string|true|Reference number.|
-|`is_commercial`|query|[Boolean](#schemaboolean)|true|Commecial customer?|
-|`customer_note`|query|string|true|Customer notes.|
+|`body`|body|[UpdateCustomerProfileModel](#schemaupdatecustomerprofilemodel)|true||
 
 > Example responses
 
@@ -956,48 +3181,53 @@ Update customer at location.
 {
   "addresses": [
     {
-      "country": "USA",
-      "is_active": true,
-      "is_billing": true,
-      "is_physical": false,
-      "is_shipping": false,
-      "latitude": 48.076273,
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
       "line_1": "643 Summer Breeze",
       "line_2": "Suite 34",
       "line_3": "2nd Door on Left",
       "line_4": "Blue slot",
       "locality": "Sequim",
-      "longitude": -123.117185,
-      "postcode": 98382,
+      "longitude": "-121.276566",
+      "postcode": "98382",
       "region": "WA"
     }
   ],
   "contacts": [
     {
+      "contact_id": "1",
       "email": "develop@crosoftware.com",
       "fax": "(360) 716-1968",
       "name": "John Doe",
-      "notify_on_acknowledged_request": false,
-      "notify_on_completed_request": false,
-      "notify_on_dispatched_request": false,
-      "notify_on_failed_request": false,
-      "notify_on_new_request": false,
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
       "number": "1-111-111-1111"
     }
   ],
-  "created_on": "2019-02-23T03:28:44.994Z",
-  "customer_id": 1,
-  "is_active": false,
-  "is_commercial": false,
-  "last_edited": "2019-02-23T03:28:44.994Z",
-  "location_id": 1,
-  "name": "DEMOCO001",
-  "note": "Service Location of DemoCo Inc.",
-  "parent_id": 1,
-  "reference_number": "Ref#100",
-  "renewal_date": "2019-02-23T03:28:44.994Z",
-  "sales_rep": "John Doe",
-  "suspension_id": 1
+  "customer_id": "1",
+  "locations": [
+    {
+      "created_on": "2019-02-12T01:32:45.980000",
+      "is_active": "True",
+      "is_commercial": "True",
+      "last_edited": "2019-02-12T01:32:45.990000",
+      "location_id": "1",
+      "note": "An example note",
+      "reference_number": "REF#A1631",
+      "renewal_date": "2019-10-02T00:00:00",
+      "sales_rep": "John Doe",
+      "suspension_id": "1"
+    }
+  ],
+  "name": "Sequim Waste Inc.",
+  "parent_id": "1"
 }
 ```
 
@@ -1007,7 +3237,7 @@ Update customer at location.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerResultModel](#schemacustomerresultmodel)|Updated customer profile for customer at given location.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerModel](#schemacustomermodel)|Updated customer profile.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
 |`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
@@ -1035,7 +3265,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/location/{location_id}/driver/{driver_id}";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -1049,7 +3279,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/location/{location_id}/driver/{driver_id} \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -1057,7 +3287,7 @@ curl -X GET https://api.crosoftware.net/location/{location_id}/driver/{driver_id
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -1080,7 +3310,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -1096,7 +3326,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -1131,11 +3361,13 @@ System.out.println(response.toString());
 
 Get driver info.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`driver_id`|path|integer(int64)|true|Driver identifier (internal).|
@@ -1147,21 +3379,21 @@ Get driver info.
 ```json
 {
   "address": "1234 Cro St",
-  "can_convert_to_group": false,
-  "can_create_requests": false,
-  "can_edit_requests": false,
-  "can_reposition_asset": false,
+  "can_convert_to_group": "False",
+  "can_create_requests": "False",
+  "can_edit_requests": "False",
+  "can_reposition_asset": "False",
   "city": "Sequim",
-  "disable_shift_tracking": false,
+  "disable_shift_tracking": "False",
   "email": "john@crosoftware.net",
-  "id": 2,
+  "id": "2",
   "license_number": "123ABC",
-  "location_id": 1,
+  "location_id": "1",
   "name": "John Denver",
   "phone_number": "(360) 718-1234",
   "state": "WA",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "zip": 98368
+  "zip": "98368"
 }
 ```
 
@@ -1197,7 +3429,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/location/{location_id}/driver";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -1211,7 +3443,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/location/{location_id}/driver \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -1219,7 +3451,7 @@ curl -X GET https://api.crosoftware.net/location/{location_id}/driver \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -1242,7 +3474,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -1258,7 +3490,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -1293,11 +3525,13 @@ System.out.println(response.toString());
 
 List drivers for location.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
@@ -1309,30 +3543,30 @@ List drivers for location.
 
 ```json
 {
-  "current_limit": 100,
-  "current_page": 1,
+  "current_limit": "100",
+  "current_page": "1",
   "results": [
     {
       "address": "1234 Cro St",
-      "can_convert_to_group": false,
-      "can_create_requests": false,
-      "can_edit_requests": false,
-      "can_reposition_asset": false,
+      "can_convert_to_group": "False",
+      "can_create_requests": "False",
+      "can_edit_requests": "False",
+      "can_reposition_asset": "False",
       "city": "Sequim",
-      "disable_shift_tracking": false,
+      "disable_shift_tracking": "False",
       "email": "john@crosoftware.net",
-      "id": 2,
+      "id": "2",
       "license_number": "123ABC",
-      "location_id": 1,
+      "location_id": "1",
       "name": "John Denver",
       "phone_number": "(360) 718-1234",
       "state": "WA",
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-      "zip": 98368
+      "zip": "98368"
     }
   ],
-  "total_count": 1,
-  "total_pages": 1
+  "total_count": "1",
+  "total_pages": "1"
 }
 ```
 
@@ -1370,12 +3604,8 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/location/{location_id}/gps_event";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
-          
-          // Parameters
-          NameValueCollection parameters = new NameValueCollection();
-          parameters.Add("gps_event_json", "string");
           
           byte[] json = client.UploadValues(url, "POST", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
@@ -1386,17 +3616,19 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/location/{location_id}/gps_event?gps_event_json=string \
+curl -X POST https://api.crosoftware.net/location/{location_id}/gps_event \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
 
 ```javascript
 var headers = {
+  'Content-Type':'application/json',
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -1404,7 +3636,7 @@ var headers = {
 $.ajax({
   url: 'https://api.crosoftware.net/location/{location_id}/gps_event',
   method: 'post',
-  data: '?gps_event_json=string',
+
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -1418,15 +3650,15 @@ require 'rest-client'
 require 'json'
 
 headers = {
+  'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
 result = RestClient.post 'https://api.crosoftware.net/location/{location_id}/gps_event',
   params: {
-  'gps_event_json' => 'string(json)'
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -1435,13 +3667,14 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
+  'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
 r = requests.post('https://api.crosoftware.net/location/{location_id}/gps_event', params={
-  'gps_event_json': 'string'
+
 }, headers = headers)
 
 print r.json()
@@ -1449,7 +3682,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/gps_event?gps_event_json=string");
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/gps_event");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1471,14 +3704,32 @@ System.out.println(response.toString());
 
 Log GPS event.
 
+> Body parameter
+
+```json
+{
+  "location": {
+    "coords": {
+      "heading": "184.57",
+      "latitude": "37.33517518",
+      "longitude": "-122.03255055",
+      "speed": "2.41"
+    },
+    "timestamp": "2019-02-07T00:12:19.354Z"
+  }
+}
+```
+
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
-|`gps_event_json`|query|string(json)|true|{&quot;location&quot;:{&quot;coords&quot;:{&quot;speed&quot;:2.4100000000000001,&quot;longitude&quot;:-122.03255055,&quot;floor&quot;:0,&quot;latitude&quot;:37.33517518,&quot;accuracy&quot;:5,&quot;altitude_accuracy&quot;:-1,&quot;altitude&quot;:0,&quot;heading&quot;:184.56999999999999},&quot;extras&quot;:{},&quot;is_moving&quot;:true,&quot;odometer&quot;:77163.899999999994,&quot;uuid&quot;:&quot;81223611-D5FF-4C7E-9BCF-59595D1720AB&quot;,&quot;activity&quot;:{&quot;type&quot;:&quot;unknown&quot;,&quot;confidence&quot;:100},&quot;battery&quot;:{&quot;level&quot;:-1,&quot;is_charging&quot;:false},&quot;timestamp&quot;:&quot;2019-02-07T00:12:19.354Z&quot;}}|
+|`body`|body|[GpsEventProfileModel](#schemagpseventprofilemodel)|true||
 
 > Example responses
 
@@ -1486,15 +3737,15 @@ Log GPS event.
 
 ```json
 {
-  "bearing": 184.57,
-  "created_on": "2019-02-23T03:28:44.995Z",
+  "bearing": "184.57",
+  "created_on": "2019-02-07T00:12:19.354000",
   "device_name": "N/A",
-  "driver_id": 2,
-  "id": 3,
-  "latitude": 37.33517518,
-  "longitude": -122.03255055,
+  "driver_id": "2",
+  "id": "3",
+  "latitude": "37.33517518",
+  "longitude": "-122.03255055",
   "truck_id": "string",
-  "velocity": 2.41
+  "velocity": "2.41"
 }
 ```
 
@@ -1532,13 +3783,6 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hauler";
 
           // Headers
-          // Parameters
-          NameValueCollection parameters = new NameValueCollection();
-          parameters.Add("company_name", "Cro Scrap");
-          parameters.Add("username", "test_user@crosoftware.net");
-          parameters.Add("password", "AnExample!Password1000");
-          parameters.Add("recaptcha", "<recaptcha-string>");
-          
           byte[] json = client.UploadValues(url, "POST", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
@@ -1548,13 +3792,15 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=%3Crecaptcha-string%3E \
+curl -X POST https://api.crosoftware.net/hauler \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json'
 
 ```
 
 ```javascript
 var headers = {
+  'Content-Type':'application/json',
   'Accept':'application/json'
 
 };
@@ -1562,7 +3808,7 @@ var headers = {
 $.ajax({
   url: 'https://api.crosoftware.net/hauler',
   method: 'post',
-  data: '?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=%3Crecaptcha-string%3E',
+
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -1576,16 +3822,13 @@ require 'rest-client'
 require 'json'
 
 headers = {
+  'Content-Type' => 'application/json',
   'Accept' => 'application/json'
 }
 
 result = RestClient.post 'https://api.crosoftware.net/hauler',
   params: {
-  'company_name' => 'string(stringIdentifier)',
-'username' => 'string(email)',
-'password' => 'string(password)',
-'recaptcha' => 'string(recaptcha)'
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -1594,11 +3837,12 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
 r = requests.post('https://api.crosoftware.net/hauler', params={
-  'company_name': 'Cro Scrap',  'username': 'test_user@crosoftware.net',  'password': 'AnExample!Password1000',  'recaptcha': '<recaptcha-string>'
+
 }, headers = headers)
 
 print r.json()
@@ -1606,7 +3850,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/hauler?company_name=Cro%20Scrap&username=test_user%40crosoftware.net&password=AnExample%21Password1000&recaptcha=%3Crecaptcha-string%3E");
+URL obj = new URL("https://api.crosoftware.net/hauler");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1632,14 +3876,24 @@ Create 3rd Party hauler profile.
 This operation does not require authentication
 </aside>
 
+> Body parameter
+
+```json
+{
+  "company_name": "An Example Company, Inc.",
+  "password": "password",
+  "recaptcha": "somecaptcha",
+  "username": "company_user"
+}
+```
+
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`company_name`|query|string(stringIdentifier)|true|The comapny identifier issued at account creation. All caps, no spaces, no special characters.|
-|`username`|query|string(email)|true|The email address registered for an account. Access control is based on the username. Usernames must conform to the addr-spec defined in RFC 5322.|
-|`password`|query|string(password)|true|ASCII string. Min length 6, max length 32.|
-|`recaptcha`|query|string(recaptcha)|true|ReCaptcha string.|
+|`body`|body|[CreateThirdPartyHaulerProfileModel](#schemacreatethirdpartyhaulerprofilemodel)|true||
 
 > Example responses
 
@@ -1648,7 +3902,7 @@ This operation does not require authentication
 ```json
 {
   "id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "name": "EXCOID"
+  "name": "SMS594"
 }
 ```
 
@@ -1684,7 +3938,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hauler/{hauler_id}/connection";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           // Parameters
@@ -1702,7 +3956,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X POST https://api.crosoftware.net/hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1 \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -1710,7 +3964,7 @@ curl -X POST https://api.crosoftware.net/hauler/{hauler_id}/connection?tenant_co
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -1733,7 +3987,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -1750,7 +4004,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -1781,15 +4035,17 @@ System.out.println(response.toString());
 
 `POST /hauler/{hauler_id}/connection`
 
-<a id="opIdget_hauler"></a>
+<a id="opIdcreate_hauler_connection"></a>
 
 Create hauler connection.
+
+ 
 
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`hauler_id`|path|[UUID](#schemauuid)|true|Hauler identifier.|
 |`tenant_code`|query|string(tenantCode)|true|&lt;YardCode&gt;+&lt;LocationId&gt;. The YardCode is an identifier assigned at account creation.|
@@ -1800,16 +4056,16 @@ Create hauler connection.
 
 ```json
 {
-  "approved_by": 1,
-  "approved_on": "2019-02-23T03:28:44.996Z",
+  "approved_by": "1",
+  "approved_on": "2018-10-31T11:24:53.153000",
   "denied_on": "string",
-  "is_approved": true,
-  "location_id": 1,
+  "is_approved": "True",
+  "location_id": "1",
   "provider_email": "test_hauler@crosoftware.net",
-  "provider_id": 2,
+  "provider_id": "2",
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-02-23T03:28:44.996Z"
+  "requested_on": "2018-10-31T18:24:06.723000"
 }
 ```
 
@@ -1845,7 +4101,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hauler/{hauler_id}";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -1859,7 +4115,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/hauler/{hauler_id} \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -1867,7 +4123,7 @@ curl -X GET https://api.crosoftware.net/hauler/{hauler_id} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -1890,7 +4146,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -1906,7 +4162,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -1941,11 +4197,13 @@ System.out.println(response.toString());
 
 Hauler profile.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`hauler_id`|path|[UUID](#schemauuid)|true|Hauler identifier.|
 
@@ -1956,7 +4214,7 @@ Hauler profile.
 ```json
 {
   "id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "name": "EXCOID"
+  "name": "SMS594"
 }
 ```
 
@@ -1992,7 +4250,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hauler";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -2006,7 +4264,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/hauler \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -2014,7 +4272,7 @@ curl -X GET https://api.crosoftware.net/hauler \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -2037,7 +4295,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -2053,7 +4311,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -2088,11 +4346,13 @@ System.out.println(response.toString());
 
 List third party haulers for tenant.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
 |`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
@@ -2103,16 +4363,16 @@ List third party haulers for tenant.
 
 ```json
 {
-  "current_limit": 100,
-  "current_page": 1,
+  "current_limit": "100",
+  "current_page": "1",
   "results": [
     {
       "id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-      "name": "EXCOID"
+      "name": "SMS594"
     }
   ],
-  "total_count": 1,
-  "total_pages": 1
+  "total_count": "1",
+  "total_pages": "1"
 }
 ```
 
@@ -2148,7 +4408,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hauler/{hauler_id}/connection";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -2162,7 +4422,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/hauler/{hauler_id}/connection \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -2170,7 +4430,7 @@ curl -X GET https://api.crosoftware.net/hauler/{hauler_id}/connection \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -2193,7 +4453,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -2209,7 +4469,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -2244,11 +4504,13 @@ System.out.println(response.toString());
 
 List of 3rd party haulers.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`hauler_id`|path|[UUID](#schemauuid)|true|Hauler identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
@@ -2260,16 +4522,16 @@ List of 3rd party haulers.
 
 ```json
 {
-  "approved_by": 1,
-  "approved_on": "2019-02-23T03:28:44.997Z",
+  "approved_by": "1",
+  "approved_on": "2018-10-31T11:24:53.153000",
   "denied_on": "string",
-  "is_approved": true,
-  "location_id": 1,
+  "is_approved": "True",
+  "location_id": "1",
   "provider_email": "test_hauler@crosoftware.net",
-  "provider_id": 2,
+  "provider_id": "2",
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-02-23T03:28:44.997Z"
+  "requested_on": "2018-10-31T18:24:06.723000"
 }
 ```
 
@@ -2307,7 +4569,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/location/{location_id}/job/{job_id}";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           // Parameters
@@ -2325,7 +4587,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X PATCH https://api.crosoftware.net/location/{location_id}/job/{job_id}?truck_id=0 \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -2333,7 +4595,7 @@ curl -X PATCH https://api.crosoftware.net/location/{location_id}/job/{job_id}?tr
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -2356,7 +4618,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -2373,7 +4635,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -2408,11 +4670,13 @@ System.out.println(response.toString());
 
 Dispatch job.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`job_id`|path|integer(int64)|true|Job identifier (internal).|
@@ -2425,64 +4689,64 @@ Dispatch job.
 
 ```json
 {
-  "arrived_at_dest": "2019-02-23T03:28:44.997Z",
-  "arrived_on": "2019-02-23T03:28:44.997Z",
-  "asset_dropped": 1,
-  "asset_id": 1,
-  "asset_quantity": 1,
-  "asset_type_id": 1,
-  "completed_by": 1,
-  "completed_by_driver": false,
-  "completed_on": "2019-02-23T03:28:44.998Z",
-  "confirmed_on": "2019-02-23T03:28:44.998Z",
-  "created_by_id": 1,
-  "created_with_portal": false,
-  "customer_id": 9,
+  "arrived_at_dest": "2018-11-18T19:54:55.327000",
+  "arrived_on": "2018-11-18T19:54:55.327000",
+  "asset_dropped": "1",
+  "asset_id": "1",
+  "asset_quantity": "1",
+  "asset_type_id": "1",
+  "completed_by": "1",
+  "completed_by_driver": "False",
+  "completed_on": "2018-11-18T19:54:55.327000",
+  "confirmed_on": "2018-11-18T19:54:55.327000",
+  "created_by_id": "1",
+  "created_with_portal": "False",
+  "customer_id": "9",
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-02-23T03:28:44.998Z",
+  "departed_on": "2018-11-18T19:54:55.327000",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
-  "dispatched_by_route": 1,
-  "dispatched_on": "2019-02-23T03:28:44.998Z",
+  "dispatched_by_route": "1",
+  "dispatched_on": "2018-11-18T19:54:55.327000",
   "dispatcher_notes": "Some dispatcher notes",
-  "do_confirm": false,
+  "do_confirm": "False",
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
-  "dump_location_id": 1,
-  "dumped_on": "2019-02-23T03:28:44.998Z",
-  "end_time": "2019-02-23T03:28:44.998Z",
+  "dump_location_id": "1",
+  "dumped_on": "2018-11-18T19:54:55.327000",
+  "end_time": "2018-11-18T19:54:55.327000",
   "fail_reason": "Failure reason",
-  "final_location_id": 1,
+  "final_location_id": "1",
   "flags": "Job notes",
-  "id": 1,
+  "id": "1",
   "invoice_notes": "Some invoice notes",
-  "is_completed": false,
-  "is_declined": false,
-  "is_deleted": false,
-  "is_failed": false,
+  "is_completed": "False",
+  "is_declined": "False",
+  "is_deleted": "False",
+  "is_failed": "False",
   "is_paid": true,
-  "job_group_id": 1,
-  "location_id": 1,
-  "merged_with_route": 1,
-  "original_schedule_date": "2019-02-23T03:28:44.998Z",
-  "pickup_date": "2019-02-23T03:28:44.998Z",
-  "priority": -1,
+  "job_group_id": "1",
+  "location_id": "1",
+  "merged_with_route": "1",
+  "original_schedule_date": "2018-10-31T11:34:13.690000",
+  "pickup_date": "2018-10-31T11:34:13.690000",
+  "priority": "-1",
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-02-23T03:28:44.998Z",
-  "require_image": false,
-  "require_material": false,
-  "require_signature": false,
-  "require_weights": false,
-  "schedule_date": "2019-02-23T03:28:44.998Z",
-  "start_location_id": 1,
-  "start_time": "2019-02-23T03:28:44.998Z",
+  "requested_on": "2018-10-31T11:33:52.920000",
+  "require_image": "False",
+  "require_material": "False",
+  "require_signature": "False",
+  "require_weights": "False",
+  "schedule_date": "2018-10-31T00:00:00",
+  "start_location_id": "1",
+  "start_time": "2018-10-31T11:33:52.920000",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "times_failed": 0,
-  "times_rolled_over": 0,
-  "truck_id": 1,
+  "times_failed": "0",
+  "times_rolled_over": "0",
+  "truck_id": "1",
   "type": "D",
-  "weighed_on": "2019-02-23T03:28:44.998Z"
+  "weighed_on": "2018-10-31T11:33:52.920000"
 }
 ```
 
@@ -2518,7 +4782,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/location/{location_id}/job/{job_id}";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -2532,7 +4796,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/location/{location_id}/job/{job_id} \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -2540,7 +4804,7 @@ curl -X GET https://api.crosoftware.net/location/{location_id}/job/{job_id} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -2563,7 +4827,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -2579,7 +4843,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -2614,11 +4878,13 @@ System.out.println(response.toString());
 
 Get specified job.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`job_id`|path|integer(int64)|true|Job identifier (internal).|
@@ -2629,210 +4895,217 @@ Get specified job.
 
 ```json
 {
+  "arrived_at_dest": "2018-11-18T19:54:55.327000",
+  "arrived_on": "2018-11-18T19:54:55.327000",
   "asset": {
     "asset_type": {
-      "deleted": false,
-      "id": 1,
-      "is_default": false,
-      "location_id": 1,
+      "deleted": "False",
+      "id": "1",
+      "is_default": "False",
+      "location_id": "1",
       "name": "10 yrd",
-      "quantity": 2,
-      "require_numbers": true,
-      "weight": 3245
+      "quantity": "2",
+      "require_numbers": "True",
+      "weight": "3245"
     },
-    "asset_type_id": 1,
-    "cluster": 1,
-    "customer_id": 1,
+    "asset_type_id": "1",
+    "cluster": "1",
+    "customer_id": "1",
     "description": "A description",
-    "dispatched_on": "2019-02-23T03:28:44.999Z",
-    "id": 1,
-    "is_returned": false,
-    "last_activity_on": "2019-02-23T03:28:44.999Z",
-    "last_rental_invoice_on": "2019-02-23T03:28:44.999Z",
-    "latitude": 54.235,
+    "dispatched_on": "2018-10-31T11:34:13.690000",
+    "id": "1",
+    "is_returned": "False",
+    "last_activity_on": "2018-10-31T11:34:13.690000",
+    "last_rental_invoice_on": "2018-10-31T11:34:13.690000",
+    "latitude": "54.235",
     "location": {
-      "id": 1,
-      "is_active": true,
+      "id": "1",
+      "is_active": "True",
       "name": "Sequim"
     },
-    "location_id": 1,
-    "longitude": 127.123,
+    "location_id": "1",
+    "longitude": "127.123",
     "number": "REF100",
-    "quantity": 1,
-    "returned_on": "2019-02-23T03:28:44.999Z"
+    "quantity": "1",
+    "returned_on": "2018-10-31T11:34:13.690000"
   },
+  "asset_dropped": "1",
+  "asset_id": "1",
+  "asset_quantity": "1",
   "asset_type": {
-    "deleted": false,
-    "id": 1,
-    "is_default": false,
-    "location_id": 1,
+    "deleted": "False",
+    "id": "1",
+    "is_default": "False",
+    "location_id": "1",
     "name": "10 yrd",
-    "quantity": 2,
-    "require_numbers": true,
-    "weight": 3245
+    "quantity": "2",
+    "require_numbers": "True",
+    "weight": "3245"
   },
+  "asset_type_id": "1",
+  "completed_by": "1",
+  "completed_by_driver": "False",
+  "completed_on": "2018-11-18T19:54:55.327000",
+  "confirmed_on": "2018-11-18T19:54:55.327000",
+  "created_by_id": "1",
+  "created_with_portal": "False",
   "customer": {
     "addresses": [
       {
-        "address": {
-          "country": "usa",
-          "id": 9,
-          "latitude": 48.0854948,
-          "line_1": "610 N 5th Ave",
-          "line_2": "P.O. Box 123",
-          "line_3": "Suite 1",
-          "line_4": "1st Floor",
-          "locality": "Sequim",
-          "longitude": -123.11221510000001,
-          "postcode": 98382,
-          "region": "WA"
-        },
-        "address_id": 9,
-        "customer_id": 9,
-        "is_active": true,
-        "is_billing": false,
-        "is_physical": true,
-        "is_shipping": true
+        "address_id": "1",
+        "country": "US",
+        "is_billing": "True",
+        "is_physical": "True",
+        "is_shipping": "False",
+        "latitude": "46.881398",
+        "line_1": "643 Summer Breeze",
+        "line_2": "Suite 34",
+        "line_3": "2nd Door on Left",
+        "line_4": "Blue slot",
+        "locality": "Sequim",
+        "longitude": "-121.276566",
+        "postcode": "98382",
+        "region": "WA"
       }
     ],
-    "created_on": "2019-02-23T03:28:44.999Z",
-    "id": 9,
+    "contacts": [
+      {
+        "contact_id": "1",
+        "email": "develop@crosoftware.com",
+        "fax": "(360) 716-1968",
+        "name": "John Doe",
+        "notify_on_acknowledged_request": "False",
+        "notify_on_completed_request": "False",
+        "notify_on_dispatched_request": "False",
+        "notify_on_failed_request": "False",
+        "notify_on_new_request": "False",
+        "number": "1-111-111-1111"
+      }
+    ],
+    "customer_id": "1",
     "locations": [
       {
-        "created_on": "2019-02-23T03:28:44.999Z",
-        "customer_id": 9,
-        "is_active": true,
-        "is_commercial": false,
-        "last_edited": "2019-02-23T03:28:44.999Z",
-        "location_id": 1,
-        "note": "string",
-        "reference_number": "string",
-        "renewal_date": "string",
-        "sales_rep": "string",
-        "suspension_id": "string"
+        "created_on": "2019-02-12T01:32:45.980000",
+        "is_active": "True",
+        "is_commercial": "True",
+        "last_edited": "2019-02-12T01:32:45.990000",
+        "location_id": "1",
+        "note": "An example note",
+        "reference_number": "REF#A1631",
+        "renewal_date": "2019-10-02T00:00:00",
+        "sales_rep": "John Doe",
+        "suspension_id": "1"
       }
     ],
-    "name": "YMCA",
-    "parent_id": 8
+    "name": "Sequim Waste Inc.",
+    "parent_id": "1"
   },
+  "customer_id": "9",
+  "customer_notes": "Some customer notes",
+  "departed_on": "2018-11-18T19:54:55.327000",
+  "desired_asset_desc": "An asset description.",
+  "dispatch_priority": "H",
+  "dispatched_by_route": "1",
+  "dispatched_on": "2018-11-18T19:54:55.327000",
+  "dispatcher_notes": "Some dispatcher notes",
+  "do_confirm": "False",
+  "driver_notes": "Some driver notes",
+  "dropped_number": "Unused/deprecated field",
   "dump_location": {
     "address": "123 Sequim Ave.",
     "city": "Sequim",
     "contact_email": "support@crosoftware.net",
     "contact_name": "John Doe",
     "contact_phone": "(706) 360-7109",
-    "id": 1,
-    "is_holding_yard": true,
-    "latitude": 128.123,
+    "id": "1",
+    "is_holding_yard": "True",
+    "latitude": "128.123",
     "location": {
-      "id": 1,
-      "is_active": true,
+      "id": "1",
+      "is_active": "True",
       "name": "Sequim"
     },
-    "location_id": 1,
-    "longitude": 54.234,
+    "location_id": "1",
+    "longitude": "54.234",
     "name": "A Destination",
     "state": "Washington",
-    "zip": 98368
+    "zip": "98368"
   },
+  "dump_location_id": "1",
+  "dumped_on": "2018-11-18T19:54:55.327000",
+  "end_time": "2018-11-18T19:54:55.327000",
+  "fail_reason": "Failure reason",
   "final_location": {
     "address": "123 Sequim Ave.",
     "city": "Sequim",
     "contact_email": "support@crosoftware.net",
     "contact_name": "John Doe",
     "contact_phone": "(706) 360-7109",
-    "id": 1,
-    "is_holding_yard": true,
-    "latitude": 128.123,
+    "id": "1",
+    "is_holding_yard": "True",
+    "latitude": "128.123",
     "location": {
-      "id": 1,
-      "is_active": true,
+      "id": "1",
+      "is_active": "True",
       "name": "Sequim"
     },
-    "location_id": 1,
-    "longitude": 54.234,
+    "location_id": "1",
+    "longitude": "54.234",
     "name": "A Destination",
     "state": "Washington",
-    "zip": 98368
+    "zip": "98368"
   },
+  "final_location_id": "1",
+  "flags": "Job notes",
+  "id": "1",
+  "invoice_notes": "Some invoice notes",
+  "is_completed": "False",
+  "is_declined": "False",
+  "is_deleted": "False",
+  "is_failed": "False",
+  "is_paid": true,
+  "job_group_id": "1",
+  "location_id": "1",
+  "merged_with_route": "1",
+  "original_schedule_date": "2018-10-31T11:34:13.690000",
+  "pickup_date": "2018-10-31T11:34:13.690000",
+  "priority": "-1",
+  "reference_number": null,
+  "removed_number": "string",
+  "requested_on": "2018-10-31T11:33:52.920000",
+  "require_image": "False",
+  "require_material": "False",
+  "require_signature": "False",
+  "require_weights": "False",
+  "schedule_date": "2018-10-31T00:00:00",
   "start_location": {
     "address": "123 Sequim Ave.",
     "city": "Sequim",
     "contact_email": "support@crosoftware.net",
     "contact_name": "John Doe",
     "contact_phone": "(706) 360-7109",
-    "id": 1,
-    "is_holding_yard": true,
-    "latitude": 128.123,
+    "id": "1",
+    "is_holding_yard": "True",
+    "latitude": "128.123",
     "location": {
-      "id": 1,
-      "is_active": true,
+      "id": "1",
+      "is_active": "True",
       "name": "Sequim"
     },
-    "location_id": 1,
-    "longitude": 54.234,
+    "location_id": "1",
+    "longitude": "54.234",
     "name": "A Destination",
     "state": "Washington",
-    "zip": 98368
+    "zip": "98368"
   },
+  "start_location_id": "1",
+  "start_time": "2018-10-31T11:33:52.920000",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "arrived_at_dest": "2019-02-23T03:28:44.999Z",
-  "arrived_on": "2019-02-23T03:28:44.999Z",
-  "asset_dropped": 1,
-  "asset_id": 1,
-  "asset_quantity": 1,
-  "asset_type_id": 1,
-  "completed_by": 1,
-  "completed_by_driver": false,
-  "completed_on": "2019-02-23T03:28:44.999Z",
-  "confirmed_on": "2019-02-23T03:28:44.999Z",
-  "created_by_id": 1,
-  "created_with_portal": false,
-  "customer_id": 9,
-  "customer_notes": "Some customer notes",
-  "departed_on": "2019-02-23T03:28:44.999Z",
-  "desired_asset_desc": "An asset description.",
-  "dispatch_priority": "H",
-  "dispatched_by_route": 1,
-  "dispatched_on": "2019-02-23T03:28:44.999Z",
-  "dispatcher_notes": "Some dispatcher notes",
-  "do_confirm": false,
-  "driver_notes": "Some driver notes",
-  "dropped_number": "Unused/deprecated field",
-  "dump_location_id": 1,
-  "dumped_on": "2019-02-23T03:28:44.999Z",
-  "end_time": "2019-02-23T03:28:44.999Z",
-  "fail_reason": "Failure reason",
-  "final_location_id": 1,
-  "flags": "Job notes",
-  "id": 1,
-  "invoice_notes": "Some invoice notes",
-  "is_completed": false,
-  "is_declined": false,
-  "is_deleted": false,
-  "is_failed": false,
-  "is_paid": true,
-  "job_group_id": 1,
-  "location_id": 1,
-  "merged_with_route": 1,
-  "original_schedule_date": "2019-02-23T03:28:44.999Z",
-  "pickup_date": "2019-02-23T03:28:44.999Z",
-  "priority": -1,
-  "reference_number": null,
-  "removed_number": "string",
-  "requested_on": "2019-02-23T03:28:44.999Z",
-  "require_image": false,
-  "require_material": false,
-  "require_signature": false,
-  "require_weights": false,
-  "schedule_date": "2019-02-23T03:28:44.999Z",
-  "start_location_id": 1,
-  "start_time": "2019-02-23T03:28:44.999Z",
-  "times_failed": 0,
-  "times_rolled_over": 0,
-  "truck_id": 1,
+  "times_failed": "0",
+  "times_rolled_over": "0",
+  "truck_id": "1",
   "type": "D",
-  "weighed_on": "2019-02-23T03:28:44.999Z"
+  "weighed_on": "2018-10-31T11:33:52.920000"
 }
 ```
 
@@ -2868,7 +5141,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/location/{location_id}/job";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -2882,7 +5155,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/location/{location_id}/job \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -2890,7 +5163,7 @@ curl -X GET https://api.crosoftware.net/location/{location_id}/job \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -2913,7 +5186,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -2929,7 +5202,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -2964,21 +5237,23 @@ System.out.println(response.toString());
 
 List jobs for location.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
 |`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
-|`filter_schedule_gt`|query|[DateTime](#schemadatetime)|false|Filter jobs with scheduled dates ocurring after this date.|
-|`filter_schedule_lt`|query|[DateTime](#schemadatetime)|false|Filter jobs with scheduled dates ocurring before this date.|
-|`filter_completed`|query|[Boolean](#schemaboolean)|false|True: return completed jobs. False: return jobs not marked completed. Unspecified: return jobs independent of failed status.|
-|`filter_failed`|query|[Boolean](#schemaboolean)|false|True: return failed jobs. False: return jobs not marked failed. Unspecified: return jobs independent of failed status.|
-|`filter_driver_id`|query|integer(int64)|false|Specified: return jobs assignable to driver. Unspecified: do not filter jobs by driver.|
-|`filter_truck_id`|query|integer(int64)|false|Specified: return jobs assigned to given truck. Unspecified: do not filter jobs by truck.|
+|`schedule_gt`|query|[DateTime](#schemadatetime)|false|Filter jobs with scheduled dates ocurring after this date.|
+|`schedule_lt`|query|[DateTime](#schemadatetime)|false|Filter jobs with scheduled dates ocurring before this date.|
+|`completed`|query|[Boolean](#schemaboolean)|false|True: return completed jobs. False: return jobs not marked completed. Unspecified: return jobs independent of failed status.|
+|`failed`|query|[Boolean](#schemaboolean)|false|True: return failed jobs. False: return jobs not marked failed. Unspecified: return jobs independent of failed status.|
+|`driver_id`|query|integer(int64)|false|Specified: return jobs assignable to driver. Unspecified: do not filter jobs by driver.|
+|`truck_id`|query|integer(int64)|false|Specified: return jobs assigned to given truck. Unspecified: do not filter jobs by truck.|
 
 > Example responses
 
@@ -2986,218 +5261,225 @@ List jobs for location.
 
 ```json
 {
-  "current_limit": 1,
-  "current_page": 1,
+  "current_limit": "1",
+  "current_page": "1",
   "results": [
     {
+      "arrived_at_dest": "2018-11-18T19:54:55.327000",
+      "arrived_on": "2018-11-18T19:54:55.327000",
       "asset": {
         "asset_type": {
-          "deleted": false,
-          "id": 1,
-          "is_default": false,
-          "location_id": 1,
+          "deleted": "False",
+          "id": "1",
+          "is_default": "False",
+          "location_id": "1",
           "name": "10 yrd",
-          "quantity": 2,
-          "require_numbers": true,
-          "weight": 3245
+          "quantity": "2",
+          "require_numbers": "True",
+          "weight": "3245"
         },
-        "asset_type_id": 1,
-        "cluster": 1,
-        "customer_id": 1,
+        "asset_type_id": "1",
+        "cluster": "1",
+        "customer_id": "1",
         "description": "A description",
-        "dispatched_on": "2019-02-23T03:28:45.002Z",
-        "id": 1,
-        "is_returned": false,
-        "last_activity_on": "2019-02-23T03:28:45.002Z",
-        "last_rental_invoice_on": "2019-02-23T03:28:45.002Z",
-        "latitude": 54.235,
+        "dispatched_on": "2018-10-31T11:34:13.690000",
+        "id": "1",
+        "is_returned": "False",
+        "last_activity_on": "2018-10-31T11:34:13.690000",
+        "last_rental_invoice_on": "2018-10-31T11:34:13.690000",
+        "latitude": "54.235",
         "location": {
-          "id": 1,
-          "is_active": true,
+          "id": "1",
+          "is_active": "True",
           "name": "Sequim"
         },
-        "location_id": 1,
-        "longitude": 127.123,
+        "location_id": "1",
+        "longitude": "127.123",
         "number": "REF100",
-        "quantity": 1,
-        "returned_on": "2019-02-23T03:28:45.002Z"
+        "quantity": "1",
+        "returned_on": "2018-10-31T11:34:13.690000"
       },
+      "asset_dropped": "1",
+      "asset_id": "1",
+      "asset_quantity": "1",
       "asset_type": {
-        "deleted": false,
-        "id": 1,
-        "is_default": false,
-        "location_id": 1,
+        "deleted": "False",
+        "id": "1",
+        "is_default": "False",
+        "location_id": "1",
         "name": "10 yrd",
-        "quantity": 2,
-        "require_numbers": true,
-        "weight": 3245
+        "quantity": "2",
+        "require_numbers": "True",
+        "weight": "3245"
       },
+      "asset_type_id": "1",
+      "completed_by": "1",
+      "completed_by_driver": "False",
+      "completed_on": "2018-11-18T19:54:55.327000",
+      "confirmed_on": "2018-11-18T19:54:55.327000",
+      "created_by_id": "1",
+      "created_with_portal": "False",
       "customer": {
         "addresses": [
           {
-            "address": {
-              "country": "usa",
-              "id": 9,
-              "latitude": 48.0854948,
-              "line_1": "610 N 5th Ave",
-              "line_2": "P.O. Box 123",
-              "line_3": "Suite 1",
-              "line_4": "1st Floor",
-              "locality": "Sequim",
-              "longitude": -123.11221510000001,
-              "postcode": 98382,
-              "region": "WA"
-            },
-            "address_id": 9,
-            "customer_id": 9,
-            "is_active": true,
-            "is_billing": false,
-            "is_physical": true,
-            "is_shipping": true
+            "address_id": "1",
+            "country": "US",
+            "is_billing": "True",
+            "is_physical": "True",
+            "is_shipping": "False",
+            "latitude": "46.881398",
+            "line_1": "643 Summer Breeze",
+            "line_2": "Suite 34",
+            "line_3": "2nd Door on Left",
+            "line_4": "Blue slot",
+            "locality": "Sequim",
+            "longitude": "-121.276566",
+            "postcode": "98382",
+            "region": "WA"
           }
         ],
-        "created_on": "2019-02-23T03:28:45.002Z",
-        "id": 9,
+        "contacts": [
+          {
+            "contact_id": "1",
+            "email": "develop@crosoftware.com",
+            "fax": "(360) 716-1968",
+            "name": "John Doe",
+            "notify_on_acknowledged_request": "False",
+            "notify_on_completed_request": "False",
+            "notify_on_dispatched_request": "False",
+            "notify_on_failed_request": "False",
+            "notify_on_new_request": "False",
+            "number": "1-111-111-1111"
+          }
+        ],
+        "customer_id": "1",
         "locations": [
           {
-            "created_on": "2019-02-23T03:28:45.002Z",
-            "customer_id": 9,
-            "is_active": true,
-            "is_commercial": false,
-            "last_edited": "2019-02-23T03:28:45.002Z",
-            "location_id": 1,
-            "note": "string",
-            "reference_number": "string",
-            "renewal_date": "string",
-            "sales_rep": "string",
-            "suspension_id": "string"
+            "created_on": "2019-02-12T01:32:45.980000",
+            "is_active": "True",
+            "is_commercial": "True",
+            "last_edited": "2019-02-12T01:32:45.990000",
+            "location_id": "1",
+            "note": "An example note",
+            "reference_number": "REF#A1631",
+            "renewal_date": "2019-10-02T00:00:00",
+            "sales_rep": "John Doe",
+            "suspension_id": "1"
           }
         ],
-        "name": "YMCA",
-        "parent_id": 8
+        "name": "Sequim Waste Inc.",
+        "parent_id": "1"
       },
+      "customer_id": "9",
+      "customer_notes": "Some customer notes",
+      "departed_on": "2018-11-18T19:54:55.327000",
+      "desired_asset_desc": "An asset description.",
+      "dispatch_priority": "H",
+      "dispatched_by_route": "1",
+      "dispatched_on": "2018-11-18T19:54:55.327000",
+      "dispatcher_notes": "Some dispatcher notes",
+      "do_confirm": "False",
+      "driver_notes": "Some driver notes",
+      "dropped_number": "Unused/deprecated field",
       "dump_location": {
         "address": "123 Sequim Ave.",
         "city": "Sequim",
         "contact_email": "support@crosoftware.net",
         "contact_name": "John Doe",
         "contact_phone": "(706) 360-7109",
-        "id": 1,
-        "is_holding_yard": true,
-        "latitude": 128.123,
+        "id": "1",
+        "is_holding_yard": "True",
+        "latitude": "128.123",
         "location": {
-          "id": 1,
-          "is_active": true,
+          "id": "1",
+          "is_active": "True",
           "name": "Sequim"
         },
-        "location_id": 1,
-        "longitude": 54.234,
+        "location_id": "1",
+        "longitude": "54.234",
         "name": "A Destination",
         "state": "Washington",
-        "zip": 98368
+        "zip": "98368"
       },
+      "dump_location_id": "1",
+      "dumped_on": "2018-11-18T19:54:55.327000",
+      "end_time": "2018-11-18T19:54:55.327000",
+      "fail_reason": "Failure reason",
       "final_location": {
         "address": "123 Sequim Ave.",
         "city": "Sequim",
         "contact_email": "support@crosoftware.net",
         "contact_name": "John Doe",
         "contact_phone": "(706) 360-7109",
-        "id": 1,
-        "is_holding_yard": true,
-        "latitude": 128.123,
+        "id": "1",
+        "is_holding_yard": "True",
+        "latitude": "128.123",
         "location": {
-          "id": 1,
-          "is_active": true,
+          "id": "1",
+          "is_active": "True",
           "name": "Sequim"
         },
-        "location_id": 1,
-        "longitude": 54.234,
+        "location_id": "1",
+        "longitude": "54.234",
         "name": "A Destination",
         "state": "Washington",
-        "zip": 98368
+        "zip": "98368"
       },
+      "final_location_id": "1",
+      "flags": "Job notes",
+      "id": "1",
+      "invoice_notes": "Some invoice notes",
+      "is_completed": "False",
+      "is_declined": "False",
+      "is_deleted": "False",
+      "is_failed": "False",
+      "is_paid": true,
+      "job_group_id": "1",
+      "location_id": "1",
+      "merged_with_route": "1",
+      "original_schedule_date": "2018-10-31T11:34:13.690000",
+      "pickup_date": "2018-10-31T11:34:13.690000",
+      "priority": "-1",
+      "reference_number": null,
+      "removed_number": "string",
+      "requested_on": "2018-10-31T11:33:52.920000",
+      "require_image": "False",
+      "require_material": "False",
+      "require_signature": "False",
+      "require_weights": "False",
+      "schedule_date": "2018-10-31T00:00:00",
       "start_location": {
         "address": "123 Sequim Ave.",
         "city": "Sequim",
         "contact_email": "support@crosoftware.net",
         "contact_name": "John Doe",
         "contact_phone": "(706) 360-7109",
-        "id": 1,
-        "is_holding_yard": true,
-        "latitude": 128.123,
+        "id": "1",
+        "is_holding_yard": "True",
+        "latitude": "128.123",
         "location": {
-          "id": 1,
-          "is_active": true,
+          "id": "1",
+          "is_active": "True",
           "name": "Sequim"
         },
-        "location_id": 1,
-        "longitude": 54.234,
+        "location_id": "1",
+        "longitude": "54.234",
         "name": "A Destination",
         "state": "Washington",
-        "zip": 98368
+        "zip": "98368"
       },
+      "start_location_id": "1",
+      "start_time": "2018-10-31T11:33:52.920000",
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-      "arrived_at_dest": "2019-02-23T03:28:45.002Z",
-      "arrived_on": "2019-02-23T03:28:45.002Z",
-      "asset_dropped": 1,
-      "asset_id": 1,
-      "asset_quantity": 1,
-      "asset_type_id": 1,
-      "completed_by": 1,
-      "completed_by_driver": false,
-      "completed_on": "2019-02-23T03:28:45.002Z",
-      "confirmed_on": "2019-02-23T03:28:45.002Z",
-      "created_by_id": 1,
-      "created_with_portal": false,
-      "customer_id": 9,
-      "customer_notes": "Some customer notes",
-      "departed_on": "2019-02-23T03:28:45.002Z",
-      "desired_asset_desc": "An asset description.",
-      "dispatch_priority": "H",
-      "dispatched_by_route": 1,
-      "dispatched_on": "2019-02-23T03:28:45.002Z",
-      "dispatcher_notes": "Some dispatcher notes",
-      "do_confirm": false,
-      "driver_notes": "Some driver notes",
-      "dropped_number": "Unused/deprecated field",
-      "dump_location_id": 1,
-      "dumped_on": "2019-02-23T03:28:45.002Z",
-      "end_time": "2019-02-23T03:28:45.002Z",
-      "fail_reason": "Failure reason",
-      "final_location_id": 1,
-      "flags": "Job notes",
-      "id": 1,
-      "invoice_notes": "Some invoice notes",
-      "is_completed": false,
-      "is_declined": false,
-      "is_deleted": false,
-      "is_failed": false,
-      "is_paid": true,
-      "job_group_id": 1,
-      "location_id": 1,
-      "merged_with_route": 1,
-      "original_schedule_date": "2019-02-23T03:28:45.002Z",
-      "pickup_date": "2019-02-23T03:28:45.002Z",
-      "priority": -1,
-      "reference_number": null,
-      "removed_number": "string",
-      "requested_on": "2019-02-23T03:28:45.002Z",
-      "require_image": false,
-      "require_material": false,
-      "require_signature": false,
-      "require_weights": false,
-      "schedule_date": "2019-02-23T03:28:45.002Z",
-      "start_location_id": 1,
-      "start_time": "2019-02-23T03:28:45.002Z",
-      "times_failed": 0,
-      "times_rolled_over": 0,
-      "truck_id": 1,
+      "times_failed": "0",
+      "times_rolled_over": "0",
+      "truck_id": "1",
       "type": "D",
-      "weighed_on": "2019-02-23T03:28:45.002Z"
+      "weighed_on": "2018-10-31T11:33:52.920000"
     }
   ],
-  "total_count": 1,
-  "total_pages": 1
+  "total_count": "1",
+  "total_pages": "1"
 }
 ```
 
@@ -3208,6 +5490,646 @@ List jobs for location.
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[JobListModel](#schemajoblistmodel)|List of jobs for location.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+## Location Customers
+
+### Create Customer
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/customer";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          byte[] json = client.UploadValues(url, "POST", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X POST https://api.crosoftware.net/location/{location_id}/customer \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/location/{location_id}/customer',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.post 'https://api.crosoftware.net/location/{location_id}/customer',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.post('https://api.crosoftware.net/location/{location_id}/customer', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`POST /location/{location_id}/customer`
+
+<a id="opIdcreate_customer_at_location"></a>
+
+Create customer at location.
+
+> Body parameter
+
+```json
+{
+  "addresses": [
+    {
+      "country": "US",
+      "is_billing": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "is_commercial": "False",
+  "name": "DEMOCO001",
+  "note": "Service Location of DemoCo Inc.",
+  "parent_id": "1",
+  "reference_number": "Ref#100",
+  "renewal_date": "2100-02-18T15:53:55.851Z",
+  "sales_rep": "John Doe",
+  "suspension_id": "1"
+}
+```
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`body`|body|[CreateCustomerProfileModel](#schemacreatecustomerprofilemodel)|true||
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "addresses": [
+    {
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "contact_id": "1",
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "customer_id": "1",
+  "locations": [
+    {
+      "created_on": "2019-02-12T01:32:45.980000",
+      "is_active": "True",
+      "is_commercial": "True",
+      "last_edited": "2019-02-12T01:32:45.990000",
+      "location_id": "1",
+      "note": "An example note",
+      "reference_number": "REF#A1631",
+      "renewal_date": "2019-10-02T00:00:00",
+      "sales_rep": "John Doe",
+      "suspension_id": "1"
+    }
+  ],
+  "name": "Sequim Waste Inc.",
+  "parent_id": "1"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerModel](#schemacustomermodel)|New customer profile for customer at given location.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### Get Customer
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/customer/{customer_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location/{location_id}/customer/{customer_id} \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/location/{location_id}/customer/{customer_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer/{customer_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /location/{location_id}/customer/{customer_id}`
+
+<a id="opIdget_customer_for_location"></a>
+
+Get customer for location.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "addresses": [
+    {
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "contact_id": "1",
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "created_on": "2019-03-08T16:40:37.647000",
+  "customer_id": "2",
+  "is_active": "True",
+  "is_commercial": "False",
+  "last_edited": "2019-03-08T16:40:37.647000",
+  "name": "Jane Smith",
+  "note": "An example note",
+  "parent_id": "1",
+  "reference_number": "1234",
+  "renewal_date": "2100-03-08T16:40:37.647000",
+  "sales_rep": "Jane Doe",
+  "suspension_id": "1"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|Customer profile for customer at given location.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### List Customers
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/customer";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location/{location_id}/customer \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/location/{location_id}/customer',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/customer',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/location/{location_id}/customer', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /location/{location_id}/customer`
+
+<a id="opIdlist_customers_for_location"></a>
+
+List customers for location.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
+|`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "current_limit": "100",
+  "current_page": "1",
+  "results": [
+    {
+      "addresses": [
+        {
+          "address_id": "1",
+          "country": "US",
+          "is_billing": "True",
+          "is_physical": "True",
+          "is_shipping": "False",
+          "latitude": "46.881398",
+          "line_1": "643 Summer Breeze",
+          "line_2": "Suite 34",
+          "line_3": "2nd Door on Left",
+          "line_4": "Blue slot",
+          "locality": "Sequim",
+          "longitude": "-121.276566",
+          "postcode": "98382",
+          "region": "WA"
+        }
+      ],
+      "contacts": [
+        {
+          "contact_id": "1",
+          "email": "develop@crosoftware.com",
+          "fax": "(360) 716-1968",
+          "name": "John Doe",
+          "notify_on_acknowledged_request": "False",
+          "notify_on_completed_request": "False",
+          "notify_on_dispatched_request": "False",
+          "notify_on_failed_request": "False",
+          "notify_on_new_request": "False",
+          "number": "1-111-111-1111"
+        }
+      ],
+      "created_on": "2019-03-08T16:40:37.647000",
+      "customer_id": "2",
+      "is_active": "True",
+      "is_commercial": "False",
+      "last_edited": "2019-03-08T16:40:37.647000",
+      "name": "Jane Smith",
+      "note": "An example note",
+      "parent_id": "1",
+      "reference_number": "1234",
+      "renewal_date": "2100-03-08T16:40:37.647000",
+      "sales_rep": "Jane Doe",
+      "suspension_id": "1"
+    }
+  ],
+  "total_count": "100",
+  "total_pages": "1"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationListModel](#schemacustomerlocationlistmodel)|Paged result sef of customers for location.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
 |`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
@@ -3235,7 +6157,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/location/{location_id}";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -3249,7 +6171,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/location/{location_id} \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -3257,7 +6179,7 @@ curl -X GET https://api.crosoftware.net/location/{location_id} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -3280,7 +6202,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -3296,7 +6218,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -3331,11 +6253,13 @@ System.out.println(response.toString());
 
 Get info for specified location.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 
@@ -3345,8 +6269,8 @@ Get info for specified location.
 
 ```json
 {
-  "id": 1,
-  "is_active": true,
+  "id": "1",
+  "is_active": "True",
   "name": "Sequim"
 }
 ```
@@ -3383,7 +6307,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/location";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -3397,7 +6321,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/location \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -3405,7 +6329,7 @@ curl -X GET https://api.crosoftware.net/location \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -3428,7 +6352,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -3444,7 +6368,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -3479,11 +6403,13 @@ System.out.println(response.toString());
 
 List locations for tenant.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
 |`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
@@ -3494,17 +6420,17 @@ List locations for tenant.
 
 ```json
 {
-  "current_limit": 1,
-  "current_page": 1,
+  "current_limit": "1",
+  "current_page": "1",
   "results": [
     {
-      "id": 1,
-      "is_active": true,
+      "id": "1",
+      "is_active": "True",
       "name": "Sequim"
     }
   ],
-  "total_count": 1,
-  "total_pages": 1
+  "total_count": "1",
+  "total_pages": "1"
 }
 ```
 
@@ -3542,7 +6468,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/tenant";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -3556,7 +6482,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/tenant \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -3564,7 +6490,7 @@ curl -X GET https://api.crosoftware.net/tenant \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -3587,7 +6513,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -3603,7 +6529,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -3638,11 +6564,13 @@ System.out.println(response.toString());
 
 List tenants for this user.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
 |`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
@@ -3653,26 +6581,26 @@ List tenants for this user.
 
 ```json
 {
-  "current_limit": 100,
-  "current_page": 1,
+  "current_limit": "100",
+  "current_page": "1",
   "results": [
     {
       "address": "123 some st",
       "city": "Sequim",
       "code": "CROSCRAP",
-      "created_on": "2019-02-23T03:28:45.004Z",
+      "created_on": "2019-02-12T01:32:45.640000",
       "email": "test_admin@crosoftware.net",
-      "id": 1,
-      "is_active": true,
+      "id": "1",
+      "is_active": "True",
       "name": "CRO Scrap",
-      "phone": 1234567890,
+      "phone": "1234567890",
       "state": "WA",
       "truck_limit": "string",
-      "zip": 98360
+      "zip": "98360"
     }
   ],
-  "total_count": 1,
-  "total_pages": 1
+  "total_count": "1",
+  "total_pages": "1"
 }
 ```
 
@@ -3682,7 +6610,7 @@ List tenants for this user.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ListTenantResultModel](#schemalisttenantresultmodel)|Paged list response of tenants.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[TenantListModel](#schematenantlistmodel)|Paged list response of tenants.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
 |`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
@@ -3710,7 +6638,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/location/{location_id}/truck/{truck_id}";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -3724,7 +6652,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/location/{location_id}/truck/{truck_id} \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -3732,7 +6660,7 @@ curl -X GET https://api.crosoftware.net/location/{location_id}/truck/{truck_id} 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -3755,7 +6683,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -3771,7 +6699,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -3806,11 +6734,13 @@ System.out.println(response.toString());
 
 Get truck info.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`truck_id`|path|integer(int64)|true|Truck identifier (internal).|
@@ -3821,16 +6751,16 @@ Get truck info.
 
 ```json
 {
-  "driver_id": 1,
-  "id": 2,
-  "location_id": 1,
-  "name": "AnExampleTruck",
+  "driver_id": "1",
+  "id": "2",
+  "location_id": "1",
+  "name": "ZachTruck",
   "notes": "Sequim",
-  "out_of_service": false,
-  "require_odometer": false,
+  "out_of_service": "False",
+  "require_odometer": "False",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "type": "Example Truck Rolloff",
-  "weight": 18678
+  "type": "AwesomeTRUCK Rolloff",
+  "weight": "18678"
 }
 ```
 
@@ -3864,7 +6794,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/location/{location_id}/truck";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           string json = client.DownloadString(url);
@@ -3878,7 +6808,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/location/{location_id}/truck \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -3886,7 +6816,7 @@ curl -X GET https://api.crosoftware.net/location/{location_id}/truck \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -3909,7 +6839,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -3925,7 +6855,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -3960,11 +6890,13 @@ System.out.println(response.toString());
 
 List trucks for location.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
@@ -3976,24 +6908,24 @@ List trucks for location.
 
 ```json
 {
-  "current_limit": 100,
-  "current_page": 1,
+  "current_limit": "100",
+  "current_page": "1",
   "results": [
     {
-      "driver_id": 1,
-      "id": 2,
-      "location_id": 1,
-      "name": "AnExampleTruck",
+      "driver_id": "1",
+      "id": "2",
+      "location_id": "1",
+      "name": "ZachTruck",
       "notes": "Sequim",
-      "out_of_service": false,
-      "require_odometer": false,
+      "out_of_service": "False",
+      "require_odometer": "False",
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-      "type": "Example Truck Rolloff",
-      "weight": 18678
+      "type": "AwesomeTRUCK Rolloff",
+      "weight": "18678"
     }
   ],
-  "total_count": 1,
-  "total_pages": 1
+  "total_count": "1",
+  "total_pages": "1"
 }
 ```
 
@@ -4029,7 +6961,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/location/{location_id}/truck/{truck_id}";
 
           // Headers
-          client.Headers.Add("Authorization", "bearer <jwt-access-token>");
+          client.Headers.Add("Authorization", "bearer <access-token>");
           client.Headers.Add("X-TENANT-ID", "1");
           
           // Parameters
@@ -4047,7 +6979,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X PATCH https://api.crosoftware.net/location/{location_id}/truck/{truck_id}?driver_id=0 \
   -H 'Accept: application/json' \
-  -H 'Authorization: bearer <jwt-access-token>' \
+  -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
 
 ```
@@ -4055,7 +6987,7 @@ curl -X PATCH https://api.crosoftware.net/location/{location_id}/truck/{truck_id
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'Authorization':'bearer <jwt-access-token>',
+  'Authorization':'bearer <access-token>',
   'X-TENANT-ID':'1'
 
 };
@@ -4078,7 +7010,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'Authorization' => 'bearer <jwt-access-token>',
+  'Authorization' => 'bearer <access-token>',
   'X-TENANT-ID' => '1'
 }
 
@@ -4095,7 +7027,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'Authorization': 'bearer <jwt-access-token>',
+  'Authorization': 'bearer <access-token>',
   'X-TENANT-ID': '1'
 }
 
@@ -4130,11 +7062,13 @@ System.out.println(response.toString());
 
 Set driver for truck.
 
+ 
+
 <h4 id="undefined-parameters">Parameters</h4>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer JWT access token.|
+|`Authorization`|header|string|true|Authorization bearer access token.|
 |`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`truck_id`|path|integer(int64)|true|Truck identifier (internal).|
@@ -4146,16 +7080,16 @@ Set driver for truck.
 
 ```json
 {
-  "driver_id": 1,
-  "id": 2,
-  "location_id": 1,
-  "name": "AnExampleTruck",
+  "driver_id": "1",
+  "id": "2",
+  "location_id": "1",
+  "name": "ZachTruck",
   "notes": "Sequim",
-  "out_of_service": false,
-  "require_odometer": false,
+  "out_of_service": "False",
+  "require_odometer": "False",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "type": "Example Truck Rolloff",
-  "weight": 18678
+  "type": "AwesomeTRUCK Rolloff",
+  "weight": "18678"
 }
 ```
 
@@ -4221,31 +7155,33 @@ ISO 8601 DateTime Format (GMT)
 |---|---|---|
 |`-`|string(boolean)|May be case insensitive True|False or 1|0.|
 
-<h2 id="tocSaddressmodel">AddressModel</h2>
+<h2 id="tocSaddcustomeraddressprofilemodel">AddCustomerAddressProfileModel</h2>
 
 ```json
 {
-  "country": "usa",
-  "id": 9,
-  "latitude": 48.0854948,
-  "line_1": "610 N 5th Ave",
-  "line_2": "P.O. Box 123",
-  "line_3": "Suite 1",
-  "line_4": "1st Floor",
+  "country": "US",
+  "is_billing": "True",
+  "is_shipping": "False",
+  "latitude": "46.881398",
+  "line_1": "643 Summer Breeze",
+  "line_2": "Suite 34",
+  "line_3": "2nd Door on Left",
+  "line_4": "Blue slot",
   "locality": "Sequim",
-  "longitude": -123.11221510000001,
-  "postcode": 98382,
+  "longitude": "-121.276566",
+  "postcode": "98382",
   "region": "WA"
 }
 
 ```
 
-<a id="schemaaddressmodel"></a>
+<a id="schemaaddcustomeraddressprofilemodel"></a>
 
 |Name|Type|Description|
 |---|---|---|
 |`country`|string|-|
-|`id`|integer(int64)|-|
+|`is_billing`|boolean|-|
+|`is_shipping`|boolean|-|
 |`latitude`|number(float)|-|
 |`line_1`|string|-|
 |`line_2`|string|-|
@@ -4253,43 +7189,99 @@ ISO 8601 DateTime Format (GMT)
 |`line_4`|string|-|
 |`locality`|string|-|
 |`longitude`|number(float)|-|
-|`postcode`|string|-|
+|`postcode`|integer(int64)|-|
 |`region`|string|-|
+
+<h2 id="tocSaddcustomercontactprofilemodel">AddCustomerContactProfileModel</h2>
+
+```json
+{
+  "email": "develop@crosoftware.com",
+  "fax": "(360) 716-1968",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": "False",
+  "notify_on_completed_request": "False",
+  "notify_on_dispatched_request": "False",
+  "notify_on_failed_request": "False",
+  "notify_on_new_request": "False",
+  "number": "1-111-111-1111"
+}
+
+```
+
+<a id="schemaaddcustomercontactprofilemodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`email`|string|-|
+|`fax`|string|-|
+|`name`|string|-|
+|`notify_on_acknowledged_request`|boolean|-|
+|`notify_on_completed_request`|boolean|-|
+|`notify_on_dispatched_request`|boolean|-|
+|`notify_on_failed_request`|boolean|-|
+|`notify_on_new_request`|boolean|-|
+|`number`|string|-|
+
+<h2 id="tocSaddcustomerlocationprofilemodel">AddCustomerLocationProfileModel</h2>
+
+```json
+{
+  "is_commercial": "True",
+  "note": "An example note",
+  "reference_number": "R100-10C",
+  "renewal_date": "2100-02-12T01:32:45.640000",
+  "sales_rep": "John Smith",
+  "suspension_id": "1"
+}
+
+```
+
+<a id="schemaaddcustomerlocationprofilemodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`is_commercial`|boolean|-|
+|`note`|string|-|
+|`reference_number`|string|-|
+|`renewal_date`|string(datetime)|-|
+|`sales_rep`|string|-|
+|`suspension_id`|integer(int64)|-|
 
 <h2 id="tocSassetmodel">AssetModel</h2>
 
 ```json
 {
   "asset_type": {
-    "deleted": false,
-    "id": 1,
-    "is_default": false,
-    "location_id": 1,
+    "deleted": "False",
+    "id": "1",
+    "is_default": "False",
+    "location_id": "1",
     "name": "10 yrd",
-    "quantity": 2,
-    "require_numbers": true,
-    "weight": 3245
+    "quantity": "2",
+    "require_numbers": "True",
+    "weight": "3245"
   },
-  "asset_type_id": 1,
-  "cluster": 1,
-  "customer_id": 1,
+  "asset_type_id": "1",
+  "cluster": "1",
+  "customer_id": "1",
   "description": "A description",
-  "dispatched_on": "2019-02-23T03:28:45.008Z",
-  "id": 1,
-  "is_returned": false,
-  "last_activity_on": "2019-02-23T03:28:45.008Z",
-  "last_rental_invoice_on": "2019-02-23T03:28:45.008Z",
-  "latitude": 54.235,
+  "dispatched_on": "2018-10-31T11:34:13.690000",
+  "id": "1",
+  "is_returned": "False",
+  "last_activity_on": "2018-10-31T11:34:13.690000",
+  "last_rental_invoice_on": "2018-10-31T11:34:13.690000",
+  "latitude": "54.235",
   "location": {
-    "id": 1,
-    "is_active": true,
+    "id": "1",
+    "is_active": "True",
     "name": "Sequim"
   },
-  "location_id": 1,
-  "longitude": 127.123,
+  "location_id": "1",
+  "longitude": "127.123",
   "number": "REF100",
-  "quantity": 1,
-  "returned_on": "2019-02-23T03:28:45.008Z"
+  "quantity": "1",
+  "returned_on": "2018-10-31T11:34:13.690000"
 }
 
 ```
@@ -4320,14 +7312,14 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "deleted": false,
-  "id": 1,
-  "is_default": false,
-  "location_id": 1,
+  "deleted": "False",
+  "id": "1",
+  "is_default": "False",
+  "location_id": "1",
   "name": "10 yrd",
-  "quantity": 2,
-  "require_numbers": true,
-  "weight": 3245
+  "quantity": "2",
+  "require_numbers": "True",
+  "weight": "3245"
 }
 
 ```
@@ -4345,29 +7337,145 @@ ISO 8601 DateTime Format (GMT)
 |`require_numbers`|boolean|-|
 |`weight`|integer(int64)|-|
 
+<h2 id="tocScreatecustomerprofilemodel">CreateCustomerProfileModel</h2>
+
+```json
+{
+  "addresses": [
+    {
+      "country": "US",
+      "is_billing": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "is_commercial": "False",
+  "name": "DEMOCO001",
+  "note": "Service Location of DemoCo Inc.",
+  "parent_id": "1",
+  "reference_number": "Ref#100",
+  "renewal_date": "2100-02-18T15:53:55.851Z",
+  "sales_rep": "John Doe",
+  "suspension_id": "1"
+}
+
+```
+
+<a id="schemacreatecustomerprofilemodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`addresses`|array[[AddCustomerAddressProfileModel](#schemaaddcustomeraddressprofilemodel)]|-|
+|`contacts`|array[[AddCustomerContactProfileModel](#schemaaddcustomercontactprofilemodel)]|-|
+|`is_commercial`|boolean|-|
+|`name`|string|-|
+|`note`|string|-|
+|`parent_id`|integer(int64)|-|
+|`reference_number`|string|-|
+|`renewal_date`|string(datetime)|-|
+|`sales_rep`|string|-|
+|`suspension_id`|integer(int64)|-|
+
+<h2 id="tocScreatethirdpartyhaulerprofilemodel">CreateThirdPartyHaulerProfileModel</h2>
+
+```json
+{
+  "company_name": "An Example Company, Inc.",
+  "password": "password",
+  "recaptcha": "somecaptcha",
+  "username": "company_user"
+}
+
+```
+
+<a id="schemacreatethirdpartyhaulerprofilemodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`company_name`|string|-|
+|`password`|string(byte)|-|
+|`recaptcha`|string|-|
+|`username`|string|-|
+
+<h2 id="tocScustomeraddresslistmodel">CustomerAddressListModel</h2>
+
+```json
+{
+  "current_limit": "1",
+  "current_page": "1",
+  "results": [
+    {
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "total_count": "1",
+  "total_pages": "1"
+}
+
+```
+
+<a id="schemacustomeraddresslistmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`current_limit`|integer(int64)|-|
+|`current_page`|integer(int64)|-|
+|`results`|array[[CustomerAddressModel](#schemacustomeraddressmodel)]|-|
+|`total_count`|integer(int64)|-|
+|`total_pages`|integer(int64)|-|
+
 <h2 id="tocScustomeraddressmodel">CustomerAddressModel</h2>
 
 ```json
 {
-  "address": {
-    "country": "usa",
-    "id": 9,
-    "latitude": 48.0854948,
-    "line_1": "610 N 5th Ave",
-    "line_2": "P.O. Box 123",
-    "line_3": "Suite 1",
-    "line_4": "1st Floor",
-    "locality": "Sequim",
-    "longitude": -123.11221510000001,
-    "postcode": 98382,
-    "region": "WA"
-  },
-  "address_id": 9,
-  "customer_id": 9,
-  "is_active": true,
-  "is_billing": false,
-  "is_physical": true,
-  "is_shipping": true
+  "address_id": "1",
+  "country": "US",
+  "is_billing": "True",
+  "is_physical": "True",
+  "is_shipping": "False",
+  "latitude": "46.881398",
+  "line_1": "643 Summer Breeze",
+  "line_2": "Suite 34",
+  "line_3": "2nd Door on Left",
+  "line_4": "Blue slot",
+  "locality": "Sequim",
+  "longitude": "-121.276566",
+  "postcode": "98382",
+  "region": "WA"
 }
 
 ```
@@ -4376,103 +7484,8 @@ ISO 8601 DateTime Format (GMT)
 
 |Name|Type|Description|
 |---|---|---|
-|`address`|[AddressModel](#schemaaddressmodel)|-|
 |`address_id`|integer(int64)|-|
-|`customer_id`|integer(int64)|-|
-|`is_active`|boolean|-|
-|`is_billing`|boolean|-|
-|`is_physical`|boolean|-|
-|`is_shipping`|boolean|-|
-
-<h2 id="tocScustomermodel">CustomerModel</h2>
-
-```json
-{
-  "addresses": [
-    {
-      "address": {
-        "country": "usa",
-        "id": 9,
-        "latitude": 48.0854948,
-        "line_1": "610 N 5th Ave",
-        "line_2": "P.O. Box 123",
-        "line_3": "Suite 1",
-        "line_4": "1st Floor",
-        "locality": "Sequim",
-        "longitude": -123.11221510000001,
-        "postcode": 98382,
-        "region": "WA"
-      },
-      "address_id": 9,
-      "customer_id": 9,
-      "is_active": true,
-      "is_billing": false,
-      "is_physical": true,
-      "is_shipping": true
-    }
-  ],
-  "created_on": "2019-02-23T03:28:45.008Z",
-  "id": 9,
-  "locations": [
-    {
-      "created_on": "2019-02-23T03:28:45.009Z",
-      "customer_id": 9,
-      "is_active": true,
-      "is_commercial": false,
-      "last_edited": "2019-02-23T03:28:45.009Z",
-      "location_id": 1,
-      "note": "string",
-      "reference_number": "string",
-      "renewal_date": "string",
-      "sales_rep": "string",
-      "suspension_id": "string"
-    }
-  ],
-  "name": "YMCA",
-  "parent_id": 8
-}
-
-```
-
-<a id="schemacustomermodel"></a>
-
-|Name|Type|Description|
-|---|---|---|
-|`addresses`|array[[CustomerAddressModel](#schemacustomeraddressmodel)]|-|
-|`created_on`|string(datetime)|-|
-|`id`|integer(int64)|-|
-|`locations`|array[[JobLocationModel](#schemajoblocationmodel)]|-|
-|`name`|string(byte)|-|
-|`parent_id`|integer(int64)|-|
-
-<h2 id="tocScustomerresultaddressmodel">CustomerResultAddressModel</h2>
-
-```json
-{
-  "country": "USA",
-  "is_active": true,
-  "is_billing": true,
-  "is_physical": false,
-  "is_shipping": false,
-  "latitude": 48.076273,
-  "line_1": "643 Summer Breeze",
-  "line_2": "Suite 34",
-  "line_3": "2nd Door on Left",
-  "line_4": "Blue slot",
-  "locality": "Sequim",
-  "longitude": -123.117185,
-  "postcode": 98382,
-  "region": "WA"
-}
-
-```
-
-<a id="schemacustomerresultaddressmodel"></a>
-
-|Name|Type|Description|
-|---|---|---|
 |`country`|string|-|
-|`is_active`|boolean|-|
 |`is_billing`|boolean|-|
 |`is_physical`|boolean|-|
 |`is_shipping`|boolean|-|
@@ -4483,30 +7496,68 @@ ISO 8601 DateTime Format (GMT)
 |`line_4`|string|-|
 |`locality`|string|-|
 |`longitude`|number(float)|-|
-|`postcode`|string|-|
+|`postcode`|integer(int64)|-|
 |`region`|string|-|
 
-<h2 id="tocScustomerresultcontactmodel">CustomerResultContactModel</h2>
+<h2 id="tocScustomercontactlistmodel">CustomerContactListModel</h2>
 
 ```json
 {
+  "current_limit": "100",
+  "current_page": "1",
+  "results": [
+    {
+      "contact_id": "1",
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "total_count": "100",
+  "total_pages": "1"
+}
+
+```
+
+<a id="schemacustomercontactlistmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`current_limit`|integer(int64)|-|
+|`current_page`|integer(int64)|-|
+|`results`|array[[CustomerContactModel](#schemacustomercontactmodel)]|-|
+|`total_count`|integer(int64)|-|
+|`total_pages`|integer(int64)|-|
+
+<h2 id="tocScustomercontactmodel">CustomerContactModel</h2>
+
+```json
+{
+  "contact_id": "1",
   "email": "develop@crosoftware.com",
   "fax": "(360) 716-1968",
   "name": "John Doe",
-  "notify_on_acknowledged_request": false,
-  "notify_on_completed_request": false,
-  "notify_on_dispatched_request": false,
-  "notify_on_failed_request": false,
-  "notify_on_new_request": false,
+  "notify_on_acknowledged_request": "False",
+  "notify_on_completed_request": "False",
+  "notify_on_dispatched_request": "False",
+  "notify_on_failed_request": "False",
+  "notify_on_new_request": "False",
   "number": "1-111-111-1111"
 }
 
 ```
 
-<a id="schemacustomerresultcontactmodel"></a>
+<a id="schemacustomercontactmodel"></a>
 
 |Name|Type|Description|
 |---|---|---|
+|`contact_id`|integer(int64)|-|
 |`email`|string|-|
 |`fax`|string|-|
 |`name`|string|-|
@@ -4517,73 +7568,318 @@ ISO 8601 DateTime Format (GMT)
 |`notify_on_new_request`|boolean|-|
 |`number`|string|-|
 
-<h2 id="tocScustomerresultmodel">CustomerResultModel</h2>
+<h2 id="tocScustomerlistmodel">CustomerListModel</h2>
+
+```json
+{
+  "current_limit": "100",
+  "current_page": "1",
+  "results": [
+    {
+      "addresses": [
+        {
+          "address_id": "1",
+          "country": "US",
+          "is_billing": "True",
+          "is_physical": "True",
+          "is_shipping": "False",
+          "latitude": "46.881398",
+          "line_1": "643 Summer Breeze",
+          "line_2": "Suite 34",
+          "line_3": "2nd Door on Left",
+          "line_4": "Blue slot",
+          "locality": "Sequim",
+          "longitude": "-121.276566",
+          "postcode": "98382",
+          "region": "WA"
+        }
+      ],
+      "contacts": [
+        {
+          "contact_id": "1",
+          "email": "develop@crosoftware.com",
+          "fax": "(360) 716-1968",
+          "name": "John Doe",
+          "notify_on_acknowledged_request": "False",
+          "notify_on_completed_request": "False",
+          "notify_on_dispatched_request": "False",
+          "notify_on_failed_request": "False",
+          "notify_on_new_request": "False",
+          "number": "1-111-111-1111"
+        }
+      ],
+      "customer_id": "1",
+      "locations": [
+        {
+          "created_on": "2019-02-12T01:32:45.980000",
+          "is_active": "True",
+          "is_commercial": "True",
+          "last_edited": "2019-02-12T01:32:45.990000",
+          "location_id": "1",
+          "note": "An example note",
+          "reference_number": "REF#A1631",
+          "renewal_date": "2019-10-02T00:00:00",
+          "sales_rep": "John Doe",
+          "suspension_id": "1"
+        }
+      ],
+      "name": "Sequim Waste Inc.",
+      "parent_id": "1"
+    }
+  ],
+  "total_count": "100",
+  "total_pages": "1"
+}
+
+```
+
+<a id="schemacustomerlistmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`current_limit`|integer(int64)|-|
+|`current_page`|integer(int64)|-|
+|`results`|array[[CustomerModel](#schemacustomermodel)]|-|
+|`total_count`|integer(int64)|-|
+|`total_pages`|integer(int64)|-|
+
+<h2 id="tocScustomerlocationlistmodel">CustomerLocationListModel</h2>
+
+```json
+{
+  "current_limit": "100",
+  "current_page": "1",
+  "results": [
+    {
+      "addresses": [
+        {
+          "address_id": "1",
+          "country": "US",
+          "is_billing": "True",
+          "is_physical": "True",
+          "is_shipping": "False",
+          "latitude": "46.881398",
+          "line_1": "643 Summer Breeze",
+          "line_2": "Suite 34",
+          "line_3": "2nd Door on Left",
+          "line_4": "Blue slot",
+          "locality": "Sequim",
+          "longitude": "-121.276566",
+          "postcode": "98382",
+          "region": "WA"
+        }
+      ],
+      "contacts": [
+        {
+          "contact_id": "1",
+          "email": "develop@crosoftware.com",
+          "fax": "(360) 716-1968",
+          "name": "John Doe",
+          "notify_on_acknowledged_request": "False",
+          "notify_on_completed_request": "False",
+          "notify_on_dispatched_request": "False",
+          "notify_on_failed_request": "False",
+          "notify_on_new_request": "False",
+          "number": "1-111-111-1111"
+        }
+      ],
+      "created_on": "2019-03-08T16:40:37.647000",
+      "customer_id": "2",
+      "is_active": "True",
+      "is_commercial": "False",
+      "last_edited": "2019-03-08T16:40:37.647000",
+      "name": "Jane Smith",
+      "note": "An example note",
+      "parent_id": "1",
+      "reference_number": "1234",
+      "renewal_date": "2100-03-08T16:40:37.647000",
+      "sales_rep": "Jane Doe",
+      "suspension_id": "1"
+    }
+  ],
+  "total_count": "100",
+  "total_pages": "1"
+}
+
+```
+
+<a id="schemacustomerlocationlistmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`current_limit`|integer(int64)|-|
+|`current_page`|integer(int64)|-|
+|`results`|array[[CustomerLocationModel](#schemacustomerlocationmodel)]|-|
+|`total_count`|integer(int64)|-|
+|`total_pages`|integer(int64)|-|
+
+<h2 id="tocScustomerlocationmodel">CustomerLocationModel</h2>
 
 ```json
 {
   "addresses": [
     {
-      "country": "USA",
-      "is_active": true,
-      "is_billing": true,
-      "is_physical": false,
-      "is_shipping": false,
-      "latitude": 48.076273,
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
       "line_1": "643 Summer Breeze",
       "line_2": "Suite 34",
       "line_3": "2nd Door on Left",
       "line_4": "Blue slot",
       "locality": "Sequim",
-      "longitude": -123.117185,
-      "postcode": 98382,
+      "longitude": "-121.276566",
+      "postcode": "98382",
       "region": "WA"
     }
   ],
   "contacts": [
     {
+      "contact_id": "1",
       "email": "develop@crosoftware.com",
       "fax": "(360) 716-1968",
       "name": "John Doe",
-      "notify_on_acknowledged_request": false,
-      "notify_on_completed_request": false,
-      "notify_on_dispatched_request": false,
-      "notify_on_failed_request": false,
-      "notify_on_new_request": false,
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
       "number": "1-111-111-1111"
     }
   ],
-  "created_on": "2019-02-23T03:28:45.009Z",
-  "customer_id": 1,
-  "is_active": false,
-  "is_commercial": false,
-  "last_edited": "2019-02-23T03:28:45.009Z",
-  "location_id": 1,
-  "name": "DEMOCO001",
-  "note": "Service Location of DemoCo Inc.",
-  "parent_id": 1,
-  "reference_number": "Ref#100",
-  "renewal_date": "2019-02-23T03:28:45.009Z",
-  "sales_rep": "John Doe",
-  "suspension_id": 1
+  "created_on": "2019-03-08T16:40:37.647000",
+  "customer_id": "2",
+  "is_active": "True",
+  "is_commercial": "False",
+  "last_edited": "2019-03-08T16:40:37.647000",
+  "name": "Jane Smith",
+  "note": "An example note",
+  "parent_id": "1",
+  "reference_number": "1234",
+  "renewal_date": "2100-03-08T16:40:37.647000",
+  "sales_rep": "Jane Doe",
+  "suspension_id": "1"
 }
 
 ```
 
-<a id="schemacustomerresultmodel"></a>
+<a id="schemacustomerlocationmodel"></a>
 
 |Name|Type|Description|
 |---|---|---|
-|`addresses`|array[[CustomerResultAddressModel](#schemacustomerresultaddressmodel)]|-|
-|`contacts`|array[[CustomerResultContactModel](#schemacustomerresultcontactmodel)]|-|
+|`addresses`|array[[CustomerAddressModel](#schemacustomeraddressmodel)]|-|
+|`contacts`|array[[CustomerContactModel](#schemacustomercontactmodel)]|-|
 |`created_on`|string(datetime)|-|
 |`customer_id`|integer(int64)|-|
 |`is_active`|boolean|-|
 |`is_commercial`|boolean|-|
 |`last_edited`|string(datetime)|-|
-|`location_id`|integer(int64)|-|
 |`name`|string|-|
 |`note`|string|-|
 |`parent_id`|integer(int64)|-|
+|`reference_number`|string(byte)|-|
+|`renewal_date`|string(datetime)|-|
+|`sales_rep`|string|-|
+|`suspension_id`|integer(int64)|-|
+
+<h2 id="tocScustomermodel">CustomerModel</h2>
+
+```json
+{
+  "addresses": [
+    {
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "contact_id": "1",
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "customer_id": "1",
+  "locations": [
+    {
+      "created_on": "2019-02-12T01:32:45.980000",
+      "is_active": "True",
+      "is_commercial": "True",
+      "last_edited": "2019-02-12T01:32:45.990000",
+      "location_id": "1",
+      "note": "An example note",
+      "reference_number": "REF#A1631",
+      "renewal_date": "2019-10-02T00:00:00",
+      "sales_rep": "John Doe",
+      "suspension_id": "1"
+    }
+  ],
+  "name": "Sequim Waste Inc.",
+  "parent_id": "1"
+}
+
+```
+
+<a id="schemacustomermodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`addresses`|array[[CustomerAddressModel](#schemacustomeraddressmodel)]|-|
+|`contacts`|array[[CustomerContactModel](#schemacustomercontactmodel)]|-|
+|`customer_id`|integer(int64)|-|
+|`locations`|array[[CustomerModelLocationModel](#schemacustomermodellocationmodel)]|-|
+|`name`|string|-|
+|`parent_id`|integer(int64)|-|
+
+<h2 id="tocScustomermodellocationmodel">CustomerModelLocationModel</h2>
+
+```json
+{
+  "created_on": "2019-02-12T01:32:45.980000",
+  "is_active": "True",
+  "is_commercial": "True",
+  "last_edited": "2019-02-12T01:32:45.990000",
+  "location_id": "1",
+  "note": "An example note",
+  "reference_number": "REF#A1631",
+  "renewal_date": "2019-10-02T00:00:00",
+  "sales_rep": "John Doe",
+  "suspension_id": "1"
+}
+
+```
+
+<a id="schemacustomermodellocationmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`created_on`|string(datetime)|-|
+|`is_active`|boolean|-|
+|`is_commercial`|boolean|-|
+|`last_edited`|string(datetime)|-|
+|`location_id`|integer(int64)|-|
+|`note`|string|-|
 |`reference_number`|string|-|
 |`renewal_date`|string(datetime)|-|
 |`sales_rep`|string|-|
@@ -4598,19 +7894,19 @@ ISO 8601 DateTime Format (GMT)
   "contact_email": "support@crosoftware.net",
   "contact_name": "John Doe",
   "contact_phone": "(706) 360-7109",
-  "id": 1,
-  "is_holding_yard": true,
-  "latitude": 128.123,
+  "id": "1",
+  "is_holding_yard": "True",
+  "latitude": "128.123",
   "location": {
-    "id": 1,
-    "is_active": true,
+    "id": "1",
+    "is_active": "True",
     "name": "Sequim"
   },
-  "location_id": 1,
-  "longitude": 54.234,
+  "location_id": "1",
+  "longitude": "54.234",
   "name": "A Destination",
   "state": "Washington",
-  "zip": 98368
+  "zip": "98368"
 }
 
 ```
@@ -4638,30 +7934,30 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "current_limit": 100,
-  "current_page": 1,
+  "current_limit": "100",
+  "current_page": "1",
   "results": [
     {
       "address": "1234 Cro St",
-      "can_convert_to_group": false,
-      "can_create_requests": false,
-      "can_edit_requests": false,
-      "can_reposition_asset": false,
+      "can_convert_to_group": "False",
+      "can_create_requests": "False",
+      "can_edit_requests": "False",
+      "can_reposition_asset": "False",
       "city": "Sequim",
-      "disable_shift_tracking": false,
+      "disable_shift_tracking": "False",
       "email": "john@crosoftware.net",
-      "id": 2,
+      "id": "2",
       "license_number": "123ABC",
-      "location_id": 1,
+      "location_id": "1",
       "name": "John Denver",
       "phone_number": "(360) 718-1234",
       "state": "WA",
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-      "zip": 98368
+      "zip": "98368"
     }
   ],
-  "total_count": 1,
-  "total_pages": 1
+  "total_count": "1",
+  "total_pages": "1"
 }
 
 ```
@@ -4681,21 +7977,21 @@ ISO 8601 DateTime Format (GMT)
 ```json
 {
   "address": "1234 Cro St",
-  "can_convert_to_group": false,
-  "can_create_requests": false,
-  "can_edit_requests": false,
-  "can_reposition_asset": false,
+  "can_convert_to_group": "False",
+  "can_create_requests": "False",
+  "can_edit_requests": "False",
+  "can_reposition_asset": "False",
   "city": "Sequim",
-  "disable_shift_tracking": false,
+  "disable_shift_tracking": "False",
   "email": "john@crosoftware.net",
-  "id": 2,
+  "id": "2",
   "license_number": "123ABC",
-  "location_id": 1,
+  "location_id": "1",
   "name": "John Denver",
   "phone_number": "(360) 718-1234",
   "state": "WA",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "zip": 98368
+  "zip": "98368"
 }
 
 ```
@@ -4721,19 +8017,62 @@ ISO 8601 DateTime Format (GMT)
 |`third_party_hauler_id`|[UUID](#schemauuid)|UUID|
 |`zip`|string|-|
 
+<h2 id="tocSgpseventcoordsprofilemodel">GpsEventCoordsProfileModel</h2>
+
+```json
+{
+  "heading": "184.57",
+  "latitude": "37.33517518",
+  "longitude": "-122.03255055",
+  "speed": "2.41"
+}
+
+```
+
+<a id="schemagpseventcoordsprofilemodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`heading`|number(float)|-|
+|`latitude`|number(float)|-|
+|`longitude`|number(float)|-|
+|`speed`|number(float)|-|
+
+<h2 id="tocSgpseventlocationprofilemodel">GpsEventLocationProfileModel</h2>
+
+```json
+{
+  "coords": {
+    "heading": "184.57",
+    "latitude": "37.33517518",
+    "longitude": "-122.03255055",
+    "speed": "2.41"
+  },
+  "timestamp": "2019-02-07T00:12:19.354Z"
+}
+
+```
+
+<a id="schemagpseventlocationprofilemodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`coords`|[GpsEventCoordsProfileModel](#schemagpseventcoordsprofilemodel)|-|
+|`timestamp`|string(datetime)|-|
+
 <h2 id="tocSgpseventmodel">GpsEventModel</h2>
 
 ```json
 {
-  "bearing": 184.57,
-  "created_on": "2019-02-23T03:28:45.011Z",
+  "bearing": "184.57",
+  "created_on": "2019-02-07T00:12:19.354000",
   "device_name": "N/A",
-  "driver_id": 2,
-  "id": 3,
-  "latitude": 37.33517518,
-  "longitude": -122.03255055,
+  "driver_id": "2",
+  "id": "3",
+  "latitude": "37.33517518",
+  "longitude": "-122.03255055",
   "truck_id": "string",
-  "velocity": 2.41
+  "velocity": "2.41"
 }
 
 ```
@@ -4752,20 +8091,43 @@ ISO 8601 DateTime Format (GMT)
 |`truck_id`|string|-|
 |`velocity`|number(float)|-|
 
+<h2 id="tocSgpseventprofilemodel">GpsEventProfileModel</h2>
+
+```json
+{
+  "location": {
+    "coords": {
+      "heading": "184.57",
+      "latitude": "37.33517518",
+      "longitude": "-122.03255055",
+      "speed": "2.41"
+    },
+    "timestamp": "2019-02-07T00:12:19.354Z"
+  }
+}
+
+```
+
+<a id="schemagpseventprofilemodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`location`|[GpsEventLocationProfileModel](#schemagpseventlocationprofilemodel)|-|
+
 <h2 id="tocShaulerconnectionmodel">HaulerConnectionModel</h2>
 
 ```json
 {
-  "approved_by": 1,
-  "approved_on": "2019-02-23T03:28:45.012Z",
+  "approved_by": "1",
+  "approved_on": "2018-10-31T11:24:53.153000",
   "denied_on": "string",
-  "is_approved": true,
-  "location_id": 1,
+  "is_approved": "True",
+  "location_id": "1",
   "provider_email": "test_hauler@crosoftware.net",
-  "provider_id": 2,
+  "provider_id": "2",
   "provider_name": "CRO Scrap - Sequim",
   "provider_phone": "na",
-  "requested_on": "2019-02-23T03:28:45.012Z"
+  "requested_on": "2018-10-31T18:24:06.723000"
 }
 
 ```
@@ -4789,218 +8151,225 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "current_limit": 1,
-  "current_page": 1,
+  "current_limit": "1",
+  "current_page": "1",
   "results": [
     {
+      "arrived_at_dest": "2018-11-18T19:54:55.327000",
+      "arrived_on": "2018-11-18T19:54:55.327000",
       "asset": {
         "asset_type": {
-          "deleted": false,
-          "id": 1,
-          "is_default": false,
-          "location_id": 1,
+          "deleted": "False",
+          "id": "1",
+          "is_default": "False",
+          "location_id": "1",
           "name": "10 yrd",
-          "quantity": 2,
-          "require_numbers": true,
-          "weight": 3245
+          "quantity": "2",
+          "require_numbers": "True",
+          "weight": "3245"
         },
-        "asset_type_id": 1,
-        "cluster": 1,
-        "customer_id": 1,
+        "asset_type_id": "1",
+        "cluster": "1",
+        "customer_id": "1",
         "description": "A description",
-        "dispatched_on": "2019-02-23T03:28:45.012Z",
-        "id": 1,
-        "is_returned": false,
-        "last_activity_on": "2019-02-23T03:28:45.012Z",
-        "last_rental_invoice_on": "2019-02-23T03:28:45.012Z",
-        "latitude": 54.235,
+        "dispatched_on": "2018-10-31T11:34:13.690000",
+        "id": "1",
+        "is_returned": "False",
+        "last_activity_on": "2018-10-31T11:34:13.690000",
+        "last_rental_invoice_on": "2018-10-31T11:34:13.690000",
+        "latitude": "54.235",
         "location": {
-          "id": 1,
-          "is_active": true,
+          "id": "1",
+          "is_active": "True",
           "name": "Sequim"
         },
-        "location_id": 1,
-        "longitude": 127.123,
+        "location_id": "1",
+        "longitude": "127.123",
         "number": "REF100",
-        "quantity": 1,
-        "returned_on": "2019-02-23T03:28:45.012Z"
+        "quantity": "1",
+        "returned_on": "2018-10-31T11:34:13.690000"
       },
+      "asset_dropped": "1",
+      "asset_id": "1",
+      "asset_quantity": "1",
       "asset_type": {
-        "deleted": false,
-        "id": 1,
-        "is_default": false,
-        "location_id": 1,
+        "deleted": "False",
+        "id": "1",
+        "is_default": "False",
+        "location_id": "1",
         "name": "10 yrd",
-        "quantity": 2,
-        "require_numbers": true,
-        "weight": 3245
+        "quantity": "2",
+        "require_numbers": "True",
+        "weight": "3245"
       },
+      "asset_type_id": "1",
+      "completed_by": "1",
+      "completed_by_driver": "False",
+      "completed_on": "2018-11-18T19:54:55.327000",
+      "confirmed_on": "2018-11-18T19:54:55.327000",
+      "created_by_id": "1",
+      "created_with_portal": "False",
       "customer": {
         "addresses": [
           {
-            "address": {
-              "country": "usa",
-              "id": 9,
-              "latitude": 48.0854948,
-              "line_1": "610 N 5th Ave",
-              "line_2": "P.O. Box 123",
-              "line_3": "Suite 1",
-              "line_4": "1st Floor",
-              "locality": "Sequim",
-              "longitude": -123.11221510000001,
-              "postcode": 98382,
-              "region": "WA"
-            },
-            "address_id": 9,
-            "customer_id": 9,
-            "is_active": true,
-            "is_billing": false,
-            "is_physical": true,
-            "is_shipping": true
+            "address_id": "1",
+            "country": "US",
+            "is_billing": "True",
+            "is_physical": "True",
+            "is_shipping": "False",
+            "latitude": "46.881398",
+            "line_1": "643 Summer Breeze",
+            "line_2": "Suite 34",
+            "line_3": "2nd Door on Left",
+            "line_4": "Blue slot",
+            "locality": "Sequim",
+            "longitude": "-121.276566",
+            "postcode": "98382",
+            "region": "WA"
           }
         ],
-        "created_on": "2019-02-23T03:28:45.012Z",
-        "id": 9,
+        "contacts": [
+          {
+            "contact_id": "1",
+            "email": "develop@crosoftware.com",
+            "fax": "(360) 716-1968",
+            "name": "John Doe",
+            "notify_on_acknowledged_request": "False",
+            "notify_on_completed_request": "False",
+            "notify_on_dispatched_request": "False",
+            "notify_on_failed_request": "False",
+            "notify_on_new_request": "False",
+            "number": "1-111-111-1111"
+          }
+        ],
+        "customer_id": "1",
         "locations": [
           {
-            "created_on": "2019-02-23T03:28:45.012Z",
-            "customer_id": 9,
-            "is_active": true,
-            "is_commercial": false,
-            "last_edited": "2019-02-23T03:28:45.012Z",
-            "location_id": 1,
-            "note": "string",
-            "reference_number": "string",
-            "renewal_date": "string",
-            "sales_rep": "string",
-            "suspension_id": "string"
+            "created_on": "2019-02-12T01:32:45.980000",
+            "is_active": "True",
+            "is_commercial": "True",
+            "last_edited": "2019-02-12T01:32:45.990000",
+            "location_id": "1",
+            "note": "An example note",
+            "reference_number": "REF#A1631",
+            "renewal_date": "2019-10-02T00:00:00",
+            "sales_rep": "John Doe",
+            "suspension_id": "1"
           }
         ],
-        "name": "YMCA",
-        "parent_id": 8
+        "name": "Sequim Waste Inc.",
+        "parent_id": "1"
       },
+      "customer_id": "9",
+      "customer_notes": "Some customer notes",
+      "departed_on": "2018-11-18T19:54:55.327000",
+      "desired_asset_desc": "An asset description.",
+      "dispatch_priority": "H",
+      "dispatched_by_route": "1",
+      "dispatched_on": "2018-11-18T19:54:55.327000",
+      "dispatcher_notes": "Some dispatcher notes",
+      "do_confirm": "False",
+      "driver_notes": "Some driver notes",
+      "dropped_number": "Unused/deprecated field",
       "dump_location": {
         "address": "123 Sequim Ave.",
         "city": "Sequim",
         "contact_email": "support@crosoftware.net",
         "contact_name": "John Doe",
         "contact_phone": "(706) 360-7109",
-        "id": 1,
-        "is_holding_yard": true,
-        "latitude": 128.123,
+        "id": "1",
+        "is_holding_yard": "True",
+        "latitude": "128.123",
         "location": {
-          "id": 1,
-          "is_active": true,
+          "id": "1",
+          "is_active": "True",
           "name": "Sequim"
         },
-        "location_id": 1,
-        "longitude": 54.234,
+        "location_id": "1",
+        "longitude": "54.234",
         "name": "A Destination",
         "state": "Washington",
-        "zip": 98368
+        "zip": "98368"
       },
+      "dump_location_id": "1",
+      "dumped_on": "2018-11-18T19:54:55.327000",
+      "end_time": "2018-11-18T19:54:55.327000",
+      "fail_reason": "Failure reason",
       "final_location": {
         "address": "123 Sequim Ave.",
         "city": "Sequim",
         "contact_email": "support@crosoftware.net",
         "contact_name": "John Doe",
         "contact_phone": "(706) 360-7109",
-        "id": 1,
-        "is_holding_yard": true,
-        "latitude": 128.123,
+        "id": "1",
+        "is_holding_yard": "True",
+        "latitude": "128.123",
         "location": {
-          "id": 1,
-          "is_active": true,
+          "id": "1",
+          "is_active": "True",
           "name": "Sequim"
         },
-        "location_id": 1,
-        "longitude": 54.234,
+        "location_id": "1",
+        "longitude": "54.234",
         "name": "A Destination",
         "state": "Washington",
-        "zip": 98368
+        "zip": "98368"
       },
+      "final_location_id": "1",
+      "flags": "Job notes",
+      "id": "1",
+      "invoice_notes": "Some invoice notes",
+      "is_completed": "False",
+      "is_declined": "False",
+      "is_deleted": "False",
+      "is_failed": "False",
+      "is_paid": true,
+      "job_group_id": "1",
+      "location_id": "1",
+      "merged_with_route": "1",
+      "original_schedule_date": "2018-10-31T11:34:13.690000",
+      "pickup_date": "2018-10-31T11:34:13.690000",
+      "priority": "-1",
+      "reference_number": null,
+      "removed_number": "string",
+      "requested_on": "2018-10-31T11:33:52.920000",
+      "require_image": "False",
+      "require_material": "False",
+      "require_signature": "False",
+      "require_weights": "False",
+      "schedule_date": "2018-10-31T00:00:00",
       "start_location": {
         "address": "123 Sequim Ave.",
         "city": "Sequim",
         "contact_email": "support@crosoftware.net",
         "contact_name": "John Doe",
         "contact_phone": "(706) 360-7109",
-        "id": 1,
-        "is_holding_yard": true,
-        "latitude": 128.123,
+        "id": "1",
+        "is_holding_yard": "True",
+        "latitude": "128.123",
         "location": {
-          "id": 1,
-          "is_active": true,
+          "id": "1",
+          "is_active": "True",
           "name": "Sequim"
         },
-        "location_id": 1,
-        "longitude": 54.234,
+        "location_id": "1",
+        "longitude": "54.234",
         "name": "A Destination",
         "state": "Washington",
-        "zip": 98368
+        "zip": "98368"
       },
+      "start_location_id": "1",
+      "start_time": "2018-10-31T11:33:52.920000",
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-      "arrived_at_dest": "2019-02-23T03:28:45.012Z",
-      "arrived_on": "2019-02-23T03:28:45.012Z",
-      "asset_dropped": 1,
-      "asset_id": 1,
-      "asset_quantity": 1,
-      "asset_type_id": 1,
-      "completed_by": 1,
-      "completed_by_driver": false,
-      "completed_on": "2019-02-23T03:28:45.012Z",
-      "confirmed_on": "2019-02-23T03:28:45.012Z",
-      "created_by_id": 1,
-      "created_with_portal": false,
-      "customer_id": 9,
-      "customer_notes": "Some customer notes",
-      "departed_on": "2019-02-23T03:28:45.012Z",
-      "desired_asset_desc": "An asset description.",
-      "dispatch_priority": "H",
-      "dispatched_by_route": 1,
-      "dispatched_on": "2019-02-23T03:28:45.012Z",
-      "dispatcher_notes": "Some dispatcher notes",
-      "do_confirm": false,
-      "driver_notes": "Some driver notes",
-      "dropped_number": "Unused/deprecated field",
-      "dump_location_id": 1,
-      "dumped_on": "2019-02-23T03:28:45.012Z",
-      "end_time": "2019-02-23T03:28:45.012Z",
-      "fail_reason": "Failure reason",
-      "final_location_id": 1,
-      "flags": "Job notes",
-      "id": 1,
-      "invoice_notes": "Some invoice notes",
-      "is_completed": false,
-      "is_declined": false,
-      "is_deleted": false,
-      "is_failed": false,
-      "is_paid": true,
-      "job_group_id": 1,
-      "location_id": 1,
-      "merged_with_route": 1,
-      "original_schedule_date": "2019-02-23T03:28:45.012Z",
-      "pickup_date": "2019-02-23T03:28:45.012Z",
-      "priority": -1,
-      "reference_number": null,
-      "removed_number": "string",
-      "requested_on": "2019-02-23T03:28:45.012Z",
-      "require_image": false,
-      "require_material": false,
-      "require_signature": false,
-      "require_weights": false,
-      "schedule_date": "2019-02-23T03:28:45.012Z",
-      "start_location_id": 1,
-      "start_time": "2019-02-23T03:28:45.012Z",
-      "times_failed": 0,
-      "times_rolled_over": 0,
-      "truck_id": 1,
+      "times_failed": "0",
+      "times_rolled_over": "0",
+      "truck_id": "1",
       "type": "D",
-      "weighed_on": "2019-02-23T03:28:45.012Z"
+      "weighed_on": "2018-10-31T11:33:52.920000"
     }
   ],
-  "total_count": 1,
-  "total_pages": 1
+  "total_count": "1",
+  "total_pages": "1"
 }
 
 ```
@@ -5015,249 +8384,221 @@ ISO 8601 DateTime Format (GMT)
 |`total_count`|integer(int64)|-|
 |`total_pages`|integer(int64)|-|
 
-<h2 id="tocSjoblocationmodel">JobLocationModel</h2>
-
-```json
-{
-  "created_on": "2019-02-23T03:28:45.013Z",
-  "customer_id": 9,
-  "is_active": true,
-  "is_commercial": false,
-  "last_edited": "2019-02-23T03:28:45.013Z",
-  "location_id": 1,
-  "note": "string",
-  "reference_number": "string",
-  "renewal_date": "string",
-  "sales_rep": "string",
-  "suspension_id": "string"
-}
-
-```
-
-<a id="schemajoblocationmodel"></a>
-
-|Name|Type|Description|
-|---|---|---|
-|`created_on`|string(datetime)|-|
-|`customer_id`|integer(int64)|-|
-|`is_active`|boolean|-|
-|`is_commercial`|boolean|-|
-|`last_edited`|string(datetime)|-|
-|`location_id`|integer(int64)|-|
-|`note`|string|-|
-|`reference_number`|string|-|
-|`renewal_date`|string|-|
-|`sales_rep`|string|-|
-|`suspension_id`|string|-|
-
 <h2 id="tocSjobmodel">JobModel</h2>
 
 ```json
 {
+  "arrived_at_dest": "2018-11-18T19:54:55.327000",
+  "arrived_on": "2018-11-18T19:54:55.327000",
   "asset": {
     "asset_type": {
-      "deleted": false,
-      "id": 1,
-      "is_default": false,
-      "location_id": 1,
+      "deleted": "False",
+      "id": "1",
+      "is_default": "False",
+      "location_id": "1",
       "name": "10 yrd",
-      "quantity": 2,
-      "require_numbers": true,
-      "weight": 3245
+      "quantity": "2",
+      "require_numbers": "True",
+      "weight": "3245"
     },
-    "asset_type_id": 1,
-    "cluster": 1,
-    "customer_id": 1,
+    "asset_type_id": "1",
+    "cluster": "1",
+    "customer_id": "1",
     "description": "A description",
-    "dispatched_on": "2019-02-23T03:28:45.014Z",
-    "id": 1,
-    "is_returned": false,
-    "last_activity_on": "2019-02-23T03:28:45.014Z",
-    "last_rental_invoice_on": "2019-02-23T03:28:45.014Z",
-    "latitude": 54.235,
+    "dispatched_on": "2018-10-31T11:34:13.690000",
+    "id": "1",
+    "is_returned": "False",
+    "last_activity_on": "2018-10-31T11:34:13.690000",
+    "last_rental_invoice_on": "2018-10-31T11:34:13.690000",
+    "latitude": "54.235",
     "location": {
-      "id": 1,
-      "is_active": true,
+      "id": "1",
+      "is_active": "True",
       "name": "Sequim"
     },
-    "location_id": 1,
-    "longitude": 127.123,
+    "location_id": "1",
+    "longitude": "127.123",
     "number": "REF100",
-    "quantity": 1,
-    "returned_on": "2019-02-23T03:28:45.014Z"
+    "quantity": "1",
+    "returned_on": "2018-10-31T11:34:13.690000"
   },
+  "asset_dropped": "1",
+  "asset_id": "1",
+  "asset_quantity": "1",
   "asset_type": {
-    "deleted": false,
-    "id": 1,
-    "is_default": false,
-    "location_id": 1,
+    "deleted": "False",
+    "id": "1",
+    "is_default": "False",
+    "location_id": "1",
     "name": "10 yrd",
-    "quantity": 2,
-    "require_numbers": true,
-    "weight": 3245
+    "quantity": "2",
+    "require_numbers": "True",
+    "weight": "3245"
   },
+  "asset_type_id": "1",
+  "completed_by": "1",
+  "completed_by_driver": "False",
+  "completed_on": "2018-11-18T19:54:55.327000",
+  "confirmed_on": "2018-11-18T19:54:55.327000",
+  "created_by_id": "1",
+  "created_with_portal": "False",
   "customer": {
     "addresses": [
       {
-        "address": {
-          "country": "usa",
-          "id": 9,
-          "latitude": 48.0854948,
-          "line_1": "610 N 5th Ave",
-          "line_2": "P.O. Box 123",
-          "line_3": "Suite 1",
-          "line_4": "1st Floor",
-          "locality": "Sequim",
-          "longitude": -123.11221510000001,
-          "postcode": 98382,
-          "region": "WA"
-        },
-        "address_id": 9,
-        "customer_id": 9,
-        "is_active": true,
-        "is_billing": false,
-        "is_physical": true,
-        "is_shipping": true
+        "address_id": "1",
+        "country": "US",
+        "is_billing": "True",
+        "is_physical": "True",
+        "is_shipping": "False",
+        "latitude": "46.881398",
+        "line_1": "643 Summer Breeze",
+        "line_2": "Suite 34",
+        "line_3": "2nd Door on Left",
+        "line_4": "Blue slot",
+        "locality": "Sequim",
+        "longitude": "-121.276566",
+        "postcode": "98382",
+        "region": "WA"
       }
     ],
-    "created_on": "2019-02-23T03:28:45.014Z",
-    "id": 9,
+    "contacts": [
+      {
+        "contact_id": "1",
+        "email": "develop@crosoftware.com",
+        "fax": "(360) 716-1968",
+        "name": "John Doe",
+        "notify_on_acknowledged_request": "False",
+        "notify_on_completed_request": "False",
+        "notify_on_dispatched_request": "False",
+        "notify_on_failed_request": "False",
+        "notify_on_new_request": "False",
+        "number": "1-111-111-1111"
+      }
+    ],
+    "customer_id": "1",
     "locations": [
       {
-        "created_on": "2019-02-23T03:28:45.014Z",
-        "customer_id": 9,
-        "is_active": true,
-        "is_commercial": false,
-        "last_edited": "2019-02-23T03:28:45.014Z",
-        "location_id": 1,
-        "note": "string",
-        "reference_number": "string",
-        "renewal_date": "string",
-        "sales_rep": "string",
-        "suspension_id": "string"
+        "created_on": "2019-02-12T01:32:45.980000",
+        "is_active": "True",
+        "is_commercial": "True",
+        "last_edited": "2019-02-12T01:32:45.990000",
+        "location_id": "1",
+        "note": "An example note",
+        "reference_number": "REF#A1631",
+        "renewal_date": "2019-10-02T00:00:00",
+        "sales_rep": "John Doe",
+        "suspension_id": "1"
       }
     ],
-    "name": "YMCA",
-    "parent_id": 8
+    "name": "Sequim Waste Inc.",
+    "parent_id": "1"
   },
+  "customer_id": "9",
+  "customer_notes": "Some customer notes",
+  "departed_on": "2018-11-18T19:54:55.327000",
+  "desired_asset_desc": "An asset description.",
+  "dispatch_priority": "H",
+  "dispatched_by_route": "1",
+  "dispatched_on": "2018-11-18T19:54:55.327000",
+  "dispatcher_notes": "Some dispatcher notes",
+  "do_confirm": "False",
+  "driver_notes": "Some driver notes",
+  "dropped_number": "Unused/deprecated field",
   "dump_location": {
     "address": "123 Sequim Ave.",
     "city": "Sequim",
     "contact_email": "support@crosoftware.net",
     "contact_name": "John Doe",
     "contact_phone": "(706) 360-7109",
-    "id": 1,
-    "is_holding_yard": true,
-    "latitude": 128.123,
+    "id": "1",
+    "is_holding_yard": "True",
+    "latitude": "128.123",
     "location": {
-      "id": 1,
-      "is_active": true,
+      "id": "1",
+      "is_active": "True",
       "name": "Sequim"
     },
-    "location_id": 1,
-    "longitude": 54.234,
+    "location_id": "1",
+    "longitude": "54.234",
     "name": "A Destination",
     "state": "Washington",
-    "zip": 98368
+    "zip": "98368"
   },
+  "dump_location_id": "1",
+  "dumped_on": "2018-11-18T19:54:55.327000",
+  "end_time": "2018-11-18T19:54:55.327000",
+  "fail_reason": "Failure reason",
   "final_location": {
     "address": "123 Sequim Ave.",
     "city": "Sequim",
     "contact_email": "support@crosoftware.net",
     "contact_name": "John Doe",
     "contact_phone": "(706) 360-7109",
-    "id": 1,
-    "is_holding_yard": true,
-    "latitude": 128.123,
+    "id": "1",
+    "is_holding_yard": "True",
+    "latitude": "128.123",
     "location": {
-      "id": 1,
-      "is_active": true,
+      "id": "1",
+      "is_active": "True",
       "name": "Sequim"
     },
-    "location_id": 1,
-    "longitude": 54.234,
+    "location_id": "1",
+    "longitude": "54.234",
     "name": "A Destination",
     "state": "Washington",
-    "zip": 98368
+    "zip": "98368"
   },
+  "final_location_id": "1",
+  "flags": "Job notes",
+  "id": "1",
+  "invoice_notes": "Some invoice notes",
+  "is_completed": "False",
+  "is_declined": "False",
+  "is_deleted": "False",
+  "is_failed": "False",
+  "is_paid": true,
+  "job_group_id": "1",
+  "location_id": "1",
+  "merged_with_route": "1",
+  "original_schedule_date": "2018-10-31T11:34:13.690000",
+  "pickup_date": "2018-10-31T11:34:13.690000",
+  "priority": "-1",
+  "reference_number": null,
+  "removed_number": "string",
+  "requested_on": "2018-10-31T11:33:52.920000",
+  "require_image": "False",
+  "require_material": "False",
+  "require_signature": "False",
+  "require_weights": "False",
+  "schedule_date": "2018-10-31T00:00:00",
   "start_location": {
     "address": "123 Sequim Ave.",
     "city": "Sequim",
     "contact_email": "support@crosoftware.net",
     "contact_name": "John Doe",
     "contact_phone": "(706) 360-7109",
-    "id": 1,
-    "is_holding_yard": true,
-    "latitude": 128.123,
+    "id": "1",
+    "is_holding_yard": "True",
+    "latitude": "128.123",
     "location": {
-      "id": 1,
-      "is_active": true,
+      "id": "1",
+      "is_active": "True",
       "name": "Sequim"
     },
-    "location_id": 1,
-    "longitude": 54.234,
+    "location_id": "1",
+    "longitude": "54.234",
     "name": "A Destination",
     "state": "Washington",
-    "zip": 98368
+    "zip": "98368"
   },
+  "start_location_id": "1",
+  "start_time": "2018-10-31T11:33:52.920000",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "arrived_at_dest": "2019-02-23T03:28:45.014Z",
-  "arrived_on": "2019-02-23T03:28:45.014Z",
-  "asset_dropped": 1,
-  "asset_id": 1,
-  "asset_quantity": 1,
-  "asset_type_id": 1,
-  "completed_by": 1,
-  "completed_by_driver": false,
-  "completed_on": "2019-02-23T03:28:45.014Z",
-  "confirmed_on": "2019-02-23T03:28:45.014Z",
-  "created_by_id": 1,
-  "created_with_portal": false,
-  "customer_id": 9,
-  "customer_notes": "Some customer notes",
-  "departed_on": "2019-02-23T03:28:45.014Z",
-  "desired_asset_desc": "An asset description.",
-  "dispatch_priority": "H",
-  "dispatched_by_route": 1,
-  "dispatched_on": "2019-02-23T03:28:45.014Z",
-  "dispatcher_notes": "Some dispatcher notes",
-  "do_confirm": false,
-  "driver_notes": "Some driver notes",
-  "dropped_number": "Unused/deprecated field",
-  "dump_location_id": 1,
-  "dumped_on": "2019-02-23T03:28:45.014Z",
-  "end_time": "2019-02-23T03:28:45.014Z",
-  "fail_reason": "Failure reason",
-  "final_location_id": 1,
-  "flags": "Job notes",
-  "id": 1,
-  "invoice_notes": "Some invoice notes",
-  "is_completed": false,
-  "is_declined": false,
-  "is_deleted": false,
-  "is_failed": false,
-  "is_paid": true,
-  "job_group_id": 1,
-  "location_id": 1,
-  "merged_with_route": 1,
-  "original_schedule_date": "2019-02-23T03:28:45.014Z",
-  "pickup_date": "2019-02-23T03:28:45.014Z",
-  "priority": -1,
-  "reference_number": null,
-  "removed_number": "string",
-  "requested_on": "2019-02-23T03:28:45.014Z",
-  "require_image": false,
-  "require_material": false,
-  "require_signature": false,
-  "require_weights": false,
-  "schedule_date": "2019-02-23T03:28:45.014Z",
-  "start_location_id": 1,
-  "start_time": "2019-02-23T03:28:45.014Z",
-  "times_failed": 0,
-  "times_rolled_over": 0,
-  "truck_id": 1,
+  "times_failed": "0",
+  "times_rolled_over": "0",
+  "truck_id": "1",
   "type": "D",
-  "weighed_on": "2019-02-23T03:28:45.014Z"
+  "weighed_on": "2018-10-31T11:33:52.920000"
 }
 
 ```
@@ -5266,18 +8607,13 @@ ISO 8601 DateTime Format (GMT)
 
 |Name|Type|Description|
 |---|---|---|
-|`asset`|[AssetModel](#schemaassetmodel)|-|
-|`asset_type`|[AssetTypeModel](#schemaassettypemodel)|-|
-|`customer`|[CustomerModel](#schemacustomermodel)|-|
-|`dump_location`|[DestinationModel](#schemadestinationmodel)|-|
-|`final_location`|[DestinationModel](#schemadestinationmodel)|-|
-|`start_location`|[DestinationModel](#schemadestinationmodel)|-|
-|`third_party_hauler_id`|[UUID](#schemauuid)|UUID|
 |`arrived_at_dest`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Entered by driver for dispatcher and customer. Asset arrival at destination time. Only applicable for jobs with a valid dump destination.|
 |`arrived_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Drive start time entered by driver for dispatcher and customer (arrived at job slider).|
+|`asset`|[AssetModel](#schemaassetmodel)|-|
 |`asset_dropped`|integer(int64)|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types 'D', 'E'.|
 |`asset_id`|integer(int64)|Applicable to job types 'E', 'P', 'R'.|
 |`asset_quantity`|integer(int64)|How many assets are being serviced within a cluster (for jobs assigned to an asset cluster). For jobs dispatched by routes, or manually dispatched route stops, this value is 0 or 1.|
+|`asset_type`|[AssetTypeModel](#schemaassettypemodel)|-|
 |`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E').|
 |`completed_by`|integer(int64)|Dispatcher or driver id.|
 |`completed_by_driver`|boolean|If TRUE, completed by driver. If FALSE, completed by dispatcher.|
@@ -5285,6 +8621,7 @@ ISO 8601 DateTime Format (GMT)
 |`confirmed_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Must be in the past.|
 |`created_by_id`|integer(int64)|Customer, dispatcher, or driver id.|
 |`created_with_portal`|boolean|Unused field|
+|`customer`|[CustomerModel](#schemacustomermodel)|-|
 |`customer_id`|integer(int64)|Customer identifier.|
 |`customer_notes`|string|Notes entered by customers to communicate with dispatchers.|
 |`departed_on`|string(datetime)|Unused/deprecated|
@@ -5296,10 +8633,12 @@ ISO 8601 DateTime Format (GMT)
 |`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched.|
 |`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers.|
 |`dropped_number`|string|Unused/deprecated|
+|`dump_location`|[DestinationModel](#schemadestinationmodel)|-|
 |`dump_location_id`|integer(int64)|Asset or asset cluster dump location identifier (e.g. trash bin needs  dumped before returning from customer).|
 |`dumped_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Dump request completion date.|
 |`end_time`|string(datetime)|Future estimated time of job completion.|
 |`fail_reason`|string|Failure description selected by a driver for use by dispatchers.|
+|`final_location`|[DestinationModel](#schemadestinationmodel)|-|
 |`final_location_id`|integer(int64)|Final location identifier. Used by dispatchers for prioritizing jobs. Used by drivers to know where to leave the asset on job completion.|
 |`flags`|string|Job notes.|
 |`id`|integer(int64)|Job identifier.|
@@ -5323,99 +8662,31 @@ ISO 8601 DateTime Format (GMT)
 |`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion.|
 |`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion.|
 |`schedule_date`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Scheduled job completion date.|
+|`start_location`|[DestinationModel](#schemadestinationmodel)|-|
 |`start_location_id`|integer(int64)|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers.|
 |`start_time`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time customer has requested job start, set by dispatchers for dispatchers and drivers.|
+|`third_party_hauler_id`|[UUID](#schemauuid)|UUID|
 |`times_failed`|integer(int64)|Number of times a job has been attempted and failed.|
 |`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers.|
 |`truck_id`|integer(int64)|Set by dispatchers to determine job visibility for drivers.|
 |`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. 'D', 'E', 'L', 'P', 'R'|
 |`weighed_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time of truck weight entry.|
 
-<h2 id="tocSlistcustomerresultmodel">ListCustomerResultModel</h2>
-
-```json
-{
-  "current_limit": 100,
-  "current_page": 1,
-  "results": [
-    {
-      "addresses": [
-        {
-          "country": "USA",
-          "is_active": true,
-          "is_billing": true,
-          "is_physical": false,
-          "is_shipping": false,
-          "latitude": 48.076273,
-          "line_1": "643 Summer Breeze",
-          "line_2": "Suite 34",
-          "line_3": "2nd Door on Left",
-          "line_4": "Blue slot",
-          "locality": "Sequim",
-          "longitude": -123.117185,
-          "postcode": 98382,
-          "region": "WA"
-        }
-      ],
-      "contacts": [
-        {
-          "email": "develop@crosoftware.com",
-          "fax": "(360) 716-1968",
-          "name": "John Doe",
-          "notify_on_acknowledged_request": false,
-          "notify_on_completed_request": false,
-          "notify_on_dispatched_request": false,
-          "notify_on_failed_request": false,
-          "notify_on_new_request": false,
-          "number": "1-111-111-1111"
-        }
-      ],
-      "created_on": "2019-02-23T03:28:45.016Z",
-      "customer_id": 1,
-      "is_active": false,
-      "is_commercial": false,
-      "last_edited": "2019-02-23T03:28:45.016Z",
-      "location_id": 1,
-      "name": "DEMOCO001",
-      "note": "Service Location of DemoCo Inc.",
-      "parent_id": 1,
-      "reference_number": "Ref#100",
-      "renewal_date": "2019-02-23T03:28:45.016Z",
-      "sales_rep": "John Doe",
-      "suspension_id": 1
-    }
-  ],
-  "total_count": 100,
-  "total_pages": 1
-}
-
-```
-
-<a id="schemalistcustomerresultmodel"></a>
-
-|Name|Type|Description|
-|---|---|---|
-|`current_limit`|integer(int64)|-|
-|`current_page`|integer(int64)|-|
-|`results`|array[[CustomerResultModel](#schemacustomerresultmodel)]|-|
-|`total_count`|integer(int64)|-|
-|`total_pages`|integer(int64)|-|
-
 <h2 id="tocSlocationlistmodel">LocationListModel</h2>
 
 ```json
 {
-  "current_limit": 1,
-  "current_page": 1,
+  "current_limit": "1",
+  "current_page": "1",
   "results": [
     {
-      "id": 1,
-      "is_active": true,
+      "id": "1",
+      "is_active": "True",
       "name": "Sequim"
     }
   ],
-  "total_count": 1,
-  "total_pages": 1
+  "total_count": "1",
+  "total_pages": "1"
 }
 
 ```
@@ -5434,8 +8705,8 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "id": 1,
-  "is_active": true,
+  "id": "1",
+  "is_active": "True",
   "name": "Sequim"
 }
 
@@ -5449,20 +8720,95 @@ ISO 8601 DateTime Format (GMT)
 |`is_active`|boolean|-|
 |`name`|string|-|
 
+<h2 id="tocStenantlistmodel">TenantListModel</h2>
+
+```json
+{
+  "current_limit": "100",
+  "current_page": "1",
+  "results": [
+    {
+      "address": "123 some st",
+      "city": "Sequim",
+      "code": "CROSCRAP",
+      "created_on": "2019-02-12T01:32:45.640000",
+      "email": "test_admin@crosoftware.net",
+      "id": "1",
+      "is_active": "True",
+      "name": "CRO Scrap",
+      "phone": "1234567890",
+      "state": "WA",
+      "truck_limit": "string",
+      "zip": "98360"
+    }
+  ],
+  "total_count": "1",
+  "total_pages": "1"
+}
+
+```
+
+<a id="schematenantlistmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`current_limit`|integer(int64)|-|
+|`current_page`|integer(int64)|-|
+|`results`|array[[TenantModel](#schematenantmodel)]|-|
+|`total_count`|integer(int64)|-|
+|`total_pages`|integer(int64)|-|
+
+<h2 id="tocStenantmodel">TenantModel</h2>
+
+```json
+{
+  "address": "123 some st",
+  "city": "Sequim",
+  "code": "CROSCRAP",
+  "created_on": "2019-02-12T01:32:45.640000",
+  "email": "test_admin@crosoftware.net",
+  "id": "1",
+  "is_active": "True",
+  "name": "CRO Scrap",
+  "phone": "1234567890",
+  "state": "WA",
+  "truck_limit": "string",
+  "zip": "98360"
+}
+
+```
+
+<a id="schematenantmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`address`|string|-|
+|`city`|string|-|
+|`code`|string(byte)|-|
+|`created_on`|string(datetime)|-|
+|`email`|string|-|
+|`id`|integer(int64)|-|
+|`is_active`|boolean|-|
+|`name`|string|-|
+|`phone`|string|-|
+|`state`|string|-|
+|`truck_limit`|string|-|
+|`zip`|string|-|
+
 <h2 id="tocSthirdpartyhaulerlistmodel">ThirdPartyHaulerListModel</h2>
 
 ```json
 {
-  "current_limit": 100,
-  "current_page": 1,
+  "current_limit": "100",
+  "current_page": "1",
   "results": [
     {
       "id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-      "name": "EXCOID"
+      "name": "SMS594"
     }
   ],
-  "total_count": 1,
-  "total_pages": 1
+  "total_count": "1",
+  "total_pages": "1"
 }
 
 ```
@@ -5482,7 +8828,7 @@ ISO 8601 DateTime Format (GMT)
 ```json
 {
   "id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "name": "EXCOID"
+  "name": "SMS594"
 }
 
 ```
@@ -5498,24 +8844,24 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "current_limit": 100,
-  "current_page": 1,
+  "current_limit": "100",
+  "current_page": "1",
   "results": [
     {
-      "driver_id": 1,
-      "id": 2,
-      "location_id": 1,
-      "name": "AnExampleTruck",
+      "driver_id": "1",
+      "id": "2",
+      "location_id": "1",
+      "name": "ZachTruck",
       "notes": "Sequim",
-      "out_of_service": false,
-      "require_odometer": false,
+      "out_of_service": "False",
+      "require_odometer": "False",
       "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-      "type": "Example Truck Rolloff",
-      "weight": 18678
+      "type": "AwesomeTRUCK Rolloff",
+      "weight": "18678"
     }
   ],
-  "total_count": 1,
-  "total_pages": 1
+  "total_count": "1",
+  "total_pages": "1"
 }
 
 ```
@@ -5534,16 +8880,16 @@ ISO 8601 DateTime Format (GMT)
 
 ```json
 {
-  "driver_id": 1,
-  "id": 2,
-  "location_id": 1,
-  "name": "AnExampleTruck",
+  "driver_id": "1",
+  "id": "2",
+  "location_id": "1",
+  "name": "ZachTruck",
   "notes": "Sequim",
-  "out_of_service": false,
-  "require_odometer": false,
+  "out_of_service": "False",
+  "require_odometer": "False",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "type": "Example Truck Rolloff",
-  "weight": 18678
+  "type": "AwesomeTRUCK Rolloff",
+  "weight": "18678"
 }
 
 ```
@@ -5563,68 +8909,180 @@ ISO 8601 DateTime Format (GMT)
 |`type`|string|-|
 |`weight`|integer(int64)|-|
 
+<h2 id="tocSupdatecustomeraddressprofilemodel">UpdateCustomerAddressProfileModel</h2>
+
+```json
+{
+  "country": "US",
+  "is_billing": "True",
+  "is_physical": "True",
+  "is_shipping": "False",
+  "latitude": "46.881398",
+  "line_1": "643 Summer Breeze",
+  "line_2": "Suite 34",
+  "line_3": "2nd Door on Left",
+  "line_4": "Blue slot",
+  "locality": "Sequim",
+  "longitude": "-121.276566",
+  "postcode": "98382",
+  "region": "WA"
+}
+
+```
+
+<a id="schemaupdatecustomeraddressprofilemodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`country`|string|-|
+|`is_billing`|boolean|-|
+|`is_physical`|boolean|-|
+|`is_shipping`|boolean|-|
+|`latitude`|number(float)|-|
+|`line_1`|string|-|
+|`line_2`|string|-|
+|`line_3`|string|-|
+|`line_4`|string|-|
+|`locality`|string|-|
+|`longitude`|number(float)|-|
+|`postcode`|integer(int64)|-|
+|`region`|string|-|
+
+<h2 id="tocSupdatecustomercontactprofilemodel">UpdateCustomerContactProfileModel</h2>
+
+```json
+{
+  "email": "develop@crosoftware.com",
+  "fax": "(360) 716-1968",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": "False",
+  "notify_on_completed_request": "False",
+  "notify_on_dispatched_request": "False",
+  "notify_on_failed_request": "False",
+  "notify_on_new_request": "False",
+  "number": "1-111-111-1111"
+}
+
+```
+
+<a id="schemaupdatecustomercontactprofilemodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`email`|string|-|
+|`fax`|string|-|
+|`name`|string|-|
+|`notify_on_acknowledged_request`|boolean|-|
+|`notify_on_completed_request`|boolean|-|
+|`notify_on_dispatched_request`|boolean|-|
+|`notify_on_failed_request`|boolean|-|
+|`notify_on_new_request`|boolean|-|
+|`number`|string|-|
+
+<h2 id="tocSupdatecustomerlocationprofilemodel">UpdateCustomerLocationProfileModel</h2>
+
+```json
+{
+  "is_commercial": "True",
+  "note": "An example note",
+  "reference_number": "R100-10C",
+  "renewal_date": "2100-02-12T01:32:45.640000",
+  "sales_rep": "John Smith",
+  "suspension_id": "1"
+}
+
+```
+
+<a id="schemaupdatecustomerlocationprofilemodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`is_commercial`|boolean|-|
+|`note`|string|-|
+|`reference_number`|string|-|
+|`renewal_date`|string(datetime)|-|
+|`sales_rep`|string|-|
+|`suspension_id`|integer(int64)|-|
+
+<h2 id="tocSupdatecustomerprofilemodel">UpdateCustomerProfileModel</h2>
+
+```json
+{
+  "name": "Sequim Waste Inc.",
+  "parent_id": "1"
+}
+
+```
+
+<a id="schemaupdatecustomerprofilemodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`name`|string|-|
+|`parent_id`|integer(int64)|-|
+
 <h2 id="tocSupdatedjobmodel">UpdatedJobModel</h2>
 
 ```json
 {
-  "arrived_at_dest": "2019-02-23T03:28:45.018Z",
-  "arrived_on": "2019-02-23T03:28:45.018Z",
-  "asset_dropped": 1,
-  "asset_id": 1,
-  "asset_quantity": 1,
-  "asset_type_id": 1,
-  "completed_by": 1,
-  "completed_by_driver": false,
-  "completed_on": "2019-02-23T03:28:45.018Z",
-  "confirmed_on": "2019-02-23T03:28:45.018Z",
-  "created_by_id": 1,
-  "created_with_portal": false,
-  "customer_id": 9,
+  "arrived_at_dest": "2018-11-18T19:54:55.327000",
+  "arrived_on": "2018-11-18T19:54:55.327000",
+  "asset_dropped": "1",
+  "asset_id": "1",
+  "asset_quantity": "1",
+  "asset_type_id": "1",
+  "completed_by": "1",
+  "completed_by_driver": "False",
+  "completed_on": "2018-11-18T19:54:55.327000",
+  "confirmed_on": "2018-11-18T19:54:55.327000",
+  "created_by_id": "1",
+  "created_with_portal": "False",
+  "customer_id": "9",
   "customer_notes": "Some customer notes",
-  "departed_on": "2019-02-23T03:28:45.018Z",
+  "departed_on": "2018-11-18T19:54:55.327000",
   "desired_asset_desc": "An asset description.",
   "dispatch_priority": "H",
-  "dispatched_by_route": 1,
-  "dispatched_on": "2019-02-23T03:28:45.018Z",
+  "dispatched_by_route": "1",
+  "dispatched_on": "2018-11-18T19:54:55.327000",
   "dispatcher_notes": "Some dispatcher notes",
-  "do_confirm": false,
+  "do_confirm": "False",
   "driver_notes": "Some driver notes",
   "dropped_number": "Unused/deprecated field",
-  "dump_location_id": 1,
-  "dumped_on": "2019-02-23T03:28:45.018Z",
-  "end_time": "2019-02-23T03:28:45.018Z",
+  "dump_location_id": "1",
+  "dumped_on": "2018-11-18T19:54:55.327000",
+  "end_time": "2018-11-18T19:54:55.327000",
   "fail_reason": "Failure reason",
-  "final_location_id": 1,
+  "final_location_id": "1",
   "flags": "Job notes",
-  "id": 1,
+  "id": "1",
   "invoice_notes": "Some invoice notes",
-  "is_completed": false,
-  "is_declined": false,
-  "is_deleted": false,
-  "is_failed": false,
+  "is_completed": "False",
+  "is_declined": "False",
+  "is_deleted": "False",
+  "is_failed": "False",
   "is_paid": true,
-  "job_group_id": 1,
-  "location_id": 1,
-  "merged_with_route": 1,
-  "original_schedule_date": "2019-02-23T03:28:45.018Z",
-  "pickup_date": "2019-02-23T03:28:45.018Z",
-  "priority": -1,
+  "job_group_id": "1",
+  "location_id": "1",
+  "merged_with_route": "1",
+  "original_schedule_date": "2018-10-31T11:34:13.690000",
+  "pickup_date": "2018-10-31T11:34:13.690000",
+  "priority": "-1",
   "reference_number": null,
   "removed_number": "string",
-  "requested_on": "2019-02-23T03:28:45.018Z",
-  "require_image": false,
-  "require_material": false,
-  "require_signature": false,
-  "require_weights": false,
-  "schedule_date": "2019-02-23T03:28:45.018Z",
-  "start_location_id": 1,
-  "start_time": "2019-02-23T03:28:45.018Z",
+  "requested_on": "2018-10-31T11:33:52.920000",
+  "require_image": "False",
+  "require_material": "False",
+  "require_signature": "False",
+  "require_weights": "False",
+  "schedule_date": "2018-10-31T00:00:00",
+  "start_location_id": "1",
+  "start_time": "2018-10-31T11:33:52.920000",
   "third_party_hauler_id": "b8d78911-e1fa-4adc-9b22-3b48dda30522",
-  "times_failed": 0,
-  "times_rolled_over": 0,
-  "truck_id": 1,
+  "times_failed": "0",
+  "times_rolled_over": "0",
+  "truck_id": "1",
   "type": "D",
-  "weighed_on": "2019-02-23T03:28:45.018Z"
+  "weighed_on": "2018-10-31T11:33:52.920000"
 }
 
 ```
@@ -5691,79 +9149,4 @@ ISO 8601 DateTime Format (GMT)
 |`truck_id`|integer(int64)|Set by dispatchers to determine job visibility for drivers.|
 |`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. 'D', 'E', 'L', 'P', 'R'|
 |`weighed_on`|string(datetime)|YYYY-MM-DDThh:mm:ss.ssssss ISO 8601 DateTime Format (GMT) Time of truck weight entry.|
-
-<h2 id="tocSlisttenantresultmodel">ListTenantResultModel</h2>
-
-```json
-{
-  "current_limit": 100,
-  "current_page": 1,
-  "results": [
-    {
-      "address": "123 some st",
-      "city": "Sequim",
-      "code": "CROSCRAP",
-      "created_on": "2019-02-23T03:28:45.020Z",
-      "email": "test_admin@crosoftware.net",
-      "id": 1,
-      "is_active": true,
-      "name": "CRO Scrap",
-      "phone": 1234567890,
-      "state": "WA",
-      "truck_limit": "string",
-      "zip": 98360
-    }
-  ],
-  "total_count": 1,
-  "total_pages": 1
-}
-
-```
-
-<a id="schemalisttenantresultmodel"></a>
-
-|Name|Type|Description|
-|---|---|---|
-|`current_limit`|integer(int64)|-|
-|`current_page`|integer(int64)|-|
-|`results`|array[[TenantResultModel](#schematenantresultmodel)]|-|
-|`total_count`|integer(int64)|-|
-|`total_pages`|integer(int64)|-|
-
-<h2 id="tocStenantresultmodel">TenantResultModel</h2>
-
-```json
-{
-  "address": "123 some st",
-  "city": "Sequim",
-  "code": "CROSCRAP",
-  "created_on": "2019-02-23T03:28:45.020Z",
-  "email": "test_admin@crosoftware.net",
-  "id": 1,
-  "is_active": true,
-  "name": "CRO Scrap",
-  "phone": 1234567890,
-  "state": "WA",
-  "truck_limit": "string",
-  "zip": 98360
-}
-
-```
-
-<a id="schematenantresultmodel"></a>
-
-|Name|Type|Description|
-|---|---|---|
-|`address`|string|-|
-|`city`|string|-|
-|`code`|string(byte)|-|
-|`created_on`|string(datetime)|-|
-|`email`|string|-|
-|`id`|integer(int64)|-|
-|`is_active`|boolean|-|
-|`name`|string|-|
-|`phone`|string|-|
-|`state`|string|-|
-|`truck_limit`|string|-|
-|`zip`|string|-|
 
