@@ -2630,6 +2630,251 @@ Update customer location settings.
 
 ## Customers
 
+### Create Customer for Location
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/customer";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          byte[] json = client.UploadValues(url, "POST", parameters);
+          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X POST https://api.crosoftware.net/location/{location_id}/customer \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/location/{location_id}/customer',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.post 'https://api.crosoftware.net/location/{location_id}/customer',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.post('https://api.crosoftware.net/location/{location_id}/customer', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`POST /location/{location_id}/customer`
+
+<a id="opIdcreate_customer_at_location"></a>
+
+Create customer for location.
+
+> Body parameter
+
+```json
+{
+  "addresses": [
+    {
+      "country": "US",
+      "is_billing": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "is_commercial": "False",
+  "name": "DEMOCO001",
+  "note": "Service Location of DemoCo Inc.",
+  "parent_id": "1",
+  "reference_number": "Ref#100",
+  "renewal_date": "2100-02-18T15:53:55.851Z",
+  "sales_rep": "John Doe",
+  "suspension_id": "1"
+}
+```
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`body`|body|[CreateCustomerProfileModel](#schemacreatecustomerprofilemodel)|true||
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "addresses": [
+    {
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "contact_id": "1",
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "customer_id": "1",
+  "locations": [
+    {
+      "created_on": "2019-02-12T01:32:45.980000",
+      "is_active": "True",
+      "is_commercial": "True",
+      "last_edited": "2019-02-12T01:32:45.990000",
+      "location_id": "1",
+      "note": "An example note",
+      "reference_number": "REF#A1631",
+      "renewal_date": "2019-10-02T00:00:00",
+      "sales_rep": "John Doe",
+      "suspension_id": "1"
+    }
+  ],
+  "name": "Sequim Waste Inc.",
+  "parent_id": "1"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerModel](#schemacustomermodel)|New customer profile for customer at given location.|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
 ### Get Customer
 
 > Code samples
@@ -2822,6 +3067,198 @@ Customer profile.
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerModel](#schemacustomermodel)|Customer Profile|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### Get Customer for Location
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/customer/{customer_id}";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location/{location_id}/customer/{customer_id} \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/location/{location_id}/customer/{customer_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer/{customer_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /location/{location_id}/customer/{customer_id}`
+
+<a id="opIdget_customer_for_location"></a>
+
+Get customer for location.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "addresses": [
+    {
+      "address_id": "1",
+      "country": "US",
+      "is_billing": "True",
+      "is_physical": "True",
+      "is_shipping": "False",
+      "latitude": "46.881398",
+      "line_1": "643 Summer Breeze",
+      "line_2": "Suite 34",
+      "line_3": "2nd Door on Left",
+      "line_4": "Blue slot",
+      "locality": "Sequim",
+      "longitude": "-121.276566",
+      "postcode": "98382",
+      "region": "WA"
+    }
+  ],
+  "contacts": [
+    {
+      "contact_id": "1",
+      "email": "develop@crosoftware.com",
+      "fax": "(360) 716-1968",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": "False",
+      "notify_on_completed_request": "False",
+      "notify_on_dispatched_request": "False",
+      "notify_on_failed_request": "False",
+      "notify_on_new_request": "False",
+      "number": "1-111-111-1111"
+    }
+  ],
+  "created_on": "2019-03-08T16:40:37.647000",
+  "customer_id": "2",
+  "is_active": "True",
+  "is_commercial": "False",
+  "last_edited": "2019-03-08T16:40:37.647000",
+  "name": "Jane Smith",
+  "note": "An example note",
+  "parent_id": "1",
+  "reference_number": "1234",
+  "renewal_date": "2100-03-08T16:40:37.647000",
+  "sales_rep": "Jane Doe",
+  "suspension_id": "1"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|Customer profile for customer at given location.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
 |`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
@@ -3027,6 +3464,207 @@ List of customers.
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerListModel](#schemacustomerlistmodel)|List|
+|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
+|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
+
+### List Customers for Location
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/location/{location_id}/customer";
+
+          // Headers
+          client.Headers.Add("Authorization", "bearer <access-token>");
+          client.Headers.Add("X-TENANT-ID", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/location/{location_id}/customer \
+  -H 'Accept: application/json' \
+  -H 'Authorization: bearer <access-token>' \
+  -H 'X-TENANT-ID: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'Authorization':'bearer <access-token>',
+  'X-TENANT-ID':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/location/{location_id}/customer',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'bearer <access-token>',
+  'X-TENANT-ID' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/customer',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'bearer <access-token>',
+  'X-TENANT-ID': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/location/{location_id}/customer', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /location/{location_id}/customer`
+
+<a id="opIdlist_customers_for_location"></a>
+
+List customers for location.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`Authorization`|header|string|true|Authorization bearer access token.|
+|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
+|`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "current_limit": "100",
+  "current_page": "1",
+  "results": [
+    {
+      "addresses": [
+        {
+          "address_id": "1",
+          "country": "US",
+          "is_billing": "True",
+          "is_physical": "True",
+          "is_shipping": "False",
+          "latitude": "46.881398",
+          "line_1": "643 Summer Breeze",
+          "line_2": "Suite 34",
+          "line_3": "2nd Door on Left",
+          "line_4": "Blue slot",
+          "locality": "Sequim",
+          "longitude": "-121.276566",
+          "postcode": "98382",
+          "region": "WA"
+        }
+      ],
+      "contacts": [
+        {
+          "contact_id": "1",
+          "email": "develop@crosoftware.com",
+          "fax": "(360) 716-1968",
+          "name": "John Doe",
+          "notify_on_acknowledged_request": "False",
+          "notify_on_completed_request": "False",
+          "notify_on_dispatched_request": "False",
+          "notify_on_failed_request": "False",
+          "notify_on_new_request": "False",
+          "number": "1-111-111-1111"
+        }
+      ],
+      "created_on": "2019-03-08T16:40:37.647000",
+      "customer_id": "2",
+      "is_active": "True",
+      "is_commercial": "False",
+      "last_edited": "2019-03-08T16:40:37.647000",
+      "name": "Jane Smith",
+      "note": "An example note",
+      "parent_id": "1",
+      "reference_number": "1234",
+      "renewal_date": "2100-03-08T16:40:37.647000",
+      "sales_rep": "Jane Doe",
+      "suspension_id": "1"
+    }
+  ],
+  "total_count": "100",
+  "total_pages": "1"
+}
+```
+
+> 400 Response
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationListModel](#schemacustomerlocationlistmodel)|Paged result sef of customers for location.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
 |`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
@@ -5490,646 +6128,6 @@ List jobs for location.
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[JobListModel](#schemajoblistmodel)|List of jobs for location.|
-|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
-|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
-
-## Location Customers
-
-### Create Customer
-
-> Code samples
-
-```csharp
-using System;
-using System.Net;
-using System.Collections.Specialized;
-
-namespace CROSoftware
-{
-  public class DemoClient
-  {
-      static public void Main ()
-      {
-          WebClient client = new WebClient();
-
-          // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/customer";
-
-          // Headers
-          client.Headers.Add("Authorization", "bearer <access-token>");
-          client.Headers.Add("X-TENANT-ID", "1");
-          
-          byte[] json = client.UploadValues(url, "POST", parameters);
-          Console.WriteLine(System.Text.Encoding.Default.GetString(json));
-      }
-  }
-}
-```
-
-```shell
-# You can also use wget
-curl -X POST https://api.crosoftware.net/location/{location_id}/customer \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json' \
-  -H 'Authorization: bearer <access-token>' \
-  -H 'X-TENANT-ID: 1'
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/json',
-  'Accept':'application/json',
-  'Authorization':'bearer <access-token>',
-  'X-TENANT-ID':'1'
-
-};
-
-$.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/customer',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/json',
-  'Accept' => 'application/json',
-  'Authorization' => 'bearer <access-token>',
-  'X-TENANT-ID' => '1'
-}
-
-result = RestClient.post 'https://api.crosoftware.net/location/{location_id}/customer',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'Authorization': 'bearer <access-token>',
-  'X-TENANT-ID': '1'
-}
-
-r = requests.post('https://api.crosoftware.net/location/{location_id}/customer', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-`POST /location/{location_id}/customer`
-
-<a id="opIdcreate_customer_at_location"></a>
-
-Create customer at location.
-
-> Body parameter
-
-```json
-{
-  "addresses": [
-    {
-      "country": "US",
-      "is_billing": "True",
-      "is_shipping": "False",
-      "latitude": "46.881398",
-      "line_1": "643 Summer Breeze",
-      "line_2": "Suite 34",
-      "line_3": "2nd Door on Left",
-      "line_4": "Blue slot",
-      "locality": "Sequim",
-      "longitude": "-121.276566",
-      "postcode": "98382",
-      "region": "WA"
-    }
-  ],
-  "contacts": [
-    {
-      "email": "develop@crosoftware.com",
-      "fax": "(360) 716-1968",
-      "name": "John Doe",
-      "notify_on_acknowledged_request": "False",
-      "notify_on_completed_request": "False",
-      "notify_on_dispatched_request": "False",
-      "notify_on_failed_request": "False",
-      "notify_on_new_request": "False",
-      "number": "1-111-111-1111"
-    }
-  ],
-  "is_commercial": "False",
-  "name": "DEMOCO001",
-  "note": "Service Location of DemoCo Inc.",
-  "parent_id": "1",
-  "reference_number": "Ref#100",
-  "renewal_date": "2100-02-18T15:53:55.851Z",
-  "sales_rep": "John Doe",
-  "suspension_id": "1"
-}
-```
-
- 
-
-<h4 id="undefined-parameters">Parameters</h4>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer access token.|
-|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
-|`location_id`|path|integer(int64)|true|Location identifier.|
-|`body`|body|[CreateCustomerProfileModel](#schemacreatecustomerprofilemodel)|true||
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "addresses": [
-    {
-      "address_id": "1",
-      "country": "US",
-      "is_billing": "True",
-      "is_physical": "True",
-      "is_shipping": "False",
-      "latitude": "46.881398",
-      "line_1": "643 Summer Breeze",
-      "line_2": "Suite 34",
-      "line_3": "2nd Door on Left",
-      "line_4": "Blue slot",
-      "locality": "Sequim",
-      "longitude": "-121.276566",
-      "postcode": "98382",
-      "region": "WA"
-    }
-  ],
-  "contacts": [
-    {
-      "contact_id": "1",
-      "email": "develop@crosoftware.com",
-      "fax": "(360) 716-1968",
-      "name": "John Doe",
-      "notify_on_acknowledged_request": "False",
-      "notify_on_completed_request": "False",
-      "notify_on_dispatched_request": "False",
-      "notify_on_failed_request": "False",
-      "notify_on_new_request": "False",
-      "number": "1-111-111-1111"
-    }
-  ],
-  "customer_id": "1",
-  "locations": [
-    {
-      "created_on": "2019-02-12T01:32:45.980000",
-      "is_active": "True",
-      "is_commercial": "True",
-      "last_edited": "2019-02-12T01:32:45.990000",
-      "location_id": "1",
-      "note": "An example note",
-      "reference_number": "REF#A1631",
-      "renewal_date": "2019-10-02T00:00:00",
-      "sales_rep": "John Doe",
-      "suspension_id": "1"
-    }
-  ],
-  "name": "Sequim Waste Inc.",
-  "parent_id": "1"
-}
-```
-
-> 400 Response
-
-<h4 id="undefined-responses">Responses</h4>
-
-|Status|Meaning|Schema|Description|
-|---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerModel](#schemacustomermodel)|New customer profile for customer at given location.|
-|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
-|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
-
-### Get Customer
-
-> Code samples
-
-```csharp
-using System;
-using System.Net;
-using System.Collections.Specialized;
-
-namespace CROSoftware
-{
-  public class DemoClient
-  {
-      static public void Main ()
-      {
-          WebClient client = new WebClient();
-
-          // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/customer/{customer_id}";
-
-          // Headers
-          client.Headers.Add("Authorization", "bearer <access-token>");
-          client.Headers.Add("X-TENANT-ID", "1");
-          
-          string json = client.DownloadString(url);
-          Console.WriteLine(json);
-      }
-  }
-}
-```
-
-```shell
-# You can also use wget
-curl -X GET https://api.crosoftware.net/location/{location_id}/customer/{customer_id} \
-  -H 'Accept: application/json' \
-  -H 'Authorization: bearer <access-token>' \
-  -H 'X-TENANT-ID: 1'
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json',
-  'Authorization':'bearer <access-token>',
-  'X-TENANT-ID':'1'
-
-};
-
-$.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json',
-  'Authorization' => 'bearer <access-token>',
-  'X-TENANT-ID' => '1'
-}
-
-result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json',
-  'Authorization': 'bearer <access-token>',
-  'X-TENANT-ID': '1'
-}
-
-r = requests.get('https://api.crosoftware.net/location/{location_id}/customer/{customer_id}', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer/{customer_id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-`GET /location/{location_id}/customer/{customer_id}`
-
-<a id="opIdget_customer_for_location"></a>
-
-Get customer for location.
-
- 
-
-<h4 id="undefined-parameters">Parameters</h4>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer access token.|
-|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
-|`location_id`|path|integer(int64)|true|Location identifier.|
-|`customer_id`|path|integer(int64)|true|Customer identifier.|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "addresses": [
-    {
-      "address_id": "1",
-      "country": "US",
-      "is_billing": "True",
-      "is_physical": "True",
-      "is_shipping": "False",
-      "latitude": "46.881398",
-      "line_1": "643 Summer Breeze",
-      "line_2": "Suite 34",
-      "line_3": "2nd Door on Left",
-      "line_4": "Blue slot",
-      "locality": "Sequim",
-      "longitude": "-121.276566",
-      "postcode": "98382",
-      "region": "WA"
-    }
-  ],
-  "contacts": [
-    {
-      "contact_id": "1",
-      "email": "develop@crosoftware.com",
-      "fax": "(360) 716-1968",
-      "name": "John Doe",
-      "notify_on_acknowledged_request": "False",
-      "notify_on_completed_request": "False",
-      "notify_on_dispatched_request": "False",
-      "notify_on_failed_request": "False",
-      "notify_on_new_request": "False",
-      "number": "1-111-111-1111"
-    }
-  ],
-  "created_on": "2019-03-08T16:40:37.647000",
-  "customer_id": "2",
-  "is_active": "True",
-  "is_commercial": "False",
-  "last_edited": "2019-03-08T16:40:37.647000",
-  "name": "Jane Smith",
-  "note": "An example note",
-  "parent_id": "1",
-  "reference_number": "1234",
-  "renewal_date": "2100-03-08T16:40:37.647000",
-  "sales_rep": "Jane Doe",
-  "suspension_id": "1"
-}
-```
-
-> 400 Response
-
-<h4 id="undefined-responses">Responses</h4>
-
-|Status|Meaning|Schema|Description|
-|---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|Customer profile for customer at given location.|
-|`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
-|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
-|`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
-
-### List Customers
-
-> Code samples
-
-```csharp
-using System;
-using System.Net;
-using System.Collections.Specialized;
-
-namespace CROSoftware
-{
-  public class DemoClient
-  {
-      static public void Main ()
-      {
-          WebClient client = new WebClient();
-
-          // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/customer";
-
-          // Headers
-          client.Headers.Add("Authorization", "bearer <access-token>");
-          client.Headers.Add("X-TENANT-ID", "1");
-          
-          string json = client.DownloadString(url);
-          Console.WriteLine(json);
-      }
-  }
-}
-```
-
-```shell
-# You can also use wget
-curl -X GET https://api.crosoftware.net/location/{location_id}/customer \
-  -H 'Accept: application/json' \
-  -H 'Authorization: bearer <access-token>' \
-  -H 'X-TENANT-ID: 1'
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json',
-  'Authorization':'bearer <access-token>',
-  'X-TENANT-ID':'1'
-
-};
-
-$.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/customer',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json',
-  'Authorization' => 'bearer <access-token>',
-  'X-TENANT-ID' => '1'
-}
-
-result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/customer',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json',
-  'Authorization': 'bearer <access-token>',
-  'X-TENANT-ID': '1'
-}
-
-r = requests.get('https://api.crosoftware.net/location/{location_id}/customer', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-`GET /location/{location_id}/customer`
-
-<a id="opIdlist_customers_for_location"></a>
-
-List customers for location.
-
- 
-
-<h4 id="undefined-parameters">Parameters</h4>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|`Authorization`|header|string|true|Authorization bearer access token.|
-|`X-TENANT-ID`|header|integer(int64)|true|Tenant identifier.|
-|`location_id`|path|integer(int64)|true|Location identifier.|
-|`page_limit`|query|integer(int64)|false|Maximum number of results to include for paged queries. 0 &lt; PageLimit &lt; 1000.|
-|`page_index`|query|integer(int64)|false|Dataset page number to retrieve. First page is 1.|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "current_limit": "100",
-  "current_page": "1",
-  "results": [
-    {
-      "addresses": [
-        {
-          "address_id": "1",
-          "country": "US",
-          "is_billing": "True",
-          "is_physical": "True",
-          "is_shipping": "False",
-          "latitude": "46.881398",
-          "line_1": "643 Summer Breeze",
-          "line_2": "Suite 34",
-          "line_3": "2nd Door on Left",
-          "line_4": "Blue slot",
-          "locality": "Sequim",
-          "longitude": "-121.276566",
-          "postcode": "98382",
-          "region": "WA"
-        }
-      ],
-      "contacts": [
-        {
-          "contact_id": "1",
-          "email": "develop@crosoftware.com",
-          "fax": "(360) 716-1968",
-          "name": "John Doe",
-          "notify_on_acknowledged_request": "False",
-          "notify_on_completed_request": "False",
-          "notify_on_dispatched_request": "False",
-          "notify_on_failed_request": "False",
-          "notify_on_new_request": "False",
-          "number": "1-111-111-1111"
-        }
-      ],
-      "created_on": "2019-03-08T16:40:37.647000",
-      "customer_id": "2",
-      "is_active": "True",
-      "is_commercial": "False",
-      "last_edited": "2019-03-08T16:40:37.647000",
-      "name": "Jane Smith",
-      "note": "An example note",
-      "parent_id": "1",
-      "reference_number": "1234",
-      "renewal_date": "2100-03-08T16:40:37.647000",
-      "sales_rep": "Jane Doe",
-      "suspension_id": "1"
-    }
-  ],
-  "total_count": "100",
-  "total_pages": "1"
-}
-```
-
-> 400 Response
-
-<h4 id="undefined-responses">Responses</h4>
-
-|Status|Meaning|Schema|Description|
-|---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationListModel](#schemacustomerlocationlistmodel)|Paged result sef of customers for location.|
 |`400`|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|string|One or more invalid input parameters.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|string|Missing x-tenant-id header or user not authorized for specified tenant.|
 |`404`|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|string|Resource not found.|
