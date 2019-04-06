@@ -87,7 +87,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/address";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/addresses";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -102,7 +102,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/customer/{customer_id}/address \
+curl -X POST https://api.crosoftware.net/customers/{customer_id}/addresses \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
@@ -120,7 +120,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/address',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/addresses',
   method: 'post',
 
   headers: headers,
@@ -142,7 +142,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.post 'https://api.crosoftware.net/customer/{customer_id}/address',
+result = RestClient.post 'https://api.crosoftware.net/customers/{customer_id}/addresses',
   params: {
   }, headers: headers
 
@@ -159,7 +159,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.post('https://api.crosoftware.net/customer/{customer_id}/address', params={
+r = requests.post('https://api.crosoftware.net/customers/{customer_id}/addresses', params={
 
 }, headers = headers)
 
@@ -168,7 +168,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/address");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/addresses");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -184,7 +184,7 @@ System.out.println(response.toString());
 
 ```
 
-`POST /customer/{customer_id}/address`
+`POST /customers/{customer_id}/addresses`
 
 <a id="opIdadd_customer_address"></a>
 
@@ -272,7 +272,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/address/{address_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -287,7 +287,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X DELETE https://api.crosoftware.net/customer/{customer_id}/address/{address_id} \
+curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id} \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -303,7 +303,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/address/{address_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}',
   method: 'delete',
 
   headers: headers,
@@ -324,7 +324,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.delete 'https://api.crosoftware.net/customer/{customer_id}/address/{address_id}',
+result = RestClient.delete 'https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}',
   params: {
   }, headers: headers
 
@@ -340,7 +340,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.delete('https://api.crosoftware.net/customer/{customer_id}/address/{address_id}', params={
+r = requests.delete('https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}', params={
 
 }, headers = headers)
 
@@ -349,7 +349,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/address/{address_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -365,7 +365,7 @@ System.out.println(response.toString());
 
 ```
 
-`DELETE /customer/{customer_id}/address/{address_id}`
+`DELETE /customers/{customer_id}/addresses/{address_id}`
 
 <a id="opIddeactivate_customer_address"></a>
 
@@ -434,7 +434,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/address/{address_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -449,7 +449,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/customer/{customer_id}/address/{address_id} \
+curl -X GET https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id} \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -465,7 +465,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/address/{address_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}',
   method: 'get',
 
   headers: headers,
@@ -486,7 +486,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}/address/{address_id}',
+result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}',
   params: {
   }, headers: headers
 
@@ -502,7 +502,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/customer/{customer_id}/address/{address_id}', params={
+r = requests.get('https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}', params={
 
 }, headers = headers)
 
@@ -511,7 +511,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/address/{address_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -527,7 +527,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /customer/{customer_id}/address/{address_id}`
+`GET /customers/{customer_id}/addresses/{address_id}`
 
 <a id="opIdget_customer_address"></a>
 
@@ -596,7 +596,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/address";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/addresses";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -611,7 +611,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/customer/{customer_id}/address \
+curl -X GET https://api.crosoftware.net/customers/{customer_id}/addresses \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -627,7 +627,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/address',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/addresses',
   method: 'get',
 
   headers: headers,
@@ -648,7 +648,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}/address',
+result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/addresses',
   params: {
   }, headers: headers
 
@@ -664,7 +664,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/customer/{customer_id}/address', params={
+r = requests.get('https://api.crosoftware.net/customers/{customer_id}/addresses', params={
 
 }, headers = headers)
 
@@ -673,7 +673,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/address");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/addresses");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -689,7 +689,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /customer/{customer_id}/address`
+`GET /customers/{customer_id}/addresses`
 
 <a id="opIdlist_customer_addresses"></a>
 
@@ -767,7 +767,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/address/{address_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -782,7 +782,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X PATCH https://api.crosoftware.net/customer/{customer_id}/address/{address_id} \
+curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
@@ -800,7 +800,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/address/{address_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}',
   method: 'patch',
 
   headers: headers,
@@ -822,7 +822,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.patch 'https://api.crosoftware.net/customer/{customer_id}/address/{address_id}',
+result = RestClient.patch 'https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}',
   params: {
   }, headers: headers
 
@@ -839,7 +839,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.patch('https://api.crosoftware.net/customer/{customer_id}/address/{address_id}', params={
+r = requests.patch('https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}', params={
 
 }, headers = headers)
 
@@ -848,7 +848,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/address/{address_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -864,7 +864,7 @@ System.out.println(response.toString());
 
 ```
 
-`PATCH /customer/{customer_id}/address/{address_id}`
+`PATCH /customers/{customer_id}/addresses/{address_id}`
 
 <a id="opIdupdate_customer_address"></a>
 
@@ -956,7 +956,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/contact";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/contacts";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -971,7 +971,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/customer/{customer_id}/contact \
+curl -X POST https://api.crosoftware.net/customers/{customer_id}/contacts \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
@@ -989,7 +989,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/contact',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/contacts',
   method: 'post',
 
   headers: headers,
@@ -1011,7 +1011,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.post 'https://api.crosoftware.net/customer/{customer_id}/contact',
+result = RestClient.post 'https://api.crosoftware.net/customers/{customer_id}/contacts',
   params: {
   }, headers: headers
 
@@ -1028,7 +1028,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.post('https://api.crosoftware.net/customer/{customer_id}/contact', params={
+r = requests.post('https://api.crosoftware.net/customers/{customer_id}/contacts', params={
 
 }, headers = headers)
 
@@ -1037,7 +1037,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/contact");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/contacts");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1053,7 +1053,7 @@ System.out.println(response.toString());
 
 ```
 
-`POST /customer/{customer_id}/contact`
+`POST /customers/{customer_id}/contacts`
 
 <a id="opIdadd_customer_contact"></a>
 
@@ -1134,7 +1134,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -1149,7 +1149,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id} \
+curl -X GET https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id} \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -1165,7 +1165,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}',
   method: 'get',
 
   headers: headers,
@@ -1186,7 +1186,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}',
+result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}',
   params: {
   }, headers: headers
 
@@ -1202,7 +1202,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}', params={
+r = requests.get('https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}', params={
 
 }, headers = headers)
 
@@ -1211,7 +1211,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1227,7 +1227,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /customer/{customer_id}/contact/{contact_id}`
+`GET /customers/{customer_id}/contacts/{contact_id}`
 
 <a id="opIdget_customer_contact"></a>
 
@@ -1292,7 +1292,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/contact";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/contacts";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -1307,7 +1307,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/customer/{customer_id}/contact \
+curl -X GET https://api.crosoftware.net/customers/{customer_id}/contacts \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -1323,7 +1323,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/contact',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/contacts',
   method: 'get',
 
   headers: headers,
@@ -1344,7 +1344,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}/contact',
+result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/contacts',
   params: {
   }, headers: headers
 
@@ -1360,7 +1360,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/customer/{customer_id}/contact', params={
+r = requests.get('https://api.crosoftware.net/customers/{customer_id}/contacts', params={
 
 }, headers = headers)
 
@@ -1369,7 +1369,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/contact");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/contacts");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1385,7 +1385,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /customer/{customer_id}/contact`
+`GET /customers/{customer_id}/contacts`
 
 <a id="opIdlist_customer_contacts"></a>
 
@@ -1459,7 +1459,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -1474,7 +1474,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X PATCH https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id} \
+curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
@@ -1492,7 +1492,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}',
   method: 'patch',
 
   headers: headers,
@@ -1514,7 +1514,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.patch 'https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}',
+result = RestClient.patch 'https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}',
   params: {
   }, headers: headers
 
@@ -1531,7 +1531,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.patch('https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}', params={
+r = requests.patch('https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}', params={
 
 }, headers = headers)
 
@@ -1540,7 +1540,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/contact/{contact_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -1556,7 +1556,7 @@ System.out.println(response.toString());
 
 ```
 
-`PATCH /customer/{customer_id}/contact/{contact_id}`
+`PATCH /customers/{customer_id}/contacts/{contact_id}`
 
 <a id="opIdupdate_customer_contact"></a>
 
@@ -1640,7 +1640,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/location/{location_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -1655,7 +1655,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/customer/{customer_id}/location/{location_id} \
+curl -X POST https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
@@ -1673,7 +1673,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   method: 'post',
 
   headers: headers,
@@ -1695,7 +1695,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.post 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+result = RestClient.post 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   params: {
   }, headers: headers
 
@@ -1712,7 +1712,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.post('https://api.crosoftware.net/customer/{customer_id}/location/{location_id}', params={
+r = requests.post('https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}', params={
 
 }, headers = headers)
 
@@ -1721,7 +1721,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/location/{location_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1737,7 +1737,7 @@ System.out.println(response.toString());
 
 ```
 
-`POST /customer/{customer_id}/location/{location_id}`
+`POST /customers/{customer_id}/locations/{location_id}`
 
 <a id="opIdadd_customer_location"></a>
 
@@ -1850,7 +1850,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/location/{location_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -1865,7 +1865,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X DELETE https://api.crosoftware.net/customer/{customer_id}/location/{location_id} \
+curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -1881,7 +1881,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   method: 'delete',
 
   headers: headers,
@@ -1902,7 +1902,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.delete 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+result = RestClient.delete 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   params: {
   }, headers: headers
 
@@ -1918,7 +1918,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.delete('https://api.crosoftware.net/customer/{customer_id}/location/{location_id}', params={
+r = requests.delete('https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}', params={
 
 }, headers = headers)
 
@@ -1927,7 +1927,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/location/{location_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -1943,7 +1943,7 @@ System.out.println(response.toString());
 
 ```
 
-`DELETE /customer/{customer_id}/location/{location_id}`
+`DELETE /customers/{customer_id}/locations/{location_id}`
 
 <a id="opIddeactivate_customer_at_location"></a>
 
@@ -2042,7 +2042,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/location/{location_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -2057,7 +2057,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/customer/{customer_id}/location/{location_id} \
+curl -X GET https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -2073,7 +2073,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   method: 'get',
 
   headers: headers,
@@ -2094,7 +2094,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   params: {
   }, headers: headers
 
@@ -2110,7 +2110,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/customer/{customer_id}/location/{location_id}', params={
+r = requests.get('https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}', params={
 
 }, headers = headers)
 
@@ -2119,7 +2119,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/location/{location_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2135,7 +2135,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /customer/{customer_id}/location/{location_id}`
+`GET /customers/{customer_id}/locations/{location_id}`
 
 <a id="opIdget_customer_location"></a>
 
@@ -2234,7 +2234,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/location";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/locations";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -2249,7 +2249,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/customer/{customer_id}/location \
+curl -X GET https://api.crosoftware.net/customers/{customer_id}/locations \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -2265,7 +2265,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/location',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/locations',
   method: 'get',
 
   headers: headers,
@@ -2286,7 +2286,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}/location',
+result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/locations',
   params: {
   }, headers: headers
 
@@ -2302,7 +2302,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/customer/{customer_id}/location', params={
+r = requests.get('https://api.crosoftware.net/customers/{customer_id}/locations', params={
 
 }, headers = headers)
 
@@ -2311,7 +2311,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/location");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2327,7 +2327,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /customer/{customer_id}/location`
+`GET /customers/{customer_id}/locations`
 
 <a id="opIdlist_customer_locations"></a>
 
@@ -2436,7 +2436,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}/location/{location_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -2451,7 +2451,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X PATCH https://api.crosoftware.net/customer/{customer_id}/location/{location_id} \
+curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
@@ -2469,7 +2469,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   method: 'patch',
 
   headers: headers,
@@ -2491,7 +2491,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.patch 'https://api.crosoftware.net/customer/{customer_id}/location/{location_id}',
+result = RestClient.patch 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   params: {
   }, headers: headers
 
@@ -2508,7 +2508,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.patch('https://api.crosoftware.net/customer/{customer_id}/location/{location_id}', params={
+r = requests.patch('https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}', params={
 
 }, headers = headers)
 
@@ -2517,7 +2517,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}/location/{location_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -2533,7 +2533,7 @@ System.out.println(response.toString());
 
 ```
 
-`PATCH /customer/{customer_id}/location/{location_id}`
+`PATCH /customers/{customer_id}/locations/{location_id}`
 
 <a id="opIdupdate_customer_location"></a>
 
@@ -2648,7 +2648,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/customer";
+          String url = "https://api.crosoftware.net/locations/{location_id}/customers";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -2663,7 +2663,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/location/{location_id}/customer \
+curl -X POST https://api.crosoftware.net/locations/{location_id}/customers \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
@@ -2681,7 +2681,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/customer',
+  url: 'https://api.crosoftware.net/locations/{location_id}/customers',
   method: 'post',
 
   headers: headers,
@@ -2703,7 +2703,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.post 'https://api.crosoftware.net/location/{location_id}/customer',
+result = RestClient.post 'https://api.crosoftware.net/locations/{location_id}/customers',
   params: {
   }, headers: headers
 
@@ -2720,7 +2720,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.post('https://api.crosoftware.net/location/{location_id}/customer', params={
+r = requests.post('https://api.crosoftware.net/locations/{location_id}/customers', params={
 
 }, headers = headers)
 
@@ -2729,7 +2729,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/customers");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2745,7 +2745,7 @@ System.out.println(response.toString());
 
 ```
 
-`POST /location/{location_id}/customer`
+`POST /locations/{location_id}/customers`
 
 <a id="opIdcreate_customer_at_location"></a>
 
@@ -2893,7 +2893,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -2908,7 +2908,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/customer/{customer_id} \
+curl -X GET https://api.crosoftware.net/customers/{customer_id} \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -2924,7 +2924,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}',
   method: 'get',
 
   headers: headers,
@@ -2945,7 +2945,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/customer/{customer_id}',
+result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}',
   params: {
   }, headers: headers
 
@@ -2961,7 +2961,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/customer/{customer_id}', params={
+r = requests.get('https://api.crosoftware.net/customers/{customer_id}', params={
 
 }, headers = headers)
 
@@ -2970,7 +2970,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2986,7 +2986,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /customer/{customer_id}`
+`GET /customers/{customer_id}`
 
 <a id="opIdget_customer"></a>
 
@@ -3089,7 +3089,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/customer/{customer_id}";
+          String url = "https://api.crosoftware.net/locations/{location_id}/customers/{customer_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -3104,7 +3104,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/location/{location_id}/customer/{customer_id} \
+curl -X GET https://api.crosoftware.net/locations/{location_id}/customers/{customer_id} \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -3120,7 +3120,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+  url: 'https://api.crosoftware.net/locations/{location_id}/customers/{customer_id}',
   method: 'get',
 
   headers: headers,
@@ -3141,7 +3141,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/customer/{customer_id}',
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/customers/{customer_id}',
   params: {
   }, headers: headers
 
@@ -3157,7 +3157,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/location/{location_id}/customer/{customer_id}', params={
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/customers/{customer_id}', params={
 
 }, headers = headers)
 
@@ -3166,7 +3166,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer/{customer_id}");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/customers/{customer_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3182,7 +3182,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /location/{location_id}/customer/{customer_id}`
+`GET /locations/{location_id}/customers/{customer_id}`
 
 <a id="opIdget_customer_for_location"></a>
 
@@ -3281,7 +3281,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer";
+          String url = "https://api.crosoftware.net/customers";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -3296,7 +3296,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/customer \
+curl -X GET https://api.crosoftware.net/customers \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -3312,7 +3312,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer',
+  url: 'https://api.crosoftware.net/customers',
   method: 'get',
 
   headers: headers,
@@ -3333,7 +3333,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/customer',
+result = RestClient.get 'https://api.crosoftware.net/customers',
   params: {
   }, headers: headers
 
@@ -3349,7 +3349,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/customer', params={
+r = requests.get('https://api.crosoftware.net/customers', params={
 
 }, headers = headers)
 
@@ -3358,7 +3358,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer");
+URL obj = new URL("https://api.crosoftware.net/customers");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3374,7 +3374,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /customer`
+`GET /customers`
 
 <a id="opIdlist_customers"></a>
 
@@ -3486,7 +3486,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/customer";
+          String url = "https://api.crosoftware.net/locations/{location_id}/customers";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -3501,7 +3501,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/location/{location_id}/customer \
+curl -X GET https://api.crosoftware.net/locations/{location_id}/customers \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -3517,7 +3517,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/customer',
+  url: 'https://api.crosoftware.net/locations/{location_id}/customers',
   method: 'get',
 
   headers: headers,
@@ -3538,7 +3538,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/customer',
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/customers',
   params: {
   }, headers: headers
 
@@ -3554,7 +3554,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/location/{location_id}/customer', params={
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/customers', params={
 
 }, headers = headers)
 
@@ -3563,7 +3563,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/customer");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/customers");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3579,7 +3579,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /location/{location_id}/customer`
+`GET /locations/{location_id}/customers`
 
 <a id="opIdlist_customers_for_location"></a>
 
@@ -3687,7 +3687,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customer/{customer_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -3702,7 +3702,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X PATCH https://api.crosoftware.net/customer/{customer_id} \
+curl -X PATCH https://api.crosoftware.net/customers/{customer_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
@@ -3720,7 +3720,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customer/{customer_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}',
   method: 'patch',
 
   headers: headers,
@@ -3742,7 +3742,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.patch 'https://api.crosoftware.net/customer/{customer_id}',
+result = RestClient.patch 'https://api.crosoftware.net/customers/{customer_id}',
   params: {
   }, headers: headers
 
@@ -3759,7 +3759,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.patch('https://api.crosoftware.net/customer/{customer_id}', params={
+r = requests.patch('https://api.crosoftware.net/customers/{customer_id}', params={
 
 }, headers = headers)
 
@@ -3768,7 +3768,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customer/{customer_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -3784,7 +3784,7 @@ System.out.println(response.toString());
 
 ```
 
-`PATCH /customer/{customer_id}`
+`PATCH /customers/{customer_id}`
 
 <a id="opIdupdate_customer"></a>
 
@@ -3900,7 +3900,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/driver/{driver_id}";
+          String url = "https://api.crosoftware.net/locations/{location_id}/drivers/{driver_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -3915,7 +3915,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/location/{location_id}/driver/{driver_id} \
+curl -X GET https://api.crosoftware.net/locations/{location_id}/drivers/{driver_id} \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -3931,7 +3931,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/driver/{driver_id}',
+  url: 'https://api.crosoftware.net/locations/{location_id}/drivers/{driver_id}',
   method: 'get',
 
   headers: headers,
@@ -3952,7 +3952,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/driver/{driver_id}',
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/drivers/{driver_id}',
   params: {
   }, headers: headers
 
@@ -3968,7 +3968,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/location/{location_id}/driver/{driver_id}', params={
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/drivers/{driver_id}', params={
 
 }, headers = headers)
 
@@ -3977,7 +3977,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/driver/{driver_id}");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/drivers/{driver_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3993,7 +3993,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /location/{location_id}/driver/{driver_id}`
+`GET /locations/{location_id}/drivers/{driver_id}`
 
 <a id="opIdget_driver"></a>
 
@@ -4064,7 +4064,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/driver";
+          String url = "https://api.crosoftware.net/locations/{location_id}/drivers";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -4079,7 +4079,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/location/{location_id}/driver \
+curl -X GET https://api.crosoftware.net/locations/{location_id}/drivers \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -4095,7 +4095,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/driver',
+  url: 'https://api.crosoftware.net/locations/{location_id}/drivers',
   method: 'get',
 
   headers: headers,
@@ -4116,7 +4116,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/driver',
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/drivers',
   params: {
   }, headers: headers
 
@@ -4132,7 +4132,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/location/{location_id}/driver', params={
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/drivers', params={
 
 }, headers = headers)
 
@@ -4141,7 +4141,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/driver");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/drivers");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -4157,7 +4157,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /location/{location_id}/driver`
+`GET /locations/{location_id}/drivers`
 
 <a id="opIdlist_drivers_for_location"></a>
 
@@ -4239,7 +4239,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/gps_event";
+          String url = "https://api.crosoftware.net/locations/{location_id}/gps_events";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -4254,7 +4254,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/location/{location_id}/gps_event \
+curl -X POST https://api.crosoftware.net/locations/{location_id}/gps_events \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
@@ -4272,7 +4272,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/gps_event',
+  url: 'https://api.crosoftware.net/locations/{location_id}/gps_events',
   method: 'post',
 
   headers: headers,
@@ -4294,7 +4294,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.post 'https://api.crosoftware.net/location/{location_id}/gps_event',
+result = RestClient.post 'https://api.crosoftware.net/locations/{location_id}/gps_events',
   params: {
   }, headers: headers
 
@@ -4311,7 +4311,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.post('https://api.crosoftware.net/location/{location_id}/gps_event', params={
+r = requests.post('https://api.crosoftware.net/locations/{location_id}/gps_events', params={
 
 }, headers = headers)
 
@@ -4320,7 +4320,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/gps_event");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/gps_events");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -4336,7 +4336,7 @@ System.out.println(response.toString());
 
 ```
 
-`POST /location/{location_id}/gps_event`
+`POST /locations/{location_id}/gps_events`
 
 <a id="opIdlog_gps_event"></a>
 
@@ -4418,7 +4418,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/hauler";
+          String url = "https://api.crosoftware.net/haulers";
 
           // Headers
           byte[] json = client.UploadValues(url, "POST", parameters);
@@ -4430,7 +4430,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/hauler \
+curl -X POST https://api.crosoftware.net/haulers \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json'
 
@@ -4444,7 +4444,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/hauler',
+  url: 'https://api.crosoftware.net/haulers',
   method: 'post',
 
   headers: headers,
@@ -4464,7 +4464,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.crosoftware.net/hauler',
+result = RestClient.post 'https://api.crosoftware.net/haulers',
   params: {
   }, headers: headers
 
@@ -4479,7 +4479,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.crosoftware.net/hauler', params={
+r = requests.post('https://api.crosoftware.net/haulers', params={
 
 }, headers = headers)
 
@@ -4488,7 +4488,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/hauler");
+URL obj = new URL("https://api.crosoftware.net/haulers");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -4504,7 +4504,7 @@ System.out.println(response.toString());
 
 ```
 
-`POST /hauler`
+`POST /haulers`
 
 <a id="opIdcreate_third_party_hauler"></a>
 
@@ -4573,7 +4573,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/hauler/{hauler_id}/connection";
+          String url = "https://api.crosoftware.net/halers/{hauler_id}/connections";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -4592,7 +4592,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1 \
+curl -X POST https://api.crosoftware.net/halers/{hauler_id}/connections?tenant_code=CROSCRAP%2B1 \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -4608,7 +4608,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/hauler/{hauler_id}/connection',
+  url: 'https://api.crosoftware.net/halers/{hauler_id}/connections',
   method: 'post',
   data: '?tenant_code=CROSCRAP%2B1',
   headers: headers,
@@ -4629,7 +4629,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.post 'https://api.crosoftware.net/hauler/{hauler_id}/connection',
+result = RestClient.post 'https://api.crosoftware.net/halers/{hauler_id}/connections',
   params: {
   'tenant_code' => 'string(tenantCode)'
 }, headers: headers
@@ -4646,7 +4646,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.post('https://api.crosoftware.net/hauler/{hauler_id}/connection', params={
+r = requests.post('https://api.crosoftware.net/halers/{hauler_id}/connections', params={
   'tenant_code': 'CROSCRAP+1'
 }, headers = headers)
 
@@ -4655,7 +4655,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/hauler/{hauler_id}/connection?tenant_code=CROSCRAP%2B1");
+URL obj = new URL("https://api.crosoftware.net/halers/{hauler_id}/connections?tenant_code=CROSCRAP%2B1");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -4671,7 +4671,7 @@ System.out.println(response.toString());
 
 ```
 
-`POST /hauler/{hauler_id}/connection`
+`POST /halers/{hauler_id}/connections`
 
 <a id="opIdcreate_hauler_connection"></a>
 
@@ -4736,7 +4736,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/hauler/{hauler_id}";
+          String url = "https://api.crosoftware.net/halers/{hauler_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -4751,7 +4751,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/hauler/{hauler_id} \
+curl -X GET https://api.crosoftware.net/halers/{hauler_id} \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -4767,7 +4767,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/hauler/{hauler_id}',
+  url: 'https://api.crosoftware.net/halers/{hauler_id}',
   method: 'get',
 
   headers: headers,
@@ -4788,7 +4788,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/hauler/{hauler_id}',
+result = RestClient.get 'https://api.crosoftware.net/halers/{hauler_id}',
   params: {
   }, headers: headers
 
@@ -4804,7 +4804,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/hauler/{hauler_id}', params={
+r = requests.get('https://api.crosoftware.net/halers/{hauler_id}', params={
 
 }, headers = headers)
 
@@ -4813,7 +4813,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/hauler/{hauler_id}");
+URL obj = new URL("https://api.crosoftware.net/halers/{hauler_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -4829,7 +4829,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /hauler/{hauler_id}`
+`GET /halers/{hauler_id}`
 
 <a id="opIdget_hauler"></a>
 
@@ -4885,7 +4885,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/hauler";
+          String url = "https://api.crosoftware.net/haulers";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -4900,7 +4900,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/hauler \
+curl -X GET https://api.crosoftware.net/haulers \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -4916,7 +4916,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/hauler',
+  url: 'https://api.crosoftware.net/haulers',
   method: 'get',
 
   headers: headers,
@@ -4937,7 +4937,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/hauler',
+result = RestClient.get 'https://api.crosoftware.net/haulers',
   params: {
   }, headers: headers
 
@@ -4953,7 +4953,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/hauler', params={
+r = requests.get('https://api.crosoftware.net/haulers', params={
 
 }, headers = headers)
 
@@ -4962,7 +4962,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/hauler");
+URL obj = new URL("https://api.crosoftware.net/haulers");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -4978,7 +4978,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /hauler`
+`GET /haulers`
 
 <a id="opIdlist_haulers"></a>
 
@@ -5043,7 +5043,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/hauler/{hauler_id}/connection";
+          String url = "https://api.crosoftware.net/halers/{hauler_id}/connections";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -5058,7 +5058,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/hauler/{hauler_id}/connection \
+curl -X GET https://api.crosoftware.net/halers/{hauler_id}/connections \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -5074,7 +5074,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/hauler/{hauler_id}/connection',
+  url: 'https://api.crosoftware.net/halers/{hauler_id}/connections',
   method: 'get',
 
   headers: headers,
@@ -5095,7 +5095,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/hauler/{hauler_id}/connection',
+result = RestClient.get 'https://api.crosoftware.net/halers/{hauler_id}/connections',
   params: {
   }, headers: headers
 
@@ -5111,7 +5111,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/hauler/{hauler_id}/connection', params={
+r = requests.get('https://api.crosoftware.net/halers/{hauler_id}/connections', params={
 
 }, headers = headers)
 
@@ -5120,7 +5120,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/hauler/{hauler_id}/connection");
+URL obj = new URL("https://api.crosoftware.net/halers/{hauler_id}/connections");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -5136,7 +5136,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /hauler/{hauler_id}/connection`
+`GET /halers/{hauler_id}/connections`
 
 <a id="opIdlist_hauler_connections"></a>
 
@@ -5204,7 +5204,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/job/{job_id}";
+          String url = "https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -5223,7 +5223,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X PATCH https://api.crosoftware.net/location/{location_id}/job/{job_id}?truck_id=0 \
+curl -X PATCH https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}?truck_id=0 \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -5239,7 +5239,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/job/{job_id}',
+  url: 'https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}',
   method: 'patch',
   data: '?truck_id=0',
   headers: headers,
@@ -5260,7 +5260,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.patch 'https://api.crosoftware.net/location/{location_id}/job/{job_id}',
+result = RestClient.patch 'https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}',
   params: {
   'truck_id' => 'integer(int64)'
 }, headers: headers
@@ -5277,7 +5277,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.patch('https://api.crosoftware.net/location/{location_id}/job/{job_id}', params={
+r = requests.patch('https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}', params={
   'truck_id': '0'
 }, headers = headers)
 
@@ -5286,7 +5286,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/job/{job_id}?truck_id=0");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}?truck_id=0");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -5302,7 +5302,7 @@ System.out.println(response.toString());
 
 ```
 
-`PATCH /location/{location_id}/job/{job_id}`
+`PATCH /locations/{location_id}/jobs/{job_id}`
 
 <a id="opIddispatch_job"></a>
 
@@ -5417,7 +5417,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/job/{job_id}";
+          String url = "https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -5432,7 +5432,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/location/{location_id}/job/{job_id} \
+curl -X GET https://api.crosoftware.net/locations/{location_id}/jobs/{job_id} \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -5448,7 +5448,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/job/{job_id}',
+  url: 'https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}',
   method: 'get',
 
   headers: headers,
@@ -5469,7 +5469,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/job/{job_id}',
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}',
   params: {
   }, headers: headers
 
@@ -5485,7 +5485,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/location/{location_id}/job/{job_id}', params={
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}', params={
 
 }, headers = headers)
 
@@ -5494,7 +5494,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/job/{job_id}");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -5510,7 +5510,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /location/{location_id}/job/{job_id}`
+`GET /locations/{location_id}/jobs/{job_id}`
 
 <a id="opIdget_job"></a>
 
@@ -5776,7 +5776,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/job";
+          String url = "https://api.crosoftware.net/locations/{location_id}/jobs";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -5791,7 +5791,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/location/{location_id}/job \
+curl -X GET https://api.crosoftware.net/locations/{location_id}/jobs \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -5807,7 +5807,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/job',
+  url: 'https://api.crosoftware.net/locations/{location_id}/jobs',
   method: 'get',
 
   headers: headers,
@@ -5828,7 +5828,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/job',
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/jobs',
   params: {
   }, headers: headers
 
@@ -5844,7 +5844,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/location/{location_id}/job', params={
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/jobs', params={
 
 }, headers = headers)
 
@@ -5853,7 +5853,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/job");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/jobs");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -5869,7 +5869,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /location/{location_id}/job`
+`GET /locations/{location_id}/jobs`
 
 <a id="opIdlist_jobs_for_location"></a>
 
@@ -6152,7 +6152,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}";
+          String url = "https://api.crosoftware.net/locations/{location_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -6167,7 +6167,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/location/{location_id} \
+curl -X GET https://api.crosoftware.net/locations/{location_id} \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -6183,7 +6183,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}',
+  url: 'https://api.crosoftware.net/locations/{location_id}',
   method: 'get',
 
   headers: headers,
@@ -6204,7 +6204,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/location/{location_id}',
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}',
   params: {
   }, headers: headers
 
@@ -6220,7 +6220,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/location/{location_id}', params={
+r = requests.get('https://api.crosoftware.net/locations/{location_id}', params={
 
 }, headers = headers)
 
@@ -6229,7 +6229,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6245,7 +6245,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /location/{location_id}`
+`GET /locations/{location_id}`
 
 <a id="opIdget_location"></a>
 
@@ -6302,7 +6302,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location";
+          String url = "https://api.crosoftware.net/locations";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -6317,7 +6317,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/location \
+curl -X GET https://api.crosoftware.net/locations \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -6333,7 +6333,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location',
+  url: 'https://api.crosoftware.net/locations',
   method: 'get',
 
   headers: headers,
@@ -6354,7 +6354,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/location',
+result = RestClient.get 'https://api.crosoftware.net/locations',
   params: {
   }, headers: headers
 
@@ -6370,7 +6370,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/location', params={
+r = requests.get('https://api.crosoftware.net/locations', params={
 
 }, headers = headers)
 
@@ -6379,7 +6379,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location");
+URL obj = new URL("https://api.crosoftware.net/locations");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6395,7 +6395,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /location`
+`GET /locations`
 
 <a id="opIdlist_locations"></a>
 
@@ -6463,7 +6463,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/tenant";
+          String url = "https://api.crosoftware.net/tenants";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -6478,7 +6478,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/tenant \
+curl -X GET https://api.crosoftware.net/tenants \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -6494,7 +6494,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/tenant',
+  url: 'https://api.crosoftware.net/tenants',
   method: 'get',
 
   headers: headers,
@@ -6515,7 +6515,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/tenant',
+result = RestClient.get 'https://api.crosoftware.net/tenants',
   params: {
   }, headers: headers
 
@@ -6531,7 +6531,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/tenant', params={
+r = requests.get('https://api.crosoftware.net/tenants', params={
 
 }, headers = headers)
 
@@ -6540,7 +6540,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/tenant");
+URL obj = new URL("https://api.crosoftware.net/tenants");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6556,7 +6556,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /tenant`
+`GET /tenants`
 
 <a id="opIdlist_tenants"></a>
 
@@ -6633,7 +6633,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/truck/{truck_id}";
+          String url = "https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -6648,7 +6648,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/location/{location_id}/truck/{truck_id} \
+curl -X GET https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id} \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -6664,7 +6664,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/truck/{truck_id}',
+  url: 'https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}',
   method: 'get',
 
   headers: headers,
@@ -6685,7 +6685,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/truck/{truck_id}',
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}',
   params: {
   }, headers: headers
 
@@ -6701,7 +6701,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/location/{location_id}/truck/{truck_id}', params={
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}', params={
 
 }, headers = headers)
 
@@ -6710,7 +6710,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/truck/{truck_id}");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6726,7 +6726,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /location/{location_id}/truck/{truck_id}`
+`GET /locations/{location_id}/trucks/{truck_id}`
 
 <a id="opIdget_truck"></a>
 
@@ -6789,7 +6789,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/truck";
+          String url = "https://api.crosoftware.net/locations/{location_id}/trucks";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -6804,7 +6804,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/location/{location_id}/truck \
+curl -X GET https://api.crosoftware.net/locations/{location_id}/trucks \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -6820,7 +6820,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/truck',
+  url: 'https://api.crosoftware.net/locations/{location_id}/trucks',
   method: 'get',
 
   headers: headers,
@@ -6841,7 +6841,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/location/{location_id}/truck',
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/trucks',
   params: {
   }, headers: headers
 
@@ -6857,7 +6857,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/location/{location_id}/truck', params={
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/trucks', params={
 
 }, headers = headers)
 
@@ -6866,7 +6866,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/truck");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/trucks");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6882,7 +6882,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /location/{location_id}/truck`
+`GET /locations/{location_id}/trucks`
 
 <a id="opIdlist_trucks_for_location"></a>
 
@@ -6956,7 +6956,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/location/{location_id}/truck/{truck_id}";
+          String url = "https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}";
 
           // Headers
           client.Headers.Add("Authorization", "bearer <access-token>");
@@ -6975,7 +6975,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X PATCH https://api.crosoftware.net/location/{location_id}/truck/{truck_id}?driver_id=0 \
+curl -X PATCH https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}?driver_id=0 \
   -H 'Accept: application/json' \
   -H 'Authorization: bearer <access-token>' \
   -H 'X-TENANT-ID: 1'
@@ -6991,7 +6991,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/location/{location_id}/truck/{truck_id}',
+  url: 'https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}',
   method: 'patch',
   data: '?driver_id=0',
   headers: headers,
@@ -7012,7 +7012,7 @@ headers = {
   'X-TENANT-ID' => '1'
 }
 
-result = RestClient.patch 'https://api.crosoftware.net/location/{location_id}/truck/{truck_id}',
+result = RestClient.patch 'https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}',
   params: {
   'driver_id' => 'integer(int64)'
 }, headers: headers
@@ -7029,7 +7029,7 @@ headers = {
   'X-TENANT-ID': '1'
 }
 
-r = requests.patch('https://api.crosoftware.net/location/{location_id}/truck/{truck_id}', params={
+r = requests.patch('https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}', params={
   'driver_id': '0'
 }, headers = headers)
 
@@ -7038,7 +7038,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/location/{location_id}/truck/{truck_id}?driver_id=0");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}?driver_id=0");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -7054,7 +7054,7 @@ System.out.println(response.toString());
 
 ```
 
-`PATCH /location/{location_id}/truck/{truck_id}`
+`PATCH /locations/{location_id}/trucks/{truck_id}`
 
 <a id="opIdset_truck_driver"></a>
 
