@@ -173,10 +173,10 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/addresses";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "POST", parameters);
+          byte[] json = client.UploadString(url, "POST", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -188,7 +188,7 @@ namespace CROSoftware
 curl -X POST https://api.crosoftware.net/customers/{customer_id}/addresses \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -197,10 +197,7 @@ curl -X POST https://api.crosoftware.net/customers/{customer_id}/addresses \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -224,10 +221,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -244,10 +238,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -307,7 +298,7 @@ Add customer addresses.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
 |`body`|body|[CreateCustomerAddressModel](#schemacreatecustomeraddressmodel)|true||
@@ -339,7 +330,7 @@ Add customer addresses.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressModel](#schemacustomeraddressmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressModel](#schemacustomeraddressmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -375,10 +366,10 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "DELETE", parameters);
+          byte[] json = client.UploadString(url, "DELETE", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -389,7 +380,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -397,10 +388,7 @@ curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/addresses/{ad
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -423,10 +411,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -442,10 +427,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -486,7 +468,7 @@ Deactivate a customer address.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
 |`address_id`|path|integer(int64)|true||
@@ -518,7 +500,7 @@ Deactivate a customer address.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressModel](#schemacustomeraddressmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressModel](#schemacustomeraddressmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -554,7 +536,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -568,7 +550,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -576,10 +558,7 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id}/addresses/{addre
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -602,10 +581,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -621,10 +597,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -665,7 +638,7 @@ Get a customer address.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
 |`address_id`|path|integer(int64)|true||
@@ -697,7 +670,7 @@ Get a customer address.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressModel](#schemacustomeraddressmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressModel](#schemacustomeraddressmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -733,7 +706,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/addresses";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -747,7 +720,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers/{customer_id}/addresses \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -755,10 +728,7 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id}/addresses \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -781,10 +751,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -800,10 +767,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -844,7 +808,7 @@ List customer addresses.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
 |`filter_active`|query|boolean|false||
@@ -886,7 +850,7 @@ List customer addresses.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressListModel](#schemacustomeraddresslistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressListModel](#schemacustomeraddresslistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -922,10 +886,10 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "PATCH", parameters);
+          byte[] json = client.UploadString(url, "PATCH", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -937,7 +901,7 @@ namespace CROSoftware
 curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -946,10 +910,7 @@ curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/addresses/{add
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -973,10 +934,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -993,10 +951,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -1056,7 +1011,7 @@ Update a customer address.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
 |`address_id`|path|integer(int64)|true||
@@ -1089,7 +1044,7 @@ Update a customer address.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressModel](#schemacustomeraddressmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerAddressModel](#schemacustomeraddressmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -1127,10 +1082,10 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/contacts";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "POST", parameters);
+          byte[] json = client.UploadString(url, "POST", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -1142,7 +1097,7 @@ namespace CROSoftware
 curl -X POST https://api.crosoftware.net/customers/{customer_id}/contacts \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -1151,10 +1106,7 @@ curl -X POST https://api.crosoftware.net/customers/{customer_id}/contacts \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -1178,10 +1130,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -1198,10 +1147,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -1258,7 +1204,7 @@ Create new customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
 |`body`|body|[CreateCustomerContactModel](#schemacreatecustomercontactmodel)|true||
@@ -1286,7 +1232,7 @@ Create new customer contact.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerContactModel](#schemacustomercontactmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerContactModel](#schemacustomercontactmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -1322,7 +1268,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -1336,7 +1282,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -1344,10 +1290,7 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id}/contacts/{contac
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -1370,10 +1313,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -1389,10 +1329,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -1433,7 +1370,7 @@ Get a customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
 |`contact_id`|path|integer(int64)|true||
@@ -1461,7 +1398,7 @@ Get a customer contact.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerContactModel](#schemacustomercontactmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerContactModel](#schemacustomercontactmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -1497,7 +1434,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/contacts";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -1511,7 +1448,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers/{customer_id}/contacts \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -1519,10 +1456,7 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id}/contacts \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -1545,10 +1479,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -1564,10 +1495,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -1608,7 +1536,7 @@ List customer contacts.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
 |`page_limit`|query|integer(int64)|false||
@@ -1645,7 +1573,7 @@ List customer contacts.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerContactListModel](#schemacustomercontactlistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerContactListModel](#schemacustomercontactlistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -1681,10 +1609,10 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "PATCH", parameters);
+          byte[] json = client.UploadString(url, "PATCH", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -1696,7 +1624,7 @@ namespace CROSoftware
 curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -1705,10 +1633,7 @@ curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/contacts/{cont
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -1732,10 +1657,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -1752,10 +1674,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -1812,7 +1731,7 @@ Update a customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
 |`contact_id`|path|integer(int64)|true||
@@ -1841,7 +1760,7 @@ Update a customer contact.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerContactModel](#schemacustomercontactmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerContactModel](#schemacustomercontactmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -1876,13 +1795,13 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "POST", parameters);
+          byte[] json = client.UploadString(url, "POST", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -1891,10 +1810,10 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id} \
+curl -X POST https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -1903,16 +1822,13 @@ curl -X POST https://api.crosoftware.net/customers/{customer_id}/locations/{cust
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   method: 'post',
 
   headers: headers,
@@ -1930,14 +1846,11 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
-result = RestClient.post 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}',
+result = RestClient.post 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   params: {
   }, headers: headers
 
@@ -1950,14 +1863,11 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
-r = requests.post('https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}', params={
+r = requests.post('https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}', params={
 
 }, headers = headers)
 
@@ -1966,7 +1876,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1982,7 +1892,7 @@ System.out.println(response.toString());
 
 ```
 
-`POST /customers/{customer_id}/locations/{customer_id}`
+`POST /customers/{customer_id}/locations/{location_id}`
 
 <a id="opIdpost_customers_by_id_locations_by_id"></a>
 
@@ -2007,9 +1917,10 @@ Add customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
+|`location_id`|path|integer(int64)|true||
 |`body`|body|[CreateCustomerLocationModel](#schemacreatecustomerlocationmodel)|true||
 
 > Example responses
@@ -2032,7 +1943,7 @@ Add customer location profile.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -2065,13 +1976,13 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "DELETE", parameters);
+          byte[] json = client.UploadString(url, "DELETE", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -2080,9 +1991,9 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id} \
+curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -2090,16 +2001,13 @@ curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/locations/{cu
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   method: 'delete',
 
   headers: headers,
@@ -2116,14 +2024,11 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
-result = RestClient.delete 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}',
+result = RestClient.delete 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   params: {
   }, headers: headers
 
@@ -2135,14 +2040,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
-r = requests.delete('https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}', params={
+r = requests.delete('https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}', params={
 
 }, headers = headers)
 
@@ -2151,7 +2053,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -2167,7 +2069,7 @@ System.out.println(response.toString());
 
 ```
 
-`DELETE /customers/{customer_id}/locations/{customer_id}`
+`DELETE /customers/{customer_id}/locations/{location_id}`
 
 <a id="opIddelete_customers_by_id_locations_by_id"></a>
 
@@ -2179,9 +2081,10 @@ Deactivate (soft delete) customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
+|`location_id`|path|integer(int64)|true||
 
 > Example responses
 
@@ -2203,7 +2106,7 @@ Deactivate (soft delete) customer location profile.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -2236,10 +2139,10 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -2251,9 +2154,9 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id} \
+curl -X GET https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -2261,16 +2164,13 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id}/locations/{custo
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   method: 'get',
 
   headers: headers,
@@ -2287,14 +2187,11 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}',
+result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   params: {
   }, headers: headers
 
@@ -2306,14 +2203,11 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}', params={
+r = requests.get('https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}', params={
 
 }, headers = headers)
 
@@ -2322,7 +2216,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2338,7 +2232,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /customers/{customer_id}/locations/{customer_id}`
+`GET /customers/{customer_id}/locations/{location_id}`
 
 <a id="opIdget_customers_by_id_locations_by_id"></a>
 
@@ -2350,9 +2244,10 @@ Get a customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
+|`location_id`|path|integer(int64)|true||
 
 > Example responses
 
@@ -2374,7 +2269,7 @@ Get a customer contact.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -2410,7 +2305,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/locations";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -2424,7 +2319,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers/{customer_id}/locations \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -2432,10 +2327,7 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id}/locations \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -2458,10 +2350,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -2477,10 +2366,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -2521,7 +2407,7 @@ Update customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
 |`filter_active`|query|boolean|false||
@@ -2556,7 +2442,7 @@ Update customer location profile.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationListModel](#schemacustomerlocationlistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationListModel](#schemacustomerlocationlistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -2589,13 +2475,13 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "PATCH", parameters);
+          byte[] json = client.UploadString(url, "PATCH", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -2604,10 +2490,10 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id} \
+curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -2616,16 +2502,13 @@ curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/locations/{cus
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   method: 'patch',
 
   headers: headers,
@@ -2643,14 +2526,11 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
-result = RestClient.patch 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}',
+result = RestClient.patch 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
   params: {
   }, headers: headers
 
@@ -2663,14 +2543,11 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
-r = requests.patch('https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}', params={
+r = requests.patch('https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}', params={
 
 }, headers = headers)
 
@@ -2679,7 +2556,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{customer_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -2695,7 +2572,7 @@ System.out.println(response.toString());
 
 ```
 
-`PATCH /customers/{customer_id}/locations/{customer_id}`
+`PATCH /customers/{customer_id}/locations/{location_id}`
 
 <a id="opIdpatch_customers_by_id_locations_by_id"></a>
 
@@ -2720,9 +2597,10 @@ Update customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
+|`location_id`|path|integer(int64)|true||
 |`body`|body|[UpdateCustomerLocationModel](#schemaupdatecustomerlocationmodel)|true||
 
 > Example responses
@@ -2745,7 +2623,7 @@ Update customer location profile.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -2783,10 +2661,10 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/customers";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "POST", parameters);
+          byte[] json = client.UploadString(url, "POST", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -2798,7 +2676,7 @@ namespace CROSoftware
 curl -X POST https://api.crosoftware.net/locations/{location_id}/customers \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -2807,10 +2685,7 @@ curl -X POST https://api.crosoftware.net/locations/{location_id}/customers \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -2834,10 +2709,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -2854,10 +2726,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -2942,7 +2811,7 @@ Create customer for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`location_id`|path|integer(int64)|true||
 |`body`|body|[CreateCustomerModel](#schemacreatecustomermodel)|true||
@@ -2997,7 +2866,7 @@ Create customer for location.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CreateCustomerModel](#schemacreatecustomermodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CreateCustomerModel](#schemacreatecustomermodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -3033,7 +2902,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -3047,7 +2916,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers/{customer_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -3055,10 +2924,7 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -3081,10 +2947,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -3100,10 +2963,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -3144,7 +3004,7 @@ Customer model.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
 
@@ -3199,7 +3059,7 @@ Customer model.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerModel](#schemacustomermodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerModel](#schemacustomermodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -3235,7 +3095,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/customers/{customer_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -3249,7 +3109,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/customers/{customer_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -3257,10 +3117,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/customers/{custo
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -3283,10 +3140,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -3302,10 +3156,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -3346,7 +3197,7 @@ Get customer for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`location_id`|path|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
@@ -3371,7 +3222,7 @@ Get customer for location.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationModel](#schemacustomerlocationmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -3407,7 +3258,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -3421,7 +3272,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -3429,10 +3280,7 @@ curl -X GET https://api.crosoftware.net/customers \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -3455,10 +3303,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -3474,10 +3319,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -3518,7 +3360,7 @@ List of customers.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`name`|query|string|false||
 |`last_updated_gte`|query|string(DateTime)|false||
@@ -3585,7 +3427,7 @@ List of customers.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerListModel](#schemacustomerlistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerListModel](#schemacustomerlistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -3621,7 +3463,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/customers";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -3635,7 +3477,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/customers \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -3643,10 +3485,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/customers \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -3669,10 +3508,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -3688,10 +3524,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -3732,7 +3565,7 @@ List customers for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`location_id`|path|integer(int64)|true||
 |`name`|query|string|false||
@@ -3767,7 +3600,7 @@ List customers for location.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationListModel](#schemacustomerlocationlistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerLocationListModel](#schemacustomerlocationlistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -3803,10 +3636,10 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "PATCH", parameters);
+          byte[] json = client.UploadString(url, "PATCH", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -3818,7 +3651,7 @@ namespace CROSoftware
 curl -X PATCH https://api.crosoftware.net/customers/{customer_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -3827,10 +3660,7 @@ curl -X PATCH https://api.crosoftware.net/customers/{customer_id} \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -3854,10 +3684,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -3874,10 +3701,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -3927,7 +3751,7 @@ Customer model.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`customer_id`|path|integer(int64)|true||
 |`body`|body|[UpdateCustomerModel](#schemaupdatecustomermodel)|true||
@@ -3983,7 +3807,7 @@ Customer model.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerModel](#schemacustomermodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CustomerModel](#schemacustomermodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -4021,7 +3845,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/drivers/{driver_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -4035,7 +3859,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/drivers/{driver_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -4043,10 +3867,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/drivers/{driver_
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -4069,10 +3890,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -4088,10 +3906,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -4132,7 +3947,7 @@ Get driver.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`location_id`|path|integer(int64)|true||
 |`driver_id`|path|integer(int64)|true||
@@ -4166,7 +3981,7 @@ Get driver.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[DriverModel](#schemadrivermodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[DriverModel](#schemadrivermodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -4202,7 +4017,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/drivers";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -4216,7 +4031,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/drivers \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -4224,10 +4039,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/drivers \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -4250,10 +4062,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -4269,10 +4078,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -4313,7 +4119,7 @@ List drivers.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`location_id`|path|integer(int64)|true||
 |`page_limit`|query|integer(int64)|false||
@@ -4356,7 +4162,7 @@ List drivers.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[DriverListModel](#schemadriverlistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[DriverListModel](#schemadriverlistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -4394,10 +4200,10 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/gps_events";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "POST", parameters);
+          byte[] json = client.UploadString(url, "POST", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -4409,7 +4215,7 @@ namespace CROSoftware
 curl -X POST https://api.crosoftware.net/locations/{location_id}/gps_events \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -4418,10 +4224,7 @@ curl -X POST https://api.crosoftware.net/locations/{location_id}/gps_events \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -4445,10 +4248,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -4465,10 +4265,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -4525,7 +4322,7 @@ Log a GPS event.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`location_id`|path|integer(int64)|true||
 |`body`|body|[GpsEventProfileModel](#schemagpseventprofilemodel)|true||
@@ -4552,7 +4349,7 @@ Log a GPS event.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[GpsStopModel](#schemagpsstopmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[GpsStopModel](#schemagpsstopmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -4590,14 +4387,14 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/haulers/{hauler_uuid}/connections";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           // Parameters
           NameValueCollection parameters = new NameValueCollection();
           parameters.Add("tenant_code", "CROSCRAPCO+101");
           
-          byte[] json = client.UploadValues(url, "POST", parameters);
+          byte[] json = client.UploadString(url, "POST", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -4608,7 +4405,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X POST https://api.crosoftware.net/haulers/{hauler_uuid}/connections?tenant_code=CROSCRAPCO%2B101 \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -4616,10 +4413,7 @@ curl -X POST https://api.crosoftware.net/haulers/{hauler_uuid}/connections?tenan
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -4642,10 +4436,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -4662,10 +4453,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -4706,7 +4494,7 @@ Create third party connection.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`hauler_uuid`|path|string(Uuid)|true||
 |`tenant_code`|query|string|true||
@@ -4740,7 +4528,7 @@ Create third party connection.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ThirdPartyHaulerConnectionListModel](#schemathirdpartyhaulerconnectionlistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ThirdPartyHaulerConnectionListModel](#schemathirdpartyhaulerconnectionlistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -4776,7 +4564,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/haulers";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           // Parameters
@@ -4786,7 +4574,7 @@ namespace CROSoftware
           parameters.Add("password", "cro1sher3!");
           parameters.Add("recaptcha", "<recaptcha-string>");
           
-          byte[] json = client.UploadValues(url, "POST", parameters);
+          byte[] json = client.UploadString(url, "POST", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -4797,7 +4585,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X POST https://api.crosoftware.net/haulers?company_name=CRO%20Scrap%20Example%20Inc.&username=a_user%40crosoftware.net&password=cro1sher3%21&recaptcha=%3Crecaptcha-string%3E \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -4805,10 +4593,7 @@ curl -X POST https://api.crosoftware.net/haulers?company_name=CRO%20Scrap%20Exam
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -4831,10 +4616,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -4854,10 +4636,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -4902,7 +4681,7 @@ This operation does not require authentication
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`company_name`|query|string|true||
 |`username`|query|string|true||
@@ -4938,7 +4717,7 @@ This operation does not require authentication
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ThirdPartyHaulerConnectionListModel](#schemathirdpartyhaulerconnectionlistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ThirdPartyHaulerConnectionListModel](#schemathirdpartyhaulerconnectionlistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -4974,7 +4753,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/haulers/{hauler_uuid}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -4988,7 +4767,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/haulers/{hauler_uuid} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -4996,10 +4775,7 @@ curl -X GET https://api.crosoftware.net/haulers/{hauler_uuid} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -5022,10 +4798,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -5041,10 +4814,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -5085,7 +4855,7 @@ Get third party hauler.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`hauler_uuid`|path|string(Uuid)|true||
 
@@ -5104,7 +4874,7 @@ Get third party hauler.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ThirdPartyHaulerModel](#schemathirdpartyhaulermodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ThirdPartyHaulerModel](#schemathirdpartyhaulermodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -5140,7 +4910,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/haulers/{hauler_uuid}/connections";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -5154,7 +4924,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/haulers/{hauler_uuid}/connections \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -5162,10 +4932,7 @@ curl -X GET https://api.crosoftware.net/haulers/{hauler_uuid}/connections \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -5188,10 +4955,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -5207,10 +4971,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -5251,7 +5012,7 @@ List third party hauler connections.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`hauler_uuid`|path|string(Uuid)|true||
 |`page_limit`|query|integer(int64)|false||
@@ -5286,7 +5047,7 @@ List third party hauler connections.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ThirdPartyHaulerConnectionListModel](#schemathirdpartyhaulerconnectionlistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ThirdPartyHaulerConnectionListModel](#schemathirdpartyhaulerconnectionlistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -5322,7 +5083,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/haulers";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -5336,7 +5097,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/haulers \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -5344,10 +5105,7 @@ curl -X GET https://api.crosoftware.net/haulers \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -5370,10 +5128,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -5389,10 +5144,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -5433,7 +5185,7 @@ List third party haulers.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`page_limit`|query|integer(int64)|false||
 |`page_index`|query|integer(int64)|false||
@@ -5461,7 +5213,7 @@ List third party haulers.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ThirdPartyHaulerListModel](#schemathirdpartyhaulerlistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[ThirdPartyHaulerListModel](#schemathirdpartyhaulerlistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -5499,10 +5251,10 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "PATCH", parameters);
+          byte[] json = client.UploadString(url, "PATCH", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -5513,7 +5265,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X PATCH https://api.crosoftware.net/locations/{location_id}/jobs/{job_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -5521,10 +5273,7 @@ curl -X PATCH https://api.crosoftware.net/locations/{location_id}/jobs/{job_id} 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -5547,10 +5296,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -5566,10 +5312,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -5610,7 +5353,7 @@ Dispatch a job by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`location_id`|path|integer(int64)|true||
 |`job_id`|path|integer(int64)|true||
@@ -5683,7 +5426,7 @@ Dispatch a job by id.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[UpdatedJobModel](#schemaupdatedjobmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[UpdatedJobModel](#schemaupdatedjobmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -5719,7 +5462,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -5733,7 +5476,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/jobs/{job_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -5741,10 +5484,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/jobs/{job_id} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -5767,10 +5507,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -5786,10 +5523,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -5830,7 +5564,7 @@ Get job by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`location_id`|path|integer(int64)|true||
 |`job_id`|path|integer(int64)|true||
@@ -5997,7 +5731,7 @@ Get job by id.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[JobModel](#schemajobmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[JobModel](#schemajobmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -6033,7 +5767,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/jobs";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           // Parameters
@@ -6052,7 +5786,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/jobs?schedule_gt=2018-10-31T11%3A32%3A38.390000&schedule_lt=2018-10-31T11%3A32%3A38.390000 \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -6060,10 +5794,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/jobs?schedule_gt
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -6086,10 +5817,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -6107,10 +5835,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -6151,7 +5876,7 @@ List jobs.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`location_id`|path|integer(int64)|true||
 |`page_limit`|query|integer(int64)|false||
@@ -6336,7 +6061,7 @@ List jobs.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[JobListModel](#schemajoblistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[JobListModel](#schemajoblistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -6374,7 +6099,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -6388,7 +6113,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -6396,10 +6121,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -6422,10 +6144,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -6441,10 +6160,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -6485,7 +6201,7 @@ Get location by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`location_id`|path|integer(int64)|true||
 
@@ -6505,7 +6221,7 @@ Get location by id.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[LocationModel](#schemalocationmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[LocationModel](#schemalocationmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -6541,7 +6257,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -6555,7 +6271,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -6563,10 +6279,7 @@ curl -X GET https://api.crosoftware.net/locations \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -6589,10 +6302,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -6608,10 +6318,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -6652,7 +6359,7 @@ List locations for this user.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`page_limit`|query|integer(int64)|false||
 |`page_index`|query|integer(int64)|false||
@@ -6681,7 +6388,7 @@ List locations for this user.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[LocationListModel](#schemalocationlistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[LocationListModel](#schemalocationlistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -6719,7 +6426,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/tenants";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -6733,7 +6440,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/tenants \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -6741,10 +6448,7 @@ curl -X GET https://api.crosoftware.net/tenants \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -6767,10 +6471,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -6786,10 +6487,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -6830,7 +6528,7 @@ List tenants for this user.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`page_limit`|query|integer(int64)|false||
 |`page_index`|query|integer(int64)|false||
@@ -6868,7 +6566,7 @@ List tenants for this user.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[TenantListModel](#schematenantlistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[TenantListModel](#schematenantlistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -6906,7 +6604,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -6920,7 +6618,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -6928,10 +6626,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -6954,10 +6649,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -6973,10 +6665,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -7017,7 +6706,7 @@ Get truck.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`location_id`|path|integer(int64)|true||
 |`truck_id`|path|integer(int64)|true||
@@ -7045,7 +6734,7 @@ Get truck.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|string|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|string|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -7081,7 +6770,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/trucks";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -7095,7 +6784,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/trucks \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -7103,10 +6792,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/trucks \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -7129,10 +6815,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -7148,10 +6831,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -7192,7 +6872,7 @@ List trucks.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`location_id`|path|integer(int64)|true||
 |`page_limit`|query|integer(int64)|false||
@@ -7229,7 +6909,7 @@ List trucks.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[TruckListModel](#schematrucklistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[TruckListModel](#schematrucklistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -7265,10 +6945,10 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "PATCH", parameters);
+          byte[] json = client.UploadString(url, "PATCH", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -7279,7 +6959,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X PATCH https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -7287,10 +6967,7 @@ curl -X PATCH https://api.crosoftware.net/locations/{location_id}/trucks/{truck_
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -7313,10 +6990,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -7332,10 +7006,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -7376,7 +7047,7 @@ Set driver for truck.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`location_id`|path|integer(int64)|true||
 |`truck_id`|path|integer(int64)|true||
@@ -7405,7 +7076,7 @@ Set driver for truck.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[TruckModel](#schematruckmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[TruckModel](#schematruckmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -7443,10 +7114,10 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hooks";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "POST", parameters);
+          byte[] json = client.UploadString(url, "POST", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -7458,7 +7129,7 @@ namespace CROSoftware
 curl -X POST https://api.crosoftware.net/hooks \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -7467,10 +7138,7 @@ curl -X POST https://api.crosoftware.net/hooks \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -7494,10 +7162,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -7514,10 +7179,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -7569,7 +7231,7 @@ Create new webhook.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`body`|body|[CreateWebhookModel](#schemacreatewebhookmodel)|true||
 
@@ -7590,7 +7252,7 @@ Create new webhook.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CreateWebhookModel](#schemacreatewebhookmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[CreateWebhookModel](#schemacreatewebhookmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -7626,10 +7288,10 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hooks/{hook_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "DELETE", parameters);
+          byte[] json = client.UploadString(url, "DELETE", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -7640,7 +7302,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X DELETE https://api.crosoftware.net/hooks/{hook_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -7648,10 +7310,7 @@ curl -X DELETE https://api.crosoftware.net/hooks/{hook_id} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -7674,10 +7333,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -7693,10 +7349,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -7737,7 +7390,7 @@ Deactivate (soft delete) webhook by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`hook_id`|path|integer(int64)|true||
 
@@ -7751,6 +7404,8 @@ Deactivate (soft delete) webhook by id.
     "customer"
   ],
   "id": "1",
+  "last_http_fail": "2018-10-31T11:32:38.390000",
+  "last_http_success": "2018-10-31T11:32:38.390000",
   "url": "http://your.callback.url.net"
 }
 ```
@@ -7759,7 +7414,7 @@ Deactivate (soft delete) webhook by id.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[WebhookModel](#schemawebhookmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[WebhookModel](#schemawebhookmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -7795,7 +7450,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hooks/{hook_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -7809,7 +7464,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/hooks/{hook_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -7817,10 +7472,7 @@ curl -X GET https://api.crosoftware.net/hooks/{hook_id} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -7843,10 +7495,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -7862,10 +7511,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -7906,7 +7552,7 @@ Get webhook by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`hook_id`|path|integer(int64)|true||
 
@@ -7920,6 +7566,8 @@ Get webhook by id.
     "customer"
   ],
   "id": "1",
+  "last_http_fail": "2018-10-31T11:32:38.390000",
+  "last_http_success": "2018-10-31T11:32:38.390000",
   "url": "http://your.callback.url.net"
 }
 ```
@@ -7928,7 +7576,7 @@ Get webhook by id.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[WebhookModel](#schemawebhookmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[WebhookModel](#schemawebhookmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -7964,7 +7612,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hooks";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -7978,7 +7626,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/hooks \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -7986,10 +7634,7 @@ curl -X GET https://api.crosoftware.net/hooks \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -8012,10 +7657,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -8031,10 +7673,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -8075,7 +7714,7 @@ List webhooks.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`deleted`|query|boolean|false||
 |`page_limit`|query|integer(int64)|false||
@@ -8095,6 +7734,8 @@ List webhooks.
         "customer"
       ],
       "id": "1",
+      "last_http_fail": "2018-10-31T11:32:38.390000",
+      "last_http_success": "2018-10-31T11:32:38.390000",
       "url": "http://your.callback.url.net"
     }
   ],
@@ -8107,7 +7748,164 @@ List webhooks.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[WebhookListModel](#schemawebhooklistmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[WebhookListModel](#schemawebhooklistmodel)|HTTP call succeeded.|
+|`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
+
+<h4>Response Headers</h4>
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|x-request-id|string||Request identifier.
+|
+|401|x-request-id|string||Request identifier.
+|
+|403|x-request-id|string||Request identifier.
+|
+
+### Ping Hook
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/hooks/{hook_id}/ping";
+
+          // Headers
+          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("x-tenant-id", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/hooks/{hook_id}/ping \
+  -H 'Accept: application/json' \
+  -H 'authorization: bearer <token>' \
+  -H 'x-tenant-id: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'authorization':'bearer <token>',
+  'x-tenant-id':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/hooks/{hook_id}/ping',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'authorization' => 'bearer <token>',
+  'x-tenant-id' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/hooks/{hook_id}/ping',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'authorization': 'bearer <token>',
+  'x-tenant-id': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/hooks/{hook_id}/ping', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/hooks/{hook_id}/ping");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /hooks/{hook_id}/ping`
+
+<a id="opIdget_hooks_by_id_ping"></a>
+
+Ping webhook by id.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`authorization`|header|string|true||
+|`x-tenant-id`|header|integer(int64)|true||
+|`hook_id`|path|integer(int64)|true||
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "delivery_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
+  "http_status": "200"
+}
+```
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[WebhookPingResultModel](#schemawebhookpingresultmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -8143,10 +7941,10 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hooks/{hook_id}";
 
           // Headers
-          client.Headers.Add("authorization", "[object Object]");
+          client.Headers.Add("authorization", "bearer <token>");
           client.Headers.Add("x-tenant-id", "1");
           
-          byte[] json = client.UploadValues(url, "PATCH", parameters);
+          byte[] json = client.UploadString(url, "PATCH", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
   }
@@ -8158,7 +7956,7 @@ namespace CROSoftware
 curl -X PATCH https://api.crosoftware.net/hooks/{hook_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: [object Object]' \
+  -H 'authorization: bearer <token>' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -8167,10 +7965,7 @@ curl -X PATCH https://api.crosoftware.net/hooks/{hook_id} \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization':'bearer <token>',
   'x-tenant-id':'1'
 
 };
@@ -8194,10 +7989,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization' => 'bearer <token>',
   'x-tenant-id' => '1'
 }
 
@@ -8214,10 +8006,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': {
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-},
+  'authorization': 'bearer <token>',
   'x-tenant-id': '1'
 }
 
@@ -8269,7 +8058,7 @@ Update webhook.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|[AuthorizationHeaderModel](#schemaauthorizationheadermodel)|true||
+|`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`hook_id`|path|integer(int64)|true||
 |`body`|body|[UpdateWebhookModel](#schemaupdatewebhookmodel)|true||
@@ -8291,7 +8080,7 @@ Update webhook.
 
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
-|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[UpdateWebhookModel](#schemaupdatewebhookmodel)|OK.|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[UpdateWebhookModel](#schemaupdatewebhookmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -8357,7 +8146,7 @@ Update webhook.
 |`description`|string|Free-form text description. Must be at least 1 and no more than 2048 characters.|
 |`dispatched_on`|string(DateTime)|Time the asset was dispatched. Must be a date in an ISO 8601 compatible format.|
 |`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
-|`is_returned`|boolean|Is asset returned. Must be one of [0, 1, True, False] (case insensitive).|
+|`is_returned`|boolean|Is asset returned. Must be one of 0, 1, True, False (case insensitive).|
 |`last_activity_on`|string(DateTime)|Last activity time. Must be a date in an ISO 8601 compatible format.|
 |`last_rental_invoice_on`|string(DateTime)|Last rental invoice time. Must be a date in an ISO 8601 compatible format.|
 |`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
@@ -8388,31 +8177,14 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`deleted`|boolean|Is record deleted (soft delete). Must be one of [0, 1, True, False] (case insensitive).|
+|`deleted`|boolean|Is record deleted (soft delete). Must be one of 0, 1, True, False (case insensitive).|
 |`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
-|`is_default`|boolean|Is asset the default asset. Must be one of [0, 1, True, False] (case insensitive).|
+|`is_default`|boolean|Is asset the default asset. Must be one of 0, 1, True, False (case insensitive).|
 |`location_id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
 |`quantity`|integer(int64)|Asset type quantity. Must be integer greater than or equal to 0.|
-|`require_numbers`|boolean|Require asset numbers. Must be one of [0, 1, True, False] (case insensitive).|
+|`require_numbers`|boolean|Require asset numbers. Must be one of 0, 1, True, False (case insensitive).|
 |`weight`|number(float)|Must be integer greater than or equal to 0.|
-
-<h2 id="tocSauthorizationheadermodel">AuthorizationHeaderModel</h2>
-
-```json
-{
-  "authtype": "bearer",
-  "params": "asdf1234.asdf+1234.asdf"
-}
-
-```
-
-<a id="schemaauthorizationheadermodel"></a>
-
-|Name|Type|Description|
-|---|---|---|
-|`authtype`|string|Athorization bearer. Must match expression ^bearer$|
-|`params`|string|Athorization access token. Must be no longer than 255 characters. Must match expression ^[a-z0-9_\-\.+\/~\=]{16,255}$|
 
 <h2 id="tocScreatecustomeraddressmodel">CreateCustomerAddressModel</h2>
 
@@ -8439,8 +8211,8 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`country`|string|Country code (ISO 3166-1 alpha 2). Must be a 2 character country code.|
-|`is_billing`|boolean|If true, this is the customer's billing address. Must be one of [0, 1, True, False] (case insensitive).|
-|`is_shipping`|boolean|Customer's shipping address if true. Must be one of [0, 1, True, False] (case insensitive).|
+|`is_billing`|boolean|If true, this is the customer's billing address. Must be one of 0, 1, True, False (case insensitive).|
+|`is_shipping`|boolean|Customer's shipping address if true. Must be one of 0, 1, True, False (case insensitive).|
 |`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
 |`line_1`|string|Street address. Must be at least 1 and no more than 256 characters.|
 |`line_2`|string|Street address line 2. Must be at least 1 and no more than 256 characters.|
@@ -8475,11 +8247,11 @@ Update webhook.
 |`email`|string(Email)|Email address. Must be a valid email address.|
 |`fax`|string(PhoneNumber)|Fax number (free text). At least 7 characters, not more than 15.|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`notify_on_acknowledged_request`|boolean|Notify on acknowledge request. Must be one of [0, 1, True, False] (case insensitive).|
-|`notify_on_completed_request`|boolean|Notify on completed request. Must be one of [0, 1, True, False] (case insensitive).|
-|`notify_on_dispatched_request`|boolean|Notify on dispatched request. Must be one of [0, 1, True, False] (case insensitive).|
-|`notify_on_failed_request`|boolean|Notify on failed request. Must be one of [0, 1, True, False] (case insensitive).|
-|`notify_on_new_request`|boolean|Notify on new request. Must be one of [0, 1, True, False] (case insensitive).|
+|`notify_on_acknowledged_request`|boolean|Notify on acknowledge request. Must be one of 0, 1, True, False (case insensitive).|
+|`notify_on_completed_request`|boolean|Notify on completed request. Must be one of 0, 1, True, False (case insensitive).|
+|`notify_on_dispatched_request`|boolean|Notify on dispatched request. Must be one of 0, 1, True, False (case insensitive).|
+|`notify_on_failed_request`|boolean|Notify on failed request. Must be one of 0, 1, True, False (case insensitive).|
+|`notify_on_new_request`|boolean|Notify on new request. Must be one of 0, 1, True, False (case insensitive).|
 |`number`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
 
 <h2 id="tocScreatecustomerlocationmodel">CreateCustomerLocationModel</h2>
@@ -8500,7 +8272,7 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of [0, 1, True, False] (case insensitive).|
+|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
 |`note`|string|Notes (free text). Must be at least 1 and no more than 2048 characters.|
 |`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
 |`renewal_date`|string(DateTime)|Renewal date. Must be a date in an ISO 8601 compatible format.|
@@ -8558,7 +8330,7 @@ Update webhook.
 |---|---|---|
 |`addresses`|array[[CreateCustomerAddressModel](#schemacreatecustomeraddressmodel)]|-|
 |`contacts`|array[[CreateCustomerContactModel](#schemacreatecustomercontactmodel)]|-|
-|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of [0, 1, True, False] (case insensitive).|
+|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
 |`note`|string|Notes (free text). Must be at least 1 and no more than 2048 characters.|
 |`parent_id`|integer(int64)|Parent record identifier (integer) Must be valid resource identifier (integer).|
@@ -8583,7 +8355,7 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`events`|array[string]|Hook event. Must be a valid hook event (one of: customer, job).|
+|`events`|array[string]|Hook event. Must be a valid hook event (one of: customer, customer_location, job, truck).|
 |`url`|string(Url)|Callback URL. URL conforming to RFC 1738.|
 
 <h2 id="tocScustomeraddresslistmodel">CustomerAddressListModel</h2>
@@ -8654,9 +8426,9 @@ Update webhook.
 |---|---|---|
 |`address_id`|integer(int64)|Customer address identifier. Must be valid resource identifier (integer).|
 |`country`|string|Country code (ISO 3166-1 alpha 2). Must be a 2 character country code.|
-|`is_billing`|boolean|If true, this is the customer's billing address. Must be one of [0, 1, True, False] (case insensitive).|
-|`is_physical`|boolean|Physical address if true. Must be one of [0, 1, True, False] (case insensitive).|
-|`is_shipping`|boolean|Customer's shipping address if true. Must be one of [0, 1, True, False] (case insensitive).|
+|`is_billing`|boolean|If true, this is the customer's billing address. Must be one of 0, 1, True, False (case insensitive).|
+|`is_physical`|boolean|Physical address if true. Must be one of 0, 1, True, False (case insensitive).|
+|`is_shipping`|boolean|Customer's shipping address if true. Must be one of 0, 1, True, False (case insensitive).|
 |`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
 |`line_1`|string|Street address. Must be at least 1 and no more than 256 characters.|
 |`line_2`|string|Street address line 2. Must be at least 1 and no more than 256 characters.|
@@ -8729,11 +8501,11 @@ Update webhook.
 |`email`|string(Email)|Email address. Must be a valid email address.|
 |`fax`|string(PhoneNumber)|Fax number (free text). At least 7 characters, not more than 15.|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`notify_on_acknowledged_request`|boolean|Notify on acknowledge request. Must be one of [0, 1, True, False] (case insensitive).|
-|`notify_on_completed_request`|boolean|Notify on completed request. Must be one of [0, 1, True, False] (case insensitive).|
-|`notify_on_dispatched_request`|boolean|Notify on dispatched request. Must be one of [0, 1, True, False] (case insensitive).|
-|`notify_on_failed_request`|boolean|Notify on failed request. Must be one of [0, 1, True, False] (case insensitive).|
-|`notify_on_new_request`|boolean|Notify on new request. Must be one of [0, 1, True, False] (case insensitive).|
+|`notify_on_acknowledged_request`|boolean|Notify on acknowledge request. Must be one of 0, 1, True, False (case insensitive).|
+|`notify_on_completed_request`|boolean|Notify on completed request. Must be one of 0, 1, True, False (case insensitive).|
+|`notify_on_dispatched_request`|boolean|Notify on dispatched request. Must be one of 0, 1, True, False (case insensitive).|
+|`notify_on_failed_request`|boolean|Notify on failed request. Must be one of 0, 1, True, False (case insensitive).|
+|`notify_on_new_request`|boolean|Notify on new request. Must be one of 0, 1, True, False (case insensitive).|
 |`number`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
 
 <h2 id="tocScustomerlistmodel">CustomerListModel</h2>
@@ -8853,7 +8625,7 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
-|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of [0, 1, True, False] (case insensitive).|
+|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
 |`note`|string|Notes (free text). Must be at least 1 and no more than 2048 characters.|
 |`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
 |`renewal_date`|string(DateTime)|Renewal date. Must be a date in an ISO 8601 compatible format.|
@@ -8913,7 +8685,7 @@ Update webhook.
 |`addresses`|array[[CreateCustomerAddressModel](#schemacreatecustomeraddressmodel)]|-|
 |`contacts`|array[[CreateCustomerContactModel](#schemacreatecustomercontactmodel)]|-|
 |`customer_id`|integer(int64)|Customer identifier. Must be valid resource identifier (integer).|
-|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of [0, 1, True, False] (case insensitive).|
+|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
 |`note`|string|Notes (free text). Must be at least 1 and no more than 2048 characters.|
 |`parent_id`|integer(int64)|Parent record identifier (integer) Must be valid resource identifier (integer).|
@@ -8993,12 +8765,12 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`address`|string|Street address. Must be at least 1 and no more than 256 characters.|
-|`can_convert_to_group`|boolean|Can driver convert to group. Must be one of [0, 1, True, False] (case insensitive).|
-|`can_create_requests`|boolean|Can driver create requests. Must be one of [0, 1, True, False] (case insensitive).|
-|`can_edit_requests`|boolean|Can driver edit requests. Must be one of [0, 1, True, False] (case insensitive).|
-|`can_reposition_asset`|boolean|Can driver reposition asset. Must be one of [0, 1, True, False] (case insensitive).|
+|`can_convert_to_group`|boolean|Can driver convert to group. Must be one of 0, 1, True, False (case insensitive).|
+|`can_create_requests`|boolean|Can driver create requests. Must be one of 0, 1, True, False (case insensitive).|
+|`can_edit_requests`|boolean|Can driver edit requests. Must be one of 0, 1, True, False (case insensitive).|
+|`can_reposition_asset`|boolean|Can driver reposition asset. Must be one of 0, 1, True, False (case insensitive).|
 |`city`|string|Address locality (e.g. city). Must be at least 1 and no more than 86 characters.|
-|`disable_shift_tracking`|boolean|Disable shift tracking. Must be one of [0, 1, True, False] (case insensitive).|
+|`disable_shift_tracking`|boolean|Disable shift tracking. Must be one of 0, 1, True, False (case insensitive).|
 |`email`|string(Email)|Email address. Must be a valid email address.|
 |`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
 |`license_number`|string|Driver's license number. Must be at least 1 and no more than 100 characters.|
@@ -9470,7 +9242,7 @@ Update webhook.
 |`asset_type`|[AssetTypeModel](#schemaassettypemodel)|-|
 |`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E'). Must be valid resource identifier (integer).|
 |`completed_by`|integer(int64)|Dispatcher or driver id. Must be valid resource identifier (integer).|
-|`completed_by_driver`|boolean|If TRUE, completed by driver. If FALSE, completed by dispatcher. Must be one of [0, 1, True, False] (case insensitive).|
+|`completed_by_driver`|boolean|If TRUE, completed by driver. If FALSE, completed by dispatcher. Must be one of 0, 1, True, False (case insensitive).|
 |`completed_on`|string(DateTime)|Job completion time. Must be a date occurring in the past in an ISO 8601 compatible format.|
 |`confirmed_on`|string(DateTime)|Job confirmation date. Must be a date occurring in the past in an ISO 8601 compatible format.|
 |`created_by_id`|integer(int64)|Customer, dispatcher, or driver id. Must be valid resource identifier (integer).|
@@ -9482,7 +9254,7 @@ Update webhook.
 |`dispatched_by_route`|integer(int64)|Route id of dispatching route (or NULL if not dispatched by a route). Must be valid resource identifier (integer).|
 |`dispatched_on`|string(DateTime)|Time the job is assigned to a truck. Must be a date in an ISO 8601 compatible format.|
 |`dispatcher_notes`|string|Entered by dispatchers, read by drivers and dispatchers. Must be at least 1 and no more than 2048 characters.|
-|`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched. Must be one of [0, 1, True, False] (case insensitive).|
+|`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched. Must be one of 0, 1, True, False (case insensitive).|
 |`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers. Must be at least 1 and no more than 2048 characters.|
 |`dump_location`|[LocationModel](#schemalocationmodel)|-|
 |`dump_location_id`|integer(int64)|Asset or asset cluster dump location identifier (e.g. trash bin needs dumped before returning from customer). Must be valid resource identifier (integer).|
@@ -9493,10 +9265,10 @@ Update webhook.
 |`final_location_id`|integer(int64)|Final location identifier. Used by dispatchers for prioritizing jobs. Used by drivers to know where to leave the asset on job completion. Must be valid resource identifier (integer).|
 |`flags`|string|Job notes. Must be at least 0 and no more than 64 characters.|
 |`invoice_notes`|string|Invoice notes from the billing system. Must be at least 1 and no more than 2048 characters.|
-|`is_completed`|boolean|Job completion flag set by dispatchers and drivers. Must be one of [0, 1, True, False] (case insensitive).|
-|`is_declined`|boolean|Job completion flag set by dispatchers and drivers. Must be one of [0, 1, True, False] (case insensitive).|
-|`is_deleted`|boolean|Indicates whether job is still valid. Must be one of [0, 1, True, False] (case insensitive).|
-|`is_failed`|boolean|Set by drivers and dispatchers to indicate a failed job. Must be one of [0, 1, True, False] (case insensitive).|
+|`is_completed`|boolean|Job completion flag set by dispatchers and drivers. Must be one of 0, 1, True, False (case insensitive).|
+|`is_declined`|boolean|Job completion flag set by dispatchers and drivers. Must be one of 0, 1, True, False (case insensitive).|
+|`is_deleted`|boolean|Indicates whether job is still valid. Must be one of 0, 1, True, False (case insensitive).|
+|`is_failed`|boolean|Set by drivers and dispatchers to indicate a failed job. Must be one of 0, 1, True, False (case insensitive).|
 |`job_group_id`|integer(int64)|Job group identifier for group jobs (vs service, exchange, etc.). Must be valid resource identifier (integer).|
 |`location_id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
 |`merged_with_route`|integer(int64)|Assigned by dispatchers for dispatchers and drivers. Must be valid resource identifier (integer).|
@@ -9505,10 +9277,10 @@ Update webhook.
 |`priority`|integer(int64)|Assigned by dispatchers for job order completion determination for drivers. Must be integer greater than or equal to -999999. Must be integer less than or equal to -1.|
 |`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
 |`requested_on`|string(DateTime)|Requested date. Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`require_image`|boolean|Set by dispatchers and drivers, requires drivers to upload one or more job images before completion. Must be one of [0, 1, True, False] (case insensitive).|
-|`require_material`|boolean|Set by dispatchers and drivers, requires drivers to set a material before completing a job. Must be one of [0, 1, True, False] (case insensitive).|
-|`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion. Must be one of [0, 1, True, False] (case insensitive).|
-|`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion. Must be one of [0, 1, True, False] (case insensitive).|
+|`require_image`|boolean|Set by dispatchers and drivers, requires drivers to upload one or more job images before completion. Must be one of 0, 1, True, False (case insensitive).|
+|`require_material`|boolean|Set by dispatchers and drivers, requires drivers to set a material before completing a job. Must be one of 0, 1, True, False (case insensitive).|
+|`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion. Must be one of 0, 1, True, False (case insensitive).|
+|`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion. Must be one of 0, 1, True, False (case insensitive).|
 |`schedule_date`|string(DateTime)|Scheduled job completion date. Must be a date in an ISO 8601 compatible format.|
 |`start_location`|[LocationModel](#schemalocationmodel)|-|
 |`start_location_id`|integer(int64)|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers. Must be valid resource identifier (integer).|
@@ -9517,7 +9289,7 @@ Update webhook.
 |`times_failed`|integer(int64)|Number of times a job has been attempted and failed. Must be integer greater than or equal to 0.|
 |`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers. Must be integer greater than or equal to 0.|
 |`truck_id`|integer(int64)|Truck identifier. Must be valid resource identifier (integer).|
-|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'R', 'P', 'D', 'E', 'L'.|
+|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'R', 'E', 'P', 'L', 'D'.|
 |`weighed_on`|string(DateTime)|Time of truck weight entry. Must be a date occurring in the past in an ISO 8601 compatible format.|
 
 <h2 id="tocSlocationlistmodel">LocationListModel</h2>
@@ -9565,7 +9337,7 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
-|`is_active`|boolean|Records marked inactive are treated as deleted (soft delete). Must be one of [0, 1, True, False] (case insensitive).|
+|`is_active`|boolean|Records marked inactive are treated as deleted (soft delete). Must be one of 0, 1, True, False (case insensitive).|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
 
 <h2 id="tocStenantlistmodel">TenantListModel</h2>
@@ -9636,7 +9408,7 @@ Update webhook.
 |`created_on`|string(DateTime)|Timestamp of creation (must be in past). Must be a date occurring in the past in an ISO 8601 compatible format.|
 |`email`|string(Email)|Email address. Must be a valid email address.|
 |`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
-|`is_active`|boolean|Records marked inactive are treated as deleted (soft delete). Must be one of [0, 1, True, False] (case insensitive).|
+|`is_active`|boolean|Records marked inactive are treated as deleted (soft delete). Must be one of 0, 1, True, False (case insensitive).|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
 |`phone`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
 |`state`|string|Address region (e.g. state). Must be at least 1 and no more than 32 characters.|
@@ -9702,7 +9474,7 @@ Update webhook.
 |`approved_by`|integer(int64)|Approved by. Must be valid resource identifier (integer).|
 |`approved_on`|string(DateTime)|Approval date. Must be a date in an ISO 8601 compatible format.|
 |`denied_on`|string(DateTime)|Denial date. Must be a date in an ISO 8601 compatible format.|
-|`is_approved`|boolean|Approved record state. Must be one of [0, 1, True, False] (case insensitive).|
+|`is_approved`|boolean|Approved record state. Must be one of 0, 1, True, False (case insensitive).|
 |`location_id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
 |`provider_email`|string(Email)|Email address. Must be a valid email address.|
 |`provider_id`|integer(int64)|Bin provider identifier (integer) Must be valid resource identifier (integer).|
@@ -9818,8 +9590,8 @@ Update webhook.
 |`location_id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
 |`notes`|string|Notes (free text). Must be at least 1 and no more than 2048 characters.|
-|`out_of_service`|boolean|Truck out of service. Must be one of [0, 1, True, False] (case insensitive).|
-|`require_odometer`|boolean|Require odometer. Must be one of [0, 1, True, False] (case insensitive).|
+|`out_of_service`|boolean|Truck out of service. Must be one of 0, 1, True, False (case insensitive).|
+|`require_odometer`|boolean|Require odometer. Must be one of 0, 1, True, False (case insensitive).|
 |`third_party_hauler_id`|string(Uuid)|Third party hauler identifier. Must be a valid UUID.|
 |`type`|string|Truck type (free text). Must be at least 1 and no more than 50 characters.|
 |`weight`|number(float)|Truck empty weight. Must be float greater than or equal to 0. Must be float less than or equal to 10000000.|
@@ -9849,8 +9621,8 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`country`|string|Country code (ISO 3166-1 alpha 2). Must be a 2 character country code.|
-|`is_billing`|boolean|If true, this is the customer's billing address. Must be one of [0, 1, True, False] (case insensitive).|
-|`is_shipping`|boolean|Customer's shipping address if true. Must be one of [0, 1, True, False] (case insensitive).|
+|`is_billing`|boolean|If true, this is the customer's billing address. Must be one of 0, 1, True, False (case insensitive).|
+|`is_shipping`|boolean|Customer's shipping address if true. Must be one of 0, 1, True, False (case insensitive).|
 |`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
 |`line_1`|string|Street address. Must be at least 1 and no more than 256 characters.|
 |`line_2`|string|Street address line 2. Must be at least 1 and no more than 256 characters.|
@@ -9885,11 +9657,11 @@ Update webhook.
 |`email`|string(Email)|Email address. Must be a valid email address.|
 |`fax`|string(PhoneNumber)|Fax number (free text). At least 7 characters, not more than 15.|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`notify_on_acknowledged_request`|boolean|Notify on acknowledge request. Must be one of [0, 1, True, False] (case insensitive).|
-|`notify_on_completed_request`|boolean|Notify on completed request. Must be one of [0, 1, True, False] (case insensitive).|
-|`notify_on_dispatched_request`|boolean|Notify on dispatched request. Must be one of [0, 1, True, False] (case insensitive).|
-|`notify_on_failed_request`|boolean|Notify on failed request. Must be one of [0, 1, True, False] (case insensitive).|
-|`notify_on_new_request`|boolean|Notify on new request. Must be one of [0, 1, True, False] (case insensitive).|
+|`notify_on_acknowledged_request`|boolean|Notify on acknowledge request. Must be one of 0, 1, True, False (case insensitive).|
+|`notify_on_completed_request`|boolean|Notify on completed request. Must be one of 0, 1, True, False (case insensitive).|
+|`notify_on_dispatched_request`|boolean|Notify on dispatched request. Must be one of 0, 1, True, False (case insensitive).|
+|`notify_on_failed_request`|boolean|Notify on failed request. Must be one of 0, 1, True, False (case insensitive).|
+|`notify_on_new_request`|boolean|Notify on new request. Must be one of 0, 1, True, False (case insensitive).|
 |`number`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
 
 <h2 id="tocSupdatecustomerlocationmodel">UpdateCustomerLocationModel</h2>
@@ -9910,7 +9682,7 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of [0, 1, True, False] (case insensitive).|
+|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
 |`note`|string|Notes (free text). Must be at least 1 and no more than 2048 characters.|
 |`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
 |`renewal_date`|string(DateTime)|Renewal date. Must be a date in an ISO 8601 compatible format.|
@@ -9950,7 +9722,7 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`events`|array[string]|Hook event. Must be a valid hook event (one of: customer, job).|
+|`events`|array[string]|Hook event. Must be a valid hook event (one of: customer, customer_location, job, truck).|
 |`url`|string(Url)|Callback URL. URL conforming to RFC 1738.|
 
 <h2 id="tocSupdatedjobmodel">UpdatedJobModel</h2>
@@ -10025,7 +9797,7 @@ Update webhook.
 |`asset_quantity`|integer(int64)|How many assets are being serviced within a cluster (for jobs assigned to an asset cluster). For jobs dispatched by routes, or manually dispatched route stops, this value is 0 or 1. Must be integer greater than or equal to 0.|
 |`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E'). Must be valid resource identifier (integer).|
 |`completed_by`|integer(int64)|Dispatcher or driver id. Must be valid resource identifier (integer).|
-|`completed_by_driver`|boolean|If TRUE, completed by driver. If FALSE, completed by dispatcher. Must be one of [0, 1, True, False] (case insensitive).|
+|`completed_by_driver`|boolean|If TRUE, completed by driver. If FALSE, completed by dispatcher. Must be one of 0, 1, True, False (case insensitive).|
 |`completed_on`|string(DateTime)|Job completion time. Must be a date occurring in the past in an ISO 8601 compatible format.|
 |`confirmed_on`|string(DateTime)|Job confirmation date. Must be a date occurring in the past in an ISO 8601 compatible format.|
 |`created_by_id`|integer(int64)|Customer, dispatcher, or driver id. Must be valid resource identifier (integer).|
@@ -10036,7 +9808,7 @@ Update webhook.
 |`dispatched_by_route`|integer(int64)|Route id of dispatching route (or NULL if not dispatched by a route). Must be valid resource identifier (integer).|
 |`dispatched_on`|string(DateTime)|Time the job is assigned to a truck. Must be a date in an ISO 8601 compatible format.|
 |`dispatcher_notes`|string|Entered by dispatchers, read by drivers and dispatchers. Must be at least 1 and no more than 2048 characters.|
-|`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched. Must be one of [0, 1, True, False] (case insensitive).|
+|`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched. Must be one of 0, 1, True, False (case insensitive).|
 |`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers. Must be at least 1 and no more than 2048 characters.|
 |`dump_location_id`|integer(int64)|Asset or asset cluster dump location identifier (e.g. trash bin needs dumped before returning from customer). Must be valid resource identifier (integer).|
 |`dumped_on`|string(DateTime)|Dump request completion date. Must be a date in an ISO 8601 compatible format.|
@@ -10046,10 +9818,10 @@ Update webhook.
 |`flags`|string|Job notes. Must be at least 0 and no more than 64 characters.|
 |`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
 |`invoice_notes`|string|Invoice notes from the billing system. Must be at least 1 and no more than 2048 characters.|
-|`is_completed`|boolean|Job completion flag set by dispatchers and drivers. Must be one of [0, 1, True, False] (case insensitive).|
-|`is_declined`|boolean|Job completion flag set by dispatchers and drivers. Must be one of [0, 1, True, False] (case insensitive).|
-|`is_deleted`|boolean|Indicates whether job is still valid. Must be one of [0, 1, True, False] (case insensitive).|
-|`is_failed`|boolean|Set by drivers and dispatchers to indicate a failed job. Must be one of [0, 1, True, False] (case insensitive).|
+|`is_completed`|boolean|Job completion flag set by dispatchers and drivers. Must be one of 0, 1, True, False (case insensitive).|
+|`is_declined`|boolean|Job completion flag set by dispatchers and drivers. Must be one of 0, 1, True, False (case insensitive).|
+|`is_deleted`|boolean|Indicates whether job is still valid. Must be one of 0, 1, True, False (case insensitive).|
+|`is_failed`|boolean|Set by drivers and dispatchers to indicate a failed job. Must be one of 0, 1, True, False (case insensitive).|
 |`job_group_id`|integer(int64)|Job group identifier for group jobs (vs service, exchange, etc.). Must be valid resource identifier (integer).|
 |`location_id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
 |`merged_with_route`|integer(int64)|Assigned by dispatchers for dispatchers and drivers. Must be valid resource identifier (integer).|
@@ -10058,10 +9830,10 @@ Update webhook.
 |`priority`|integer(int64)|Assigned by dispatchers for job order completion determination for drivers. Must be integer greater than or equal to -999999. Must be integer less than or equal to -1.|
 |`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
 |`requested_on`|string(DateTime)|Requested date. Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`require_image`|boolean|Set by dispatchers and drivers, requires drivers to upload one or more job images before completion. Must be one of [0, 1, True, False] (case insensitive).|
-|`require_material`|boolean|Set by dispatchers and drivers, requires drivers to set a material before completing a job. Must be one of [0, 1, True, False] (case insensitive).|
-|`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion. Must be one of [0, 1, True, False] (case insensitive).|
-|`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion. Must be one of [0, 1, True, False] (case insensitive).|
+|`require_image`|boolean|Set by dispatchers and drivers, requires drivers to upload one or more job images before completion. Must be one of 0, 1, True, False (case insensitive).|
+|`require_material`|boolean|Set by dispatchers and drivers, requires drivers to set a material before completing a job. Must be one of 0, 1, True, False (case insensitive).|
+|`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion. Must be one of 0, 1, True, False (case insensitive).|
+|`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion. Must be one of 0, 1, True, False (case insensitive).|
 |`schedule_date`|string(DateTime)|Scheduled job completion date. Must be a date in an ISO 8601 compatible format.|
 |`start_location_id`|integer(int64)|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers. Must be valid resource identifier (integer).|
 |`start_time`|string(DateTime)|Time customer has requested job start, set by dispatchers for dispatchers and drivers. Must be a date in an ISO 8601 compatible format.|
@@ -10069,7 +9841,7 @@ Update webhook.
 |`times_failed`|integer(int64)|Number of times a job has been attempted and failed. Must be integer greater than or equal to 0.|
 |`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers. Must be integer greater than or equal to 0.|
 |`truck_id`|integer(int64)|Truck identifier. Must be valid resource identifier (integer).|
-|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'R', 'P', 'D', 'E', 'L'.|
+|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'R', 'E', 'P', 'L', 'D'.|
 |`weighed_on`|string(DateTime)|Time of truck weight entry. Must be a date occurring in the past in an ISO 8601 compatible format.|
 
 <h2 id="tocSwebhooklistmodel">WebhookListModel</h2>
@@ -10084,6 +9856,8 @@ Update webhook.
         "customer"
       ],
       "id": "1",
+      "last_http_fail": "2018-10-31T11:32:38.390000",
+      "last_http_success": "2018-10-31T11:32:38.390000",
       "url": "http://your.callback.url.net"
     }
   ],
@@ -10111,6 +9885,8 @@ Update webhook.
     "customer"
   ],
   "id": "1",
+  "last_http_fail": "2018-10-31T11:32:38.390000",
+  "last_http_success": "2018-10-31T11:32:38.390000",
   "url": "http://your.callback.url.net"
 }
 
@@ -10120,7 +9896,26 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`events`|array[string]|Hook event. Must be a valid hook event (one of: customer, job).|
+|`events`|array[string]|Hook event. Must be a valid hook event (one of: customer, customer_location, job, truck).|
 |`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
+|`last_http_fail`|string(DateTime)|Last time of url webhook execution failure. Must be a date in an ISO 8601 compatible format.|
+|`last_http_success`|string(DateTime)|Last time of url webhook execution success. Must be a date in an ISO 8601 compatible format.|
 |`url`|string(Url)|Callback URL. URL conforming to RFC 1738.|
+
+<h2 id="tocSwebhookpingresultmodel">WebhookPingResultModel</h2>
+
+```json
+{
+  "delivery_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
+  "http_status": "200"
+}
+
+```
+
+<a id="schemawebhookpingresultmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`delivery_id`|string(Uuid)|Webhook payload delivery identifier. Must be a valid UUID.|
+|`http_status`|integer(int64)|HTTP status return code. Must be a valid HTTP status code 1xx-5xx or -1. Status -1 means the HTTP call did not succeed/complete.|
 
