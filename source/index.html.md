@@ -15,7 +15,7 @@ headingLevel: 2
 
 ---
 
-<h1 id="cro-software-api">CRO Software API v1.0.0</h1>
+<h1 id="cro-software-api">CRO Software API v1.0.2</h1>
 
 Build on & integrate with CRO Software.
 
@@ -27,13 +27,79 @@ Email: <a href="mailto:develop@crosoftware.net">Support</a>
 
 # Changelog
 
-## Unreleased
+## [1.0.2] - 2019/09/25
+
+### Added
+- Added GET /locations/{location_id}/materials.
+- Added GET /locations/{location_id}/users.
+- Added GET /locations/{location_id}/users/{user_id}.
+- Added scale_ticket field to JobModel.
+- Added webhooks callbacks.
+- Added webhook ping endpoint to API.
+- Fixed issue in user location authorization for Admin roles.
+
+### Changed
+- Changed field inputs type validation to restrict to specified type (e.g. JSON int not implicitly converted to string).
+- Changed requests with Admin users to also auth for Dispatched authorized calls.
+- Renamed GET /customers 'filter_name' param to 'name'.
+
+### Fixed
+- Fixed header param naming issue in customer locations.
+- Fixed authorization header spec.
+- Fixed customer_id/location_id mixup in the CustomerLocation endpoints.
+- Fixed bug in date filter validation.
+- Fixed exception handling for missing/invalid endpoint arguments.
+- Fixed exception bug and indentation error.
+
+## [1.0.1] - 2019/07/30
+
+### Fixed
+- Un-flipped Customer ID and Location ID on the "Add customer to location" endpoint.
+
+### Added
+- Added filter_last_update_gte and filter_created_on_gte to GET /customers and GET /location/{loc_id}/jobs.
+- Changed requests with Admin users to also auth for Dispatcher authorized calls.
+
+### Changed
+- Renamed GET /customers 'filter_name' param to 'name'.
+
+## [0.0.0] - 2019/04/16
+
+### Fixed
+- Changed MultiTenantSAConnector to raise InputError on connection if missing tenant id.
+- Fixed fence post error in paged queries logic.
+
+### Added
+- Exception handling to endpoint arg processing.
+- Support for X-REQUEST-ID header.
+- 'materials' list to job records (for GET /locations/{location_id}/jobs/{job_id} only).
+
+### Changed
+- Changed customer contact and address to Dispatcher role access (removed ThirdPartyDispatcher role access).
+- Changed argument validation to raise InputError on invalid signature profile (vs HTTP 500).
+- Changed scope list support (vs single scope).
+- Changed tenant db session logic to raise InputError on x-tenant-id missing.
+
+## [0.0.0] - 2019/04/09
+
+### Fixed
+- Improved /location/{location_id}/customers GET query performance.
+
+### Added
+- No external adds.
+
+### Changed
+- Pluralized endpoint URLs.
+- Changed CustomerLocationApi.list_customers to RoleGroup.Authenticated.
+
+## [0.0.0] - 2019/03/11
 
 ### Changed
 - Log GPS event now accepts application/json instead of gps_event_json parameter.
 - Create/update customer changed from request parameter to JSON customer profile.
 - Create/update customer creates/updates customer addresses.
 - Create/update customer creates/updates billing zone codes.
+- Policy verification moved to function entry points.
 
 ### Added
 - GET /customer
@@ -64,11 +130,6 @@ Email: <a href="mailto:develop@crosoftware.net">Support</a>
 
 ### Changed
 - Requests using unassigned tenant IDs now return 403 instead of 200.
-- Unit test generator now generates test cases for third party roles in DAL.
-- Removed predicate and acl (replaced with policy management).
-- Changed unit tests from exhaustive to single-sequential.
-- Removed tenant_id params (redundant with context)
-- Indexed params as kw args for policy enforcement
 - Added tenant/location check to policy enforcement
 
 ### Added
@@ -82,9 +143,7 @@ Email: <a href="mailto:develop@crosoftware.net">Support</a>
 
 ### Fixed
 - Issue with date comparisons during input validation (aware vs naive)
-- Permssions issues found during unit testing (policy info point config)
 - ThirdPartyDriver permission issues with List Customers.
-- Permissions issues found during acceptance testing.
 
 ## [0.0.0] - 2019/02/08
 
@@ -173,7 +232,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/addresses";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "POST", parameters);
@@ -188,7 +247,7 @@ namespace CROSoftware
 curl -X POST https://api.crosoftware.net/customers/{customer_id}/addresses \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -197,7 +256,7 @@ curl -X POST https://api.crosoftware.net/customers/{customer_id}/addresses \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -221,7 +280,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -238,7 +297,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -278,15 +337,15 @@ Add customer addresses.
 ```json
 {
   "country": "US",
-  "is_billing": "0",
-  "is_shipping": "0",
-  "latitude": "-90",
-  "line_1": "321 Chase Rd",
-  "line_2": "P.O. Box 256",
-  "line_3": "3rd Floor",
-  "line_4": "Last door on the left (blue)",
+  "is_billing": true,
+  "is_shipping": true,
+  "latitude": 56.2,
+  "line_1": "123 Some St.",
+  "line_2": "Office #34",
+  "line_3": "Box #2",
+  "line_4": "Drop in Blue Box",
   "locality": "Sequim",
-  "longitude": "-180",
+  "longitude": 128.1,
   "postcode": "98368",
   "region": "WA"
 }
@@ -309,18 +368,18 @@ Add customer addresses.
 
 ```json
 {
-  "address_id": "1",
+  "address_id": 1,
   "country": "US",
-  "is_billing": "0",
-  "is_physical": "0",
-  "is_shipping": "0",
-  "latitude": "-90",
-  "line_1": "321 Chase Rd",
-  "line_2": "P.O. Box 256",
-  "line_3": "3rd Floor",
-  "line_4": "Last door on the left (blue)",
+  "is_billing": true,
+  "is_physical": true,
+  "is_shipping": true,
+  "latitude": 56.2,
+  "line_1": "123 Some St.",
+  "line_2": "Office #34",
+  "line_3": "Box #2",
+  "line_4": "Drop in Blue Box",
   "locality": "Sequim",
-  "longitude": "-180",
+  "longitude": 128.1,
   "postcode": "98368",
   "region": "WA"
 }
@@ -366,7 +425,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "DELETE", parameters);
@@ -380,7 +439,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -388,7 +447,7 @@ curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/addresses/{ad
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -411,7 +470,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -427,7 +486,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -479,18 +538,18 @@ Deactivate a customer address.
 
 ```json
 {
-  "address_id": "1",
+  "address_id": 1,
   "country": "US",
-  "is_billing": "0",
-  "is_physical": "0",
-  "is_shipping": "0",
-  "latitude": "-90",
-  "line_1": "321 Chase Rd",
-  "line_2": "P.O. Box 256",
-  "line_3": "3rd Floor",
-  "line_4": "Last door on the left (blue)",
+  "is_billing": true,
+  "is_physical": true,
+  "is_shipping": true,
+  "latitude": 56.2,
+  "line_1": "123 Some St.",
+  "line_2": "Office #34",
+  "line_3": "Box #2",
+  "line_4": "Drop in Blue Box",
   "locality": "Sequim",
-  "longitude": "-180",
+  "longitude": 128.1,
   "postcode": "98368",
   "region": "WA"
 }
@@ -536,7 +595,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -550,7 +609,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -558,7 +617,7 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id}/addresses/{addre
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -581,7 +640,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -597,7 +656,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -649,18 +708,18 @@ Get a customer address.
 
 ```json
 {
-  "address_id": "1",
+  "address_id": 1,
   "country": "US",
-  "is_billing": "0",
-  "is_physical": "0",
-  "is_shipping": "0",
-  "latitude": "-90",
-  "line_1": "321 Chase Rd",
-  "line_2": "P.O. Box 256",
-  "line_3": "3rd Floor",
-  "line_4": "Last door on the left (blue)",
+  "is_billing": true,
+  "is_physical": true,
+  "is_shipping": true,
+  "latitude": 56.2,
+  "line_1": "123 Some St.",
+  "line_2": "Office #34",
+  "line_3": "Box #2",
+  "line_4": "Drop in Blue Box",
   "locality": "Sequim",
-  "longitude": "-180",
+  "longitude": 128.1,
   "postcode": "98368",
   "region": "WA"
 }
@@ -706,7 +765,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/addresses";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -720,7 +779,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers/{customer_id}/addresses \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -728,7 +787,7 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id}/addresses \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -751,7 +810,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -767,7 +826,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -821,28 +880,28 @@ List customer addresses.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "address_id": "1",
+      "address_id": 1,
       "country": "US",
-      "is_billing": "0",
-      "is_physical": "0",
-      "is_shipping": "0",
-      "latitude": "-90",
-      "line_1": "321 Chase Rd",
-      "line_2": "P.O. Box 256",
-      "line_3": "3rd Floor",
-      "line_4": "Last door on the left (blue)",
+      "is_billing": true,
+      "is_physical": true,
+      "is_shipping": true,
+      "latitude": 56.2,
+      "line_1": "123 Some St.",
+      "line_2": "Office #34",
+      "line_3": "Box #2",
+      "line_4": "Drop in Blue Box",
       "locality": "Sequim",
-      "longitude": "-180",
+      "longitude": 128.1,
       "postcode": "98368",
       "region": "WA"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -886,7 +945,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "PATCH", parameters);
@@ -901,7 +960,7 @@ namespace CROSoftware
 curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -910,7 +969,7 @@ curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/addresses/{add
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -934,7 +993,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -951,7 +1010,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -991,15 +1050,15 @@ Update a customer address.
 ```json
 {
   "country": "US",
-  "is_billing": "0",
-  "is_shipping": "0",
-  "latitude": "-90",
-  "line_1": "321 Chase Rd",
-  "line_2": "P.O. Box 256",
-  "line_3": "3rd Floor",
-  "line_4": "Last door on the left (blue)",
+  "is_billing": true,
+  "is_shipping": true,
+  "latitude": 56.2,
+  "line_1": "123 Some St.",
+  "line_2": "Office #34",
+  "line_3": "Box #2",
+  "line_4": "Drop in Blue Box",
   "locality": "Sequim",
-  "longitude": "-180",
+  "longitude": 128.1,
   "postcode": "98368",
   "region": "WA"
 }
@@ -1023,18 +1082,18 @@ Update a customer address.
 
 ```json
 {
-  "address_id": "1",
+  "address_id": 1,
   "country": "US",
-  "is_billing": "0",
-  "is_physical": "0",
-  "is_shipping": "0",
-  "latitude": "-90",
-  "line_1": "321 Chase Rd",
-  "line_2": "P.O. Box 256",
-  "line_3": "3rd Floor",
-  "line_4": "Last door on the left (blue)",
+  "is_billing": true,
+  "is_physical": true,
+  "is_shipping": true,
+  "latitude": 56.2,
+  "line_1": "123 Some St.",
+  "line_2": "Office #34",
+  "line_3": "Box #2",
+  "line_4": "Drop in Blue Box",
   "locality": "Sequim",
-  "longitude": "-180",
+  "longitude": 128.1,
   "postcode": "98368",
   "region": "WA"
 }
@@ -1082,7 +1141,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/contacts";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "POST", parameters);
@@ -1097,7 +1156,7 @@ namespace CROSoftware
 curl -X POST https://api.crosoftware.net/customers/{customer_id}/contacts \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -1106,7 +1165,7 @@ curl -X POST https://api.crosoftware.net/customers/{customer_id}/contacts \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -1130,7 +1189,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -1147,7 +1206,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -1186,15 +1245,15 @@ Create new customer contact.
 
 ```json
 {
-  "email": "support@crosoftware.net",
-  "fax": "+1 (360) 733-1649",
-  "name": "John C. Doe",
-  "notify_on_acknowledged_request": "0",
-  "notify_on_completed_request": "0",
-  "notify_on_dispatched_request": "0",
-  "notify_on_failed_request": "0",
-  "notify_on_new_request": "0",
-  "number": "+1 (360) 733-1649"
+  "email": "test@crosoftware.net",
+  "fax": "+1 (360) 123-6543",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": true,
+  "notify_on_completed_request": true,
+  "notify_on_dispatched_request": true,
+  "notify_on_failed_request": true,
+  "notify_on_new_request": true,
+  "number": "+1 (360) 123-6543"
 }
 ```
 
@@ -1215,16 +1274,16 @@ Create new customer contact.
 
 ```json
 {
-  "contact_id": "1",
-  "email": "support@crosoftware.net",
-  "fax": "+1 (360) 733-1649",
-  "name": "John C. Doe",
-  "notify_on_acknowledged_request": "0",
-  "notify_on_completed_request": "0",
-  "notify_on_dispatched_request": "0",
-  "notify_on_failed_request": "0",
-  "notify_on_new_request": "0",
-  "number": "+1 (360) 733-1649"
+  "contact_id": 1,
+  "email": "test@crosoftware.net",
+  "fax": "+1 (360) 123-6543",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": true,
+  "notify_on_completed_request": true,
+  "notify_on_dispatched_request": true,
+  "notify_on_failed_request": true,
+  "notify_on_new_request": true,
+  "number": "+1 (360) 123-6543"
 }
 ```
 
@@ -1268,7 +1327,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -1282,7 +1341,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -1290,7 +1349,7 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id}/contacts/{contac
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -1313,7 +1372,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -1329,7 +1388,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -1381,16 +1440,16 @@ Get a customer contact.
 
 ```json
 {
-  "contact_id": "1",
-  "email": "support@crosoftware.net",
-  "fax": "+1 (360) 733-1649",
-  "name": "John C. Doe",
-  "notify_on_acknowledged_request": "0",
-  "notify_on_completed_request": "0",
-  "notify_on_dispatched_request": "0",
-  "notify_on_failed_request": "0",
-  "notify_on_new_request": "0",
-  "number": "+1 (360) 733-1649"
+  "contact_id": 1,
+  "email": "test@crosoftware.net",
+  "fax": "+1 (360) 123-6543",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": true,
+  "notify_on_completed_request": true,
+  "notify_on_dispatched_request": true,
+  "notify_on_failed_request": true,
+  "notify_on_new_request": true,
+  "number": "+1 (360) 123-6543"
 }
 ```
 
@@ -1434,7 +1493,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/contacts";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -1448,7 +1507,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers/{customer_id}/contacts \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -1456,7 +1515,7 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id}/contacts \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -1479,7 +1538,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -1495,7 +1554,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -1548,24 +1607,24 @@ List customer contacts.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "contact_id": "1",
-      "email": "support@crosoftware.net",
-      "fax": "+1 (360) 733-1649",
-      "name": "John C. Doe",
-      "notify_on_acknowledged_request": "0",
-      "notify_on_completed_request": "0",
-      "notify_on_dispatched_request": "0",
-      "notify_on_failed_request": "0",
-      "notify_on_new_request": "0",
-      "number": "+1 (360) 733-1649"
+      "contact_id": 1,
+      "email": "test@crosoftware.net",
+      "fax": "+1 (360) 123-6543",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": true,
+      "notify_on_completed_request": true,
+      "notify_on_dispatched_request": true,
+      "notify_on_failed_request": true,
+      "notify_on_new_request": true,
+      "number": "+1 (360) 123-6543"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -1609,7 +1668,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "PATCH", parameters);
@@ -1624,7 +1683,7 @@ namespace CROSoftware
 curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -1633,7 +1692,7 @@ curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/contacts/{cont
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -1657,7 +1716,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -1674,7 +1733,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -1713,15 +1772,15 @@ Update a customer contact.
 
 ```json
 {
-  "email": "support@crosoftware.net",
-  "fax": "+1 (360) 733-1649",
-  "name": "John C. Doe",
-  "notify_on_acknowledged_request": "0",
-  "notify_on_completed_request": "0",
-  "notify_on_dispatched_request": "0",
-  "notify_on_failed_request": "0",
-  "notify_on_new_request": "0",
-  "number": "+1 (360) 733-1649"
+  "email": "test@crosoftware.net",
+  "fax": "+1 (360) 123-6543",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": true,
+  "notify_on_completed_request": true,
+  "notify_on_dispatched_request": true,
+  "notify_on_failed_request": true,
+  "notify_on_new_request": true,
+  "number": "+1 (360) 123-6543"
 }
 ```
 
@@ -1743,16 +1802,16 @@ Update a customer contact.
 
 ```json
 {
-  "contact_id": "1",
-  "email": "support@crosoftware.net",
-  "fax": "+1 (360) 733-1649",
-  "name": "John C. Doe",
-  "notify_on_acknowledged_request": "0",
-  "notify_on_completed_request": "0",
-  "notify_on_dispatched_request": "0",
-  "notify_on_failed_request": "0",
-  "notify_on_new_request": "0",
-  "number": "+1 (360) 733-1649"
+  "contact_id": 1,
+  "email": "test@crosoftware.net",
+  "fax": "+1 (360) 123-6543",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": true,
+  "notify_on_completed_request": true,
+  "notify_on_dispatched_request": true,
+  "notify_on_failed_request": true,
+  "notify_on_new_request": true,
+  "number": "+1 (360) 123-6543"
 }
 ```
 
@@ -1798,7 +1857,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "POST", parameters);
@@ -1813,7 +1872,7 @@ namespace CROSoftware
 curl -X POST https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -1822,7 +1881,7 @@ curl -X POST https://api.crosoftware.net/customers/{customer_id}/locations/{loca
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -1846,7 +1905,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -1863,7 +1922,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -1902,12 +1961,12 @@ Add customer location profile.
 
 ```json
 {
-  "is_commercial": "0",
-  "note": "Bin located in alley.",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "is_commercial": true,
+  "note": "A note about something",
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 ```
 
@@ -1929,13 +1988,13 @@ Add customer location profile.
 
 ```json
 {
-  "id": "1",
-  "is_commercial": "0",
-  "note": "Bin located in alley.",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "id": 1,
+  "is_commercial": true,
+  "note": "A note about something",
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 ```
 
@@ -1979,7 +2038,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "DELETE", parameters);
@@ -1993,7 +2052,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -2001,7 +2060,7 @@ curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/locations/{lo
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -2024,7 +2083,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -2040,7 +2099,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -2092,13 +2151,13 @@ Deactivate (soft delete) customer location profile.
 
 ```json
 {
-  "id": "1",
-  "is_commercial": "0",
-  "note": "Bin located in alley.",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "id": 1,
+  "is_commercial": true,
+  "note": "A note about something",
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 ```
 
@@ -2142,7 +2201,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -2156,7 +2215,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -2164,7 +2223,7 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id}/locations/{locat
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -2187,7 +2246,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -2203,7 +2262,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -2255,13 +2314,13 @@ Get a customer contact.
 
 ```json
 {
-  "id": "1",
-  "is_commercial": "0",
-  "note": "Bin located in alley.",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "id": 1,
+  "is_commercial": true,
+  "note": "A note about something",
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 ```
 
@@ -2305,7 +2364,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/locations";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -2319,7 +2378,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers/{customer_id}/locations \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -2327,7 +2386,7 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id}/locations \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -2350,7 +2409,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -2366,7 +2425,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -2420,21 +2479,21 @@ Update customer location profile.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "id": "1",
-      "is_commercial": "0",
-      "note": "Bin located in alley.",
-      "reference_number": "REF#100A61",
-      "renewal_date": "2018-10-31T11:32:38.390000",
-      "sales_rep": "John C. Doe",
-      "suspension_id": "1"
+      "id": 1,
+      "is_commercial": true,
+      "note": "A note about something",
+      "reference_number": "A140",
+      "renewal_date": "2049-10-31T11:32:38.390000",
+      "sales_rep": "Jane Johnson",
+      "suspension_id": 1
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -2478,7 +2537,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "PATCH", parameters);
@@ -2493,7 +2552,7 @@ namespace CROSoftware
 curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -2502,7 +2561,7 @@ curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/locations/{loc
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -2526,7 +2585,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -2543,7 +2602,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -2582,12 +2641,12 @@ Update customer location profile.
 
 ```json
 {
-  "is_commercial": "0",
-  "note": "Bin located in alley.",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "is_commercial": true,
+  "note": "A note about something",
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 ```
 
@@ -2609,13 +2668,13 @@ Update customer location profile.
 
 ```json
 {
-  "id": "1",
-  "is_commercial": "0",
-  "note": "Bin located in alley.",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "id": 1,
+  "is_commercial": true,
+  "note": "A note about something",
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 ```
 
@@ -2661,7 +2720,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/customers";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "POST", parameters);
@@ -2676,7 +2735,7 @@ namespace CROSoftware
 curl -X POST https://api.crosoftware.net/locations/{location_id}/customers \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -2685,7 +2744,7 @@ curl -X POST https://api.crosoftware.net/locations/{location_id}/customers \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -2709,7 +2768,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -2726,7 +2785,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -2768,40 +2827,40 @@ Create customer for location.
   "addresses": [
     {
       "country": "US",
-      "is_billing": "0",
-      "is_shipping": "0",
-      "latitude": "-90",
-      "line_1": "321 Chase Rd",
-      "line_2": "P.O. Box 256",
-      "line_3": "3rd Floor",
-      "line_4": "Last door on the left (blue)",
+      "is_billing": true,
+      "is_shipping": true,
+      "latitude": 56.2,
+      "line_1": "123 Some St.",
+      "line_2": "Office #34",
+      "line_3": "Box #2",
+      "line_4": "Drop in Blue Box",
       "locality": "Sequim",
-      "longitude": "-180",
+      "longitude": 128.1,
       "postcode": "98368",
       "region": "WA"
     }
   ],
   "contacts": [
     {
-      "email": "support@crosoftware.net",
-      "fax": "+1 (360) 733-1649",
-      "name": "John C. Doe",
-      "notify_on_acknowledged_request": "0",
-      "notify_on_completed_request": "0",
-      "notify_on_dispatched_request": "0",
-      "notify_on_failed_request": "0",
-      "notify_on_new_request": "0",
-      "number": "+1 (360) 733-1649"
+      "email": "test@crosoftware.net",
+      "fax": "+1 (360) 123-6543",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": true,
+      "notify_on_completed_request": true,
+      "notify_on_dispatched_request": true,
+      "notify_on_failed_request": true,
+      "notify_on_new_request": true,
+      "number": "+1 (360) 123-6543"
     }
   ],
-  "is_commercial": "0",
-  "name": "John C. Doe",
-  "note": "Bin located in alley.",
-  "parent_id": "1",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "is_commercial": true,
+  "name": "John Doe",
+  "note": "A note about something",
+  "parent_id": 1,
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 ```
 
@@ -2825,40 +2884,40 @@ Create customer for location.
   "addresses": [
     {
       "country": "US",
-      "is_billing": "0",
-      "is_shipping": "0",
-      "latitude": "-90",
-      "line_1": "321 Chase Rd",
-      "line_2": "P.O. Box 256",
-      "line_3": "3rd Floor",
-      "line_4": "Last door on the left (blue)",
+      "is_billing": true,
+      "is_shipping": true,
+      "latitude": 56.2,
+      "line_1": "123 Some St.",
+      "line_2": "Office #34",
+      "line_3": "Box #2",
+      "line_4": "Drop in Blue Box",
       "locality": "Sequim",
-      "longitude": "-180",
+      "longitude": 128.1,
       "postcode": "98368",
       "region": "WA"
     }
   ],
   "contacts": [
     {
-      "email": "support@crosoftware.net",
-      "fax": "+1 (360) 733-1649",
-      "name": "John C. Doe",
-      "notify_on_acknowledged_request": "0",
-      "notify_on_completed_request": "0",
-      "notify_on_dispatched_request": "0",
-      "notify_on_failed_request": "0",
-      "notify_on_new_request": "0",
-      "number": "+1 (360) 733-1649"
+      "email": "test@crosoftware.net",
+      "fax": "+1 (360) 123-6543",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": true,
+      "notify_on_completed_request": true,
+      "notify_on_dispatched_request": true,
+      "notify_on_failed_request": true,
+      "notify_on_new_request": true,
+      "number": "+1 (360) 123-6543"
     }
   ],
-  "is_commercial": "0",
-  "name": "John C. Doe",
-  "note": "Bin located in alley.",
-  "parent_id": "1",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "is_commercial": true,
+  "name": "John Doe",
+  "note": "A note about something",
+  "parent_id": 1,
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 ```
 
@@ -2902,7 +2961,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -2916,7 +2975,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/customers/{customer_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -2924,7 +2983,7 @@ curl -X GET https://api.crosoftware.net/customers/{customer_id} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -2947,7 +3006,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -2963,7 +3022,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -3017,41 +3076,41 @@ Customer model.
   "addresses": [
     {
       "country": "US",
-      "is_billing": "0",
-      "is_shipping": "0",
-      "latitude": "-90",
-      "line_1": "321 Chase Rd",
-      "line_2": "P.O. Box 256",
-      "line_3": "3rd Floor",
-      "line_4": "Last door on the left (blue)",
+      "is_billing": true,
+      "is_shipping": true,
+      "latitude": 56.2,
+      "line_1": "123 Some St.",
+      "line_2": "Office #34",
+      "line_3": "Box #2",
+      "line_4": "Drop in Blue Box",
       "locality": "Sequim",
-      "longitude": "-180",
+      "longitude": 128.1,
       "postcode": "98368",
       "region": "WA"
     }
   ],
   "contacts": [
     {
-      "email": "support@crosoftware.net",
-      "fax": "+1 (360) 733-1649",
-      "name": "John C. Doe",
-      "notify_on_acknowledged_request": "0",
-      "notify_on_completed_request": "0",
-      "notify_on_dispatched_request": "0",
-      "notify_on_failed_request": "0",
-      "notify_on_new_request": "0",
-      "number": "+1 (360) 733-1649"
+      "email": "test@crosoftware.net",
+      "fax": "+1 (360) 123-6543",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": true,
+      "notify_on_completed_request": true,
+      "notify_on_dispatched_request": true,
+      "notify_on_failed_request": true,
+      "notify_on_new_request": true,
+      "number": "+1 (360) 123-6543"
     }
   ],
-  "customer_id": "1",
-  "is_commercial": "0",
-  "name": "John C. Doe",
-  "note": "Bin located in alley.",
-  "parent_id": "1",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "customer_id": 1,
+  "is_commercial": true,
+  "name": "John Doe",
+  "note": "A note about something",
+  "parent_id": 1,
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 ```
 
@@ -3095,7 +3154,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/customers/{customer_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -3109,7 +3168,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/customers/{customer_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -3117,7 +3176,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/customers/{custo
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -3140,7 +3199,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -3156,7 +3215,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -3208,13 +3267,13 @@ Get customer for location.
 
 ```json
 {
-  "id": "1",
-  "is_commercial": "0",
-  "note": "Bin located in alley.",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "id": 1,
+  "is_commercial": true,
+  "note": "A note about something",
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 ```
 
@@ -3258,8 +3317,13 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
+          
+          // Parameters
+          NameValueCollection parameters = new NameValueCollection();
+          parameters.Add("last_updated_gte", "2049-10-31T11:32:38.390000");
+          parameters.Add("created_on_gte", "2049-10-31T11:32:38.390000");
           
           string json = client.DownloadString(url);
           Console.WriteLine(json);
@@ -3270,9 +3334,9 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/customers \
+curl -X GET https://api.crosoftware.net/customers?last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000 \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -3280,7 +3344,7 @@ curl -X GET https://api.crosoftware.net/customers \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -3288,7 +3352,7 @@ var headers = {
 $.ajax({
   url: 'https://api.crosoftware.net/customers',
   method: 'get',
-
+  data: '?last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -3303,13 +3367,15 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
 result = RestClient.get 'https://api.crosoftware.net/customers',
   params: {
-  }, headers: headers
+  'last_updated_gte' => 'string(DateTime)',
+'created_on_gte' => 'string(DateTime)'
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -3319,12 +3385,12 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
 r = requests.get('https://api.crosoftware.net/customers', params={
-
+  'last_updated_gte': '2049-10-31T11:32:38.390000',  'created_on_gte': '2049-10-31T11:32:38.390000'
 }, headers = headers)
 
 print r.json()
@@ -3332,7 +3398,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers");
+URL obj = new URL("https://api.crosoftware.net/customers?last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3363,8 +3429,8 @@ List of customers.
 |`authorization`|header|string|true||
 |`x-tenant-id`|header|integer(int64)|true||
 |`name`|query|string|false||
-|`last_updated_gte`|query|string(DateTime)|false||
-|`created_on_gte`|query|string(DateTime)|false||
+|`last_updated_gte`|query|string(DateTime)|true||
+|`created_on_gte`|query|string(DateTime)|true||
 |`page_limit`|query|integer(int64)|false||
 |`page_index`|query|integer(int64)|false||
 
@@ -3374,52 +3440,52 @@ List of customers.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
       "addresses": [
         {
           "country": "US",
-          "is_billing": "0",
-          "is_shipping": "0",
-          "latitude": "-90",
-          "line_1": "321 Chase Rd",
-          "line_2": "P.O. Box 256",
-          "line_3": "3rd Floor",
-          "line_4": "Last door on the left (blue)",
+          "is_billing": true,
+          "is_shipping": true,
+          "latitude": 56.2,
+          "line_1": "123 Some St.",
+          "line_2": "Office #34",
+          "line_3": "Box #2",
+          "line_4": "Drop in Blue Box",
           "locality": "Sequim",
-          "longitude": "-180",
+          "longitude": 128.1,
           "postcode": "98368",
           "region": "WA"
         }
       ],
       "contacts": [
         {
-          "email": "support@crosoftware.net",
-          "fax": "+1 (360) 733-1649",
-          "name": "John C. Doe",
-          "notify_on_acknowledged_request": "0",
-          "notify_on_completed_request": "0",
-          "notify_on_dispatched_request": "0",
-          "notify_on_failed_request": "0",
-          "notify_on_new_request": "0",
-          "number": "+1 (360) 733-1649"
+          "email": "test@crosoftware.net",
+          "fax": "+1 (360) 123-6543",
+          "name": "John Doe",
+          "notify_on_acknowledged_request": true,
+          "notify_on_completed_request": true,
+          "notify_on_dispatched_request": true,
+          "notify_on_failed_request": true,
+          "notify_on_new_request": true,
+          "number": "+1 (360) 123-6543"
         }
       ],
-      "customer_id": "1",
-      "is_commercial": "0",
-      "name": "John C. Doe",
-      "note": "Bin located in alley.",
-      "parent_id": "1",
-      "reference_number": "REF#100A61",
-      "renewal_date": "2018-10-31T11:32:38.390000",
-      "sales_rep": "John C. Doe",
-      "suspension_id": "1"
+      "customer_id": 1,
+      "is_commercial": true,
+      "name": "John Doe",
+      "note": "A note about something",
+      "parent_id": 1,
+      "reference_number": "A140",
+      "renewal_date": "2049-10-31T11:32:38.390000",
+      "sales_rep": "Jane Johnson",
+      "suspension_id": 1
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -3463,7 +3529,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/customers";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -3477,7 +3543,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/customers \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -3485,7 +3551,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/customers \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -3508,7 +3574,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -3524,7 +3590,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -3578,21 +3644,21 @@ List customers for location.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "id": "1",
-      "is_commercial": "0",
-      "note": "Bin located in alley.",
-      "reference_number": "REF#100A61",
-      "renewal_date": "2018-10-31T11:32:38.390000",
-      "sales_rep": "John C. Doe",
-      "suspension_id": "1"
+      "id": 1,
+      "is_commercial": true,
+      "note": "A note about something",
+      "reference_number": "A140",
+      "renewal_date": "2049-10-31T11:32:38.390000",
+      "sales_rep": "Jane Johnson",
+      "suspension_id": 1
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -3636,7 +3702,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/customers/{customer_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "PATCH", parameters);
@@ -3651,7 +3717,7 @@ namespace CROSoftware
 curl -X PATCH https://api.crosoftware.net/customers/{customer_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -3660,7 +3726,7 @@ curl -X PATCH https://api.crosoftware.net/customers/{customer_id} \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -3684,7 +3750,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -3701,7 +3767,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -3740,8 +3806,8 @@ Customer model.
 
 ```json
 {
-  "name": "John C. Doe",
-  "parent_id": "1"
+  "name": "John Doe",
+  "parent_id": 1
 }
 ```
 
@@ -3765,41 +3831,41 @@ Customer model.
   "addresses": [
     {
       "country": "US",
-      "is_billing": "0",
-      "is_shipping": "0",
-      "latitude": "-90",
-      "line_1": "321 Chase Rd",
-      "line_2": "P.O. Box 256",
-      "line_3": "3rd Floor",
-      "line_4": "Last door on the left (blue)",
+      "is_billing": true,
+      "is_shipping": true,
+      "latitude": 56.2,
+      "line_1": "123 Some St.",
+      "line_2": "Office #34",
+      "line_3": "Box #2",
+      "line_4": "Drop in Blue Box",
       "locality": "Sequim",
-      "longitude": "-180",
+      "longitude": 128.1,
       "postcode": "98368",
       "region": "WA"
     }
   ],
   "contacts": [
     {
-      "email": "support@crosoftware.net",
-      "fax": "+1 (360) 733-1649",
-      "name": "John C. Doe",
-      "notify_on_acknowledged_request": "0",
-      "notify_on_completed_request": "0",
-      "notify_on_dispatched_request": "0",
-      "notify_on_failed_request": "0",
-      "notify_on_new_request": "0",
-      "number": "+1 (360) 733-1649"
+      "email": "test@crosoftware.net",
+      "fax": "+1 (360) 123-6543",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": true,
+      "notify_on_completed_request": true,
+      "notify_on_dispatched_request": true,
+      "notify_on_failed_request": true,
+      "notify_on_new_request": true,
+      "number": "+1 (360) 123-6543"
     }
   ],
-  "customer_id": "1",
-  "is_commercial": "0",
-  "name": "John C. Doe",
-  "note": "Bin located in alley.",
-  "parent_id": "1",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "customer_id": 1,
+  "is_commercial": true,
+  "name": "John Doe",
+  "note": "A note about something",
+  "parent_id": 1,
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 ```
 
@@ -3845,7 +3911,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/drivers/{driver_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -3859,7 +3925,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/drivers/{driver_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -3867,7 +3933,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/drivers/{driver_
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -3890,7 +3956,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -3906,7 +3972,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -3958,21 +4024,21 @@ Get driver.
 
 ```json
 {
-  "address": "321 Chase Rd",
-  "can_convert_to_group": "0",
-  "can_create_requests": "0",
-  "can_edit_requests": "0",
-  "can_reposition_asset": "0",
+  "address": "123 Some St.",
+  "can_convert_to_group": true,
+  "can_create_requests": true,
+  "can_edit_requests": true,
+  "can_reposition_asset": true,
   "city": "Sequim",
-  "disable_shift_tracking": "0",
-  "email": "support@crosoftware.net",
-  "id": "1",
-  "license_number": "12ZA24WA-21",
-  "location_id": "1",
-  "name": "John C. Doe",
-  "phone_number": "+1 (360) 733-1649",
+  "disable_shift_tracking": true,
+  "email": "test@crosoftware.net",
+  "id": 1,
+  "license_number": "AJONDO251Z",
+  "location_id": 1,
+  "name": "John Doe",
+  "phone_number": "+1 (360) 123-6543",
   "state": "WA",
-  "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
+  "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
   "zip": "98368"
 }
 ```
@@ -4017,7 +4083,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/drivers";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -4031,7 +4097,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/drivers \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -4039,7 +4105,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/drivers \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -4062,7 +4128,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -4078,7 +4144,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -4131,30 +4197,30 @@ List drivers.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "address": "321 Chase Rd",
-      "can_convert_to_group": "0",
-      "can_create_requests": "0",
-      "can_edit_requests": "0",
-      "can_reposition_asset": "0",
+      "address": "123 Some St.",
+      "can_convert_to_group": true,
+      "can_create_requests": true,
+      "can_edit_requests": true,
+      "can_reposition_asset": true,
       "city": "Sequim",
-      "disable_shift_tracking": "0",
-      "email": "support@crosoftware.net",
-      "id": "1",
-      "license_number": "12ZA24WA-21",
-      "location_id": "1",
-      "name": "John C. Doe",
-      "phone_number": "+1 (360) 733-1649",
+      "disable_shift_tracking": true,
+      "email": "test@crosoftware.net",
+      "id": 1,
+      "license_number": "AJONDO251Z",
+      "location_id": 1,
+      "name": "John Doe",
+      "phone_number": "+1 (360) 123-6543",
       "state": "WA",
-      "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
+      "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
       "zip": "98368"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -4200,7 +4266,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/gps_events";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "POST", parameters);
@@ -4215,7 +4281,7 @@ namespace CROSoftware
 curl -X POST https://api.crosoftware.net/locations/{location_id}/gps_events \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -4224,7 +4290,7 @@ curl -X POST https://api.crosoftware.net/locations/{location_id}/gps_events \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -4248,7 +4314,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -4265,7 +4331,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -4306,12 +4372,12 @@ Log a GPS event.
 {
   "location": {
     "coords": {
-      "heading": "0",
-      "latitude": "-90",
-      "longitude": "-180",
-      "speed": "0"
+      "heading": 0,
+      "latitude": 56.2,
+      "longitude": 128.1,
+      "speed": 10.1
     },
-    "timestamp": "2018-10-31T11:32:38.390000"
+    "timestamp": "2049-10-31T11:32:38.390000"
   }
 }
 ```
@@ -4333,15 +4399,15 @@ Log a GPS event.
 
 ```json
 {
-  "bearing": "0",
-  "created_on": "2018-10-31T11:32:38.390000",
-  "device_name": "John C. Doe",
-  "driver_id": "1",
-  "id": "1",
-  "latitude": "-90",
-  "longitude": "-180",
-  "truck_id": "1",
-  "velocity": "0"
+  "bearing": 0,
+  "created_on": "2049-10-31T11:32:38.390000",
+  "device_name": "John Doe",
+  "driver_id": 1,
+  "id": 1,
+  "latitude": 56.2,
+  "longitude": 128.1,
+  "truck_id": 1,
+  "velocity": 10.1
 }
 ```
 
@@ -4387,12 +4453,12 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/haulers/{hauler_uuid}/connections";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           // Parameters
           NameValueCollection parameters = new NameValueCollection();
-          parameters.Add("tenant_code", "CROSCRAPCO+101");
+          parameters.Add("tenant_code", "08767");
           
           byte[] json = client.UploadString(url, "POST", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
@@ -4403,9 +4469,9 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/haulers/{hauler_uuid}/connections?tenant_code=CROSCRAPCO%2B101 \
+curl -X POST https://api.crosoftware.net/haulers/{hauler_uuid}/connections?tenant_code=08767 \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -4413,7 +4479,7 @@ curl -X POST https://api.crosoftware.net/haulers/{hauler_uuid}/connections?tenan
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -4421,7 +4487,7 @@ var headers = {
 $.ajax({
   url: 'https://api.crosoftware.net/haulers/{hauler_uuid}/connections',
   method: 'post',
-  data: '?tenant_code=CROSCRAPCO%2B101',
+  data: '?tenant_code=08767',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -4436,7 +4502,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -4453,12 +4519,12 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
 r = requests.post('https://api.crosoftware.net/haulers/{hauler_uuid}/connections', params={
-  'tenant_code': 'CROSCRAPCO+101'
+  'tenant_code': '08767'
 }, headers = headers)
 
 print r.json()
@@ -4466,7 +4532,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/haulers/{hauler_uuid}/connections?tenant_code=CROSCRAPCO%2B101");
+URL obj = new URL("https://api.crosoftware.net/haulers/{hauler_uuid}/connections?tenant_code=08767");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -4505,22 +4571,22 @@ Create third party connection.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": {
-    "approved_by": "1",
-    "approved_on": "2018-10-31T11:32:38.390000",
-    "denied_on": "2018-10-31T11:32:38.390000",
-    "is_approved": "0",
-    "location_id": "1",
-    "provider_email": "support@crosoftware.net",
-    "provider_id": "1",
-    "provider_name": "John C. Doe",
-    "provider_phone": "+1 (360) 733-1649",
-    "requested_on": "2018-10-31T11:32:38.390000"
+    "approved_by": 1,
+    "approved_on": "2049-10-31T11:32:38.390000",
+    "denied_on": "2049-10-31T11:32:38.390000",
+    "is_approved": true,
+    "location_id": 1,
+    "provider_email": "test@crosoftware.net",
+    "provider_id": 1,
+    "provider_name": "John Doe",
+    "provider_phone": "+1 (360) 123-6543",
+    "requested_on": "2049-10-31T11:32:38.390000"
   },
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -4564,15 +4630,15 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/haulers";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           // Parameters
           NameValueCollection parameters = new NameValueCollection();
-          parameters.Add("company_name", "CRO Scrap Example Inc.");
-          parameters.Add("username", "a_user@crosoftware.net");
-          parameters.Add("password", "cro1sher3!");
-          parameters.Add("recaptcha", "<recaptcha-string>");
+          parameters.Add("company_name", "BestScrap, Inc.");
+          parameters.Add("username", "test_user_1000");
+          parameters.Add("password", "AG00d!P@55w0rd;");
+          parameters.Add("recaptcha", "<google captcha str>");
           
           byte[] json = client.UploadString(url, "POST", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
@@ -4583,9 +4649,9 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/haulers?company_name=CRO%20Scrap%20Example%20Inc.&username=a_user%40crosoftware.net&password=cro1sher3%21&recaptcha=%3Crecaptcha-string%3E \
+curl -X POST https://api.crosoftware.net/haulers?company_name=BestScrap%2C%20Inc.&username=test_user_1000&password=AG00d%21P%4055w0rd%3B&recaptcha=%3Cgoogle%20captcha%20str%3E \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -4593,7 +4659,7 @@ curl -X POST https://api.crosoftware.net/haulers?company_name=CRO%20Scrap%20Exam
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -4601,7 +4667,7 @@ var headers = {
 $.ajax({
   url: 'https://api.crosoftware.net/haulers',
   method: 'post',
-  data: '?company_name=CRO%20Scrap%20Example%20Inc.&username=a_user%40crosoftware.net&password=cro1sher3%21&recaptcha=%3Crecaptcha-string%3E',
+  data: '?company_name=BestScrap%2C%20Inc.&username=test_user_1000&password=AG00d%21P%4055w0rd%3B&recaptcha=%3Cgoogle%20captcha%20str%3E',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -4616,7 +4682,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -4636,12 +4702,12 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
 r = requests.post('https://api.crosoftware.net/haulers', params={
-  'company_name': 'CRO Scrap Example Inc.',  'username': 'a_user@crosoftware.net',  'password': 'cro1sher3!',  'recaptcha': '<recaptcha-string>'
+  'company_name': 'BestScrap, Inc.',  'username': 'test_user_1000',  'password': 'AG00d!P@55w0rd;',  'recaptcha': '<google captcha str>'
 }, headers = headers)
 
 print r.json()
@@ -4649,7 +4715,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/haulers?company_name=CRO%20Scrap%20Example%20Inc.&username=a_user%40crosoftware.net&password=cro1sher3%21&recaptcha=%3Crecaptcha-string%3E");
+URL obj = new URL("https://api.crosoftware.net/haulers?company_name=BestScrap%2C%20Inc.&username=test_user_1000&password=AG00d%21P%4055w0rd%3B&recaptcha=%3Cgoogle%20captcha%20str%3E");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -4694,22 +4760,22 @@ This operation does not require authentication
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": {
-    "approved_by": "1",
-    "approved_on": "2018-10-31T11:32:38.390000",
-    "denied_on": "2018-10-31T11:32:38.390000",
-    "is_approved": "0",
-    "location_id": "1",
-    "provider_email": "support@crosoftware.net",
-    "provider_id": "1",
-    "provider_name": "John C. Doe",
-    "provider_phone": "+1 (360) 733-1649",
-    "requested_on": "2018-10-31T11:32:38.390000"
+    "approved_by": 1,
+    "approved_on": "2049-10-31T11:32:38.390000",
+    "denied_on": "2049-10-31T11:32:38.390000",
+    "is_approved": true,
+    "location_id": 1,
+    "provider_email": "test@crosoftware.net",
+    "provider_id": 1,
+    "provider_name": "John Doe",
+    "provider_phone": "+1 (360) 123-6543",
+    "requested_on": "2049-10-31T11:32:38.390000"
   },
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -4753,7 +4819,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/haulers/{hauler_uuid}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -4767,7 +4833,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/haulers/{hauler_uuid} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -4775,7 +4841,7 @@ curl -X GET https://api.crosoftware.net/haulers/{hauler_uuid} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -4798,7 +4864,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -4814,7 +4880,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -4865,8 +4931,8 @@ Get third party hauler.
 
 ```json
 {
-  "id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-  "name": "John C. Doe"
+  "id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+  "name": "John Doe"
 }
 ```
 
@@ -4910,7 +4976,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/haulers/{hauler_uuid}/connections";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -4924,7 +4990,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/haulers/{hauler_uuid}/connections \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -4932,7 +4998,7 @@ curl -X GET https://api.crosoftware.net/haulers/{hauler_uuid}/connections \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -4955,7 +5021,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -4971,7 +5037,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -5024,22 +5090,22 @@ List third party hauler connections.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": {
-    "approved_by": "1",
-    "approved_on": "2018-10-31T11:32:38.390000",
-    "denied_on": "2018-10-31T11:32:38.390000",
-    "is_approved": "0",
-    "location_id": "1",
-    "provider_email": "support@crosoftware.net",
-    "provider_id": "1",
-    "provider_name": "John C. Doe",
-    "provider_phone": "+1 (360) 733-1649",
-    "requested_on": "2018-10-31T11:32:38.390000"
+    "approved_by": 1,
+    "approved_on": "2049-10-31T11:32:38.390000",
+    "denied_on": "2049-10-31T11:32:38.390000",
+    "is_approved": true,
+    "location_id": 1,
+    "provider_email": "test@crosoftware.net",
+    "provider_id": 1,
+    "provider_name": "John Doe",
+    "provider_phone": "+1 (360) 123-6543",
+    "requested_on": "2049-10-31T11:32:38.390000"
   },
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -5083,7 +5149,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/haulers";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -5097,7 +5163,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/haulers \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -5105,7 +5171,7 @@ curl -X GET https://api.crosoftware.net/haulers \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -5128,7 +5194,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -5144,7 +5210,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -5196,16 +5262,16 @@ List third party haulers.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-      "name": "John C. Doe"
+      "id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+      "name": "John Doe"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -5251,7 +5317,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "PATCH", parameters);
@@ -5265,7 +5331,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X PATCH https://api.crosoftware.net/locations/{location_id}/jobs/{job_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -5273,7 +5339,7 @@ curl -X PATCH https://api.crosoftware.net/locations/{location_id}/jobs/{job_id} 
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -5296,7 +5362,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -5312,7 +5378,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -5366,59 +5432,60 @@ Dispatch a job by id.
 
 ```json
 {
-  "arrived_at_dest": "2018-10-31T11:32:38.390000",
-  "arrived_on": "2018-10-31T11:32:38.390000",
-  "asset_dropped": "0",
-  "asset_id": "1",
-  "asset_quantity": "0",
-  "asset_type_id": "1",
-  "completed_by": "1",
-  "completed_by_driver": "0",
-  "completed_on": "2018-10-31T11:32:38.390000",
-  "confirmed_on": "2018-10-31T11:32:38.390000",
-  "created_by_id": "1",
-  "customer_id": "1",
-  "customer_notes": "Some notes from a customer to a dispatcher.",
-  "desired_asset_desc": "Some asset characteristics.",
+  "arrived_at_dest": "2049-10-31T11:32:38.390000",
+  "arrived_on": "2049-10-31T11:32:38.390000",
+  "asset_dropped": 101,
+  "asset_id": 1,
+  "asset_quantity": 1,
+  "asset_type_id": 1,
+  "completed_by": 1,
+  "completed_by_driver": true,
+  "completed_on": "2049-10-31T11:32:38.390000",
+  "confirmed_on": "2049-10-31T11:32:38.390000",
+  "created_by_id": 1,
+  "customer_id": 1,
+  "customer_notes": "A note entered by a customer",
+  "desired_asset_desc": "A note entered by a driver",
   "dispatch_priority": "H",
-  "dispatched_by_route": "1",
-  "dispatched_on": "2018-10-31T11:32:38.390000",
-  "dispatcher_notes": "Some dispatcher notes.",
-  "do_confirm": "0",
-  "driver_notes": "Some driver notes.",
-  "dump_location_id": "1",
-  "dumped_on": "2018-10-31T11:32:38.390000",
-  "end_time": "2018-10-31T11:32:38.390000",
-  "fail_reason": "A reason for failure.",
-  "final_location_id": "1",
-  "flags": "A reason for failure.",
-  "id": "1",
-  "invoice_notes": "Some invoice notes.",
-  "is_completed": "0",
-  "is_declined": "0",
-  "is_deleted": "0",
-  "is_failed": "0",
-  "job_group_id": "1",
-  "location_id": "1",
-  "merged_with_route": "1",
-  "original_schedule_date": "2018-10-31T11:32:38.390000",
-  "pickup_date": "2018-10-31T11:32:38.390000",
-  "priority": "-999999",
-  "reference_number": "REF#100A61",
-  "requested_on": "2018-10-31T11:32:38.390000",
-  "require_image": "0",
-  "require_material": "0",
-  "require_signature": "0",
-  "require_weights": "0",
-  "schedule_date": "2018-10-31T11:32:38.390000",
-  "start_location_id": "1",
-  "start_time": "2018-10-31T11:32:38.390000",
-  "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-  "times_failed": "0",
-  "times_rolled_over": "0",
-  "truck_id": "1",
-  "type": "R",
-  "weighed_on": "2018-10-31T11:32:38.390000"
+  "dispatched_by_route": 1,
+  "dispatched_on": "2049-10-31T11:32:38.390000",
+  "dispatcher_notes": "A note entered by a dispatcher.",
+  "do_confirm": true,
+  "driver_notes": "A note entered by a driver.",
+  "dump_location_id": 2,
+  "dumped_on": "2049-10-31T11:32:38.390000",
+  "end_time": "2049-10-31T11:32:38.390000",
+  "fail_reason": "A failure description selected by a driver.",
+  "final_location_id": 1,
+  "flags": "Notes about a job.",
+  "id": 1,
+  "invoice_notes": "Notes from a billing invoice",
+  "is_completed": true,
+  "is_declined": true,
+  "is_deleted": true,
+  "is_failed": true,
+  "job_group_id": 1,
+  "location_id": 1,
+  "merged_with_route": 1,
+  "original_schedule_date": "2049-10-31T11:32:38.390000",
+  "pickup_date": "2049-10-31T11:32:38.390000",
+  "priority": -3,
+  "reference_number": "A140",
+  "requested_on": "2049-10-31T11:32:38.390000",
+  "require_image": true,
+  "require_material": true,
+  "require_signature": true,
+  "require_weights": true,
+  "scale_ticket": "A5100",
+  "schedule_date": "2049-10-31T11:32:38.390000",
+  "start_location_id": 1,
+  "start_time": "2049-10-31T11:32:38.390000",
+  "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+  "times_failed": 2,
+  "times_rolled_over": 1,
+  "truck_id": 1,
+  "type": "D",
+  "weighed_on": "2049-10-31T11:32:38.390000"
 }
 ```
 
@@ -5462,7 +5529,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/jobs/{job_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -5476,7 +5543,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/jobs/{job_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -5484,7 +5551,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/jobs/{job_id} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -5507,7 +5574,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -5523,7 +5590,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -5575,155 +5642,156 @@ Get job by id.
 
 ```json
 {
-  "arrived_at_dest": "2018-10-31T11:32:38.390000",
-  "arrived_on": "2018-10-31T11:32:38.390000",
+  "arrived_at_dest": "2049-10-31T11:32:38.390000",
+  "arrived_on": "2049-10-31T11:32:38.390000",
   "asset": {
     "asset_type": {
-      "deleted": "0",
-      "id": "1",
-      "is_default": "0",
-      "location_id": "1",
-      "name": "John C. Doe",
-      "quantity": "0",
-      "require_numbers": "0",
-      "weight": "0"
+      "deleted": true,
+      "id": 1,
+      "is_default": true,
+      "location_id": 1,
+      "name": "John Doe",
+      "quantity": 3,
+      "require_numbers": true,
+      "weight": 10192.77
     },
-    "asset_type_id": "1",
-    "cluster": "1",
-    "customer_id": "1",
-    "description": "Some description.",
-    "dispatched_on": "2018-10-31T11:32:38.390000",
-    "id": "1",
-    "is_returned": "0",
-    "last_activity_on": "2018-10-31T11:32:38.390000",
-    "last_rental_invoice_on": "2018-10-31T11:32:38.390000",
-    "latitude": "-90",
+    "asset_type_id": 1,
+    "cluster": 1,
+    "customer_id": 1,
+    "description": "A user entered/human readable text description.",
+    "dispatched_on": "2049-10-31T11:32:38.390000",
+    "id": 1,
+    "is_returned": true,
+    "last_activity_on": "2049-10-31T11:32:38.390000",
+    "last_rental_invoice_on": "2049-10-31T11:32:38.390000",
+    "latitude": 56.2,
     "location": {
-      "id": "1",
-      "is_active": "0",
-      "name": "John C. Doe"
+      "id": 1,
+      "is_active": true,
+      "name": "CRO Scrap"
     },
-    "location_id": "1",
-    "longitude": "-180",
-    "number": "+1 (360) 733-1649",
-    "quantity": "0",
-    "returned_on": "2018-10-31T11:32:38.390000"
+    "location_id": 1,
+    "longitude": 128.1,
+    "number": "+1 (360) 123-6543",
+    "quantity": 3,
+    "returned_on": "2049-10-31T11:32:38.390000"
   },
-  "asset_dropped": "0",
-  "asset_id": "1",
-  "asset_quantity": "0",
+  "asset_dropped": 101,
+  "asset_id": 1,
+  "asset_quantity": 1,
   "asset_type": {
-    "deleted": "0",
-    "id": "1",
-    "is_default": "0",
-    "location_id": "1",
-    "name": "John C. Doe",
-    "quantity": "0",
-    "require_numbers": "0",
-    "weight": "0"
+    "deleted": true,
+    "id": 1,
+    "is_default": true,
+    "location_id": 1,
+    "name": "John Doe",
+    "quantity": 3,
+    "require_numbers": true,
+    "weight": 10192.77
   },
-  "asset_type_id": "1",
-  "completed_by": "1",
-  "completed_by_driver": "0",
-  "completed_on": "2018-10-31T11:32:38.390000",
-  "confirmed_on": "2018-10-31T11:32:38.390000",
-  "created_by_id": "1",
+  "asset_type_id": 1,
+  "completed_by": 1,
+  "completed_by_driver": true,
+  "completed_on": "2049-10-31T11:32:38.390000",
+  "confirmed_on": "2049-10-31T11:32:38.390000",
+  "created_by_id": 1,
   "customer": {
     "addresses": [
       {
         "country": "US",
-        "is_billing": "0",
-        "is_shipping": "0",
-        "latitude": "-90",
-        "line_1": "321 Chase Rd",
-        "line_2": "P.O. Box 256",
-        "line_3": "3rd Floor",
-        "line_4": "Last door on the left (blue)",
+        "is_billing": true,
+        "is_shipping": true,
+        "latitude": 56.2,
+        "line_1": "123 Some St.",
+        "line_2": "Office #34",
+        "line_3": "Box #2",
+        "line_4": "Drop in Blue Box",
         "locality": "Sequim",
-        "longitude": "-180",
+        "longitude": 128.1,
         "postcode": "98368",
         "region": "WA"
       }
     ],
     "contacts": [
       {
-        "email": "support@crosoftware.net",
-        "fax": "+1 (360) 733-1649",
-        "name": "John C. Doe",
-        "notify_on_acknowledged_request": "0",
-        "notify_on_completed_request": "0",
-        "notify_on_dispatched_request": "0",
-        "notify_on_failed_request": "0",
-        "notify_on_new_request": "0",
-        "number": "+1 (360) 733-1649"
+        "email": "test@crosoftware.net",
+        "fax": "+1 (360) 123-6543",
+        "name": "John Doe",
+        "notify_on_acknowledged_request": true,
+        "notify_on_completed_request": true,
+        "notify_on_dispatched_request": true,
+        "notify_on_failed_request": true,
+        "notify_on_new_request": true,
+        "number": "+1 (360) 123-6543"
       }
     ],
-    "customer_id": "1",
-    "is_commercial": "0",
-    "name": "John C. Doe",
-    "note": "Bin located in alley.",
-    "parent_id": "1",
-    "reference_number": "REF#100A61",
-    "renewal_date": "2018-10-31T11:32:38.390000",
-    "sales_rep": "John C. Doe",
-    "suspension_id": "1"
+    "customer_id": 1,
+    "is_commercial": true,
+    "name": "John Doe",
+    "note": "A note about something",
+    "parent_id": 1,
+    "reference_number": "A140",
+    "renewal_date": "2049-10-31T11:32:38.390000",
+    "sales_rep": "Jane Johnson",
+    "suspension_id": 1
   },
-  "customer_id": "1",
-  "customer_notes": "Some notes from a customer to a dispatcher.",
-  "desired_asset_desc": "Some asset characteristics.",
+  "customer_id": 1,
+  "customer_notes": "A note entered by a customer",
+  "desired_asset_desc": "A note entered by a driver",
   "dispatch_priority": "H",
-  "dispatched_by_route": "1",
-  "dispatched_on": "2018-10-31T11:32:38.390000",
-  "dispatcher_notes": "Some dispatcher notes.",
-  "do_confirm": "0",
-  "driver_notes": "Some driver notes.",
+  "dispatched_by_route": 1,
+  "dispatched_on": "2049-10-31T11:32:38.390000",
+  "dispatcher_notes": "A note entered by a dispatcher.",
+  "do_confirm": true,
+  "driver_notes": "A note entered by a driver.",
   "dump_location": {
-    "id": "1",
-    "is_active": "0",
-    "name": "John C. Doe"
+    "id": 1,
+    "is_active": true,
+    "name": "CRO Scrap"
   },
-  "dump_location_id": "1",
-  "dumped_on": "2018-10-31T11:32:38.390000",
-  "end_time": "2018-10-31T11:32:38.390000",
-  "fail_reason": "A reason for failure.",
+  "dump_location_id": 2,
+  "dumped_on": "2049-10-31T11:32:38.390000",
+  "end_time": "2049-10-31T11:32:38.390000",
+  "fail_reason": "A failure description selected by a driver.",
   "final_location": {
-    "id": "1",
-    "is_active": "0",
-    "name": "John C. Doe"
+    "id": 1,
+    "is_active": true,
+    "name": "CRO Scrap"
   },
-  "final_location_id": "1",
-  "flags": "A reason for failure.",
-  "invoice_notes": "Some invoice notes.",
-  "is_completed": "0",
-  "is_declined": "0",
-  "is_deleted": "0",
-  "is_failed": "0",
-  "job_group_id": "1",
-  "location_id": "1",
-  "merged_with_route": "1",
-  "original_schedule_date": "2018-10-31T11:32:38.390000",
-  "pickup_date": "2018-10-31T11:32:38.390000",
-  "priority": "-999999",
-  "reference_number": "REF#100A61",
-  "requested_on": "2018-10-31T11:32:38.390000",
-  "require_image": "0",
-  "require_material": "0",
-  "require_signature": "0",
-  "require_weights": "0",
-  "schedule_date": "2018-10-31T11:32:38.390000",
+  "final_location_id": 1,
+  "flags": "Notes about a job.",
+  "invoice_notes": "Notes from a billing invoice",
+  "is_completed": true,
+  "is_declined": true,
+  "is_deleted": true,
+  "is_failed": true,
+  "job_group_id": 1,
+  "location_id": 1,
+  "merged_with_route": 1,
+  "original_schedule_date": "2049-10-31T11:32:38.390000",
+  "pickup_date": "2049-10-31T11:32:38.390000",
+  "priority": -3,
+  "reference_number": "A140",
+  "requested_on": "2049-10-31T11:32:38.390000",
+  "require_image": true,
+  "require_material": true,
+  "require_signature": true,
+  "require_weights": true,
+  "scale_ticket": "A5100",
+  "schedule_date": "2049-10-31T11:32:38.390000",
   "start_location": {
-    "id": "1",
-    "is_active": "0",
-    "name": "John C. Doe"
+    "id": 1,
+    "is_active": true,
+    "name": "CRO Scrap"
   },
-  "start_location_id": "1",
-  "start_time": "2018-10-31T11:32:38.390000",
-  "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-  "times_failed": "0",
-  "times_rolled_over": "0",
-  "truck_id": "1",
-  "type": "R",
-  "weighed_on": "2018-10-31T11:32:38.390000"
+  "start_location_id": 1,
+  "start_time": "2049-10-31T11:32:38.390000",
+  "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+  "times_failed": 2,
+  "times_rolled_over": 1,
+  "truck_id": 1,
+  "type": "D",
+  "weighed_on": "2049-10-31T11:32:38.390000"
 }
 ```
 
@@ -5767,13 +5835,15 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/jobs";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           // Parameters
           NameValueCollection parameters = new NameValueCollection();
-          parameters.Add("schedule_gt", "2018-10-31T11:32:38.390000");
-          parameters.Add("schedule_lt", "2018-10-31T11:32:38.390000");
+          parameters.Add("schedule_gt", "2049-10-31T11:32:38.390000");
+          parameters.Add("schedule_lt", "2049-10-31T11:32:38.390000");
+          parameters.Add("last_updated_gte", "2049-10-31T11:32:38.390000");
+          parameters.Add("created_on_gte", "2049-10-31T11:32:38.390000");
           
           string json = client.DownloadString(url);
           Console.WriteLine(json);
@@ -5784,9 +5854,9 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/locations/{location_id}/jobs?schedule_gt=2018-10-31T11%3A32%3A38.390000&schedule_lt=2018-10-31T11%3A32%3A38.390000 \
+curl -X GET https://api.crosoftware.net/locations/{location_id}/jobs?schedule_gt=2049-10-31T11%3A32%3A38.390000&schedule_lt=2049-10-31T11%3A32%3A38.390000&last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000 \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -5794,7 +5864,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/jobs?schedule_gt
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -5802,7 +5872,7 @@ var headers = {
 $.ajax({
   url: 'https://api.crosoftware.net/locations/{location_id}/jobs',
   method: 'get',
-  data: '?schedule_gt=2018-10-31T11%3A32%3A38.390000&schedule_lt=2018-10-31T11%3A32%3A38.390000',
+  data: '?schedule_gt=2049-10-31T11%3A32%3A38.390000&schedule_lt=2049-10-31T11%3A32%3A38.390000&last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -5817,14 +5887,16 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
 result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/jobs',
   params: {
   'schedule_gt' => 'string(DateTime)',
-'schedule_lt' => 'string(DateTime)'
+'schedule_lt' => 'string(DateTime)',
+'last_updated_gte' => 'string(DateTime)',
+'created_on_gte' => 'string(DateTime)'
 }, headers: headers
 
 p JSON.parse(result)
@@ -5835,12 +5907,12 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
 r = requests.get('https://api.crosoftware.net/locations/{location_id}/jobs', params={
-  'schedule_gt': '2018-10-31T11:32:38.390000',  'schedule_lt': '2018-10-31T11:32:38.390000'
+  'schedule_gt': '2049-10-31T11:32:38.390000',  'schedule_lt': '2049-10-31T11:32:38.390000',  'last_updated_gte': '2049-10-31T11:32:38.390000',  'created_on_gte': '2049-10-31T11:32:38.390000'
 }, headers = headers)
 
 print r.json()
@@ -5848,7 +5920,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/jobs?schedule_gt=2018-10-31T11%3A32%3A38.390000&schedule_lt=2018-10-31T11%3A32%3A38.390000");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/jobs?schedule_gt=2049-10-31T11%3A32%3A38.390000&schedule_lt=2049-10-31T11%3A32%3A38.390000&last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -5888,8 +5960,8 @@ List jobs.
 |`failed`|query|boolean|false||
 |`driver_id`|query|boolean|false||
 |`truck_id`|query|boolean|false||
-|`last_updated_gte`|query|string(DateTime)|false||
-|`created_on_gte`|query|string(DateTime)|false||
+|`last_updated_gte`|query|string(DateTime)|true||
+|`created_on_gte`|query|string(DateTime)|true||
 
 > Example responses
 
@@ -5897,163 +5969,164 @@ List jobs.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "arrived_at_dest": "2018-10-31T11:32:38.390000",
-      "arrived_on": "2018-10-31T11:32:38.390000",
+      "arrived_at_dest": "2049-10-31T11:32:38.390000",
+      "arrived_on": "2049-10-31T11:32:38.390000",
       "asset": {
         "asset_type": {
-          "deleted": "0",
-          "id": "1",
-          "is_default": "0",
-          "location_id": "1",
-          "name": "John C. Doe",
-          "quantity": "0",
-          "require_numbers": "0",
-          "weight": "0"
+          "deleted": true,
+          "id": 1,
+          "is_default": true,
+          "location_id": 1,
+          "name": "John Doe",
+          "quantity": 3,
+          "require_numbers": true,
+          "weight": 10192.77
         },
-        "asset_type_id": "1",
-        "cluster": "1",
-        "customer_id": "1",
-        "description": "Some description.",
-        "dispatched_on": "2018-10-31T11:32:38.390000",
-        "id": "1",
-        "is_returned": "0",
-        "last_activity_on": "2018-10-31T11:32:38.390000",
-        "last_rental_invoice_on": "2018-10-31T11:32:38.390000",
-        "latitude": "-90",
+        "asset_type_id": 1,
+        "cluster": 1,
+        "customer_id": 1,
+        "description": "A user entered/human readable text description.",
+        "dispatched_on": "2049-10-31T11:32:38.390000",
+        "id": 1,
+        "is_returned": true,
+        "last_activity_on": "2049-10-31T11:32:38.390000",
+        "last_rental_invoice_on": "2049-10-31T11:32:38.390000",
+        "latitude": 56.2,
         "location": {
-          "id": "1",
-          "is_active": "0",
-          "name": "John C. Doe"
+          "id": 1,
+          "is_active": true,
+          "name": "CRO Scrap"
         },
-        "location_id": "1",
-        "longitude": "-180",
-        "number": "+1 (360) 733-1649",
-        "quantity": "0",
-        "returned_on": "2018-10-31T11:32:38.390000"
+        "location_id": 1,
+        "longitude": 128.1,
+        "number": "+1 (360) 123-6543",
+        "quantity": 3,
+        "returned_on": "2049-10-31T11:32:38.390000"
       },
-      "asset_dropped": "0",
-      "asset_id": "1",
-      "asset_quantity": "0",
+      "asset_dropped": 101,
+      "asset_id": 1,
+      "asset_quantity": 1,
       "asset_type": {
-        "deleted": "0",
-        "id": "1",
-        "is_default": "0",
-        "location_id": "1",
-        "name": "John C. Doe",
-        "quantity": "0",
-        "require_numbers": "0",
-        "weight": "0"
+        "deleted": true,
+        "id": 1,
+        "is_default": true,
+        "location_id": 1,
+        "name": "John Doe",
+        "quantity": 3,
+        "require_numbers": true,
+        "weight": 10192.77
       },
-      "asset_type_id": "1",
-      "completed_by": "1",
-      "completed_by_driver": "0",
-      "completed_on": "2018-10-31T11:32:38.390000",
-      "confirmed_on": "2018-10-31T11:32:38.390000",
-      "created_by_id": "1",
+      "asset_type_id": 1,
+      "completed_by": 1,
+      "completed_by_driver": true,
+      "completed_on": "2049-10-31T11:32:38.390000",
+      "confirmed_on": "2049-10-31T11:32:38.390000",
+      "created_by_id": 1,
       "customer": {
         "addresses": [
           {
             "country": "US",
-            "is_billing": "0",
-            "is_shipping": "0",
-            "latitude": "-90",
-            "line_1": "321 Chase Rd",
-            "line_2": "P.O. Box 256",
-            "line_3": "3rd Floor",
-            "line_4": "Last door on the left (blue)",
+            "is_billing": true,
+            "is_shipping": true,
+            "latitude": 56.2,
+            "line_1": "123 Some St.",
+            "line_2": "Office #34",
+            "line_3": "Box #2",
+            "line_4": "Drop in Blue Box",
             "locality": "Sequim",
-            "longitude": "-180",
+            "longitude": 128.1,
             "postcode": "98368",
             "region": "WA"
           }
         ],
         "contacts": [
           {
-            "email": "support@crosoftware.net",
-            "fax": "+1 (360) 733-1649",
-            "name": "John C. Doe",
-            "notify_on_acknowledged_request": "0",
-            "notify_on_completed_request": "0",
-            "notify_on_dispatched_request": "0",
-            "notify_on_failed_request": "0",
-            "notify_on_new_request": "0",
-            "number": "+1 (360) 733-1649"
+            "email": "test@crosoftware.net",
+            "fax": "+1 (360) 123-6543",
+            "name": "John Doe",
+            "notify_on_acknowledged_request": true,
+            "notify_on_completed_request": true,
+            "notify_on_dispatched_request": true,
+            "notify_on_failed_request": true,
+            "notify_on_new_request": true,
+            "number": "+1 (360) 123-6543"
           }
         ],
-        "customer_id": "1",
-        "is_commercial": "0",
-        "name": "John C. Doe",
-        "note": "Bin located in alley.",
-        "parent_id": "1",
-        "reference_number": "REF#100A61",
-        "renewal_date": "2018-10-31T11:32:38.390000",
-        "sales_rep": "John C. Doe",
-        "suspension_id": "1"
+        "customer_id": 1,
+        "is_commercial": true,
+        "name": "John Doe",
+        "note": "A note about something",
+        "parent_id": 1,
+        "reference_number": "A140",
+        "renewal_date": "2049-10-31T11:32:38.390000",
+        "sales_rep": "Jane Johnson",
+        "suspension_id": 1
       },
-      "customer_id": "1",
-      "customer_notes": "Some notes from a customer to a dispatcher.",
-      "desired_asset_desc": "Some asset characteristics.",
+      "customer_id": 1,
+      "customer_notes": "A note entered by a customer",
+      "desired_asset_desc": "A note entered by a driver",
       "dispatch_priority": "H",
-      "dispatched_by_route": "1",
-      "dispatched_on": "2018-10-31T11:32:38.390000",
-      "dispatcher_notes": "Some dispatcher notes.",
-      "do_confirm": "0",
-      "driver_notes": "Some driver notes.",
+      "dispatched_by_route": 1,
+      "dispatched_on": "2049-10-31T11:32:38.390000",
+      "dispatcher_notes": "A note entered by a dispatcher.",
+      "do_confirm": true,
+      "driver_notes": "A note entered by a driver.",
       "dump_location": {
-        "id": "1",
-        "is_active": "0",
-        "name": "John C. Doe"
+        "id": 1,
+        "is_active": true,
+        "name": "CRO Scrap"
       },
-      "dump_location_id": "1",
-      "dumped_on": "2018-10-31T11:32:38.390000",
-      "end_time": "2018-10-31T11:32:38.390000",
-      "fail_reason": "A reason for failure.",
+      "dump_location_id": 2,
+      "dumped_on": "2049-10-31T11:32:38.390000",
+      "end_time": "2049-10-31T11:32:38.390000",
+      "fail_reason": "A failure description selected by a driver.",
       "final_location": {
-        "id": "1",
-        "is_active": "0",
-        "name": "John C. Doe"
+        "id": 1,
+        "is_active": true,
+        "name": "CRO Scrap"
       },
-      "final_location_id": "1",
-      "flags": "A reason for failure.",
-      "invoice_notes": "Some invoice notes.",
-      "is_completed": "0",
-      "is_declined": "0",
-      "is_deleted": "0",
-      "is_failed": "0",
-      "job_group_id": "1",
-      "location_id": "1",
-      "merged_with_route": "1",
-      "original_schedule_date": "2018-10-31T11:32:38.390000",
-      "pickup_date": "2018-10-31T11:32:38.390000",
-      "priority": "-999999",
-      "reference_number": "REF#100A61",
-      "requested_on": "2018-10-31T11:32:38.390000",
-      "require_image": "0",
-      "require_material": "0",
-      "require_signature": "0",
-      "require_weights": "0",
-      "schedule_date": "2018-10-31T11:32:38.390000",
+      "final_location_id": 1,
+      "flags": "Notes about a job.",
+      "invoice_notes": "Notes from a billing invoice",
+      "is_completed": true,
+      "is_declined": true,
+      "is_deleted": true,
+      "is_failed": true,
+      "job_group_id": 1,
+      "location_id": 1,
+      "merged_with_route": 1,
+      "original_schedule_date": "2049-10-31T11:32:38.390000",
+      "pickup_date": "2049-10-31T11:32:38.390000",
+      "priority": -3,
+      "reference_number": "A140",
+      "requested_on": "2049-10-31T11:32:38.390000",
+      "require_image": true,
+      "require_material": true,
+      "require_signature": true,
+      "require_weights": true,
+      "scale_ticket": "A5100",
+      "schedule_date": "2049-10-31T11:32:38.390000",
       "start_location": {
-        "id": "1",
-        "is_active": "0",
-        "name": "John C. Doe"
+        "id": 1,
+        "is_active": true,
+        "name": "CRO Scrap"
       },
-      "start_location_id": "1",
-      "start_time": "2018-10-31T11:32:38.390000",
-      "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-      "times_failed": "0",
-      "times_rolled_over": "0",
-      "truck_id": "1",
-      "type": "R",
-      "weighed_on": "2018-10-31T11:32:38.390000"
+      "start_location_id": 1,
+      "start_time": "2049-10-31T11:32:38.390000",
+      "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+      "times_failed": 2,
+      "times_rolled_over": 1,
+      "truck_id": 1,
+      "type": "D",
+      "weighed_on": "2049-10-31T11:32:38.390000"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -6099,7 +6172,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -6113,7 +6186,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -6121,7 +6194,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -6144,7 +6217,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -6160,7 +6233,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -6211,9 +6284,9 @@ Get location by id.
 
 ```json
 {
-  "id": "1",
-  "is_active": "0",
-  "name": "John C. Doe"
+  "id": 1,
+  "is_active": true,
+  "name": "CRO Scrap"
 }
 ```
 
@@ -6257,7 +6330,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -6271,7 +6344,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -6279,7 +6352,7 @@ curl -X GET https://api.crosoftware.net/locations \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -6302,7 +6375,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -6318,7 +6391,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -6370,17 +6443,17 @@ List locations for this user.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "id": "1",
-      "is_active": "0",
-      "name": "John C. Doe"
+      "id": 1,
+      "is_active": true,
+      "name": "CRO Scrap"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -6389,6 +6462,180 @@ List locations for this user.
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[LocationListModel](#schemalocationlistmodel)|HTTP call succeeded.|
+|`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
+
+<h4>Response Headers</h4>
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|x-request-id|string||Request identifier.
+|
+|401|x-request-id|string||Request identifier.
+|
+|403|x-request-id|string||Request identifier.
+|
+
+## Materials
+
+### List Materials
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/locations/{location_id}/materials";
+
+          // Headers
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
+          client.Headers.Add("x-tenant-id", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/locations/{location_id}/materials \
+  -H 'Accept: application/json' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
+  -H 'x-tenant-id: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/locations/{location_id}/materials',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/materials',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/materials', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/materials");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /locations/{location_id}/materials`
+
+<a id="opIdget_locations_by_id_materials"></a>
+
+List all job materials.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`authorization`|header|string|true||
+|`x-tenant-id`|header|integer(int64)|true||
+|`location_id`|path|integer(int64)|true||
+|`page_limit`|query|integer(int64)|false||
+|`page_index`|query|integer(int64)|false||
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "current_limit": 100,
+  "current_page": 1,
+  "results": [
+    {
+      "created_on": "2049-10-31T11:32:38.390000",
+      "description": "A user entered/human readable text description.",
+      "factor": 1.1,
+      "group_description": "A user entered/human readable text description.",
+      "id": 1,
+      "line_item_id": 1,
+      "uom": "A user entered/human readable description of the UOM."
+    }
+  ],
+  "total_count": 1001,
+  "total_pages": 3
+}
+```
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[MaterialListModel](#schemamateriallistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -6426,7 +6673,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/tenants";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -6440,7 +6687,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/tenants \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -6448,7 +6695,7 @@ curl -X GET https://api.crosoftware.net/tenants \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -6471,7 +6718,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -6487,7 +6734,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -6539,26 +6786,26 @@ List tenants for this user.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "address": "321 Chase Rd",
+      "address": "123 Some St.",
       "city": "Sequim",
-      "code": "CROSCRAPCO",
-      "created_on": "2018-10-31T11:32:38.390000",
-      "email": "support@crosoftware.net",
-      "id": "1",
-      "is_active": "0",
-      "name": "John C. Doe",
-      "phone": "+1 (360) 733-1649",
+      "code": "BESTSCRAP",
+      "created_on": "2049-10-31T11:32:38.390000",
+      "email": "test@crosoftware.net",
+      "id": 1,
+      "is_active": true,
+      "name": "John Doe",
+      "phone": "+1 (360) 123-6543",
       "state": "WA",
-      "truck_limit": "0",
+      "truck_limit": 0,
       "zip": "98368"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -6604,7 +6851,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -6618,7 +6865,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -6626,7 +6873,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -6649,7 +6896,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -6665,7 +6912,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -6717,16 +6964,16 @@ Get truck.
 
 ```json
 {
-  "driver_id": "1",
-  "id": "1",
-  "location_id": "1",
-  "name": "John C. Doe",
-  "notes": "Bin located in alley.",
-  "out_of_service": "0",
-  "require_odometer": "0",
-  "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-  "type": "R59",
-  "weight": "0"
+  "driver_id": 1,
+  "id": 1,
+  "location_id": 1,
+  "name": "John Doe",
+  "notes": "A note about something",
+  "out_of_service": true,
+  "require_odometer": true,
+  "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+  "type": "FlatHauler",
+  "weight": 23100.1
 }
 ```
 
@@ -6770,7 +7017,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/trucks";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -6784,7 +7031,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/locations/{location_id}/trucks \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -6792,7 +7039,7 @@ curl -X GET https://api.crosoftware.net/locations/{location_id}/trucks \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -6815,7 +7062,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -6831,7 +7078,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -6884,24 +7131,24 @@ List trucks.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "driver_id": "1",
-      "id": "1",
-      "location_id": "1",
-      "name": "John C. Doe",
-      "notes": "Bin located in alley.",
-      "out_of_service": "0",
-      "require_odometer": "0",
-      "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-      "type": "R59",
-      "weight": "0"
+      "driver_id": 1,
+      "id": 1,
+      "location_id": 1,
+      "name": "John Doe",
+      "notes": "A note about something",
+      "out_of_service": true,
+      "require_odometer": true,
+      "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+      "type": "FlatHauler",
+      "weight": 23100.1
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -6945,7 +7192,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "PATCH", parameters);
@@ -6959,7 +7206,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X PATCH https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -6967,7 +7214,7 @@ curl -X PATCH https://api.crosoftware.net/locations/{location_id}/trucks/{truck_
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -6990,7 +7237,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -7006,7 +7253,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -7059,16 +7306,16 @@ Set driver for truck.
 
 ```json
 {
-  "driver_id": "1",
-  "id": "1",
-  "location_id": "1",
-  "name": "John C. Doe",
-  "notes": "Bin located in alley.",
-  "out_of_service": "0",
-  "require_odometer": "0",
-  "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-  "type": "R59",
-  "weight": "0"
+  "driver_id": 1,
+  "id": 1,
+  "location_id": 1,
+  "name": "John Doe",
+  "notes": "A note about something",
+  "out_of_service": true,
+  "require_odometer": true,
+  "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+  "type": "FlatHauler",
+  "weight": 23100.1
 }
 ```
 
@@ -7077,6 +7324,339 @@ Set driver for truck.
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[TruckModel](#schematruckmodel)|HTTP call succeeded.|
+|`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
+
+<h4>Response Headers</h4>
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|x-request-id|string||Request identifier.
+|
+|401|x-request-id|string||Request identifier.
+|
+|403|x-request-id|string||Request identifier.
+|
+
+## Users
+
+### Get User
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/locations/{location_id}/users/{user_id}";
+
+          // Headers
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
+          client.Headers.Add("x-tenant-id", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/locations/{location_id}/users/{user_id} \
+  -H 'Accept: application/json' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
+  -H 'x-tenant-id: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/locations/{location_id}/users/{user_id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/users/{user_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/users/{user_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/users/{user_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /locations/{location_id}/users/{user_id}`
+
+<a id="opIdget_locations_by_id_users_by_id"></a>
+
+Get user.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`authorization`|header|string|true||
+|`x-tenant-id`|header|integer(int64)|true||
+|`location_id`|path|integer(int64)|true||
+|`user_id`|path|integer(int64)|true||
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "id": 1,
+  "roles": [
+    "Dispatcher"
+  ],
+  "username": "test_user_1000"
+}
+```
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[UserModel](#schemausermodel)|HTTP call succeeded.|
+|`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
+
+<h4>Response Headers</h4>
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|x-request-id|string||Request identifier.
+|
+|401|x-request-id|string||Request identifier.
+|
+|403|x-request-id|string||Request identifier.
+|
+
+### List Users
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/locations/{location_id}/users";
+
+          // Headers
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
+          client.Headers.Add("x-tenant-id", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/locations/{location_id}/users \
+  -H 'Accept: application/json' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
+  -H 'x-tenant-id: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/locations/{location_id}/users',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/users',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/users', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/users");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /locations/{location_id}/users`
+
+<a id="opIdget_locations_by_id_users"></a>
+
+List users.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`authorization`|header|string|true||
+|`x-tenant-id`|header|integer(int64)|true||
+|`location_id`|path|integer(int64)|true||
+|`page_limit`|query|integer(int64)|false||
+|`page_index`|query|integer(int64)|false||
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "current_limit": 100,
+  "current_page": 1,
+  "results": [
+    {
+      "id": 1,
+      "roles": [
+        "Dispatcher"
+      ],
+      "username": "test_user_1000"
+    }
+  ],
+  "total_count": 1001,
+  "total_pages": 3
+}
+```
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[UserListResultsModel](#schemauserlistresultsmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -7114,7 +7694,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hooks";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "POST", parameters);
@@ -7129,7 +7709,7 @@ namespace CROSoftware
 curl -X POST https://api.crosoftware.net/hooks \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -7138,7 +7718,7 @@ curl -X POST https://api.crosoftware.net/hooks \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -7162,7 +7742,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -7179,7 +7759,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -7219,9 +7799,10 @@ Create new webhook.
 ```json
 {
   "events": [
-    "customer"
+    "Customer"
   ],
-  "url": "http://your.callback.url.net"
+  "secret": "<Secret>",
+  "url": "https://test.url"
 }
 ```
 
@@ -7242,9 +7823,10 @@ Create new webhook.
 ```json
 {
   "events": [
-    "customer"
+    "Customer"
   ],
-  "url": "http://your.callback.url.net"
+  "secret": "<Secret>",
+  "url": "https://test.url"
 }
 ```
 
@@ -7288,7 +7870,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hooks/{hook_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "DELETE", parameters);
@@ -7302,7 +7884,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X DELETE https://api.crosoftware.net/hooks/{hook_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -7310,7 +7892,7 @@ curl -X DELETE https://api.crosoftware.net/hooks/{hook_id} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -7333,7 +7915,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -7349,7 +7931,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -7401,12 +7983,12 @@ Deactivate (soft delete) webhook by id.
 ```json
 {
   "events": [
-    "customer"
+    "Customer"
   ],
-  "id": "1",
-  "last_http_fail": "2018-10-31T11:32:38.390000",
-  "last_http_success": "2018-10-31T11:32:38.390000",
-  "url": "http://your.callback.url.net"
+  "id": 1,
+  "last_http_fail": "2049-10-31T11:32:38.390000",
+  "last_http_success": "2049-10-31T11:32:38.390000",
+  "url": "https://test.url"
 }
 ```
 
@@ -7450,7 +8032,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hooks/{hook_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -7464,7 +8046,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/hooks/{hook_id} \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -7472,7 +8054,7 @@ curl -X GET https://api.crosoftware.net/hooks/{hook_id} \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -7495,7 +8077,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -7511,7 +8093,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -7563,12 +8145,12 @@ Get webhook by id.
 ```json
 {
   "events": [
-    "customer"
+    "Customer"
   ],
-  "id": "1",
-  "last_http_fail": "2018-10-31T11:32:38.390000",
-  "last_http_success": "2018-10-31T11:32:38.390000",
-  "url": "http://your.callback.url.net"
+  "id": 1,
+  "last_http_fail": "2049-10-31T11:32:38.390000",
+  "last_http_success": "2049-10-31T11:32:38.390000",
+  "url": "https://test.url"
 }
 ```
 
@@ -7612,7 +8194,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hooks";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -7626,7 +8208,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/hooks \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -7634,7 +8216,7 @@ curl -X GET https://api.crosoftware.net/hooks \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -7657,7 +8239,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -7673,7 +8255,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -7726,21 +8308,21 @@ List webhooks.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
       "events": [
-        "customer"
+        "Customer"
       ],
-      "id": "1",
-      "last_http_fail": "2018-10-31T11:32:38.390000",
-      "last_http_success": "2018-10-31T11:32:38.390000",
-      "url": "http://your.callback.url.net"
+      "id": 1,
+      "last_http_fail": "2049-10-31T11:32:38.390000",
+      "last_http_success": "2049-10-31T11:32:38.390000",
+      "url": "https://test.url"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 ```
 
@@ -7784,7 +8366,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hooks/{hook_id}/ping";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           string json = client.DownloadString(url);
@@ -7798,7 +8380,7 @@ namespace CROSoftware
 # You can also use wget
 curl -X GET https://api.crosoftware.net/hooks/{hook_id}/ping \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -7806,7 +8388,7 @@ curl -X GET https://api.crosoftware.net/hooks/{hook_id}/ping \
 ```javascript
 var headers = {
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -7829,7 +8411,7 @@ require 'json'
 
 headers = {
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -7845,7 +8427,7 @@ p JSON.parse(result)
 import requests
 headers = {
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -7896,8 +8478,8 @@ Ping webhook by id.
 
 ```json
 {
-  "delivery_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-  "http_status": "200"
+  "delivery_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+  "http_status": 200
 }
 ```
 
@@ -7941,7 +8523,7 @@ namespace CROSoftware
           String url = "https://api.crosoftware.net/hooks/{hook_id}";
 
           // Headers
-          client.Headers.Add("authorization", "bearer <token>");
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
           byte[] json = client.UploadString(url, "PATCH", parameters);
@@ -7956,7 +8538,7 @@ namespace CROSoftware
 curl -X PATCH https://api.crosoftware.net/hooks/{hook_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H 'authorization: bearer <token>' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
 
 ```
@@ -7965,7 +8547,7 @@ curl -X PATCH https://api.crosoftware.net/hooks/{hook_id} \
 var headers = {
   'Content-Type':'application/json',
   'Accept':'application/json',
-  'authorization':'bearer <token>',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id':'1'
 
 };
@@ -7989,7 +8571,7 @@ require 'json'
 headers = {
   'Content-Type' => 'application/json',
   'Accept' => 'application/json',
-  'authorization' => 'bearer <token>',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id' => '1'
 }
 
@@ -8006,7 +8588,7 @@ import requests
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'authorization': 'bearer <token>',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
   'x-tenant-id': '1'
 }
 
@@ -8046,9 +8628,10 @@ Update webhook.
 ```json
 {
   "events": [
-    "customer"
+    "Customer"
   ],
-  "url": "http://your.callback.url.net"
+  "secret": "<Secret>",
+  "url": "https://test.url"
 }
 ```
 
@@ -8070,9 +8653,10 @@ Update webhook.
 ```json
 {
   "events": [
-    "customer"
+    "Customer"
   ],
-  "url": "http://your.callback.url.net"
+  "secret": "<Secret>",
+  "url": "https://test.url"
 }
 ```
 
@@ -8102,35 +8686,35 @@ Update webhook.
 ```json
 {
   "asset_type": {
-    "deleted": "0",
-    "id": "1",
-    "is_default": "0",
-    "location_id": "1",
-    "name": "John C. Doe",
-    "quantity": "0",
-    "require_numbers": "0",
-    "weight": "0"
+    "deleted": true,
+    "id": 1,
+    "is_default": true,
+    "location_id": 1,
+    "name": "John Doe",
+    "quantity": 3,
+    "require_numbers": true,
+    "weight": 10192.77
   },
-  "asset_type_id": "1",
-  "cluster": "1",
-  "customer_id": "1",
-  "description": "Some description.",
-  "dispatched_on": "2018-10-31T11:32:38.390000",
-  "id": "1",
-  "is_returned": "0",
-  "last_activity_on": "2018-10-31T11:32:38.390000",
-  "last_rental_invoice_on": "2018-10-31T11:32:38.390000",
-  "latitude": "-90",
+  "asset_type_id": 1,
+  "cluster": 1,
+  "customer_id": 1,
+  "description": "A user entered/human readable text description.",
+  "dispatched_on": "2049-10-31T11:32:38.390000",
+  "id": 1,
+  "is_returned": true,
+  "last_activity_on": "2049-10-31T11:32:38.390000",
+  "last_rental_invoice_on": "2049-10-31T11:32:38.390000",
+  "latitude": 56.2,
   "location": {
-    "id": "1",
-    "is_active": "0",
-    "name": "John C. Doe"
+    "id": 1,
+    "is_active": true,
+    "name": "CRO Scrap"
   },
-  "location_id": "1",
-  "longitude": "-180",
-  "number": "+1 (360) 733-1649",
-  "quantity": "0",
-  "returned_on": "2018-10-31T11:32:38.390000"
+  "location_id": 1,
+  "longitude": 128.1,
+  "number": "+1 (360) 123-6543",
+  "quantity": 3,
+  "returned_on": "2049-10-31T11:32:38.390000"
 }
 
 ```
@@ -8143,15 +8727,15 @@ Update webhook.
 |`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E'). Must be valid resource identifier (integer).|
 |`cluster`|integer(int64)|Cluster id. Must be valid resource identifier (integer).|
 |`customer_id`|integer(int64)|Customer identifier. Must be valid resource identifier (integer).|
-|`description`|string|Free-form text description. Must be at least 1 and no more than 2048 characters.|
+|`description`|string|Free-form text description. Must be at least 0 and no more than 2048 characters.|
 |`dispatched_on`|string(DateTime)|Time the asset was dispatched. Must be a date in an ISO 8601 compatible format.|
-|`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
+|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
 |`is_returned`|boolean|Is asset returned. Must be one of 0, 1, True, False (case insensitive).|
 |`last_activity_on`|string(DateTime)|Last activity time. Must be a date in an ISO 8601 compatible format.|
 |`last_rental_invoice_on`|string(DateTime)|Last rental invoice time. Must be a date in an ISO 8601 compatible format.|
 |`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
 |`location`|[LocationModel](#schemalocationmodel)|-|
-|`location_id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
+|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
 |`longitude`|number(float)|longitude. Must be float greater than or equal to -180. Must be float less than or equal to 180.|
 |`number`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
 |`quantity`|integer(int64)|Asset quantity. Must be integer greater than or equal to 0.|
@@ -8161,14 +8745,14 @@ Update webhook.
 
 ```json
 {
-  "deleted": "0",
-  "id": "1",
-  "is_default": "0",
-  "location_id": "1",
-  "name": "John C. Doe",
-  "quantity": "0",
-  "require_numbers": "0",
-  "weight": "0"
+  "deleted": true,
+  "id": 1,
+  "is_default": true,
+  "location_id": 1,
+  "name": "John Doe",
+  "quantity": 3,
+  "require_numbers": true,
+  "weight": 10192.77
 }
 
 ```
@@ -8178,9 +8762,9 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`deleted`|boolean|Is record deleted (soft delete). Must be one of 0, 1, True, False (case insensitive).|
-|`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
+|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
 |`is_default`|boolean|Is asset the default asset. Must be one of 0, 1, True, False (case insensitive).|
-|`location_id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
+|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
 |`quantity`|integer(int64)|Asset type quantity. Must be integer greater than or equal to 0.|
 |`require_numbers`|boolean|Require asset numbers. Must be one of 0, 1, True, False (case insensitive).|
@@ -8191,15 +8775,15 @@ Update webhook.
 ```json
 {
   "country": "US",
-  "is_billing": "0",
-  "is_shipping": "0",
-  "latitude": "-90",
-  "line_1": "321 Chase Rd",
-  "line_2": "P.O. Box 256",
-  "line_3": "3rd Floor",
-  "line_4": "Last door on the left (blue)",
+  "is_billing": true,
+  "is_shipping": true,
+  "latitude": 56.2,
+  "line_1": "123 Some St.",
+  "line_2": "Office #34",
+  "line_3": "Box #2",
+  "line_4": "Drop in Blue Box",
   "locality": "Sequim",
-  "longitude": "-180",
+  "longitude": 128.1,
   "postcode": "98368",
   "region": "WA"
 }
@@ -8215,9 +8799,9 @@ Update webhook.
 |`is_shipping`|boolean|Customer's shipping address if true. Must be one of 0, 1, True, False (case insensitive).|
 |`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
 |`line_1`|string|Street address. Must be at least 1 and no more than 256 characters.|
-|`line_2`|string|Street address line 2. Must be at least 1 and no more than 256 characters.|
-|`line_3`|string|Street address line 3. Must be at least 1 and no more than 256 characters.|
-|`line_4`|string|Street address line 4 (doubles as county). Must be at least 1 and no more than 256 characters.|
+|`line_2`|string|Street address line 2. Must be at least 0 and no more than 256 characters.|
+|`line_3`|string|Street address line 3. Must be at least 0 and no more than 256 characters.|
+|`line_4`|string|Street address line 4 (doubles as county). Must be at least 0 and no more than 256 characters.|
 |`locality`|string|Address locality (e.g. city). Must be at least 1 and no more than 86 characters.|
 |`longitude`|number(float)|longitude. Must be float greater than or equal to -180. Must be float less than or equal to 180.|
 |`postcode`|string|Postal code (may include letters and symbols). Must be at least 1 and no more than 86 characters.|
@@ -8227,15 +8811,15 @@ Update webhook.
 
 ```json
 {
-  "email": "support@crosoftware.net",
-  "fax": "+1 (360) 733-1649",
-  "name": "John C. Doe",
-  "notify_on_acknowledged_request": "0",
-  "notify_on_completed_request": "0",
-  "notify_on_dispatched_request": "0",
-  "notify_on_failed_request": "0",
-  "notify_on_new_request": "0",
-  "number": "+1 (360) 733-1649"
+  "email": "test@crosoftware.net",
+  "fax": "+1 (360) 123-6543",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": true,
+  "notify_on_completed_request": true,
+  "notify_on_dispatched_request": true,
+  "notify_on_failed_request": true,
+  "notify_on_new_request": true,
+  "number": "+1 (360) 123-6543"
 }
 
 ```
@@ -8258,12 +8842,12 @@ Update webhook.
 
 ```json
 {
-  "is_commercial": "0",
-  "note": "Bin located in alley.",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "is_commercial": true,
+  "note": "A note about something",
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 
 ```
@@ -8273,7 +8857,7 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
-|`note`|string|Notes (free text). Must be at least 1 and no more than 2048 characters.|
+|`note`|string|Notes (free text). Must be at least 0 and no more than 2048 characters.|
 |`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
 |`renewal_date`|string(DateTime)|Renewal date. Must be a date in an ISO 8601 compatible format.|
 |`sales_rep`|string|Name of sales representative. Must be at least 1 and no more than 64 characters.|
@@ -8286,40 +8870,40 @@ Update webhook.
   "addresses": [
     {
       "country": "US",
-      "is_billing": "0",
-      "is_shipping": "0",
-      "latitude": "-90",
-      "line_1": "321 Chase Rd",
-      "line_2": "P.O. Box 256",
-      "line_3": "3rd Floor",
-      "line_4": "Last door on the left (blue)",
+      "is_billing": true,
+      "is_shipping": true,
+      "latitude": 56.2,
+      "line_1": "123 Some St.",
+      "line_2": "Office #34",
+      "line_3": "Box #2",
+      "line_4": "Drop in Blue Box",
       "locality": "Sequim",
-      "longitude": "-180",
+      "longitude": 128.1,
       "postcode": "98368",
       "region": "WA"
     }
   ],
   "contacts": [
     {
-      "email": "support@crosoftware.net",
-      "fax": "+1 (360) 733-1649",
-      "name": "John C. Doe",
-      "notify_on_acknowledged_request": "0",
-      "notify_on_completed_request": "0",
-      "notify_on_dispatched_request": "0",
-      "notify_on_failed_request": "0",
-      "notify_on_new_request": "0",
-      "number": "+1 (360) 733-1649"
+      "email": "test@crosoftware.net",
+      "fax": "+1 (360) 123-6543",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": true,
+      "notify_on_completed_request": true,
+      "notify_on_dispatched_request": true,
+      "notify_on_failed_request": true,
+      "notify_on_new_request": true,
+      "number": "+1 (360) 123-6543"
     }
   ],
-  "is_commercial": "0",
-  "name": "John C. Doe",
-  "note": "Bin located in alley.",
-  "parent_id": "1",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "is_commercial": true,
+  "name": "John Doe",
+  "note": "A note about something",
+  "parent_id": 1,
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 
 ```
@@ -8332,8 +8916,8 @@ Update webhook.
 |`contacts`|array[[CreateCustomerContactModel](#schemacreatecustomercontactmodel)]|-|
 |`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`note`|string|Notes (free text). Must be at least 1 and no more than 2048 characters.|
-|`parent_id`|integer(int64)|Parent record identifier (integer) Must be valid resource identifier (integer).|
+|`note`|string|Notes (free text). Must be at least 0 and no more than 2048 characters.|
+|`parent_id`|integer(int64)|Parent record identifier (integer). Must be valid resource identifier (integer).|
 |`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
 |`renewal_date`|string(DateTime)|Renewal date. Must be a date in an ISO 8601 compatible format.|
 |`sales_rep`|string|Name of sales representative. Must be at least 1 and no more than 64 characters.|
@@ -8344,9 +8928,10 @@ Update webhook.
 ```json
 {
   "events": [
-    "customer"
+    "Customer"
   ],
-  "url": "http://your.callback.url.net"
+  "secret": "<Secret>",
+  "url": "https://test.url"
 }
 
 ```
@@ -8355,35 +8940,36 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`events`|array[string]|Hook event. Must be a valid hook event (one of: customer, customer_location, job, truck).|
+|`events`|array[string]|Hook event. Must be a valid hook event (one of: Ping, Customer, CustomerLocation, Job, Truck).|
+|`secret`|string|Response body HMAC signing key. Must match expression ^\s*[a-zA-Z0-9\/\+=]{11,270}\s*$ Base64 encoded string.|
 |`url`|string(Url)|Callback URL. URL conforming to RFC 1738.|
 
 <h2 id="tocScustomeraddresslistmodel">CustomerAddressListModel</h2>
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "address_id": "1",
+      "address_id": 1,
       "country": "US",
-      "is_billing": "0",
-      "is_physical": "0",
-      "is_shipping": "0",
-      "latitude": "-90",
-      "line_1": "321 Chase Rd",
-      "line_2": "P.O. Box 256",
-      "line_3": "3rd Floor",
-      "line_4": "Last door on the left (blue)",
+      "is_billing": true,
+      "is_physical": true,
+      "is_shipping": true,
+      "latitude": 56.2,
+      "line_1": "123 Some St.",
+      "line_2": "Office #34",
+      "line_3": "Box #2",
+      "line_4": "Drop in Blue Box",
       "locality": "Sequim",
-      "longitude": "-180",
+      "longitude": 128.1,
       "postcode": "98368",
       "region": "WA"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 
 ```
@@ -8402,18 +8988,18 @@ Update webhook.
 
 ```json
 {
-  "address_id": "1",
+  "address_id": 1,
   "country": "US",
-  "is_billing": "0",
-  "is_physical": "0",
-  "is_shipping": "0",
-  "latitude": "-90",
-  "line_1": "321 Chase Rd",
-  "line_2": "P.O. Box 256",
-  "line_3": "3rd Floor",
-  "line_4": "Last door on the left (blue)",
+  "is_billing": true,
+  "is_physical": true,
+  "is_shipping": true,
+  "latitude": 56.2,
+  "line_1": "123 Some St.",
+  "line_2": "Office #34",
+  "line_3": "Box #2",
+  "line_4": "Drop in Blue Box",
   "locality": "Sequim",
-  "longitude": "-180",
+  "longitude": 128.1,
   "postcode": "98368",
   "region": "WA"
 }
@@ -8431,9 +9017,9 @@ Update webhook.
 |`is_shipping`|boolean|Customer's shipping address if true. Must be one of 0, 1, True, False (case insensitive).|
 |`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
 |`line_1`|string|Street address. Must be at least 1 and no more than 256 characters.|
-|`line_2`|string|Street address line 2. Must be at least 1 and no more than 256 characters.|
-|`line_3`|string|Street address line 3. Must be at least 1 and no more than 256 characters.|
-|`line_4`|string|Street address line 4 (doubles as county). Must be at least 1 and no more than 256 characters.|
+|`line_2`|string|Street address line 2. Must be at least 0 and no more than 256 characters.|
+|`line_3`|string|Street address line 3. Must be at least 0 and no more than 256 characters.|
+|`line_4`|string|Street address line 4 (doubles as county). Must be at least 0 and no more than 256 characters.|
 |`locality`|string|Address locality (e.g. city). Must be at least 1 and no more than 86 characters.|
 |`longitude`|number(float)|longitude. Must be float greater than or equal to -180. Must be float less than or equal to 180.|
 |`postcode`|string|Postal code (may include letters and symbols). Must be at least 1 and no more than 86 characters.|
@@ -8443,24 +9029,24 @@ Update webhook.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "contact_id": "1",
-      "email": "support@crosoftware.net",
-      "fax": "+1 (360) 733-1649",
-      "name": "John C. Doe",
-      "notify_on_acknowledged_request": "0",
-      "notify_on_completed_request": "0",
-      "notify_on_dispatched_request": "0",
-      "notify_on_failed_request": "0",
-      "notify_on_new_request": "0",
-      "number": "+1 (360) 733-1649"
+      "contact_id": 1,
+      "email": "test@crosoftware.net",
+      "fax": "+1 (360) 123-6543",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": true,
+      "notify_on_completed_request": true,
+      "notify_on_dispatched_request": true,
+      "notify_on_failed_request": true,
+      "notify_on_new_request": true,
+      "number": "+1 (360) 123-6543"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 
 ```
@@ -8479,16 +9065,16 @@ Update webhook.
 
 ```json
 {
-  "contact_id": "1",
-  "email": "support@crosoftware.net",
-  "fax": "+1 (360) 733-1649",
-  "name": "John C. Doe",
-  "notify_on_acknowledged_request": "0",
-  "notify_on_completed_request": "0",
-  "notify_on_dispatched_request": "0",
-  "notify_on_failed_request": "0",
-  "notify_on_new_request": "0",
-  "number": "+1 (360) 733-1649"
+  "contact_id": 1,
+  "email": "test@crosoftware.net",
+  "fax": "+1 (360) 123-6543",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": true,
+  "notify_on_completed_request": true,
+  "notify_on_dispatched_request": true,
+  "notify_on_failed_request": true,
+  "notify_on_new_request": true,
+  "number": "+1 (360) 123-6543"
 }
 
 ```
@@ -8512,52 +9098,52 @@ Update webhook.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
       "addresses": [
         {
           "country": "US",
-          "is_billing": "0",
-          "is_shipping": "0",
-          "latitude": "-90",
-          "line_1": "321 Chase Rd",
-          "line_2": "P.O. Box 256",
-          "line_3": "3rd Floor",
-          "line_4": "Last door on the left (blue)",
+          "is_billing": true,
+          "is_shipping": true,
+          "latitude": 56.2,
+          "line_1": "123 Some St.",
+          "line_2": "Office #34",
+          "line_3": "Box #2",
+          "line_4": "Drop in Blue Box",
           "locality": "Sequim",
-          "longitude": "-180",
+          "longitude": 128.1,
           "postcode": "98368",
           "region": "WA"
         }
       ],
       "contacts": [
         {
-          "email": "support@crosoftware.net",
-          "fax": "+1 (360) 733-1649",
-          "name": "John C. Doe",
-          "notify_on_acknowledged_request": "0",
-          "notify_on_completed_request": "0",
-          "notify_on_dispatched_request": "0",
-          "notify_on_failed_request": "0",
-          "notify_on_new_request": "0",
-          "number": "+1 (360) 733-1649"
+          "email": "test@crosoftware.net",
+          "fax": "+1 (360) 123-6543",
+          "name": "John Doe",
+          "notify_on_acknowledged_request": true,
+          "notify_on_completed_request": true,
+          "notify_on_dispatched_request": true,
+          "notify_on_failed_request": true,
+          "notify_on_new_request": true,
+          "number": "+1 (360) 123-6543"
         }
       ],
-      "customer_id": "1",
-      "is_commercial": "0",
-      "name": "John C. Doe",
-      "note": "Bin located in alley.",
-      "parent_id": "1",
-      "reference_number": "REF#100A61",
-      "renewal_date": "2018-10-31T11:32:38.390000",
-      "sales_rep": "John C. Doe",
-      "suspension_id": "1"
+      "customer_id": 1,
+      "is_commercial": true,
+      "name": "John Doe",
+      "note": "A note about something",
+      "parent_id": 1,
+      "reference_number": "A140",
+      "renewal_date": "2049-10-31T11:32:38.390000",
+      "sales_rep": "Jane Johnson",
+      "suspension_id": 1
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 
 ```
@@ -8576,21 +9162,21 @@ Update webhook.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "id": "1",
-      "is_commercial": "0",
-      "note": "Bin located in alley.",
-      "reference_number": "REF#100A61",
-      "renewal_date": "2018-10-31T11:32:38.390000",
-      "sales_rep": "John C. Doe",
-      "suspension_id": "1"
+      "id": 1,
+      "is_commercial": true,
+      "note": "A note about something",
+      "reference_number": "A140",
+      "renewal_date": "2049-10-31T11:32:38.390000",
+      "sales_rep": "Jane Johnson",
+      "suspension_id": 1
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 
 ```
@@ -8609,13 +9195,13 @@ Update webhook.
 
 ```json
 {
-  "id": "1",
-  "is_commercial": "0",
-  "note": "Bin located in alley.",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "id": 1,
+  "is_commercial": true,
+  "note": "A note about something",
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 
 ```
@@ -8624,9 +9210,9 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
+|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
 |`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
-|`note`|string|Notes (free text). Must be at least 1 and no more than 2048 characters.|
+|`note`|string|Notes (free text). Must be at least 0 and no more than 2048 characters.|
 |`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
 |`renewal_date`|string(DateTime)|Renewal date. Must be a date in an ISO 8601 compatible format.|
 |`sales_rep`|string|Name of sales representative. Must be at least 1 and no more than 64 characters.|
@@ -8639,41 +9225,41 @@ Update webhook.
   "addresses": [
     {
       "country": "US",
-      "is_billing": "0",
-      "is_shipping": "0",
-      "latitude": "-90",
-      "line_1": "321 Chase Rd",
-      "line_2": "P.O. Box 256",
-      "line_3": "3rd Floor",
-      "line_4": "Last door on the left (blue)",
+      "is_billing": true,
+      "is_shipping": true,
+      "latitude": 56.2,
+      "line_1": "123 Some St.",
+      "line_2": "Office #34",
+      "line_3": "Box #2",
+      "line_4": "Drop in Blue Box",
       "locality": "Sequim",
-      "longitude": "-180",
+      "longitude": 128.1,
       "postcode": "98368",
       "region": "WA"
     }
   ],
   "contacts": [
     {
-      "email": "support@crosoftware.net",
-      "fax": "+1 (360) 733-1649",
-      "name": "John C. Doe",
-      "notify_on_acknowledged_request": "0",
-      "notify_on_completed_request": "0",
-      "notify_on_dispatched_request": "0",
-      "notify_on_failed_request": "0",
-      "notify_on_new_request": "0",
-      "number": "+1 (360) 733-1649"
+      "email": "test@crosoftware.net",
+      "fax": "+1 (360) 123-6543",
+      "name": "John Doe",
+      "notify_on_acknowledged_request": true,
+      "notify_on_completed_request": true,
+      "notify_on_dispatched_request": true,
+      "notify_on_failed_request": true,
+      "notify_on_new_request": true,
+      "number": "+1 (360) 123-6543"
     }
   ],
-  "customer_id": "1",
-  "is_commercial": "0",
-  "name": "John C. Doe",
-  "note": "Bin located in alley.",
-  "parent_id": "1",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "customer_id": 1,
+  "is_commercial": true,
+  "name": "John Doe",
+  "note": "A note about something",
+  "parent_id": 1,
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 
 ```
@@ -8687,8 +9273,8 @@ Update webhook.
 |`customer_id`|integer(int64)|Customer identifier. Must be valid resource identifier (integer).|
 |`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`note`|string|Notes (free text). Must be at least 1 and no more than 2048 characters.|
-|`parent_id`|integer(int64)|Parent record identifier (integer) Must be valid resource identifier (integer).|
+|`note`|string|Notes (free text). Must be at least 0 and no more than 2048 characters.|
+|`parent_id`|integer(int64)|Parent record identifier (integer). Must be valid resource identifier (integer).|
 |`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
 |`renewal_date`|string(DateTime)|Renewal date. Must be a date in an ISO 8601 compatible format.|
 |`sales_rep`|string|Name of sales representative. Must be at least 1 and no more than 64 characters.|
@@ -8698,30 +9284,30 @@ Update webhook.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "address": "321 Chase Rd",
-      "can_convert_to_group": "0",
-      "can_create_requests": "0",
-      "can_edit_requests": "0",
-      "can_reposition_asset": "0",
+      "address": "123 Some St.",
+      "can_convert_to_group": true,
+      "can_create_requests": true,
+      "can_edit_requests": true,
+      "can_reposition_asset": true,
       "city": "Sequim",
-      "disable_shift_tracking": "0",
-      "email": "support@crosoftware.net",
-      "id": "1",
-      "license_number": "12ZA24WA-21",
-      "location_id": "1",
-      "name": "John C. Doe",
-      "phone_number": "+1 (360) 733-1649",
+      "disable_shift_tracking": true,
+      "email": "test@crosoftware.net",
+      "id": 1,
+      "license_number": "AJONDO251Z",
+      "location_id": 1,
+      "name": "John Doe",
+      "phone_number": "+1 (360) 123-6543",
       "state": "WA",
-      "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
+      "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
       "zip": "98368"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 
 ```
@@ -8740,21 +9326,21 @@ Update webhook.
 
 ```json
 {
-  "address": "321 Chase Rd",
-  "can_convert_to_group": "0",
-  "can_create_requests": "0",
-  "can_edit_requests": "0",
-  "can_reposition_asset": "0",
+  "address": "123 Some St.",
+  "can_convert_to_group": true,
+  "can_create_requests": true,
+  "can_edit_requests": true,
+  "can_reposition_asset": true,
   "city": "Sequim",
-  "disable_shift_tracking": "0",
-  "email": "support@crosoftware.net",
-  "id": "1",
-  "license_number": "12ZA24WA-21",
-  "location_id": "1",
-  "name": "John C. Doe",
-  "phone_number": "+1 (360) 733-1649",
+  "disable_shift_tracking": true,
+  "email": "test@crosoftware.net",
+  "id": 1,
+  "license_number": "AJONDO251Z",
+  "location_id": 1,
+  "name": "John Doe",
+  "phone_number": "+1 (360) 123-6543",
   "state": "WA",
-  "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
+  "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
   "zip": "98368"
 }
 
@@ -8772,9 +9358,9 @@ Update webhook.
 |`city`|string|Address locality (e.g. city). Must be at least 1 and no more than 86 characters.|
 |`disable_shift_tracking`|boolean|Disable shift tracking. Must be one of 0, 1, True, False (case insensitive).|
 |`email`|string(Email)|Email address. Must be a valid email address.|
-|`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
+|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
 |`license_number`|string|Driver's license number. Must be at least 1 and no more than 100 characters.|
-|`location_id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
+|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
 |`phone_number`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
 |`state`|string|Address region (e.g. state). Must be at least 1 and no more than 32 characters.|
@@ -8785,9 +9371,9 @@ Update webhook.
 
 ```json
 {
-  "detail": "Something went wrong.",
-  "explanation": "The server was unable to comply because something went wrong.",
-  "title": "some_field_name"
+  "detail": "Something happened that caused an error.",
+  "explanation": "An error has occurred because...",
+  "title": "Failed to load data"
 }
 
 ```
@@ -8804,10 +9390,10 @@ Update webhook.
 
 ```json
 {
-  "heading": "0",
-  "latitude": "-90",
-  "longitude": "-180",
-  "speed": "0"
+  "heading": 0,
+  "latitude": 56.2,
+  "longitude": 128.1,
+  "speed": 10.1
 }
 
 ```
@@ -8826,12 +9412,12 @@ Update webhook.
 ```json
 {
   "coords": {
-    "heading": "0",
-    "latitude": "-90",
-    "longitude": "-180",
-    "speed": "0"
+    "heading": 0,
+    "latitude": 56.2,
+    "longitude": 128.1,
+    "speed": 10.1
   },
-  "timestamp": "2018-10-31T11:32:38.390000"
+  "timestamp": "2049-10-31T11:32:38.390000"
 }
 
 ```
@@ -8849,12 +9435,12 @@ Update webhook.
 {
   "location": {
     "coords": {
-      "heading": "0",
-      "latitude": "-90",
-      "longitude": "-180",
-      "speed": "0"
+      "heading": 0,
+      "latitude": 56.2,
+      "longitude": 128.1,
+      "speed": 10.1
     },
-    "timestamp": "2018-10-31T11:32:38.390000"
+    "timestamp": "2049-10-31T11:32:38.390000"
   }
 }
 
@@ -8870,15 +9456,15 @@ Update webhook.
 
 ```json
 {
-  "bearing": "0",
-  "created_on": "2018-10-31T11:32:38.390000",
-  "device_name": "John C. Doe",
-  "driver_id": "1",
-  "id": "1",
-  "latitude": "-90",
-  "longitude": "-180",
-  "truck_id": "1",
-  "velocity": "0"
+  "bearing": 0,
+  "created_on": "2049-10-31T11:32:38.390000",
+  "device_name": "John Doe",
+  "driver_id": 1,
+  "id": 1,
+  "latitude": 56.2,
+  "longitude": 128.1,
+  "truck_id": 1,
+  "velocity": 10.1
 }
 
 ```
@@ -8891,7 +9477,7 @@ Update webhook.
 |`created_on`|string(DateTime)|Timestamp of creation (must be in past). Must be a date occurring in the past in an ISO 8601 compatible format.|
 |`device_name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
 |`driver_id`|integer(int64)|Driver identifier. Must be valid resource identifier (integer).|
-|`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
+|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
 |`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
 |`longitude`|number(float)|longitude. Must be float greater than or equal to -180. Must be float less than or equal to 180.|
 |`truck_id`|integer(int64)|Truck identifier. Must be valid resource identifier (integer).|
@@ -8901,163 +9487,164 @@ Update webhook.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "arrived_at_dest": "2018-10-31T11:32:38.390000",
-      "arrived_on": "2018-10-31T11:32:38.390000",
+      "arrived_at_dest": "2049-10-31T11:32:38.390000",
+      "arrived_on": "2049-10-31T11:32:38.390000",
       "asset": {
         "asset_type": {
-          "deleted": "0",
-          "id": "1",
-          "is_default": "0",
-          "location_id": "1",
-          "name": "John C. Doe",
-          "quantity": "0",
-          "require_numbers": "0",
-          "weight": "0"
+          "deleted": true,
+          "id": 1,
+          "is_default": true,
+          "location_id": 1,
+          "name": "John Doe",
+          "quantity": 3,
+          "require_numbers": true,
+          "weight": 10192.77
         },
-        "asset_type_id": "1",
-        "cluster": "1",
-        "customer_id": "1",
-        "description": "Some description.",
-        "dispatched_on": "2018-10-31T11:32:38.390000",
-        "id": "1",
-        "is_returned": "0",
-        "last_activity_on": "2018-10-31T11:32:38.390000",
-        "last_rental_invoice_on": "2018-10-31T11:32:38.390000",
-        "latitude": "-90",
+        "asset_type_id": 1,
+        "cluster": 1,
+        "customer_id": 1,
+        "description": "A user entered/human readable text description.",
+        "dispatched_on": "2049-10-31T11:32:38.390000",
+        "id": 1,
+        "is_returned": true,
+        "last_activity_on": "2049-10-31T11:32:38.390000",
+        "last_rental_invoice_on": "2049-10-31T11:32:38.390000",
+        "latitude": 56.2,
         "location": {
-          "id": "1",
-          "is_active": "0",
-          "name": "John C. Doe"
+          "id": 1,
+          "is_active": true,
+          "name": "CRO Scrap"
         },
-        "location_id": "1",
-        "longitude": "-180",
-        "number": "+1 (360) 733-1649",
-        "quantity": "0",
-        "returned_on": "2018-10-31T11:32:38.390000"
+        "location_id": 1,
+        "longitude": 128.1,
+        "number": "+1 (360) 123-6543",
+        "quantity": 3,
+        "returned_on": "2049-10-31T11:32:38.390000"
       },
-      "asset_dropped": "0",
-      "asset_id": "1",
-      "asset_quantity": "0",
+      "asset_dropped": 101,
+      "asset_id": 1,
+      "asset_quantity": 1,
       "asset_type": {
-        "deleted": "0",
-        "id": "1",
-        "is_default": "0",
-        "location_id": "1",
-        "name": "John C. Doe",
-        "quantity": "0",
-        "require_numbers": "0",
-        "weight": "0"
+        "deleted": true,
+        "id": 1,
+        "is_default": true,
+        "location_id": 1,
+        "name": "John Doe",
+        "quantity": 3,
+        "require_numbers": true,
+        "weight": 10192.77
       },
-      "asset_type_id": "1",
-      "completed_by": "1",
-      "completed_by_driver": "0",
-      "completed_on": "2018-10-31T11:32:38.390000",
-      "confirmed_on": "2018-10-31T11:32:38.390000",
-      "created_by_id": "1",
+      "asset_type_id": 1,
+      "completed_by": 1,
+      "completed_by_driver": true,
+      "completed_on": "2049-10-31T11:32:38.390000",
+      "confirmed_on": "2049-10-31T11:32:38.390000",
+      "created_by_id": 1,
       "customer": {
         "addresses": [
           {
             "country": "US",
-            "is_billing": "0",
-            "is_shipping": "0",
-            "latitude": "-90",
-            "line_1": "321 Chase Rd",
-            "line_2": "P.O. Box 256",
-            "line_3": "3rd Floor",
-            "line_4": "Last door on the left (blue)",
+            "is_billing": true,
+            "is_shipping": true,
+            "latitude": 56.2,
+            "line_1": "123 Some St.",
+            "line_2": "Office #34",
+            "line_3": "Box #2",
+            "line_4": "Drop in Blue Box",
             "locality": "Sequim",
-            "longitude": "-180",
+            "longitude": 128.1,
             "postcode": "98368",
             "region": "WA"
           }
         ],
         "contacts": [
           {
-            "email": "support@crosoftware.net",
-            "fax": "+1 (360) 733-1649",
-            "name": "John C. Doe",
-            "notify_on_acknowledged_request": "0",
-            "notify_on_completed_request": "0",
-            "notify_on_dispatched_request": "0",
-            "notify_on_failed_request": "0",
-            "notify_on_new_request": "0",
-            "number": "+1 (360) 733-1649"
+            "email": "test@crosoftware.net",
+            "fax": "+1 (360) 123-6543",
+            "name": "John Doe",
+            "notify_on_acknowledged_request": true,
+            "notify_on_completed_request": true,
+            "notify_on_dispatched_request": true,
+            "notify_on_failed_request": true,
+            "notify_on_new_request": true,
+            "number": "+1 (360) 123-6543"
           }
         ],
-        "customer_id": "1",
-        "is_commercial": "0",
-        "name": "John C. Doe",
-        "note": "Bin located in alley.",
-        "parent_id": "1",
-        "reference_number": "REF#100A61",
-        "renewal_date": "2018-10-31T11:32:38.390000",
-        "sales_rep": "John C. Doe",
-        "suspension_id": "1"
+        "customer_id": 1,
+        "is_commercial": true,
+        "name": "John Doe",
+        "note": "A note about something",
+        "parent_id": 1,
+        "reference_number": "A140",
+        "renewal_date": "2049-10-31T11:32:38.390000",
+        "sales_rep": "Jane Johnson",
+        "suspension_id": 1
       },
-      "customer_id": "1",
-      "customer_notes": "Some notes from a customer to a dispatcher.",
-      "desired_asset_desc": "Some asset characteristics.",
+      "customer_id": 1,
+      "customer_notes": "A note entered by a customer",
+      "desired_asset_desc": "A note entered by a driver",
       "dispatch_priority": "H",
-      "dispatched_by_route": "1",
-      "dispatched_on": "2018-10-31T11:32:38.390000",
-      "dispatcher_notes": "Some dispatcher notes.",
-      "do_confirm": "0",
-      "driver_notes": "Some driver notes.",
+      "dispatched_by_route": 1,
+      "dispatched_on": "2049-10-31T11:32:38.390000",
+      "dispatcher_notes": "A note entered by a dispatcher.",
+      "do_confirm": true,
+      "driver_notes": "A note entered by a driver.",
       "dump_location": {
-        "id": "1",
-        "is_active": "0",
-        "name": "John C. Doe"
+        "id": 1,
+        "is_active": true,
+        "name": "CRO Scrap"
       },
-      "dump_location_id": "1",
-      "dumped_on": "2018-10-31T11:32:38.390000",
-      "end_time": "2018-10-31T11:32:38.390000",
-      "fail_reason": "A reason for failure.",
+      "dump_location_id": 2,
+      "dumped_on": "2049-10-31T11:32:38.390000",
+      "end_time": "2049-10-31T11:32:38.390000",
+      "fail_reason": "A failure description selected by a driver.",
       "final_location": {
-        "id": "1",
-        "is_active": "0",
-        "name": "John C. Doe"
+        "id": 1,
+        "is_active": true,
+        "name": "CRO Scrap"
       },
-      "final_location_id": "1",
-      "flags": "A reason for failure.",
-      "invoice_notes": "Some invoice notes.",
-      "is_completed": "0",
-      "is_declined": "0",
-      "is_deleted": "0",
-      "is_failed": "0",
-      "job_group_id": "1",
-      "location_id": "1",
-      "merged_with_route": "1",
-      "original_schedule_date": "2018-10-31T11:32:38.390000",
-      "pickup_date": "2018-10-31T11:32:38.390000",
-      "priority": "-999999",
-      "reference_number": "REF#100A61",
-      "requested_on": "2018-10-31T11:32:38.390000",
-      "require_image": "0",
-      "require_material": "0",
-      "require_signature": "0",
-      "require_weights": "0",
-      "schedule_date": "2018-10-31T11:32:38.390000",
+      "final_location_id": 1,
+      "flags": "Notes about a job.",
+      "invoice_notes": "Notes from a billing invoice",
+      "is_completed": true,
+      "is_declined": true,
+      "is_deleted": true,
+      "is_failed": true,
+      "job_group_id": 1,
+      "location_id": 1,
+      "merged_with_route": 1,
+      "original_schedule_date": "2049-10-31T11:32:38.390000",
+      "pickup_date": "2049-10-31T11:32:38.390000",
+      "priority": -3,
+      "reference_number": "A140",
+      "requested_on": "2049-10-31T11:32:38.390000",
+      "require_image": true,
+      "require_material": true,
+      "require_signature": true,
+      "require_weights": true,
+      "scale_ticket": "A5100",
+      "schedule_date": "2049-10-31T11:32:38.390000",
       "start_location": {
-        "id": "1",
-        "is_active": "0",
-        "name": "John C. Doe"
+        "id": 1,
+        "is_active": true,
+        "name": "CRO Scrap"
       },
-      "start_location_id": "1",
-      "start_time": "2018-10-31T11:32:38.390000",
-      "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-      "times_failed": "0",
-      "times_rolled_over": "0",
-      "truck_id": "1",
-      "type": "R",
-      "weighed_on": "2018-10-31T11:32:38.390000"
+      "start_location_id": 1,
+      "start_time": "2049-10-31T11:32:38.390000",
+      "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+      "times_failed": 2,
+      "times_rolled_over": 1,
+      "truck_id": 1,
+      "type": "D",
+      "weighed_on": "2049-10-31T11:32:38.390000"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 
 ```
@@ -9076,155 +9663,156 @@ Update webhook.
 
 ```json
 {
-  "arrived_at_dest": "2018-10-31T11:32:38.390000",
-  "arrived_on": "2018-10-31T11:32:38.390000",
+  "arrived_at_dest": "2049-10-31T11:32:38.390000",
+  "arrived_on": "2049-10-31T11:32:38.390000",
   "asset": {
     "asset_type": {
-      "deleted": "0",
-      "id": "1",
-      "is_default": "0",
-      "location_id": "1",
-      "name": "John C. Doe",
-      "quantity": "0",
-      "require_numbers": "0",
-      "weight": "0"
+      "deleted": true,
+      "id": 1,
+      "is_default": true,
+      "location_id": 1,
+      "name": "John Doe",
+      "quantity": 3,
+      "require_numbers": true,
+      "weight": 10192.77
     },
-    "asset_type_id": "1",
-    "cluster": "1",
-    "customer_id": "1",
-    "description": "Some description.",
-    "dispatched_on": "2018-10-31T11:32:38.390000",
-    "id": "1",
-    "is_returned": "0",
-    "last_activity_on": "2018-10-31T11:32:38.390000",
-    "last_rental_invoice_on": "2018-10-31T11:32:38.390000",
-    "latitude": "-90",
+    "asset_type_id": 1,
+    "cluster": 1,
+    "customer_id": 1,
+    "description": "A user entered/human readable text description.",
+    "dispatched_on": "2049-10-31T11:32:38.390000",
+    "id": 1,
+    "is_returned": true,
+    "last_activity_on": "2049-10-31T11:32:38.390000",
+    "last_rental_invoice_on": "2049-10-31T11:32:38.390000",
+    "latitude": 56.2,
     "location": {
-      "id": "1",
-      "is_active": "0",
-      "name": "John C. Doe"
+      "id": 1,
+      "is_active": true,
+      "name": "CRO Scrap"
     },
-    "location_id": "1",
-    "longitude": "-180",
-    "number": "+1 (360) 733-1649",
-    "quantity": "0",
-    "returned_on": "2018-10-31T11:32:38.390000"
+    "location_id": 1,
+    "longitude": 128.1,
+    "number": "+1 (360) 123-6543",
+    "quantity": 3,
+    "returned_on": "2049-10-31T11:32:38.390000"
   },
-  "asset_dropped": "0",
-  "asset_id": "1",
-  "asset_quantity": "0",
+  "asset_dropped": 101,
+  "asset_id": 1,
+  "asset_quantity": 1,
   "asset_type": {
-    "deleted": "0",
-    "id": "1",
-    "is_default": "0",
-    "location_id": "1",
-    "name": "John C. Doe",
-    "quantity": "0",
-    "require_numbers": "0",
-    "weight": "0"
+    "deleted": true,
+    "id": 1,
+    "is_default": true,
+    "location_id": 1,
+    "name": "John Doe",
+    "quantity": 3,
+    "require_numbers": true,
+    "weight": 10192.77
   },
-  "asset_type_id": "1",
-  "completed_by": "1",
-  "completed_by_driver": "0",
-  "completed_on": "2018-10-31T11:32:38.390000",
-  "confirmed_on": "2018-10-31T11:32:38.390000",
-  "created_by_id": "1",
+  "asset_type_id": 1,
+  "completed_by": 1,
+  "completed_by_driver": true,
+  "completed_on": "2049-10-31T11:32:38.390000",
+  "confirmed_on": "2049-10-31T11:32:38.390000",
+  "created_by_id": 1,
   "customer": {
     "addresses": [
       {
         "country": "US",
-        "is_billing": "0",
-        "is_shipping": "0",
-        "latitude": "-90",
-        "line_1": "321 Chase Rd",
-        "line_2": "P.O. Box 256",
-        "line_3": "3rd Floor",
-        "line_4": "Last door on the left (blue)",
+        "is_billing": true,
+        "is_shipping": true,
+        "latitude": 56.2,
+        "line_1": "123 Some St.",
+        "line_2": "Office #34",
+        "line_3": "Box #2",
+        "line_4": "Drop in Blue Box",
         "locality": "Sequim",
-        "longitude": "-180",
+        "longitude": 128.1,
         "postcode": "98368",
         "region": "WA"
       }
     ],
     "contacts": [
       {
-        "email": "support@crosoftware.net",
-        "fax": "+1 (360) 733-1649",
-        "name": "John C. Doe",
-        "notify_on_acknowledged_request": "0",
-        "notify_on_completed_request": "0",
-        "notify_on_dispatched_request": "0",
-        "notify_on_failed_request": "0",
-        "notify_on_new_request": "0",
-        "number": "+1 (360) 733-1649"
+        "email": "test@crosoftware.net",
+        "fax": "+1 (360) 123-6543",
+        "name": "John Doe",
+        "notify_on_acknowledged_request": true,
+        "notify_on_completed_request": true,
+        "notify_on_dispatched_request": true,
+        "notify_on_failed_request": true,
+        "notify_on_new_request": true,
+        "number": "+1 (360) 123-6543"
       }
     ],
-    "customer_id": "1",
-    "is_commercial": "0",
-    "name": "John C. Doe",
-    "note": "Bin located in alley.",
-    "parent_id": "1",
-    "reference_number": "REF#100A61",
-    "renewal_date": "2018-10-31T11:32:38.390000",
-    "sales_rep": "John C. Doe",
-    "suspension_id": "1"
+    "customer_id": 1,
+    "is_commercial": true,
+    "name": "John Doe",
+    "note": "A note about something",
+    "parent_id": 1,
+    "reference_number": "A140",
+    "renewal_date": "2049-10-31T11:32:38.390000",
+    "sales_rep": "Jane Johnson",
+    "suspension_id": 1
   },
-  "customer_id": "1",
-  "customer_notes": "Some notes from a customer to a dispatcher.",
-  "desired_asset_desc": "Some asset characteristics.",
+  "customer_id": 1,
+  "customer_notes": "A note entered by a customer",
+  "desired_asset_desc": "A note entered by a driver",
   "dispatch_priority": "H",
-  "dispatched_by_route": "1",
-  "dispatched_on": "2018-10-31T11:32:38.390000",
-  "dispatcher_notes": "Some dispatcher notes.",
-  "do_confirm": "0",
-  "driver_notes": "Some driver notes.",
+  "dispatched_by_route": 1,
+  "dispatched_on": "2049-10-31T11:32:38.390000",
+  "dispatcher_notes": "A note entered by a dispatcher.",
+  "do_confirm": true,
+  "driver_notes": "A note entered by a driver.",
   "dump_location": {
-    "id": "1",
-    "is_active": "0",
-    "name": "John C. Doe"
+    "id": 1,
+    "is_active": true,
+    "name": "CRO Scrap"
   },
-  "dump_location_id": "1",
-  "dumped_on": "2018-10-31T11:32:38.390000",
-  "end_time": "2018-10-31T11:32:38.390000",
-  "fail_reason": "A reason for failure.",
+  "dump_location_id": 2,
+  "dumped_on": "2049-10-31T11:32:38.390000",
+  "end_time": "2049-10-31T11:32:38.390000",
+  "fail_reason": "A failure description selected by a driver.",
   "final_location": {
-    "id": "1",
-    "is_active": "0",
-    "name": "John C. Doe"
+    "id": 1,
+    "is_active": true,
+    "name": "CRO Scrap"
   },
-  "final_location_id": "1",
-  "flags": "A reason for failure.",
-  "invoice_notes": "Some invoice notes.",
-  "is_completed": "0",
-  "is_declined": "0",
-  "is_deleted": "0",
-  "is_failed": "0",
-  "job_group_id": "1",
-  "location_id": "1",
-  "merged_with_route": "1",
-  "original_schedule_date": "2018-10-31T11:32:38.390000",
-  "pickup_date": "2018-10-31T11:32:38.390000",
-  "priority": "-999999",
-  "reference_number": "REF#100A61",
-  "requested_on": "2018-10-31T11:32:38.390000",
-  "require_image": "0",
-  "require_material": "0",
-  "require_signature": "0",
-  "require_weights": "0",
-  "schedule_date": "2018-10-31T11:32:38.390000",
+  "final_location_id": 1,
+  "flags": "Notes about a job.",
+  "invoice_notes": "Notes from a billing invoice",
+  "is_completed": true,
+  "is_declined": true,
+  "is_deleted": true,
+  "is_failed": true,
+  "job_group_id": 1,
+  "location_id": 1,
+  "merged_with_route": 1,
+  "original_schedule_date": "2049-10-31T11:32:38.390000",
+  "pickup_date": "2049-10-31T11:32:38.390000",
+  "priority": -3,
+  "reference_number": "A140",
+  "requested_on": "2049-10-31T11:32:38.390000",
+  "require_image": true,
+  "require_material": true,
+  "require_signature": true,
+  "require_weights": true,
+  "scale_ticket": "A5100",
+  "schedule_date": "2049-10-31T11:32:38.390000",
   "start_location": {
-    "id": "1",
-    "is_active": "0",
-    "name": "John C. Doe"
+    "id": 1,
+    "is_active": true,
+    "name": "CRO Scrap"
   },
-  "start_location_id": "1",
-  "start_time": "2018-10-31T11:32:38.390000",
-  "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-  "times_failed": "0",
-  "times_rolled_over": "0",
-  "truck_id": "1",
-  "type": "R",
-  "weighed_on": "2018-10-31T11:32:38.390000"
+  "start_location_id": 1,
+  "start_time": "2049-10-31T11:32:38.390000",
+  "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+  "times_failed": 2,
+  "times_rolled_over": 1,
+  "truck_id": 1,
+  "type": "D",
+  "weighed_on": "2049-10-31T11:32:38.390000"
 }
 
 ```
@@ -9236,7 +9824,7 @@ Update webhook.
 |`arrived_at_dest`|string(DateTime)|Entered by driver for dispatcher and customer. Asset arrival at destination time. Only applicable for jobs with a valid dump destination. Must be a date in an ISO 8601 compatible format.|
 |`arrived_on`|string(DateTime)|Drive start time entered by driver for dispatcher and customer (arrived at job slider). Must be a date in an ISO 8601 compatible format.|
 |`asset`|[AssetModel](#schemaassetmodel)|-|
-|`asset_dropped`|integer(int64)|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types  'D', 'E'. Must be integer greater than or equal to 0. Must be integer less than or equal to 10000.|
+|`asset_dropped`|integer(int64)|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types 'D', 'E'. Must be integer greater than or equal to 0. Must be integer less than or equal to 10000.|
 |`asset_id`|integer(int64)|Job asset identifier. Applicable to job types 'E', 'P', 'R'. Must be valid resource identifier (integer).|
 |`asset_quantity`|integer(int64)|How many assets are being serviced within a cluster (for jobs assigned to an asset cluster). For jobs dispatched by routes, or manually dispatched route stops, this value is 0 or 1. Must be integer greater than or equal to 0.|
 |`asset_type`|[AssetTypeModel](#schemaassettypemodel)|-|
@@ -9253,9 +9841,9 @@ Update webhook.
 |`dispatch_priority`|string|Entered by dispatchers to determine dispatch order. Must be one of: 'H', 'M', 'L' (where 'H'='High', 'M'='Medium', 'L'='Low').|
 |`dispatched_by_route`|integer(int64)|Route id of dispatching route (or NULL if not dispatched by a route). Must be valid resource identifier (integer).|
 |`dispatched_on`|string(DateTime)|Time the job is assigned to a truck. Must be a date in an ISO 8601 compatible format.|
-|`dispatcher_notes`|string|Entered by dispatchers, read by drivers and dispatchers. Must be at least 1 and no more than 2048 characters.|
+|`dispatcher_notes`|string|Entered by dispatchers, read by drivers and dispatchers. Must be at least 0 and no more than 2048 characters.|
 |`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched. Must be one of 0, 1, True, False (case insensitive).|
-|`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers. Must be at least 1 and no more than 2048 characters.|
+|`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers. Must be at least 0 and no more than 2048 characters.|
 |`dump_location`|[LocationModel](#schemalocationmodel)|-|
 |`dump_location_id`|integer(int64)|Asset or asset cluster dump location identifier (e.g. trash bin needs dumped before returning from customer). Must be valid resource identifier (integer).|
 |`dumped_on`|string(DateTime)|Dump request completion date. Must be a date in an ISO 8601 compatible format.|
@@ -9264,13 +9852,13 @@ Update webhook.
 |`final_location`|[LocationModel](#schemalocationmodel)|-|
 |`final_location_id`|integer(int64)|Final location identifier. Used by dispatchers for prioritizing jobs. Used by drivers to know where to leave the asset on job completion. Must be valid resource identifier (integer).|
 |`flags`|string|Job notes. Must be at least 0 and no more than 64 characters.|
-|`invoice_notes`|string|Invoice notes from the billing system. Must be at least 1 and no more than 2048 characters.|
+|`invoice_notes`|string|Invoice notes from the billing system. Must be at least 0 and no more than 2048 characters.|
 |`is_completed`|boolean|Job completion flag set by dispatchers and drivers. Must be one of 0, 1, True, False (case insensitive).|
 |`is_declined`|boolean|Job completion flag set by dispatchers and drivers. Must be one of 0, 1, True, False (case insensitive).|
 |`is_deleted`|boolean|Indicates whether job is still valid. Must be one of 0, 1, True, False (case insensitive).|
 |`is_failed`|boolean|Set by drivers and dispatchers to indicate a failed job. Must be one of 0, 1, True, False (case insensitive).|
 |`job_group_id`|integer(int64)|Job group identifier for group jobs (vs service, exchange, etc.). Must be valid resource identifier (integer).|
-|`location_id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
+|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
 |`merged_with_route`|integer(int64)|Assigned by dispatchers for dispatchers and drivers. Must be valid resource identifier (integer).|
 |`original_schedule_date`|string(DateTime)|Original scheduling date. Must be a date in an ISO 8601 compatible format.|
 |`pickup_date`|string(DateTime)|A pickup job is scheduled for this date upon job completion. If the asset or cluster is assigned to a route stop, the route stop will be deleted. Must be in the future. Must be a date in an ISO 8601 compatible format.|
@@ -9281,6 +9869,7 @@ Update webhook.
 |`require_material`|boolean|Set by dispatchers and drivers, requires drivers to set a material before completing a job. Must be one of 0, 1, True, False (case insensitive).|
 |`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion. Must be one of 0, 1, True, False (case insensitive).|
 |`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion. Must be one of 0, 1, True, False (case insensitive).|
+|`scale_ticket`|string|Scale ticket. Must be at least 0 and no more than 64 characters.|
 |`schedule_date`|string(DateTime)|Scheduled job completion date. Must be a date in an ISO 8601 compatible format.|
 |`start_location`|[LocationModel](#schemalocationmodel)|-|
 |`start_location_id`|integer(int64)|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers. Must be valid resource identifier (integer).|
@@ -9289,24 +9878,24 @@ Update webhook.
 |`times_failed`|integer(int64)|Number of times a job has been attempted and failed. Must be integer greater than or equal to 0.|
 |`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers. Must be integer greater than or equal to 0.|
 |`truck_id`|integer(int64)|Truck identifier. Must be valid resource identifier (integer).|
-|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'R', 'E', 'P', 'L', 'D'.|
+|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'P', 'E', 'L', 'D', 'R'.|
 |`weighed_on`|string(DateTime)|Time of truck weight entry. Must be a date occurring in the past in an ISO 8601 compatible format.|
 
 <h2 id="tocSlocationlistmodel">LocationListModel</h2>
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "id": "1",
-      "is_active": "0",
-      "name": "John C. Doe"
+      "id": 1,
+      "is_active": true,
+      "name": "CRO Scrap"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 
 ```
@@ -9325,9 +9914,9 @@ Update webhook.
 
 ```json
 {
-  "id": "1",
-  "is_active": "0",
-  "name": "John C. Doe"
+  "id": 1,
+  "is_active": true,
+  "name": "CRO Scrap"
 }
 
 ```
@@ -9336,34 +9925,94 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
+|`id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
 |`is_active`|boolean|Records marked inactive are treated as deleted (soft delete). Must be one of 0, 1, True, False (case insensitive).|
-|`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
+|`name`|string|Name for a location. Must be at least 1 and no more than 64 characters.|
+
+<h2 id="tocSmateriallistmodel">MaterialListModel</h2>
+
+```json
+{
+  "current_limit": 100,
+  "current_page": 1,
+  "results": [
+    {
+      "created_on": "2049-10-31T11:32:38.390000",
+      "description": "A user entered/human readable text description.",
+      "factor": 1.1,
+      "group_description": "A user entered/human readable text description.",
+      "id": 1,
+      "line_item_id": 1,
+      "uom": "A user entered/human readable description of the UOM."
+    }
+  ],
+  "total_count": 1001,
+  "total_pages": 3
+}
+
+```
+
+<a id="schemamateriallistmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`results`|array[[MaterialModel](#schemamaterialmodel)]|-|
+|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
+|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+
+<h2 id="tocSmaterialmodel">MaterialModel</h2>
+
+```json
+{
+  "created_on": "2049-10-31T11:32:38.390000",
+  "description": "A user entered/human readable text description.",
+  "factor": 1.1,
+  "group_description": "A user entered/human readable text description.",
+  "id": 1,
+  "line_item_id": 1,
+  "uom": "A user entered/human readable description of the UOM."
+}
+
+```
+
+<a id="schemamaterialmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`created_on`|string(DateTime)|Timestamp of creation (must be in past). Must be a date occurring in the past in an ISO 8601 compatible format.|
+|`description`|string|Free-form text description. Must be at least 0 and no more than 200 characters.|
+|`factor`|number(float)|Must me a float.|
+|`group_description`|string|Free-form text description. Must be at least 0 and no more than 100 characters.|
+|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
+|`line_item_id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
+|`uom`|string|Unit of Measure. Must be at least 0 and no more than 25 characters.|
 
 <h2 id="tocStenantlistmodel">TenantListModel</h2>
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "address": "321 Chase Rd",
+      "address": "123 Some St.",
       "city": "Sequim",
-      "code": "CROSCRAPCO",
-      "created_on": "2018-10-31T11:32:38.390000",
-      "email": "support@crosoftware.net",
-      "id": "1",
-      "is_active": "0",
-      "name": "John C. Doe",
-      "phone": "+1 (360) 733-1649",
+      "code": "BESTSCRAP",
+      "created_on": "2049-10-31T11:32:38.390000",
+      "email": "test@crosoftware.net",
+      "id": 1,
+      "is_active": true,
+      "name": "John Doe",
+      "phone": "+1 (360) 123-6543",
       "state": "WA",
-      "truck_limit": "0",
+      "truck_limit": 0,
       "zip": "98368"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 
 ```
@@ -9382,17 +10031,17 @@ Update webhook.
 
 ```json
 {
-  "address": "321 Chase Rd",
+  "address": "123 Some St.",
   "city": "Sequim",
-  "code": "CROSCRAPCO",
-  "created_on": "2018-10-31T11:32:38.390000",
-  "email": "support@crosoftware.net",
-  "id": "1",
-  "is_active": "0",
-  "name": "John C. Doe",
-  "phone": "+1 (360) 733-1649",
+  "code": "BESTSCRAP",
+  "created_on": "2049-10-31T11:32:38.390000",
+  "email": "test@crosoftware.net",
+  "id": 1,
+  "is_active": true,
+  "name": "John Doe",
+  "phone": "+1 (360) 123-6543",
   "state": "WA",
-  "truck_limit": "0",
+  "truck_limit": 0,
   "zip": "98368"
 }
 
@@ -9407,7 +10056,7 @@ Update webhook.
 |`code`|string|Facility identifier. Must be at least 1 and no more than 64 characters.|
 |`created_on`|string(DateTime)|Timestamp of creation (must be in past). Must be a date occurring in the past in an ISO 8601 compatible format.|
 |`email`|string(Email)|Email address. Must be a valid email address.|
-|`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
+|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
 |`is_active`|boolean|Records marked inactive are treated as deleted (soft delete). Must be one of 0, 1, True, False (case insensitive).|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
 |`phone`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
@@ -9419,22 +10068,22 @@ Update webhook.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": {
-    "approved_by": "1",
-    "approved_on": "2018-10-31T11:32:38.390000",
-    "denied_on": "2018-10-31T11:32:38.390000",
-    "is_approved": "0",
-    "location_id": "1",
-    "provider_email": "support@crosoftware.net",
-    "provider_id": "1",
-    "provider_name": "John C. Doe",
-    "provider_phone": "+1 (360) 733-1649",
-    "requested_on": "2018-10-31T11:32:38.390000"
+    "approved_by": 1,
+    "approved_on": "2049-10-31T11:32:38.390000",
+    "denied_on": "2049-10-31T11:32:38.390000",
+    "is_approved": true,
+    "location_id": 1,
+    "provider_email": "test@crosoftware.net",
+    "provider_id": 1,
+    "provider_name": "John Doe",
+    "provider_phone": "+1 (360) 123-6543",
+    "requested_on": "2049-10-31T11:32:38.390000"
   },
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 
 ```
@@ -9453,16 +10102,16 @@ Update webhook.
 
 ```json
 {
-  "approved_by": "1",
-  "approved_on": "2018-10-31T11:32:38.390000",
-  "denied_on": "2018-10-31T11:32:38.390000",
-  "is_approved": "0",
-  "location_id": "1",
-  "provider_email": "support@crosoftware.net",
-  "provider_id": "1",
-  "provider_name": "John C. Doe",
-  "provider_phone": "+1 (360) 733-1649",
-  "requested_on": "2018-10-31T11:32:38.390000"
+  "approved_by": 1,
+  "approved_on": "2049-10-31T11:32:38.390000",
+  "denied_on": "2049-10-31T11:32:38.390000",
+  "is_approved": true,
+  "location_id": 1,
+  "provider_email": "test@crosoftware.net",
+  "provider_id": 1,
+  "provider_name": "John Doe",
+  "provider_phone": "+1 (360) 123-6543",
+  "requested_on": "2049-10-31T11:32:38.390000"
 }
 
 ```
@@ -9475,9 +10124,9 @@ Update webhook.
 |`approved_on`|string(DateTime)|Approval date. Must be a date in an ISO 8601 compatible format.|
 |`denied_on`|string(DateTime)|Denial date. Must be a date in an ISO 8601 compatible format.|
 |`is_approved`|boolean|Approved record state. Must be one of 0, 1, True, False (case insensitive).|
-|`location_id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
+|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
 |`provider_email`|string(Email)|Email address. Must be a valid email address.|
-|`provider_id`|integer(int64)|Bin provider identifier (integer) Must be valid resource identifier (integer).|
+|`provider_id`|integer(int64)|Bin provider identifier (integer). Must be valid resource identifier (integer).|
 |`provider_name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
 |`provider_phone`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
 |`requested_on`|string(DateTime)|Requested date. Must be a date occurring in the past in an ISO 8601 compatible format.|
@@ -9486,16 +10135,16 @@ Update webhook.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-      "name": "John C. Doe"
+      "id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+      "name": "John Doe"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 
 ```
@@ -9514,8 +10163,8 @@ Update webhook.
 
 ```json
 {
-  "id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-  "name": "John C. Doe"
+  "id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+  "name": "John Doe"
 }
 
 ```
@@ -9531,24 +10180,24 @@ Update webhook.
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
-      "driver_id": "1",
-      "id": "1",
-      "location_id": "1",
-      "name": "John C. Doe",
-      "notes": "Bin located in alley.",
-      "out_of_service": "0",
-      "require_odometer": "0",
-      "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-      "type": "R59",
-      "weight": "0"
+      "driver_id": 1,
+      "id": 1,
+      "location_id": 1,
+      "name": "John Doe",
+      "notes": "A note about something",
+      "out_of_service": true,
+      "require_odometer": true,
+      "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+      "type": "FlatHauler",
+      "weight": 23100.1
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 
 ```
@@ -9567,16 +10216,16 @@ Update webhook.
 
 ```json
 {
-  "driver_id": "1",
-  "id": "1",
-  "location_id": "1",
-  "name": "John C. Doe",
-  "notes": "Bin located in alley.",
-  "out_of_service": "0",
-  "require_odometer": "0",
-  "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-  "type": "R59",
-  "weight": "0"
+  "driver_id": 1,
+  "id": 1,
+  "location_id": 1,
+  "name": "John Doe",
+  "notes": "A note about something",
+  "out_of_service": true,
+  "require_odometer": true,
+  "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+  "type": "FlatHauler",
+  "weight": 23100.1
 }
 
 ```
@@ -9586,10 +10235,10 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`driver_id`|integer(int64)|Driver identifier. Must be valid resource identifier (integer).|
-|`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
-|`location_id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
+|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
+|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`notes`|string|Notes (free text). Must be at least 1 and no more than 2048 characters.|
+|`notes`|string|Notes (free text). Must be at least 0 and no more than 2048 characters.|
 |`out_of_service`|boolean|Truck out of service. Must be one of 0, 1, True, False (case insensitive).|
 |`require_odometer`|boolean|Require odometer. Must be one of 0, 1, True, False (case insensitive).|
 |`third_party_hauler_id`|string(Uuid)|Third party hauler identifier. Must be a valid UUID.|
@@ -9601,15 +10250,15 @@ Update webhook.
 ```json
 {
   "country": "US",
-  "is_billing": "0",
-  "is_shipping": "0",
-  "latitude": "-90",
-  "line_1": "321 Chase Rd",
-  "line_2": "P.O. Box 256",
-  "line_3": "3rd Floor",
-  "line_4": "Last door on the left (blue)",
+  "is_billing": true,
+  "is_shipping": true,
+  "latitude": 56.2,
+  "line_1": "123 Some St.",
+  "line_2": "Office #34",
+  "line_3": "Box #2",
+  "line_4": "Drop in Blue Box",
   "locality": "Sequim",
-  "longitude": "-180",
+  "longitude": 128.1,
   "postcode": "98368",
   "region": "WA"
 }
@@ -9625,9 +10274,9 @@ Update webhook.
 |`is_shipping`|boolean|Customer's shipping address if true. Must be one of 0, 1, True, False (case insensitive).|
 |`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
 |`line_1`|string|Street address. Must be at least 1 and no more than 256 characters.|
-|`line_2`|string|Street address line 2. Must be at least 1 and no more than 256 characters.|
-|`line_3`|string|Street address line 3. Must be at least 1 and no more than 256 characters.|
-|`line_4`|string|Street address line 4 (doubles as county). Must be at least 1 and no more than 256 characters.|
+|`line_2`|string|Street address line 2. Must be at least 0 and no more than 256 characters.|
+|`line_3`|string|Street address line 3. Must be at least 0 and no more than 256 characters.|
+|`line_4`|string|Street address line 4 (doubles as county). Must be at least 0 and no more than 256 characters.|
 |`locality`|string|Address locality (e.g. city). Must be at least 1 and no more than 86 characters.|
 |`longitude`|number(float)|longitude. Must be float greater than or equal to -180. Must be float less than or equal to 180.|
 |`postcode`|string|Postal code (may include letters and symbols). Must be at least 1 and no more than 86 characters.|
@@ -9637,15 +10286,15 @@ Update webhook.
 
 ```json
 {
-  "email": "support@crosoftware.net",
-  "fax": "+1 (360) 733-1649",
-  "name": "John C. Doe",
-  "notify_on_acknowledged_request": "0",
-  "notify_on_completed_request": "0",
-  "notify_on_dispatched_request": "0",
-  "notify_on_failed_request": "0",
-  "notify_on_new_request": "0",
-  "number": "+1 (360) 733-1649"
+  "email": "test@crosoftware.net",
+  "fax": "+1 (360) 123-6543",
+  "name": "John Doe",
+  "notify_on_acknowledged_request": true,
+  "notify_on_completed_request": true,
+  "notify_on_dispatched_request": true,
+  "notify_on_failed_request": true,
+  "notify_on_new_request": true,
+  "number": "+1 (360) 123-6543"
 }
 
 ```
@@ -9668,12 +10317,12 @@ Update webhook.
 
 ```json
 {
-  "is_commercial": "0",
-  "note": "Bin located in alley.",
-  "reference_number": "REF#100A61",
-  "renewal_date": "2018-10-31T11:32:38.390000",
-  "sales_rep": "John C. Doe",
-  "suspension_id": "1"
+  "is_commercial": true,
+  "note": "A note about something",
+  "reference_number": "A140",
+  "renewal_date": "2049-10-31T11:32:38.390000",
+  "sales_rep": "Jane Johnson",
+  "suspension_id": 1
 }
 
 ```
@@ -9683,7 +10332,7 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
-|`note`|string|Notes (free text). Must be at least 1 and no more than 2048 characters.|
+|`note`|string|Notes (free text). Must be at least 0 and no more than 2048 characters.|
 |`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
 |`renewal_date`|string(DateTime)|Renewal date. Must be a date in an ISO 8601 compatible format.|
 |`sales_rep`|string|Name of sales representative. Must be at least 1 and no more than 64 characters.|
@@ -9693,8 +10342,8 @@ Update webhook.
 
 ```json
 {
-  "name": "John C. Doe",
-  "parent_id": "1"
+  "name": "John Doe",
+  "parent_id": 1
 }
 
 ```
@@ -9704,16 +10353,17 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`parent_id`|integer(int64)|Parent record identifier (integer) Must be valid resource identifier (integer).|
+|`parent_id`|integer(int64)|Parent record identifier (integer). Must be valid resource identifier (integer).|
 
 <h2 id="tocSupdatewebhookmodel">UpdateWebhookModel</h2>
 
 ```json
 {
   "events": [
-    "customer"
+    "Customer"
   ],
-  "url": "http://your.callback.url.net"
+  "secret": "<Secret>",
+  "url": "https://test.url"
 }
 
 ```
@@ -9722,66 +10372,68 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`events`|array[string]|Hook event. Must be a valid hook event (one of: customer, customer_location, job, truck).|
+|`events`|array[string]|Hook event. Must be a valid hook event (one of: Ping, Customer, CustomerLocation, Job, Truck).|
+|`secret`|string|Response body HMAC signing key. Must match expression ^\s*[a-zA-Z0-9\/\+=]{11,270}\s*$ Base64 encoded string.|
 |`url`|string(Url)|Callback URL. URL conforming to RFC 1738.|
 
 <h2 id="tocSupdatedjobmodel">UpdatedJobModel</h2>
 
 ```json
 {
-  "arrived_at_dest": "2018-10-31T11:32:38.390000",
-  "arrived_on": "2018-10-31T11:32:38.390000",
-  "asset_dropped": "0",
-  "asset_id": "1",
-  "asset_quantity": "0",
-  "asset_type_id": "1",
-  "completed_by": "1",
-  "completed_by_driver": "0",
-  "completed_on": "2018-10-31T11:32:38.390000",
-  "confirmed_on": "2018-10-31T11:32:38.390000",
-  "created_by_id": "1",
-  "customer_id": "1",
-  "customer_notes": "Some notes from a customer to a dispatcher.",
-  "desired_asset_desc": "Some asset characteristics.",
+  "arrived_at_dest": "2049-10-31T11:32:38.390000",
+  "arrived_on": "2049-10-31T11:32:38.390000",
+  "asset_dropped": 101,
+  "asset_id": 1,
+  "asset_quantity": 1,
+  "asset_type_id": 1,
+  "completed_by": 1,
+  "completed_by_driver": true,
+  "completed_on": "2049-10-31T11:32:38.390000",
+  "confirmed_on": "2049-10-31T11:32:38.390000",
+  "created_by_id": 1,
+  "customer_id": 1,
+  "customer_notes": "A note entered by a customer",
+  "desired_asset_desc": "A note entered by a driver",
   "dispatch_priority": "H",
-  "dispatched_by_route": "1",
-  "dispatched_on": "2018-10-31T11:32:38.390000",
-  "dispatcher_notes": "Some dispatcher notes.",
-  "do_confirm": "0",
-  "driver_notes": "Some driver notes.",
-  "dump_location_id": "1",
-  "dumped_on": "2018-10-31T11:32:38.390000",
-  "end_time": "2018-10-31T11:32:38.390000",
-  "fail_reason": "A reason for failure.",
-  "final_location_id": "1",
-  "flags": "A reason for failure.",
-  "id": "1",
-  "invoice_notes": "Some invoice notes.",
-  "is_completed": "0",
-  "is_declined": "0",
-  "is_deleted": "0",
-  "is_failed": "0",
-  "job_group_id": "1",
-  "location_id": "1",
-  "merged_with_route": "1",
-  "original_schedule_date": "2018-10-31T11:32:38.390000",
-  "pickup_date": "2018-10-31T11:32:38.390000",
-  "priority": "-999999",
-  "reference_number": "REF#100A61",
-  "requested_on": "2018-10-31T11:32:38.390000",
-  "require_image": "0",
-  "require_material": "0",
-  "require_signature": "0",
-  "require_weights": "0",
-  "schedule_date": "2018-10-31T11:32:38.390000",
-  "start_location_id": "1",
-  "start_time": "2018-10-31T11:32:38.390000",
-  "third_party_hauler_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-  "times_failed": "0",
-  "times_rolled_over": "0",
-  "truck_id": "1",
-  "type": "R",
-  "weighed_on": "2018-10-31T11:32:38.390000"
+  "dispatched_by_route": 1,
+  "dispatched_on": "2049-10-31T11:32:38.390000",
+  "dispatcher_notes": "A note entered by a dispatcher.",
+  "do_confirm": true,
+  "driver_notes": "A note entered by a driver.",
+  "dump_location_id": 2,
+  "dumped_on": "2049-10-31T11:32:38.390000",
+  "end_time": "2049-10-31T11:32:38.390000",
+  "fail_reason": "A failure description selected by a driver.",
+  "final_location_id": 1,
+  "flags": "Notes about a job.",
+  "id": 1,
+  "invoice_notes": "Notes from a billing invoice",
+  "is_completed": true,
+  "is_declined": true,
+  "is_deleted": true,
+  "is_failed": true,
+  "job_group_id": 1,
+  "location_id": 1,
+  "merged_with_route": 1,
+  "original_schedule_date": "2049-10-31T11:32:38.390000",
+  "pickup_date": "2049-10-31T11:32:38.390000",
+  "priority": -3,
+  "reference_number": "A140",
+  "requested_on": "2049-10-31T11:32:38.390000",
+  "require_image": true,
+  "require_material": true,
+  "require_signature": true,
+  "require_weights": true,
+  "scale_ticket": "A5100",
+  "schedule_date": "2049-10-31T11:32:38.390000",
+  "start_location_id": 1,
+  "start_time": "2049-10-31T11:32:38.390000",
+  "third_party_hauler_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+  "times_failed": 2,
+  "times_rolled_over": 1,
+  "truck_id": 1,
+  "type": "D",
+  "weighed_on": "2049-10-31T11:32:38.390000"
 }
 
 ```
@@ -9792,7 +10444,7 @@ Update webhook.
 |---|---|---|
 |`arrived_at_dest`|string(DateTime)|Entered by driver for dispatcher and customer. Asset arrival at destination time. Only applicable for jobs with a valid dump destination. Must be a date in an ISO 8601 compatible format.|
 |`arrived_on`|string(DateTime)|Drive start time entered by driver for dispatcher and customer (arrived at job slider). Must be a date in an ISO 8601 compatible format.|
-|`asset_dropped`|integer(int64)|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types  'D', 'E'. Must be integer greater than or equal to 0. Must be integer less than or equal to 10000.|
+|`asset_dropped`|integer(int64)|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types 'D', 'E'. Must be integer greater than or equal to 0. Must be integer less than or equal to 10000.|
 |`asset_id`|integer(int64)|Job asset identifier. Applicable to job types 'E', 'P', 'R'. Must be valid resource identifier (integer).|
 |`asset_quantity`|integer(int64)|How many assets are being serviced within a cluster (for jobs assigned to an asset cluster). For jobs dispatched by routes, or manually dispatched route stops, this value is 0 or 1. Must be integer greater than or equal to 0.|
 |`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E'). Must be valid resource identifier (integer).|
@@ -9807,23 +10459,23 @@ Update webhook.
 |`dispatch_priority`|string|Entered by dispatchers to determine dispatch order. Must be one of: 'H', 'M', 'L' (where 'H'='High', 'M'='Medium', 'L'='Low').|
 |`dispatched_by_route`|integer(int64)|Route id of dispatching route (or NULL if not dispatched by a route). Must be valid resource identifier (integer).|
 |`dispatched_on`|string(DateTime)|Time the job is assigned to a truck. Must be a date in an ISO 8601 compatible format.|
-|`dispatcher_notes`|string|Entered by dispatchers, read by drivers and dispatchers. Must be at least 1 and no more than 2048 characters.|
+|`dispatcher_notes`|string|Entered by dispatchers, read by drivers and dispatchers. Must be at least 0 and no more than 2048 characters.|
 |`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched. Must be one of 0, 1, True, False (case insensitive).|
-|`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers. Must be at least 1 and no more than 2048 characters.|
+|`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers. Must be at least 0 and no more than 2048 characters.|
 |`dump_location_id`|integer(int64)|Asset or asset cluster dump location identifier (e.g. trash bin needs dumped before returning from customer). Must be valid resource identifier (integer).|
 |`dumped_on`|string(DateTime)|Dump request completion date. Must be a date in an ISO 8601 compatible format.|
 |`end_time`|string(DateTime)|Future estimated time of job completion. Must be a date in an ISO 8601 compatible format.|
 |`fail_reason`|string|Failure description selected by a driver for use by dispatchers. Must be at least 0 and no more than 64 characters.|
 |`final_location_id`|integer(int64)|Final location identifier. Used by dispatchers for prioritizing jobs. Used by drivers to know where to leave the asset on job completion. Must be valid resource identifier (integer).|
 |`flags`|string|Job notes. Must be at least 0 and no more than 64 characters.|
-|`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
-|`invoice_notes`|string|Invoice notes from the billing system. Must be at least 1 and no more than 2048 characters.|
+|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
+|`invoice_notes`|string|Invoice notes from the billing system. Must be at least 0 and no more than 2048 characters.|
 |`is_completed`|boolean|Job completion flag set by dispatchers and drivers. Must be one of 0, 1, True, False (case insensitive).|
 |`is_declined`|boolean|Job completion flag set by dispatchers and drivers. Must be one of 0, 1, True, False (case insensitive).|
 |`is_deleted`|boolean|Indicates whether job is still valid. Must be one of 0, 1, True, False (case insensitive).|
 |`is_failed`|boolean|Set by drivers and dispatchers to indicate a failed job. Must be one of 0, 1, True, False (case insensitive).|
 |`job_group_id`|integer(int64)|Job group identifier for group jobs (vs service, exchange, etc.). Must be valid resource identifier (integer).|
-|`location_id`|integer(int64)|Location identifier (integer) Must be valid resource identifier (integer).|
+|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
 |`merged_with_route`|integer(int64)|Assigned by dispatchers for dispatchers and drivers. Must be valid resource identifier (integer).|
 |`original_schedule_date`|string(DateTime)|Original scheduling date. Must be a date in an ISO 8601 compatible format.|
 |`pickup_date`|string(DateTime)|A pickup job is scheduled for this date upon job completion. If the asset or cluster is assigned to a route stop, the route stop will be deleted. Must be in the future. Must be a date in an ISO 8601 compatible format.|
@@ -9834,6 +10486,7 @@ Update webhook.
 |`require_material`|boolean|Set by dispatchers and drivers, requires drivers to set a material before completing a job. Must be one of 0, 1, True, False (case insensitive).|
 |`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion. Must be one of 0, 1, True, False (case insensitive).|
 |`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion. Must be one of 0, 1, True, False (case insensitive).|
+|`scale_ticket`|string|Scale ticket. Must be at least 0 and no more than 64 characters.|
 |`schedule_date`|string(DateTime)|Scheduled job completion date. Must be a date in an ISO 8601 compatible format.|
 |`start_location_id`|integer(int64)|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers. Must be valid resource identifier (integer).|
 |`start_time`|string(DateTime)|Time customer has requested job start, set by dispatchers for dispatchers and drivers. Must be a date in an ISO 8601 compatible format.|
@@ -9841,28 +10494,80 @@ Update webhook.
 |`times_failed`|integer(int64)|Number of times a job has been attempted and failed. Must be integer greater than or equal to 0.|
 |`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers. Must be integer greater than or equal to 0.|
 |`truck_id`|integer(int64)|Truck identifier. Must be valid resource identifier (integer).|
-|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'R', 'E', 'P', 'L', 'D'.|
+|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'P', 'E', 'L', 'D', 'R'.|
 |`weighed_on`|string(DateTime)|Time of truck weight entry. Must be a date occurring in the past in an ISO 8601 compatible format.|
+
+<h2 id="tocSuserlistresultsmodel">UserListResultsModel</h2>
+
+```json
+{
+  "current_limit": 100,
+  "current_page": 1,
+  "results": [
+    {
+      "id": 1,
+      "roles": [
+        "Dispatcher"
+      ],
+      "username": "test_user_1000"
+    }
+  ],
+  "total_count": 1001,
+  "total_pages": 3
+}
+
+```
+
+<a id="schemauserlistresultsmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`results`|array[[UserModel](#schemausermodel)]|-|
+|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
+|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+
+<h2 id="tocSusermodel">UserModel</h2>
+
+```json
+{
+  "id": 1,
+  "roles": [
+    "Dispatcher"
+  ],
+  "username": "test_user_1000"
+}
+
+```
+
+<a id="schemausermodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`id`|integer(int64)|User identifier. Must be valid resource identifier (integer).|
+|`roles`|array[string]|User role. Must be one of: 'ThirdPartyDriver', 'Public', 'Dispatcher', 'Admin', 'ThirdPartyDispatcher', 'ThirdPartyAdmin', 'Driver'.|
+|`username`|string|Username. Must be at least 1 characters long. Must be no longer than 64 characters.|
 
 <h2 id="tocSwebhooklistmodel">WebhookListModel</h2>
 
 ```json
 {
-  "current_limit": "1",
-  "current_page": "1",
+  "current_limit": 100,
+  "current_page": 1,
   "results": [
     {
       "events": [
-        "customer"
+        "Customer"
       ],
-      "id": "1",
-      "last_http_fail": "2018-10-31T11:32:38.390000",
-      "last_http_success": "2018-10-31T11:32:38.390000",
-      "url": "http://your.callback.url.net"
+      "id": 1,
+      "last_http_fail": "2049-10-31T11:32:38.390000",
+      "last_http_success": "2049-10-31T11:32:38.390000",
+      "url": "https://test.url"
     }
   ],
-  "total_count": "0",
-  "total_pages": "0"
+  "total_count": 1001,
+  "total_pages": 3
 }
 
 ```
@@ -9882,12 +10587,12 @@ Update webhook.
 ```json
 {
   "events": [
-    "customer"
+    "Customer"
   ],
-  "id": "1",
-  "last_http_fail": "2018-10-31T11:32:38.390000",
-  "last_http_success": "2018-10-31T11:32:38.390000",
-  "url": "http://your.callback.url.net"
+  "id": 1,
+  "last_http_fail": "2049-10-31T11:32:38.390000",
+  "last_http_success": "2049-10-31T11:32:38.390000",
+  "url": "https://test.url"
 }
 
 ```
@@ -9896,8 +10601,8 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`events`|array[string]|Hook event. Must be a valid hook event (one of: customer, customer_location, job, truck).|
-|`id`|integer(int64)|Resource identifier (integer) Must be valid resource identifier (integer).|
+|`events`|array[string]|Hook event. Must be a valid hook event (one of: Ping, Customer, CustomerLocation, Job, Truck).|
+|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
 |`last_http_fail`|string(DateTime)|Last time of url webhook execution failure. Must be a date in an ISO 8601 compatible format.|
 |`last_http_success`|string(DateTime)|Last time of url webhook execution success. Must be a date in an ISO 8601 compatible format.|
 |`url`|string(Url)|Callback URL. URL conforming to RFC 1738.|
@@ -9906,8 +10611,8 @@ Update webhook.
 
 ```json
 {
-  "delivery_id": "defbc66e-f908-40d9-9ee5-655a1f699311",
-  "http_status": "200"
+  "delivery_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+  "http_status": 200
 }
 
 ```
@@ -9916,6 +10621,6 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`delivery_id`|string(Uuid)|Webhook payload delivery identifier. Must be a valid UUID.|
+|`delivery_id`|string(Uuid)|Hook execution identifier. Must be a valid UUID.|
 |`http_status`|integer(int64)|HTTP status return code. Must be a valid HTTP status code 1xx-5xx or -1. Status -1 means the HTTP call did not succeed/complete.|
 
