@@ -357,9 +357,9 @@ Add customer addresses.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
 |`body`|body|[CreateCustomerAddressModel](#schemacreatecustomeraddressmodel)|true||
 
 > Example responses
@@ -527,10 +527,10 @@ Deactivate a customer address.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
-|`address_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`address_id`|path|integer(int64)|true|Customer address identifier. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -697,10 +697,10 @@ Get a customer address.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
-|`address_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`address_id`|path|integer(int64)|true|Customer address identifier. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -867,12 +867,12 @@ List customer addresses.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
-|`filter_active`|query|boolean|false||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`filter_active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all. Must be one of 0, 1, True, False (case insensitive).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -1070,10 +1070,10 @@ Update a customer address.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
-|`address_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`address_id`|path|integer(int64)|true|Customer address identifier. Must be valid resource identifier (integer).|
 |`body`|body|[UpdateCustomerAddressModel](#schemaupdatecustomeraddressmodel)|true||
 
 > Example responses
@@ -1263,9 +1263,9 @@ Create new customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
 |`body`|body|[CreateCustomerContactModel](#schemacreatecustomercontactmodel)|true||
 
 > Example responses
@@ -1429,10 +1429,10 @@ Get a customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
-|`contact_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`contact_id`|path|integer(int64)|true|Customer contact identifier. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -1595,11 +1595,11 @@ List customer contacts.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -1790,10 +1790,10 @@ Update a customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
-|`contact_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`contact_id`|path|integer(int64)|true|Customer contact identifier. Must be valid resource identifier (integer).|
 |`body`|body|[UpdateCustomerContactModel](#schemaupdatecustomercontactmodel)|true||
 
 > Example responses
@@ -1976,10 +1976,10 @@ Add customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
 |`body`|body|[CreateCustomerLocationModel](#schemacreatecustomerlocationmodel)|true||
 
 > Example responses
@@ -2140,10 +2140,10 @@ Deactivate (soft delete) customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -2303,10 +2303,10 @@ Get a customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -2466,12 +2466,12 @@ Update customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
-|`filter_active`|query|boolean|false||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`filter_active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all. Must be one of 0, 1, True, False (case insensitive).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -2656,10 +2656,10 @@ Update customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
 |`body`|body|[UpdateCustomerLocationModel](#schemaupdatecustomerlocationmodel)|true||
 
 > Example responses
@@ -2870,9 +2870,10 @@ Create customer for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`max_address_edit_distance`|query|integer(int64)|false|Maximum address edit distance (levenshtein). Must be integer greater than or equal to 0. Must be integer less than or equal to 15.|
 |`body`|body|[CreateCustomerModel](#schemacreatecustomermodel)|true||
 
 > Example responses
@@ -3063,9 +3064,9 @@ Customer model.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -3256,10 +3257,10 @@ Get customer for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -3426,13 +3427,13 @@ List of customers.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`name`|query|string|false||
-|`last_updated_gte`|query|string(DateTime)|true||
-|`created_on_gte`|query|string(DateTime)|true||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`name`|query|string|false|If specified, return only records with matching names. If unspecified, return all. Wildcard is &#039;*&#039;. Must be at least 1 and no more than 128 characters.|
+|`last_updated_gte`|query|string(DateTime)|true|Return only records updated after (must be in past). If unspecified, return all. Must be a date occurring in the past in an ISO 8601 compatible format.|
+|`created_on_gte`|query|string(DateTime)|true|Return records created on or after the specified date. If unspecified, return all. Must be a date occurring in the past in an ISO 8601 compatible format.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -3631,12 +3632,12 @@ List customers for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
-|`name`|query|string|false||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`name`|query|string|false|If specified, return only records with matching names. If unspecified, return all. Wildcard is &#039;*&#039;. Must be at least 1 and no more than 128 characters.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -3817,9 +3818,9 @@ Customer model.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`customer_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
 |`body`|body|[UpdateCustomerModel](#schemaupdatecustomermodel)|true||
 
 > Example responses
@@ -4013,10 +4014,10 @@ Get driver.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
-|`driver_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`driver_id`|path|integer(int64)|true|Driver identifier. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -4185,11 +4186,11 @@ List drivers.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -4388,9 +4389,9 @@ Log a GPS event.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
 |`body`|body|[GpsEventProfileModel](#schemagpseventprofilemodel)|true||
 
 > Example responses
@@ -4560,10 +4561,10 @@ Create third party connection.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`hauler_uuid`|path|string(Uuid)|true||
-|`tenant_code`|query|string|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`hauler_uuid`|path|string(Uuid)|true|Third party hauler identifier. Must be a valid UUID.|
+|`tenant_code`|query|string|true|Confirmation code for hauler creation. Must be at least 1 and no more than 128 characters. Must match expression ^[^\+]*\+[0-9]{1,10}$|
 
 > Example responses
 
@@ -4747,12 +4748,12 @@ This operation does not require authentication
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`company_name`|query|string|true||
-|`username`|query|string|true||
-|`password`|query|string|true||
-|`recaptcha`|query|string|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`company_name`|query|string|true|Company name (free text). Must be at least 1 and no more than 64 characters.|
+|`username`|query|string|true|Username. Must be at least 1 characters long. Must be no longer than 64 characters.|
+|`password`|query|string|true|Login password. Must be at least 1 and no more than 64 characters.|
+|`recaptcha`|query|string|true|Recaptcha answer. Must be at least 8 and no more than 512 characters.|
 
 > Example responses
 
@@ -4921,9 +4922,9 @@ Get third party hauler.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`hauler_uuid`|path|string(Uuid)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`hauler_uuid`|path|string(Uuid)|true|Third party hauler identifier. Must be a valid UUID.|
 
 > Example responses
 
@@ -5078,11 +5079,11 @@ List third party hauler connections.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`hauler_uuid`|path|string(Uuid)|true||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`hauler_uuid`|path|string(Uuid)|true|Third party hauler identifier. Must be a valid UUID.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -5251,10 +5252,10 @@ List third party haulers.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -5419,12 +5420,12 @@ Dispatch a job by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
-|`job_id`|path|integer(int64)|true||
-|`truck_id`|query|boolean|false||
-|`new_schedule_date`|query|string(DateTime)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`job_id`|path|integer(int64)|true|Job identifier. Must be valid resource identifier (integer).|
+|`truck_id`|query|boolean|false|If specified, return only records matching this truck (default). If unspecified, return all. Must be valid resource identifier (integer).|
+|`new_schedule_date`|query|string(DateTime)|false|New schedule date. Must be a date occurring in the future in an ISO 8601 compatible format.|
 
 > Example responses
 
@@ -5631,10 +5632,10 @@ Get job by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
-|`job_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`job_id`|path|integer(int64)|true|Job identifier. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -5948,20 +5949,20 @@ List jobs.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
-|`schedule_gt`|query|string(DateTime)|true||
-|`schedule_lt`|query|string(DateTime)|true||
-|`deleted`|query|boolean|false||
-|`completed`|query|boolean|false||
-|`failed`|query|boolean|false||
-|`driver_id`|query|boolean|false||
-|`truck_id`|query|boolean|false||
-|`last_updated_gte`|query|string(DateTime)|true||
-|`created_on_gte`|query|string(DateTime)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`schedule_gt`|query|string(DateTime)|true|Return only jobs scheduled after (must be in past). If unspecified, return all. Must be a date occurring in the past in an ISO 8601 compatible format.|
+|`schedule_lt`|query|string(DateTime)|true|Return only jobs scheduled before. Must be a date in an ISO 8601 compatible format.|
+|`deleted`|query|boolean|false|Is record deleted (soft delete). Must be one of 0, 1, True, False (case insensitive).|
+|`completed`|query|boolean|false|If true, return only records marked completed (default). If false, return only records marked incomplete. If unspecified, return all. Must be one of 0, 1, True, False (case insensitive).|
+|`failed`|query|boolean|false|If true, return only records marked deleted. If false, return only records marked as deleted. If unspecified, return all. Must be one of 0, 1, True, False (case insensitive).|
+|`driver_id`|query|boolean|false|If specified, return only records matching this driver (default). If unspecified, return all. Must be valid resource identifier (integer).|
+|`truck_id`|query|boolean|false|If specified, return only records matching this truck (default). If unspecified, return all. Must be valid resource identifier (integer).|
+|`last_updated_gte`|query|string(DateTime)|true|Return only records updated after (must be in past). If unspecified, return all. Must be a date occurring in the past in an ISO 8601 compatible format.|
+|`created_on_gte`|query|string(DateTime)|true|Return records created on or after the specified date. If unspecified, return all. Must be a date occurring in the past in an ISO 8601 compatible format.|
 
 > Example responses
 
@@ -6274,9 +6275,9 @@ Get location by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -6432,10 +6433,10 @@ List locations for this user.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -6601,11 +6602,11 @@ List all job materials.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -6775,10 +6776,10 @@ List tenants for this user.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -6953,10 +6954,10 @@ Get truck.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
-|`truck_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`truck_id`|path|integer(int64)|true|Truck identifier. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -7119,11 +7120,11 @@ List trucks.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -7294,11 +7295,11 @@ Set driver for truck.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
-|`truck_id`|path|integer(int64)|true||
-|`driver_id`|query|boolean|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`truck_id`|path|integer(int64)|true|Truck identifier. Must be valid resource identifier (integer).|
+|`driver_id`|query|boolean|false|If specified, return only records matching this driver (default). If unspecified, return all. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -7463,10 +7464,10 @@ Get user.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
-|`user_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`user_id`|path|integer(int64)|true|User identifier. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -7624,11 +7625,11 @@ List users.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`location_id`|path|integer(int64)|true||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -7812,8 +7813,8 @@ Create new webhook.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
 |`body`|body|[CreateWebhookModel](#schemacreatewebhookmodel)|true||
 
 > Example responses
@@ -7972,9 +7973,9 @@ Deactivate (soft delete) webhook by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`hook_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`hook_id`|path|integer(int64)|true|Webhook identifier. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -8134,9 +8135,9 @@ Get webhook by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`hook_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`hook_id`|path|integer(int64)|true|Webhook identifier. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -8296,11 +8297,11 @@ List webhooks.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`deleted`|query|boolean|false||
-|`page_limit`|query|integer(int64)|false||
-|`page_index`|query|integer(int64)|false||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`deleted`|query|boolean|false|Is record deleted (soft delete). Must be one of 0, 1, True, False (case insensitive).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
 > Example responses
 
@@ -8468,9 +8469,9 @@ Ping webhook by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`hook_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`hook_id`|path|integer(int64)|true|Webhook identifier. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -8641,9 +8642,9 @@ Update webhook.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true||
-|`x-tenant-id`|header|integer(int64)|true||
-|`hook_id`|path|integer(int64)|true||
+|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`hook_id`|path|integer(int64)|true|Webhook identifier. Must be valid resource identifier (integer).|
 |`body`|body|[UpdateWebhookModel](#schemaupdatewebhookmodel)|true||
 
 > Example responses
@@ -9878,7 +9879,7 @@ Update webhook.
 |`times_failed`|integer(int64)|Number of times a job has been attempted and failed. Must be integer greater than or equal to 0.|
 |`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers. Must be integer greater than or equal to 0.|
 |`truck_id`|integer(int64)|Truck identifier. Must be valid resource identifier (integer).|
-|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'P', 'E', 'L', 'D', 'R'.|
+|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'P', 'L', 'D', 'R', 'E'.|
 |`weighed_on`|string(DateTime)|Time of truck weight entry. Must be a date occurring in the past in an ISO 8601 compatible format.|
 
 <h2 id="tocSlocationlistmodel">LocationListModel</h2>
@@ -10494,7 +10495,7 @@ Update webhook.
 |`times_failed`|integer(int64)|Number of times a job has been attempted and failed. Must be integer greater than or equal to 0.|
 |`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers. Must be integer greater than or equal to 0.|
 |`truck_id`|integer(int64)|Truck identifier. Must be valid resource identifier (integer).|
-|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'P', 'E', 'L', 'D', 'R'.|
+|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'P', 'L', 'D', 'R', 'E'.|
 |`weighed_on`|string(DateTime)|Time of truck weight entry. Must be a date occurring in the past in an ISO 8601 compatible format.|
 
 <h2 id="tocSuserlistresultsmodel">UserListResultsModel</h2>
@@ -10546,7 +10547,7 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`id`|integer(int64)|User identifier. Must be valid resource identifier (integer).|
-|`roles`|array[string]|User role. Must be one of: 'ThirdPartyDriver', 'Public', 'Dispatcher', 'Admin', 'ThirdPartyDispatcher', 'ThirdPartyAdmin', 'Driver'.|
+|`roles`|array[string]|User role. Must be one of: 'Driver', 'ThirdPartyDispatcher', 'Dispatcher', 'Admin', 'ThirdPartyAdmin', 'Public', 'ThirdPartyDriver'.|
 |`username`|string|Username. Must be at least 1 characters long. Must be no longer than 64 characters.|
 
 <h2 id="tocSwebhooklistmodel">WebhookListModel</h2>
