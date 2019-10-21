@@ -15,7 +15,7 @@ headingLevel: 2
 
 ---
 
-<h1 id="cro-software-api">CRO Software API v1.0.2</h1>
+<h1 id="cro-software-api">CRO Software API v1.0.3</h1>
 
 Build on & integrate with CRO Software.
 
@@ -26,6 +26,17 @@ Base URLs:
 Email: <a href="mailto:develop@crosoftware.net">Support</a> 
 
 # Changelog
+## [1.0.3] - 2019/10/21
+
+### Added
+- Parameter max_address_edit_distance to POST /locations/{location_id}/customers.
+
+### Changed
+- Duplicate customers created via POST /locations/{location_id}/customers now return 409 conflict.
+- Updated parent_id, line_2, line_3, line_4 to be optional fields for POST /locations/{location_id}/customers.
+
+### Fixed
+- Added missing 'id' field to /tenant return results.
 
 ## [1.0.2] - 2019/09/25
 
@@ -3635,7 +3646,7 @@ List customers for location.
 |`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
 |`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`name`|query|string|false|If specified, return only records with matching names. If unspecified, return all. Wildcard is &#039;*&#039;. Must be at least 1 and no more than 128 characters.|
+|`name`|query|string|false|Name (free text). Must be at least 1 and no more than 64 characters.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
 |`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
 
@@ -5424,7 +5435,7 @@ Dispatch a job by id.
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
 |`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
 |`job_id`|path|integer(int64)|true|Job identifier. Must be valid resource identifier (integer).|
-|`truck_id`|query|boolean|false|If specified, return only records matching this truck (default). If unspecified, return all. Must be valid resource identifier (integer).|
+|`truck_id`|query|integer(int64)|false|Truck identifier. Must be valid resource identifier (integer).|
 |`new_schedule_date`|query|string(DateTime)|false|New schedule date. Must be a date occurring in the future in an ISO 8601 compatible format.|
 
 > Example responses
@@ -5841,8 +5852,6 @@ namespace CROSoftware
           
           // Parameters
           NameValueCollection parameters = new NameValueCollection();
-          parameters.Add("schedule_gt", "2049-10-31T11:32:38.390000");
-          parameters.Add("schedule_lt", "2049-10-31T11:32:38.390000");
           parameters.Add("last_updated_gte", "2049-10-31T11:32:38.390000");
           parameters.Add("created_on_gte", "2049-10-31T11:32:38.390000");
           
@@ -5855,7 +5864,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/locations/{location_id}/jobs?schedule_gt=2049-10-31T11%3A32%3A38.390000&schedule_lt=2049-10-31T11%3A32%3A38.390000&last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000 \
+curl -X GET https://api.crosoftware.net/locations/{location_id}/jobs?last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000 \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
@@ -5873,7 +5882,7 @@ var headers = {
 $.ajax({
   url: 'https://api.crosoftware.net/locations/{location_id}/jobs',
   method: 'get',
-  data: '?schedule_gt=2049-10-31T11%3A32%3A38.390000&schedule_lt=2049-10-31T11%3A32%3A38.390000&last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000',
+  data: '?last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -5894,9 +5903,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/jobs',
   params: {
-  'schedule_gt' => 'string(DateTime)',
-'schedule_lt' => 'string(DateTime)',
-'last_updated_gte' => 'string(DateTime)',
+  'last_updated_gte' => 'string(DateTime)',
 'created_on_gte' => 'string(DateTime)'
 }, headers: headers
 
@@ -5913,7 +5920,7 @@ headers = {
 }
 
 r = requests.get('https://api.crosoftware.net/locations/{location_id}/jobs', params={
-  'schedule_gt': '2049-10-31T11:32:38.390000',  'schedule_lt': '2049-10-31T11:32:38.390000',  'last_updated_gte': '2049-10-31T11:32:38.390000',  'created_on_gte': '2049-10-31T11:32:38.390000'
+  'last_updated_gte': '2049-10-31T11:32:38.390000',  'created_on_gte': '2049-10-31T11:32:38.390000'
 }, headers = headers)
 
 print r.json()
@@ -5921,7 +5928,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/jobs?schedule_gt=2049-10-31T11%3A32%3A38.390000&schedule_lt=2049-10-31T11%3A32%3A38.390000&last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/jobs?last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -5954,9 +5961,9 @@ List jobs.
 |`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
 |`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
-|`schedule_gt`|query|string(DateTime)|true|Return only jobs scheduled after (must be in past). If unspecified, return all. Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`schedule_lt`|query|string(DateTime)|true|Return only jobs scheduled before. Must be a date in an ISO 8601 compatible format.|
-|`deleted`|query|boolean|false|Is record deleted (soft delete). Must be one of 0, 1, True, False (case insensitive).|
+|`schedule_gt`|query|string(DateTime)|false|Return only jobs scheduled after (must be in past). If unspecified, return all. Must be a date occurring in the past in an ISO 8601 compatible format.|
+|`schedule_lt`|query|string(DateTime)|false|Return only jobs scheduled before. Must be a date in an ISO 8601 compatible format.|
+|`deleted`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all. Must be one of 0, 1, True, False (case insensitive).|
 |`completed`|query|boolean|false|If true, return only records marked completed (default). If false, return only records marked incomplete. If unspecified, return all. Must be one of 0, 1, True, False (case insensitive).|
 |`failed`|query|boolean|false|If true, return only records marked deleted. If false, return only records marked as deleted. If unspecified, return all. Must be one of 0, 1, True, False (case insensitive).|
 |`driver_id`|query|boolean|false|If specified, return only records matching this driver (default). If unspecified, return all. Must be valid resource identifier (integer).|
@@ -7196,6 +7203,10 @@ namespace CROSoftware
           client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
+          // Parameters
+          NameValueCollection parameters = new NameValueCollection();
+          parameters.Add("driver_id", "1");
+          
           byte[] json = client.UploadString(url, "PATCH", parameters);
           Console.WriteLine(System.Text.Encoding.Default.GetString(json));
       }
@@ -7205,7 +7216,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X PATCH https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id} \
+curl -X PATCH https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}?driver_id=1 \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
@@ -7223,7 +7234,7 @@ var headers = {
 $.ajax({
   url: 'https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}',
   method: 'patch',
-
+  data: '?driver_id=1',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -7244,7 +7255,8 @@ headers = {
 
 result = RestClient.patch 'https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}',
   params: {
-  }, headers: headers
+  'driver_id' => 'integer(int64)'
+}, headers: headers
 
 p JSON.parse(result)
 
@@ -7259,7 +7271,7 @@ headers = {
 }
 
 r = requests.patch('https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}', params={
-
+  'driver_id': '1'
 }, headers = headers)
 
 print r.json()
@@ -7267,7 +7279,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/trucks/{truck_id}?driver_id=1");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -7299,7 +7311,7 @@ Set driver for truck.
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
 |`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
 |`truck_id`|path|integer(int64)|true|Truck identifier. Must be valid resource identifier (integer).|
-|`driver_id`|query|boolean|false|If specified, return only records matching this driver (default). If unspecified, return all. Must be valid resource identifier (integer).|
+|`driver_id`|query|integer(int64)|true|Driver identifier. Must be valid resource identifier (integer).|
 
 > Example responses
 
@@ -7630,6 +7642,7 @@ List users.
 |`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
 |`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`username`|query|string|false|If specified, return only records with matching usernames. If unspecified, return all. Wildcard is &#039;*&#039;. Must be at least 1 and no more than 150 characters.|
 
 > Example responses
 
@@ -9879,7 +9892,7 @@ Update webhook.
 |`times_failed`|integer(int64)|Number of times a job has been attempted and failed. Must be integer greater than or equal to 0.|
 |`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers. Must be integer greater than or equal to 0.|
 |`truck_id`|integer(int64)|Truck identifier. Must be valid resource identifier (integer).|
-|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'P', 'L', 'D', 'R', 'E'.|
+|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'E', 'L', 'P', 'D', 'R'.|
 |`weighed_on`|string(DateTime)|Time of truck weight entry. Must be a date occurring in the past in an ISO 8601 compatible format.|
 
 <h2 id="tocSlocationlistmodel">LocationListModel</h2>
@@ -10495,7 +10508,7 @@ Update webhook.
 |`times_failed`|integer(int64)|Number of times a job has been attempted and failed. Must be integer greater than or equal to 0.|
 |`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers. Must be integer greater than or equal to 0.|
 |`truck_id`|integer(int64)|Truck identifier. Must be valid resource identifier (integer).|
-|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'P', 'L', 'D', 'R', 'E'.|
+|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'E', 'L', 'P', 'D', 'R'.|
 |`weighed_on`|string(DateTime)|Time of truck weight entry. Must be a date occurring in the past in an ISO 8601 compatible format.|
 
 <h2 id="tocSuserlistresultsmodel">UserListResultsModel</h2>
@@ -10547,7 +10560,7 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`id`|integer(int64)|User identifier. Must be valid resource identifier (integer).|
-|`roles`|array[string]|User role. Must be one of: 'Driver', 'ThirdPartyDispatcher', 'Dispatcher', 'Admin', 'ThirdPartyAdmin', 'Public', 'ThirdPartyDriver'.|
+|`roles`|array[string]|User role. Must be one of: 'ThirdPartyAdmin', 'Public', 'Dispatcher', 'Admin', 'ThirdPartyDriver', 'Driver', 'ThirdPartyDispatcher'.|
 |`username`|string|Username. Must be at least 1 characters long. Must be no longer than 64 characters.|
 
 <h2 id="tocSwebhooklistmodel">WebhookListModel</h2>
