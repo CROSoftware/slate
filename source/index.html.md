@@ -30,6 +30,7 @@ Email: <a href="mailto:develop@crosoftware.net">Support</a>
 
 ### Added
 - Parameter max_address_edit_distance to POST /locations/{location_id}/customers.
+- Name filter to GET /location/{location_id}/users.
 
 ### Changed
 - Duplicate customers created via POST /locations/{location_id}/customers now return 409 conflict.
