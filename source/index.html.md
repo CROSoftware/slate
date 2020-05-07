@@ -209,14 +209,6 @@ The access token must be passed as an [Authorization: Bearer &lt;token&gt;] head
 |---|---|
 |api|CRO API access|
 
-- Flow: clientCredentials
-
-    - Token URL = [https://auth.crosandbox.com/oauth2/token](https://auth.crosandbox.com/oauth2/token)
-
-|Scope|Scope Description|
-|---|---|
-|api|CRO API access|
-
 <h1 id="cro-software-api-dispatch">Dispatch</h1>
 
 For 3rd party integration with CRO
@@ -369,9 +361,9 @@ Add customer addresses.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`body`|body|[CreateCustomerAddressModel](#schemacreatecustomeraddressmodel)|true||
 
 > Example responses
@@ -434,7 +426,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}";
 
           // Headers
           client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
@@ -449,7 +441,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id} \
+curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id} \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
@@ -465,7 +457,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}',
   method: 'delete',
 
   headers: headers,
@@ -486,7 +478,7 @@ headers = {
   'x-tenant-id' => '1'
 }
 
-result = RestClient.delete 'https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}',
+result = RestClient.delete 'https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}',
   params: {
   }, headers: headers
 
@@ -502,7 +494,7 @@ headers = {
   'x-tenant-id': '1'
 }
 
-r = requests.delete('https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}', params={
+r = requests.delete('https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}', params={
 
 }, headers = headers)
 
@@ -511,7 +503,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -527,7 +519,7 @@ System.out.println(response.toString());
 
 ```
 
-`DELETE /customers/{customer_id}/addresses/{address_id}`
+`DELETE /customers/{customer_id}/addresses/{customer_address_id}`
 
 <a id="opIddelete_customers_by_id_addresses_by_id"></a>
 
@@ -539,10 +531,10 @@ Deactivate a customer address.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
-|`address_id`|path|integer(int64)|true|Customer address identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`customer_address_id`|path|integer(int64)|true|Customer address identifier.|
 
 > Example responses
 
@@ -604,7 +596,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}";
 
           // Headers
           client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
@@ -619,7 +611,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id} \
+curl -X GET https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id} \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
@@ -635,7 +627,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}',
   method: 'get',
 
   headers: headers,
@@ -656,7 +648,7 @@ headers = {
   'x-tenant-id' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}',
+result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}',
   params: {
   }, headers: headers
 
@@ -672,7 +664,7 @@ headers = {
   'x-tenant-id': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}', params={
+r = requests.get('https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}', params={
 
 }, headers = headers)
 
@@ -681,7 +673,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -697,7 +689,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /customers/{customer_id}/addresses/{address_id}`
+`GET /customers/{customer_id}/addresses/{customer_address_id}`
 
 <a id="opIdget_customers_by_id_addresses_by_id"></a>
 
@@ -709,10 +701,10 @@ Get a customer address.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
-|`address_id`|path|integer(int64)|true|Customer address identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`customer_address_id`|path|integer(int64)|true|Customer address identifier.|
 
 > Example responses
 
@@ -879,12 +871,12 @@ List customer addresses.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
-|`filter_active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all. Must be one of 0, 1, True, False (case insensitive).|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`filter_active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
 > Example responses
 
@@ -954,7 +946,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}";
 
           // Headers
           client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
@@ -969,7 +961,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id} \
+curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
@@ -987,7 +979,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}',
   method: 'patch',
 
   headers: headers,
@@ -1009,7 +1001,7 @@ headers = {
   'x-tenant-id' => '1'
 }
 
-result = RestClient.patch 'https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}',
+result = RestClient.patch 'https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}',
   params: {
   }, headers: headers
 
@@ -1026,7 +1018,7 @@ headers = {
   'x-tenant-id': '1'
 }
 
-r = requests.patch('https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}', params={
+r = requests.patch('https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}', params={
 
 }, headers = headers)
 
@@ -1035,7 +1027,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/addresses/{address_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/addresses/{customer_address_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -1051,7 +1043,7 @@ System.out.println(response.toString());
 
 ```
 
-`PATCH /customers/{customer_id}/addresses/{address_id}`
+`PATCH /customers/{customer_id}/addresses/{customer_address_id}`
 
 <a id="opIdpatch_customers_by_id_addresses_by_id"></a>
 
@@ -1082,10 +1074,10 @@ Update a customer address.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
-|`address_id`|path|integer(int64)|true|Customer address identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`customer_address_id`|path|integer(int64)|true|Customer address identifier.|
 |`body`|body|[UpdateCustomerAddressModel](#schemaupdatecustomeraddressmodel)|true||
 
 > Example responses
@@ -1257,15 +1249,15 @@ Create new customer contact.
 
 ```json
 {
-  "email": "test@crosoftware.net",
+  "email": "john@crosoftware.net, jane@crosoftware.net",
   "fax": "+1 (360) 123-6543",
-  "name": "John Doe",
+  "name": "John Doe, Jane Smith",
   "notify_on_acknowledged_request": true,
   "notify_on_completed_request": true,
   "notify_on_dispatched_request": true,
   "notify_on_failed_request": true,
   "notify_on_new_request": true,
-  "number": "+1 (360) 123-6543"
+  "number": "+1 (360) 123-6543, +1 (706) 123-0987"
 }
 ```
 
@@ -1275,9 +1267,9 @@ Create new customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`body`|body|[CreateCustomerContactModel](#schemacreatecustomercontactmodel)|true||
 
 > Example responses
@@ -1287,15 +1279,15 @@ Create new customer contact.
 ```json
 {
   "contact_id": 1,
-  "email": "test@crosoftware.net",
+  "email": "john@crosoftware.net, jane@crosoftware.net",
   "fax": "+1 (360) 123-6543",
-  "name": "John Doe",
+  "name": "John Doe, Jane Smith",
   "notify_on_acknowledged_request": true,
   "notify_on_completed_request": true,
   "notify_on_dispatched_request": true,
   "notify_on_failed_request": true,
   "notify_on_new_request": true,
-  "number": "+1 (360) 123-6543"
+  "number": "+1 (360) 123-6543, +1 (706) 123-0987"
 }
 ```
 
@@ -1336,7 +1328,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/contacts/{customer_contact_id}";
 
           // Headers
           client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
@@ -1351,7 +1343,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id} \
+curl -X GET https://api.crosoftware.net/customers/{customer_id}/contacts/{customer_contact_id} \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
@@ -1367,7 +1359,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/contacts/{customer_contact_id}',
   method: 'get',
 
   headers: headers,
@@ -1388,7 +1380,7 @@ headers = {
   'x-tenant-id' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}',
+result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/contacts/{customer_contact_id}',
   params: {
   }, headers: headers
 
@@ -1404,7 +1396,7 @@ headers = {
   'x-tenant-id': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}', params={
+r = requests.get('https://api.crosoftware.net/customers/{customer_id}/contacts/{customer_contact_id}', params={
 
 }, headers = headers)
 
@@ -1413,7 +1405,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/contacts/{customer_contact_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1429,7 +1421,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /customers/{customer_id}/contacts/{contact_id}`
+`GET /customers/{customer_id}/contacts/{customer_contact_id}`
 
 <a id="opIdget_customers_by_id_contacts_by_id"></a>
 
@@ -1441,10 +1433,10 @@ Get a customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
-|`contact_id`|path|integer(int64)|true|Customer contact identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`customer_contact_id`|path|integer(int64)|true|Customer contact identifier.|
 
 > Example responses
 
@@ -1453,15 +1445,15 @@ Get a customer contact.
 ```json
 {
   "contact_id": 1,
-  "email": "test@crosoftware.net",
+  "email": "john@crosoftware.net, jane@crosoftware.net",
   "fax": "+1 (360) 123-6543",
-  "name": "John Doe",
+  "name": "John Doe, Jane Smith",
   "notify_on_acknowledged_request": true,
   "notify_on_completed_request": true,
   "notify_on_dispatched_request": true,
   "notify_on_failed_request": true,
   "notify_on_new_request": true,
-  "number": "+1 (360) 123-6543"
+  "number": "+1 (360) 123-6543, +1 (706) 123-0987"
 }
 ```
 
@@ -1607,11 +1599,11 @@ List customer contacts.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
 > Example responses
 
@@ -1624,15 +1616,15 @@ List customer contacts.
   "results": [
     {
       "contact_id": 1,
-      "email": "test@crosoftware.net",
+      "email": "john@crosoftware.net, jane@crosoftware.net",
       "fax": "+1 (360) 123-6543",
-      "name": "John Doe",
+      "name": "John Doe, Jane Smith",
       "notify_on_acknowledged_request": true,
       "notify_on_completed_request": true,
       "notify_on_dispatched_request": true,
       "notify_on_failed_request": true,
       "notify_on_new_request": true,
-      "number": "+1 (360) 123-6543"
+      "number": "+1 (360) 123-6543, +1 (706) 123-0987"
     }
   ],
   "total_count": 1001,
@@ -1677,7 +1669,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/contacts/{customer_contact_id}";
 
           // Headers
           client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
@@ -1692,7 +1684,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id} \
+curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/contacts/{customer_contact_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
@@ -1710,7 +1702,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/contacts/{customer_contact_id}',
   method: 'patch',
 
   headers: headers,
@@ -1732,7 +1724,7 @@ headers = {
   'x-tenant-id' => '1'
 }
 
-result = RestClient.patch 'https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}',
+result = RestClient.patch 'https://api.crosoftware.net/customers/{customer_id}/contacts/{customer_contact_id}',
   params: {
   }, headers: headers
 
@@ -1749,7 +1741,7 @@ headers = {
   'x-tenant-id': '1'
 }
 
-r = requests.patch('https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}', params={
+r = requests.patch('https://api.crosoftware.net/customers/{customer_id}/contacts/{customer_contact_id}', params={
 
 }, headers = headers)
 
@@ -1758,7 +1750,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/contacts/{contact_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/contacts/{customer_contact_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -1774,7 +1766,7 @@ System.out.println(response.toString());
 
 ```
 
-`PATCH /customers/{customer_id}/contacts/{contact_id}`
+`PATCH /customers/{customer_id}/contacts/{customer_contact_id}`
 
 <a id="opIdpatch_customers_by_id_contacts_by_id"></a>
 
@@ -1784,15 +1776,15 @@ Update a customer contact.
 
 ```json
 {
-  "email": "test@crosoftware.net",
+  "email": "john@crosoftware.net, jane@crosoftware.net",
   "fax": "+1 (360) 123-6543",
-  "name": "John Doe",
+  "name": "John Doe, Jane Smith",
   "notify_on_acknowledged_request": true,
   "notify_on_completed_request": true,
   "notify_on_dispatched_request": true,
   "notify_on_failed_request": true,
   "notify_on_new_request": true,
-  "number": "+1 (360) 123-6543"
+  "number": "+1 (360) 123-6543, +1 (706) 123-0987"
 }
 ```
 
@@ -1802,10 +1794,10 @@ Update a customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
-|`contact_id`|path|integer(int64)|true|Customer contact identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`customer_contact_id`|path|integer(int64)|true|Customer contact identifier.|
 |`body`|body|[UpdateCustomerContactModel](#schemaupdatecustomercontactmodel)|true||
 
 > Example responses
@@ -1815,15 +1807,15 @@ Update a customer contact.
 ```json
 {
   "contact_id": 1,
-  "email": "test@crosoftware.net",
+  "email": "john@crosoftware.net, jane@crosoftware.net",
   "fax": "+1 (360) 123-6543",
-  "name": "John Doe",
+  "name": "John Doe, Jane Smith",
   "notify_on_acknowledged_request": true,
   "notify_on_completed_request": true,
   "notify_on_dispatched_request": true,
   "notify_on_failed_request": true,
   "notify_on_new_request": true,
-  "number": "+1 (360) 123-6543"
+  "number": "+1 (360) 123-6543, +1 (706) 123-0987"
 }
 ```
 
@@ -1866,7 +1858,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}";
 
           // Headers
           client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
@@ -1881,7 +1873,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X POST https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
+curl -X POST https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
@@ -1899,7 +1891,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}',
   method: 'post',
 
   headers: headers,
@@ -1921,7 +1913,7 @@ headers = {
   'x-tenant-id' => '1'
 }
 
-result = RestClient.post 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
+result = RestClient.post 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}',
   params: {
   }, headers: headers
 
@@ -1938,7 +1930,7 @@ headers = {
   'x-tenant-id': '1'
 }
 
-r = requests.post('https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}', params={
+r = requests.post('https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}', params={
 
 }, headers = headers)
 
@@ -1947,7 +1939,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1963,7 +1955,7 @@ System.out.println(response.toString());
 
 ```
 
-`POST /customers/{customer_id}/locations/{location_id}`
+`POST /customers/{customer_id}/locations/{customer_location_id}`
 
 <a id="opIdpost_customers_by_id_locations_by_id"></a>
 
@@ -1988,10 +1980,10 @@ Add customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`customer_location_id`|path|integer(int64)|true|Customer location identifier|
 |`body`|body|[CreateCustomerLocationModel](#schemacreatecustomerlocationmodel)|true||
 
 > Example responses
@@ -2047,7 +2039,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}";
 
           // Headers
           client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
@@ -2062,7 +2054,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
+curl -X DELETE https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id} \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
@@ -2078,7 +2070,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}',
   method: 'delete',
 
   headers: headers,
@@ -2099,7 +2091,7 @@ headers = {
   'x-tenant-id' => '1'
 }
 
-result = RestClient.delete 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
+result = RestClient.delete 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}',
   params: {
   }, headers: headers
 
@@ -2115,7 +2107,7 @@ headers = {
   'x-tenant-id': '1'
 }
 
-r = requests.delete('https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}', params={
+r = requests.delete('https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}', params={
 
 }, headers = headers)
 
@@ -2124,7 +2116,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -2140,7 +2132,7 @@ System.out.println(response.toString());
 
 ```
 
-`DELETE /customers/{customer_id}/locations/{location_id}`
+`DELETE /customers/{customer_id}/locations/{customer_location_id}`
 
 <a id="opIddelete_customers_by_id_locations_by_id"></a>
 
@@ -2152,10 +2144,10 @@ Deactivate (soft delete) customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`customer_location_id`|path|integer(int64)|true|Customer location identifier|
 
 > Example responses
 
@@ -2210,7 +2202,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}";
 
           // Headers
           client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
@@ -2225,7 +2217,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
+curl -X GET https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id} \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
@@ -2241,7 +2233,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}',
   method: 'get',
 
   headers: headers,
@@ -2262,7 +2254,7 @@ headers = {
   'x-tenant-id' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
+result = RestClient.get 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}',
   params: {
   }, headers: headers
 
@@ -2278,7 +2270,7 @@ headers = {
   'x-tenant-id': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}', params={
+r = requests.get('https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}', params={
 
 }, headers = headers)
 
@@ -2287,7 +2279,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2303,7 +2295,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /customers/{customer_id}/locations/{location_id}`
+`GET /customers/{customer_id}/locations/{customer_location_id}`
 
 <a id="opIdget_customers_by_id_locations_by_id"></a>
 
@@ -2315,10 +2307,10 @@ Get a customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`customer_location_id`|path|integer(int64)|true|Customer location identifier|
 
 > Example responses
 
@@ -2478,12 +2470,12 @@ Update customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
-|`filter_active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all. Must be one of 0, 1, True, False (case insensitive).|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`filter_active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
 > Example responses
 
@@ -2546,7 +2538,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}";
+          String url = "https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}";
 
           // Headers
           client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
@@ -2561,7 +2553,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/locations/{location_id} \
+curl -X PATCH https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
@@ -2579,7 +2571,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
+  url: 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}',
   method: 'patch',
 
   headers: headers,
@@ -2601,7 +2593,7 @@ headers = {
   'x-tenant-id' => '1'
 }
 
-result = RestClient.patch 'https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}',
+result = RestClient.patch 'https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}',
   params: {
   }, headers: headers
 
@@ -2618,7 +2610,7 @@ headers = {
   'x-tenant-id': '1'
 }
 
-r = requests.patch('https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}', params={
+r = requests.patch('https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}', params={
 
 }, headers = headers)
 
@@ -2627,7 +2619,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{location_id}");
+URL obj = new URL("https://api.crosoftware.net/customers/{customer_id}/locations/{customer_location_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PATCH");
 int responseCode = con.getResponseCode();
@@ -2643,7 +2635,7 @@ System.out.println(response.toString());
 
 ```
 
-`PATCH /customers/{customer_id}/locations/{location_id}`
+`PATCH /customers/{customer_id}/locations/{customer_location_id}`
 
 <a id="opIdpatch_customers_by_id_locations_by_id"></a>
 
@@ -2653,6 +2645,7 @@ Update customer location profile.
 
 ```json
 {
+  "is_active": true,
   "is_commercial": true,
   "note": "A note about something",
   "reference_number": "A140",
@@ -2668,10 +2661,10 @@ Update customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
+|`customer_location_id`|path|integer(int64)|true|Customer location identifier|
 |`body`|body|[UpdateCustomerLocationModel](#schemaupdatecustomerlocationmodel)|true||
 
 > Example responses
@@ -2854,21 +2847,21 @@ Create customer for location.
   ],
   "contacts": [
     {
-      "email": "test@crosoftware.net",
+      "email": "john@crosoftware.net, jane@crosoftware.net",
       "fax": "+1 (360) 123-6543",
-      "name": "John Doe",
+      "name": "John Doe, Jane Smith",
       "notify_on_acknowledged_request": true,
       "notify_on_completed_request": true,
       "notify_on_dispatched_request": true,
       "notify_on_failed_request": true,
       "notify_on_new_request": true,
-      "number": "+1 (360) 123-6543"
+      "number": "+1 (360) 123-6543, +1 (706) 123-0987"
     }
   ],
   "is_commercial": true,
   "name": "John Doe",
   "note": "A note about something",
-  "parent_id": 1,
+  "parent_id": 0,
   "reference_number": "A140",
   "renewal_date": "2049-10-31T11:32:38.390000",
   "sales_rep": "Jane Johnson",
@@ -2882,10 +2875,10 @@ Create customer for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`max_address_edit_distance`|query|integer(int64)|false|Maximum address edit distance (levenshtein). Must be integer greater than or equal to 0. Must be integer less than or equal to 15.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`max_address_edit_distance`|query|integer(int64)|false|Maximum address edit distance (levenshtein).|
 |`body`|body|[CreateCustomerModel](#schemacreatecustomermodel)|true||
 
 > Example responses
@@ -2912,21 +2905,21 @@ Create customer for location.
   ],
   "contacts": [
     {
-      "email": "test@crosoftware.net",
+      "email": "john@crosoftware.net, jane@crosoftware.net",
       "fax": "+1 (360) 123-6543",
-      "name": "John Doe",
+      "name": "John Doe, Jane Smith",
       "notify_on_acknowledged_request": true,
       "notify_on_completed_request": true,
       "notify_on_dispatched_request": true,
       "notify_on_failed_request": true,
       "notify_on_new_request": true,
-      "number": "+1 (360) 123-6543"
+      "number": "+1 (360) 123-6543, +1 (706) 123-0987"
     }
   ],
   "is_commercial": true,
   "name": "John Doe",
   "note": "A note about something",
-  "parent_id": 1,
+  "parent_id": 0,
   "reference_number": "A140",
   "renewal_date": "2049-10-31T11:32:38.390000",
   "sales_rep": "Jane Johnson",
@@ -3076,9 +3069,9 @@ Customer model.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
 
 > Example responses
 
@@ -3104,22 +3097,22 @@ Customer model.
   ],
   "contacts": [
     {
-      "email": "test@crosoftware.net",
+      "email": "john@crosoftware.net, jane@crosoftware.net",
       "fax": "+1 (360) 123-6543",
-      "name": "John Doe",
+      "name": "John Doe, Jane Smith",
       "notify_on_acknowledged_request": true,
       "notify_on_completed_request": true,
       "notify_on_dispatched_request": true,
       "notify_on_failed_request": true,
       "notify_on_new_request": true,
-      "number": "+1 (360) 123-6543"
+      "number": "+1 (360) 123-6543, +1 (706) 123-0987"
     }
   ],
   "customer_id": 1,
   "is_commercial": true,
   "name": "John Doe",
   "note": "A note about something",
-  "parent_id": 1,
+  "parent_id": 0,
   "reference_number": "A140",
   "renewal_date": "2049-10-31T11:32:38.390000",
   "sales_rep": "Jane Johnson",
@@ -3164,7 +3157,7 @@ namespace CROSoftware
           WebClient client = new WebClient();
 
           // URL    
-          String url = "https://api.crosoftware.net/locations/{location_id}/customers/{customer_id}";
+          String url = "https://api.crosoftware.net/locations/{location_id}/customers/{location_customer_id}";
 
           // Headers
           client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
@@ -3179,7 +3172,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/locations/{location_id}/customers/{customer_id} \
+curl -X GET https://api.crosoftware.net/locations/{location_id}/customers/{location_customer_id} \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
@@ -3195,7 +3188,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.crosoftware.net/locations/{location_id}/customers/{customer_id}',
+  url: 'https://api.crosoftware.net/locations/{location_id}/customers/{location_customer_id}',
   method: 'get',
 
   headers: headers,
@@ -3216,7 +3209,7 @@ headers = {
   'x-tenant-id' => '1'
 }
 
-result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/customers/{customer_id}',
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/customers/{location_customer_id}',
   params: {
   }, headers: headers
 
@@ -3232,7 +3225,7 @@ headers = {
   'x-tenant-id': '1'
 }
 
-r = requests.get('https://api.crosoftware.net/locations/{location_id}/customers/{customer_id}', params={
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/customers/{location_customer_id}', params={
 
 }, headers = headers)
 
@@ -3241,7 +3234,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/customers/{customer_id}");
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/customers/{location_customer_id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3257,7 +3250,7 @@ System.out.println(response.toString());
 
 ```
 
-`GET /locations/{location_id}/customers/{customer_id}`
+`GET /locations/{location_id}/customers/{location_customer_id}`
 
 <a id="opIdget_locations_by_id_customers_by_id"></a>
 
@@ -3269,10 +3262,10 @@ Get customer for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`location_customer_id`|path|integer(int64)|true|Location customer identifier.|
 
 > Example responses
 
@@ -3439,13 +3432,13 @@ List of customers.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`name`|query|string|false|If specified, return only records with matching names. If unspecified, return all. Wildcard is &#039;*&#039;. Must be at least 1 and no more than 128 characters.|
-|`last_updated_gte`|query|string(DateTime)|true|Return only records updated after (must be in past). If unspecified, return all. Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`created_on_gte`|query|string(DateTime)|true|Return records created on or after the specified date. If unspecified, return all. Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`name`|query|string|false|If specified, return only records with matching names. If unspecified, return all. Wildcard is &#039;*&#039;.|
+|`last_updated_gte`|query|string(DateTime)|true|Return only records updated after (must be in past). If unspecified, return all.|
+|`created_on_gte`|query|string(DateTime)|true|Return records created on or after the specified date. If unspecified, return all.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
 > Example responses
 
@@ -3475,22 +3468,22 @@ List of customers.
       ],
       "contacts": [
         {
-          "email": "test@crosoftware.net",
+          "email": "john@crosoftware.net, jane@crosoftware.net",
           "fax": "+1 (360) 123-6543",
-          "name": "John Doe",
+          "name": "John Doe, Jane Smith",
           "notify_on_acknowledged_request": true,
           "notify_on_completed_request": true,
           "notify_on_dispatched_request": true,
           "notify_on_failed_request": true,
           "notify_on_new_request": true,
-          "number": "+1 (360) 123-6543"
+          "number": "+1 (360) 123-6543, +1 (706) 123-0987"
         }
       ],
       "customer_id": 1,
       "is_commercial": true,
       "name": "John Doe",
       "note": "A note about something",
-      "parent_id": 1,
+      "parent_id": 0,
       "reference_number": "A140",
       "renewal_date": "2049-10-31T11:32:38.390000",
       "sales_rep": "Jane Johnson",
@@ -3644,12 +3637,12 @@ List customers for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`name`|query|string|false|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`name`|query|string|false|Name (free text).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
 > Example responses
 
@@ -3820,7 +3813,7 @@ Customer model.
 ```json
 {
   "name": "John Doe",
-  "parent_id": 1
+  "parent_id": 0
 }
 ```
 
@@ -3830,9 +3823,9 @@ Customer model.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`customer_id`|path|integer(int64)|true|Customer identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`body`|body|[UpdateCustomerModel](#schemaupdatecustomermodel)|true||
 
 > Example responses
@@ -3859,22 +3852,22 @@ Customer model.
   ],
   "contacts": [
     {
-      "email": "test@crosoftware.net",
+      "email": "john@crosoftware.net, jane@crosoftware.net",
       "fax": "+1 (360) 123-6543",
-      "name": "John Doe",
+      "name": "John Doe, Jane Smith",
       "notify_on_acknowledged_request": true,
       "notify_on_completed_request": true,
       "notify_on_dispatched_request": true,
       "notify_on_failed_request": true,
       "notify_on_new_request": true,
-      "number": "+1 (360) 123-6543"
+      "number": "+1 (360) 123-6543, +1 (706) 123-0987"
     }
   ],
   "customer_id": 1,
   "is_commercial": true,
   "name": "John Doe",
   "note": "A note about something",
-  "parent_id": 1,
+  "parent_id": 0,
   "reference_number": "A140",
   "renewal_date": "2049-10-31T11:32:38.390000",
   "sales_rep": "Jane Johnson",
@@ -4026,10 +4019,10 @@ Get driver.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`driver_id`|path|integer(int64)|true|Driver identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`driver_id`|path|integer(int64)|true|Driver identifier.|
 
 > Example responses
 
@@ -4198,11 +4191,11 @@ List drivers.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
 > Example responses
 
@@ -4242,6 +4235,355 @@ List drivers.
 |Status|Meaning|Schema|Description|
 |---|---|---|---|
 |`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[DriverListModel](#schemadriverlistmodel)|HTTP call succeeded.|
+|`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
+
+<h4>Response Headers</h4>
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|x-request-id|string||Request identifier.
+|
+|401|x-request-id|string||Request identifier.
+|
+|403|x-request-id|string||Request identifier.
+|
+
+## Dump Destinations
+
+### Get Dump Destination
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/locations/{location_id}/dump_destinations/{dump_destination_id}";
+
+          // Headers
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
+          client.Headers.Add("x-tenant-id", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/locations/{location_id}/dump_destinations/{dump_destination_id} \
+  -H 'Accept: application/json' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
+  -H 'x-tenant-id: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/locations/{location_id}/dump_destinations/{dump_destination_id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/dump_destinations/{dump_destination_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/dump_destinations/{dump_destination_id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/dump_destinations/{dump_destination_id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /locations/{location_id}/dump_destinations/{dump_destination_id}`
+
+<a id="opIdget_locations_by_id_dump_destinations_by_id"></a>
+
+Get dump destination.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`dump_destination_id`|path|integer(int64)|true|Dump destination identifier.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "address": "123 Some St.",
+  "city": "Sequim",
+  "contact_email": "test@crosoftware.net",
+  "contact_name": "John Doe",
+  "contact_phone": "+1 (360) 123-6543",
+  "description": "A user entered/human readable text description.",
+  "id": 1,
+  "is_holding_yard": true,
+  "latitude": 56.2,
+  "location_id": 1,
+  "longitude": 128.1,
+  "state": "WA",
+  "zip": "98368"
+}
+```
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[DumpDestinationModel](#schemadumpdestinationmodel)|HTTP call succeeded.|
+|`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
+|`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
+
+<h4>Response Headers</h4>
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|x-request-id|string||Request identifier.
+|
+|401|x-request-id|string||Request identifier.
+|
+|403|x-request-id|string||Request identifier.
+|
+
+### List Dump Destinations
+
+> Code samples
+
+```csharp
+using System;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace CROSoftware
+{
+  public class DemoClient
+  {
+      static public void Main ()
+      {
+          WebClient client = new WebClient();
+
+          // URL    
+          String url = "https://api.crosoftware.net/locations/{location_id}/dump_destinations";
+
+          // Headers
+          client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
+          client.Headers.Add("x-tenant-id", "1");
+          
+          string json = client.DownloadString(url);
+          Console.WriteLine(json);
+      }
+  }
+}
+```
+
+```shell
+# You can also use wget
+curl -X GET https://api.crosoftware.net/locations/{location_id}/dump_destinations \
+  -H 'Accept: application/json' \
+  -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
+  -H 'x-tenant-id: 1'
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json',
+  'authorization':'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id':'1'
+
+};
+
+$.ajax({
+  url: 'https://api.crosoftware.net/locations/{location_id}/dump_destinations',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'authorization' => 'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id' => '1'
+}
+
+result = RestClient.get 'https://api.crosoftware.net/locations/{location_id}/dump_destinations',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'authorization': 'bearer VGhlIGxhenkgYnJvd24gZm94',
+  'x-tenant-id': '1'
+}
+
+r = requests.get('https://api.crosoftware.net/locations/{location_id}/dump_destinations', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://api.crosoftware.net/locations/{location_id}/dump_destinations");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+`GET /locations/{location_id}/dump_destinations`
+
+<a id="opIdget_locations_by_id_dump_destinations"></a>
+
+List dump destinations.
+
+ 
+
+<h4 id="undefined-parameters">Parameters</h4>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "current_limit": 100,
+  "current_page": 1,
+  "results": [
+    {
+      "address": "123 Some St.",
+      "city": "Sequim",
+      "contact_email": "test@crosoftware.net",
+      "contact_name": "John Doe",
+      "contact_phone": "+1 (360) 123-6543",
+      "description": "A user entered/human readable text description.",
+      "id": 1,
+      "is_holding_yard": true,
+      "latitude": 56.2,
+      "location_id": 1,
+      "longitude": 128.1,
+      "state": "WA",
+      "zip": "98368"
+    }
+  ],
+  "total_count": 1001,
+  "total_pages": 3
+}
+```
+
+<h4 id="undefined-responses">Responses</h4>
+
+|Status|Meaning|Schema|Description|
+|---|---|---|---|
+|`200`|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|[DumpDestinationListModel](#schemadumpdestinationlistmodel)|HTTP call succeeded.|
 |`401`|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|[ErrorResponseModel](#schemaerrorresponsemodel)|401 Unauthorized.|
 |`403`|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|[ErrorResponseModel](#schemaerrorresponsemodel)|403 Forbidden.|
 
@@ -4401,9 +4743,9 @@ Log a GPS event.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
 |`body`|body|[GpsEventProfileModel](#schemagpseventprofilemodel)|true||
 
 > Example responses
@@ -4573,10 +4915,10 @@ Create third party connection.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`hauler_uuid`|path|string(Uuid)|true|Third party hauler identifier. Must be a valid UUID.|
-|`tenant_code`|query|string|true|Confirmation code for hauler creation. Must be at least 1 and no more than 128 characters. Must match expression ^[^\+]*\+[0-9]{1,10}$|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`hauler_uuid`|path|string(Uuid)|true|Third party hauler identifier.|
+|`tenant_code`|query|string|true|Confirmation code for hauler creation.|
 
 > Example responses
 
@@ -4760,12 +5102,12 @@ This operation does not require authentication
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`company_name`|query|string|true|Company name (free text). Must be at least 1 and no more than 64 characters.|
-|`username`|query|string|true|Username. Must be at least 1 characters long. Must be no longer than 64 characters.|
-|`password`|query|string|true|Login password. Must be at least 1 and no more than 64 characters.|
-|`recaptcha`|query|string|true|Recaptcha answer. Must be at least 8 and no more than 512 characters.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`company_name`|query|string|true|Company name (free text).|
+|`username`|query|string|true|Username.|
+|`password`|query|string|true|Login password.|
+|`recaptcha`|query|string|true|Recaptcha answer.|
 
 > Example responses
 
@@ -4934,9 +5276,9 @@ Get third party hauler.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`hauler_uuid`|path|string(Uuid)|true|Third party hauler identifier. Must be a valid UUID.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`hauler_uuid`|path|string(Uuid)|true|Third party hauler identifier.|
 
 > Example responses
 
@@ -5091,11 +5433,11 @@ List third party hauler connections.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`hauler_uuid`|path|string(Uuid)|true|Third party hauler identifier. Must be a valid UUID.|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`hauler_uuid`|path|string(Uuid)|true|Third party hauler identifier.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
 > Example responses
 
@@ -5264,10 +5606,10 @@ List third party haulers.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
 > Example responses
 
@@ -5432,12 +5774,12 @@ Dispatch a job by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`job_id`|path|integer(int64)|true|Job identifier. Must be valid resource identifier (integer).|
-|`truck_id`|query|integer(int64)|false|Truck identifier. Must be valid resource identifier (integer).|
-|`new_schedule_date`|query|string(DateTime)|false|New schedule date. Must be a date occurring in the future in an ISO 8601 compatible format.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`job_id`|path|integer(int64)|true|Job identifier.|
+|`truck_id`|query|integer(int64)|false|Truck identifier.|
+|`new_schedule_date`|query|string(DateTime)|false|New schedule date.|
 
 > Example responses
 
@@ -5644,10 +5986,10 @@ Get job by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`job_id`|path|integer(int64)|true|Job identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`job_id`|path|integer(int64)|true|Job identifier.|
 
 > Example responses
 
@@ -5727,22 +6069,22 @@ Get job by id.
     ],
     "contacts": [
       {
-        "email": "test@crosoftware.net",
+        "email": "john@crosoftware.net, jane@crosoftware.net",
         "fax": "+1 (360) 123-6543",
-        "name": "John Doe",
+        "name": "John Doe, Jane Smith",
         "notify_on_acknowledged_request": true,
         "notify_on_completed_request": true,
         "notify_on_dispatched_request": true,
         "notify_on_failed_request": true,
         "notify_on_new_request": true,
-        "number": "+1 (360) 123-6543"
+        "number": "+1 (360) 123-6543, +1 (706) 123-0987"
       }
     ],
     "customer_id": 1,
     "is_commercial": true,
     "name": "John Doe",
     "note": "A note about something",
-    "parent_id": 1,
+    "parent_id": 0,
     "reference_number": "A140",
     "renewal_date": "2049-10-31T11:32:38.390000",
     "sales_rep": "Jane Johnson",
@@ -5957,20 +6299,21 @@ List jobs.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
-|`schedule_gt`|query|string(DateTime)|false|Return only jobs scheduled after (must be in past). If unspecified, return all. Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`schedule_lt`|query|string(DateTime)|false|Return only jobs scheduled before. Must be a date in an ISO 8601 compatible format.|
-|`deleted`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all. Must be one of 0, 1, True, False (case insensitive).|
-|`completed`|query|boolean|false|If true, return only records marked completed (default). If false, return only records marked incomplete. If unspecified, return all. Must be one of 0, 1, True, False (case insensitive).|
-|`failed`|query|boolean|false|If true, return only records marked deleted. If false, return only records marked as deleted. If unspecified, return all. Must be one of 0, 1, True, False (case insensitive).|
-|`driver_id`|query|boolean|false|If specified, return only records matching this driver (default). If unspecified, return all. Must be valid resource identifier (integer).|
-|`truck_id`|query|boolean|false|If specified, return only records matching this truck (default). If unspecified, return all. Must be valid resource identifier (integer).|
-|`last_updated_gte`|query|string(DateTime)|true|Return only records updated after (must be in past). If unspecified, return all. Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`created_on_gte`|query|string(DateTime)|true|Return records created on or after the specified date. If unspecified, return all. Must be a date occurring in the past in an ISO 8601 compatible format.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
+|`schedule_gt`|query|string(DateTime)|false|Return only jobs scheduled after (must be in past). If unspecified, return all.|
+|`schedule_lt`|query|string(DateTime)|false|Return only jobs scheduled before.|
+|`deleted`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all.|
+|`completed`|query|boolean|false|If true, return only records marked completed. If false, return only records marked incomplete. If unspecified, return all.|
+|`completed_by_driver`|query|boolean|false|If true, return only records marked completed by a driver. If false, return only records marked incomplete. If unspecified, return all.|
+|`failed`|query|boolean|false|If true, return only records marked deleted. If false, return only records marked as deleted. If unspecified, return all.|
+|`driver_id`|query|boolean|false|If specified, return only records matching this driver (default). If unspecified, return all.|
+|`truck_id`|query|boolean|false|If specified, return only records matching this truck (default). If unspecified, return all.|
+|`last_updated_gte`|query|string(DateTime)|true|Return only records updated after (must be in past). If unspecified, return all.|
+|`created_on_gte`|query|string(DateTime)|true|Return records created on or after the specified date. If unspecified, return all.|
 
 > Example responses
 
@@ -6054,22 +6397,22 @@ List jobs.
         ],
         "contacts": [
           {
-            "email": "test@crosoftware.net",
+            "email": "john@crosoftware.net, jane@crosoftware.net",
             "fax": "+1 (360) 123-6543",
-            "name": "John Doe",
+            "name": "John Doe, Jane Smith",
             "notify_on_acknowledged_request": true,
             "notify_on_completed_request": true,
             "notify_on_dispatched_request": true,
             "notify_on_failed_request": true,
             "notify_on_new_request": true,
-            "number": "+1 (360) 123-6543"
+            "number": "+1 (360) 123-6543, +1 (706) 123-0987"
           }
         ],
         "customer_id": 1,
         "is_commercial": true,
         "name": "John Doe",
         "note": "A note about something",
-        "parent_id": 1,
+        "parent_id": 0,
         "reference_number": "A140",
         "renewal_date": "2049-10-31T11:32:38.390000",
         "sales_rep": "Jane Johnson",
@@ -6283,9 +6626,9 @@ Get location by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
 
 > Example responses
 
@@ -6441,10 +6784,10 @@ List locations for this user.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
 > Example responses
 
@@ -6610,11 +6953,11 @@ List all job materials.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
 > Example responses
 
@@ -6784,10 +7127,10 @@ List tenants for this user.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
 > Example responses
 
@@ -6962,10 +7305,10 @@ Get truck.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`truck_id`|path|integer(int64)|true|Truck identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`truck_id`|path|integer(int64)|true|Truck identifier.|
 
 > Example responses
 
@@ -7128,11 +7471,11 @@ List trucks.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
 > Example responses
 
@@ -7308,11 +7651,11 @@ Set driver for truck.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`truck_id`|path|integer(int64)|true|Truck identifier. Must be valid resource identifier (integer).|
-|`driver_id`|query|integer(int64)|true|Driver identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`truck_id`|path|integer(int64)|true|Truck identifier.|
+|`driver_id`|query|integer(int64)|true|Driver identifier.|
 
 > Example responses
 
@@ -7477,10 +7820,10 @@ Get user.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`user_id`|path|integer(int64)|true|User identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`user_id`|path|integer(int64)|true|User identifier.|
 
 > Example responses
 
@@ -7638,12 +7981,12 @@ List users.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`location_id`|path|integer(int64)|true|Location identifier (integer). Must be valid resource identifier (integer).|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
-|`username`|query|string|false|If specified, return only records with matching usernames. If unspecified, return all. Wildcard is &#039;*&#039;. Must be at least 1 and no more than 150 characters.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`location_id`|path|integer(int64)|true|Location identifier.|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
+|`username`|query|string|false|If specified, return only records with matching usernames. If unspecified, return all. Wildcard is &#039;*&#039;.|
 
 > Example responses
 
@@ -7827,8 +8170,8 @@ Create new webhook.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`body`|body|[CreateWebhookModel](#schemacreatewebhookmodel)|true||
 
 > Example responses
@@ -7987,9 +8330,9 @@ Deactivate (soft delete) webhook by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`hook_id`|path|integer(int64)|true|Webhook identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`hook_id`|path|integer(int64)|true|Webhook identifier.|
 
 > Example responses
 
@@ -8001,8 +8344,8 @@ Deactivate (soft delete) webhook by id.
     "Customer"
   ],
   "id": 1,
-  "last_http_fail": "2049-10-31T11:32:38.390000",
-  "last_http_success": "2049-10-31T11:32:38.390000",
+  "last_http_fail": "1",
+  "last_http_success": "1",
   "url": "https://test.url"
 }
 ```
@@ -8149,9 +8492,9 @@ Get webhook by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`hook_id`|path|integer(int64)|true|Webhook identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`hook_id`|path|integer(int64)|true|Webhook identifier.|
 
 > Example responses
 
@@ -8163,8 +8506,8 @@ Get webhook by id.
     "Customer"
   ],
   "id": 1,
-  "last_http_fail": "2049-10-31T11:32:38.390000",
-  "last_http_success": "2049-10-31T11:32:38.390000",
+  "last_http_fail": "1",
+  "last_http_success": "1",
   "url": "https://test.url"
 }
 ```
@@ -8311,11 +8654,11 @@ List webhooks.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`deleted`|query|boolean|false|Is record deleted (soft delete). Must be one of 0, 1, True, False (case insensitive).|
-|`page_limit`|query|integer(int64)|false|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`deleted`|query|boolean|false|Is record deleted (soft delete).|
+|`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
+|`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
 > Example responses
 
@@ -8331,8 +8674,8 @@ List webhooks.
         "Customer"
       ],
       "id": 1,
-      "last_http_fail": "2049-10-31T11:32:38.390000",
-      "last_http_success": "2049-10-31T11:32:38.390000",
+      "last_http_fail": "1",
+      "last_http_success": "1",
       "url": "https://test.url"
     }
   ],
@@ -8483,9 +8826,9 @@ Ping webhook by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`hook_id`|path|integer(int64)|true|Webhook identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`hook_id`|path|integer(int64)|true|Webhook identifier.|
 
 > Example responses
 
@@ -8493,7 +8836,7 @@ Ping webhook by id.
 
 ```json
 {
-  "delivery_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+  "delivery_id": "1",
   "http_status": 200
 }
 ```
@@ -8656,9 +8999,9 @@ Update webhook.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header. Must be at least 1 and no more than 256 characters.|
-|`x-tenant-id`|header|integer(int64)|true|Tenant identifier. Must be valid resource identifier (integer).|
-|`hook_id`|path|integer(int64)|true|Webhook identifier. Must be valid resource identifier (integer).|
+|`authorization`|header|string|true|Authorization header.|
+|`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
+|`hook_id`|path|integer(int64)|true|Webhook identifier.|
 |`body`|body|[UpdateWebhookModel](#schemaupdatewebhookmodel)|true||
 
 > Example responses
@@ -8739,22 +9082,22 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`asset_type`|[AssetTypeModel](#schemaassettypemodel)|-|
-|`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E'). Must be valid resource identifier (integer).|
-|`cluster`|integer(int64)|Cluster id. Must be valid resource identifier (integer).|
-|`customer_id`|integer(int64)|Customer identifier. Must be valid resource identifier (integer).|
-|`description`|string|Free-form text description. Must be at least 0 and no more than 2048 characters.|
-|`dispatched_on`|string(DateTime)|Time the asset was dispatched. Must be a date in an ISO 8601 compatible format.|
-|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
-|`is_returned`|boolean|Is asset returned. Must be one of 0, 1, True, False (case insensitive).|
-|`last_activity_on`|string(DateTime)|Last activity time. Must be a date in an ISO 8601 compatible format.|
-|`last_rental_invoice_on`|string(DateTime)|Last rental invoice time. Must be a date in an ISO 8601 compatible format.|
-|`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
+|`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E').|
+|`cluster`|integer(int64)|Cluster id.|
+|`customer_id`|integer(int64)|Customer identifier.|
+|`description`|string|Free-form text description.|
+|`dispatched_on`|string(DateTime)|Time the asset was dispatched.|
+|`id`|integer(int64)|Resource identifier.|
+|`is_returned`|boolean|Is asset returned.|
+|`last_activity_on`|string(DateTime)|Last activity time.|
+|`last_rental_invoice_on`|string(DateTime)|Last rental invoice time.|
+|`latitude`|number(float)|Latitude.|
 |`location`|[LocationModel](#schemalocationmodel)|-|
-|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
-|`longitude`|number(float)|longitude. Must be float greater than or equal to -180. Must be float less than or equal to 180.|
-|`number`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
-|`quantity`|integer(int64)|Asset quantity. Must be integer greater than or equal to 0.|
-|`returned_on`|string(DateTime)|Time the asset was returned. Must be a date in an ISO 8601 compatible format.|
+|`location_id`|integer(int64)|Location identifier.|
+|`longitude`|number(float)|longitude.|
+|`number`|string(PhoneNumber)|Phone number (free text).|
+|`quantity`|integer(int64)|Asset quantity.|
+|`returned_on`|string(DateTime)|Time the asset was returned.|
 
 <h2 id="tocSassettypemodel">AssetTypeModel</h2>
 
@@ -8776,14 +9119,14 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`deleted`|boolean|Is record deleted (soft delete). Must be one of 0, 1, True, False (case insensitive).|
-|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
-|`is_default`|boolean|Is asset the default asset. Must be one of 0, 1, True, False (case insensitive).|
-|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
-|`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`quantity`|integer(int64)|Asset type quantity. Must be integer greater than or equal to 0.|
-|`require_numbers`|boolean|Require asset numbers. Must be one of 0, 1, True, False (case insensitive).|
-|`weight`|number(float)|Must be integer greater than or equal to 0.|
+|`deleted`|boolean|Is record deleted (soft delete).|
+|`id`|integer(int64)|Resource identifier.|
+|`is_default`|boolean|Is asset the default asset.|
+|`location_id`|integer(int64)|Location identifier.|
+|`name`|string|Name (free text).|
+|`quantity`|integer(int64)|Asset type quantity.|
+|`require_numbers`|boolean|Require asset numbers.|
+|`weight`|number(float)|-|
 
 <h2 id="tocScreatecustomeraddressmodel">CreateCustomerAddressModel</h2>
 
@@ -8809,32 +9152,32 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`country`|string|Country code (ISO 3166-1 alpha 2). Must be a 2 character country code.|
-|`is_billing`|boolean|If true, this is the customer's billing address. Must be one of 0, 1, True, False (case insensitive).|
-|`is_shipping`|boolean|Customer's shipping address if true. Must be one of 0, 1, True, False (case insensitive).|
-|`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
-|`line_1`|string|Street address. Must be at least 1 and no more than 256 characters.|
-|`line_2`|string|Street address line 2. Must be at least 0 and no more than 256 characters.|
-|`line_3`|string|Street address line 3. Must be at least 0 and no more than 256 characters.|
-|`line_4`|string|Street address line 4 (doubles as county). Must be at least 0 and no more than 256 characters.|
-|`locality`|string|Address locality (e.g. city). Must be at least 1 and no more than 86 characters.|
-|`longitude`|number(float)|longitude. Must be float greater than or equal to -180. Must be float less than or equal to 180.|
-|`postcode`|string|Postal code (may include letters and symbols). Must be at least 1 and no more than 86 characters.|
-|`region`|string|Address region (e.g. state). Must be at least 1 and no more than 32 characters.|
+|`country`|string|Country code (ISO 3166-1 alpha 2).|
+|`is_billing`|boolean|If true, this is the customer's billing address.|
+|`is_shipping`|boolean|Customer's shipping address if true.|
+|`latitude`|number(float)|Latitude.|
+|`line_1`|string|Street address.|
+|`line_2`|string|Street address line 2.|
+|`line_3`|string|Street address line 3.|
+|`line_4`|string|Street address line 4 (doubles as county).|
+|`locality`|string|Address locality (e.g. city).|
+|`longitude`|number(float)|longitude.|
+|`postcode`|string|Postal code (may include letters and symbols).|
+|`region`|string|Address region (e.g. state).|
 
 <h2 id="tocScreatecustomercontactmodel">CreateCustomerContactModel</h2>
 
 ```json
 {
-  "email": "test@crosoftware.net",
+  "email": "john@crosoftware.net, jane@crosoftware.net",
   "fax": "+1 (360) 123-6543",
-  "name": "John Doe",
+  "name": "John Doe, Jane Smith",
   "notify_on_acknowledged_request": true,
   "notify_on_completed_request": true,
   "notify_on_dispatched_request": true,
   "notify_on_failed_request": true,
   "notify_on_new_request": true,
-  "number": "+1 (360) 123-6543"
+  "number": "+1 (360) 123-6543, +1 (706) 123-0987"
 }
 
 ```
@@ -8843,15 +9186,15 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`email`|string(Email)|Email address. Must be a valid email address.|
-|`fax`|string(PhoneNumber)|Fax number (free text). At least 7 characters, not more than 15.|
-|`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`notify_on_acknowledged_request`|boolean|Notify on acknowledge request. Must be one of 0, 1, True, False (case insensitive).|
-|`notify_on_completed_request`|boolean|Notify on completed request. Must be one of 0, 1, True, False (case insensitive).|
-|`notify_on_dispatched_request`|boolean|Notify on dispatched request. Must be one of 0, 1, True, False (case insensitive).|
-|`notify_on_failed_request`|boolean|Notify on failed request. Must be one of 0, 1, True, False (case insensitive).|
-|`notify_on_new_request`|boolean|Notify on new request. Must be one of 0, 1, True, False (case insensitive).|
-|`number`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
+|`email`|string(Email)|Email address list.|
+|`fax`|string(PhoneNumber)|Fax number (free text).|
+|`name`|string|Name list.|
+|`notify_on_acknowledged_request`|boolean|Notify on acknowledge request.|
+|`notify_on_completed_request`|boolean|Notify on completed request.|
+|`notify_on_dispatched_request`|boolean|Notify on dispatched request.|
+|`notify_on_failed_request`|boolean|Notify on failed request.|
+|`notify_on_new_request`|boolean|Notify on new request.|
+|`number`|string|Phone number list.|
 
 <h2 id="tocScreatecustomerlocationmodel">CreateCustomerLocationModel</h2>
 
@@ -8871,12 +9214,12 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
-|`note`|string|Notes (free text). Must be at least 0 and no more than 2048 characters.|
-|`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
-|`renewal_date`|string(DateTime)|Renewal date. Must be a date in an ISO 8601 compatible format.|
-|`sales_rep`|string|Name of sales representative. Must be at least 1 and no more than 64 characters.|
-|`suspension_id`|integer(int64)|Suspension identifier. Must be valid resource identifier (integer).|
+|`is_commercial`|boolean|Commercial address if true, private if false.|
+|`note`|string|Notes (free text).|
+|`reference_number`|string|Reference number (free text).|
+|`renewal_date`|string(DateTime)|Renewal date.|
+|`sales_rep`|string|Name of sales representative.|
+|`suspension_id`|integer(int64)|Suspension identifier.|
 
 <h2 id="tocScreatecustomermodel">CreateCustomerModel</h2>
 
@@ -8900,21 +9243,21 @@ Update webhook.
   ],
   "contacts": [
     {
-      "email": "test@crosoftware.net",
+      "email": "john@crosoftware.net, jane@crosoftware.net",
       "fax": "+1 (360) 123-6543",
-      "name": "John Doe",
+      "name": "John Doe, Jane Smith",
       "notify_on_acknowledged_request": true,
       "notify_on_completed_request": true,
       "notify_on_dispatched_request": true,
       "notify_on_failed_request": true,
       "notify_on_new_request": true,
-      "number": "+1 (360) 123-6543"
+      "number": "+1 (360) 123-6543, +1 (706) 123-0987"
     }
   ],
   "is_commercial": true,
   "name": "John Doe",
   "note": "A note about something",
-  "parent_id": 1,
+  "parent_id": 0,
   "reference_number": "A140",
   "renewal_date": "2049-10-31T11:32:38.390000",
   "sales_rep": "Jane Johnson",
@@ -8929,14 +9272,14 @@ Update webhook.
 |---|---|---|
 |`addresses`|array[[CreateCustomerAddressModel](#schemacreatecustomeraddressmodel)]|-|
 |`contacts`|array[[CreateCustomerContactModel](#schemacreatecustomercontactmodel)]|-|
-|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
-|`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`note`|string|Notes (free text). Must be at least 0 and no more than 2048 characters.|
-|`parent_id`|integer(int64)|Parent record identifier (integer). Must be valid resource identifier (integer).|
-|`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
-|`renewal_date`|string(DateTime)|Renewal date. Must be a date in an ISO 8601 compatible format.|
-|`sales_rep`|string|Name of sales representative. Must be at least 1 and no more than 64 characters.|
-|`suspension_id`|integer(int64)|Suspension identifier. Must be valid resource identifier (integer).|
+|`is_commercial`|boolean|Commercial address if true, private if false.|
+|`name`|string|Name (free text).|
+|`note`|string|Notes (free text).|
+|`parent_id`|integer(int64)|Parent record identifier.|
+|`reference_number`|string|Reference number (free text).|
+|`renewal_date`|string(DateTime)|Renewal date.|
+|`sales_rep`|string|Name of sales representative.|
+|`suspension_id`|integer(int64)|Suspension identifier.|
 
 <h2 id="tocScreatewebhookmodel">CreateWebhookModel</h2>
 
@@ -8955,9 +9298,9 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`events`|array[string]|Hook event. Must be a valid hook event (one of: Ping, Customer, CustomerLocation, Job, Truck).|
-|`secret`|string|Response body HMAC signing key. Must match expression ^\s*[a-zA-Z0-9\/\+=]{11,270}\s*$ Base64 encoded string.|
-|`url`|string(Url)|Callback URL. URL conforming to RFC 1738.|
+|`events`|array[string]|Hook event.|
+|`secret`|string|Response body HMAC signing key.|
+|`url`|string(Url)|Callback URL.|
 
 <h2 id="tocScustomeraddresslistmodel">CustomerAddressListModel</h2>
 
@@ -8993,11 +9336,11 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|array[[CustomerAddressModel](#schemacustomeraddressmodel)]|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocScustomeraddressmodel">CustomerAddressModel</h2>
 
@@ -9025,20 +9368,20 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`address_id`|integer(int64)|Customer address identifier. Must be valid resource identifier (integer).|
-|`country`|string|Country code (ISO 3166-1 alpha 2). Must be a 2 character country code.|
-|`is_billing`|boolean|If true, this is the customer's billing address. Must be one of 0, 1, True, False (case insensitive).|
-|`is_physical`|boolean|Physical address if true. Must be one of 0, 1, True, False (case insensitive).|
-|`is_shipping`|boolean|Customer's shipping address if true. Must be one of 0, 1, True, False (case insensitive).|
-|`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
-|`line_1`|string|Street address. Must be at least 1 and no more than 256 characters.|
-|`line_2`|string|Street address line 2. Must be at least 0 and no more than 256 characters.|
-|`line_3`|string|Street address line 3. Must be at least 0 and no more than 256 characters.|
-|`line_4`|string|Street address line 4 (doubles as county). Must be at least 0 and no more than 256 characters.|
-|`locality`|string|Address locality (e.g. city). Must be at least 1 and no more than 86 characters.|
-|`longitude`|number(float)|longitude. Must be float greater than or equal to -180. Must be float less than or equal to 180.|
-|`postcode`|string|Postal code (may include letters and symbols). Must be at least 1 and no more than 86 characters.|
-|`region`|string|Address region (e.g. state). Must be at least 1 and no more than 32 characters.|
+|`address_id`|integer(int64)|Customer address identifier.|
+|`country`|string|Country code (ISO 3166-1 alpha 2).|
+|`is_billing`|boolean|If true, this is the customer's billing address.|
+|`is_physical`|boolean|Physical address if true.|
+|`is_shipping`|boolean|Customer's shipping address if true.|
+|`latitude`|number(float)|Latitude.|
+|`line_1`|string|Street address.|
+|`line_2`|string|Street address line 2.|
+|`line_3`|string|Street address line 3.|
+|`line_4`|string|Street address line 4 (doubles as county).|
+|`locality`|string|Address locality (e.g. city).|
+|`longitude`|number(float)|longitude.|
+|`postcode`|string|Postal code (may include letters and symbols).|
+|`region`|string|Address region (e.g. state).|
 
 <h2 id="tocScustomercontactlistmodel">CustomerContactListModel</h2>
 
@@ -9049,15 +9392,15 @@ Update webhook.
   "results": [
     {
       "contact_id": 1,
-      "email": "test@crosoftware.net",
+      "email": "john@crosoftware.net, jane@crosoftware.net",
       "fax": "+1 (360) 123-6543",
-      "name": "John Doe",
+      "name": "John Doe, Jane Smith",
       "notify_on_acknowledged_request": true,
       "notify_on_completed_request": true,
       "notify_on_dispatched_request": true,
       "notify_on_failed_request": true,
       "notify_on_new_request": true,
-      "number": "+1 (360) 123-6543"
+      "number": "+1 (360) 123-6543, +1 (706) 123-0987"
     }
   ],
   "total_count": 1001,
@@ -9070,26 +9413,26 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|array[[CustomerContactModel](#schemacustomercontactmodel)]|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocScustomercontactmodel">CustomerContactModel</h2>
 
 ```json
 {
   "contact_id": 1,
-  "email": "test@crosoftware.net",
+  "email": "john@crosoftware.net, jane@crosoftware.net",
   "fax": "+1 (360) 123-6543",
-  "name": "John Doe",
+  "name": "John Doe, Jane Smith",
   "notify_on_acknowledged_request": true,
   "notify_on_completed_request": true,
   "notify_on_dispatched_request": true,
   "notify_on_failed_request": true,
   "notify_on_new_request": true,
-  "number": "+1 (360) 123-6543"
+  "number": "+1 (360) 123-6543, +1 (706) 123-0987"
 }
 
 ```
@@ -9098,16 +9441,16 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`contact_id`|integer(int64)|Customer contact identifier. Must be valid resource identifier (integer).|
-|`email`|string(Email)|Email address. Must be a valid email address.|
-|`fax`|string(PhoneNumber)|Fax number (free text). At least 7 characters, not more than 15.|
-|`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`notify_on_acknowledged_request`|boolean|Notify on acknowledge request. Must be one of 0, 1, True, False (case insensitive).|
-|`notify_on_completed_request`|boolean|Notify on completed request. Must be one of 0, 1, True, False (case insensitive).|
-|`notify_on_dispatched_request`|boolean|Notify on dispatched request. Must be one of 0, 1, True, False (case insensitive).|
-|`notify_on_failed_request`|boolean|Notify on failed request. Must be one of 0, 1, True, False (case insensitive).|
-|`notify_on_new_request`|boolean|Notify on new request. Must be one of 0, 1, True, False (case insensitive).|
-|`number`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
+|`contact_id`|integer(int64)|Customer contact identifier.|
+|`email`|string(Email)|Email address list.|
+|`fax`|string(PhoneNumber)|Fax number (free text).|
+|`name`|string|Name list.|
+|`notify_on_acknowledged_request`|boolean|Notify on acknowledge request.|
+|`notify_on_completed_request`|boolean|Notify on completed request.|
+|`notify_on_dispatched_request`|boolean|Notify on dispatched request.|
+|`notify_on_failed_request`|boolean|Notify on failed request.|
+|`notify_on_new_request`|boolean|Notify on new request.|
+|`number`|string|Phone number list.|
 
 <h2 id="tocScustomerlistmodel">CustomerListModel</h2>
 
@@ -9135,22 +9478,22 @@ Update webhook.
       ],
       "contacts": [
         {
-          "email": "test@crosoftware.net",
+          "email": "john@crosoftware.net, jane@crosoftware.net",
           "fax": "+1 (360) 123-6543",
-          "name": "John Doe",
+          "name": "John Doe, Jane Smith",
           "notify_on_acknowledged_request": true,
           "notify_on_completed_request": true,
           "notify_on_dispatched_request": true,
           "notify_on_failed_request": true,
           "notify_on_new_request": true,
-          "number": "+1 (360) 123-6543"
+          "number": "+1 (360) 123-6543, +1 (706) 123-0987"
         }
       ],
       "customer_id": 1,
       "is_commercial": true,
       "name": "John Doe",
       "note": "A note about something",
-      "parent_id": 1,
+      "parent_id": 0,
       "reference_number": "A140",
       "renewal_date": "2049-10-31T11:32:38.390000",
       "sales_rep": "Jane Johnson",
@@ -9167,11 +9510,11 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|array[[CustomerModel](#schemacustomermodel)]|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocScustomerlocationlistmodel">CustomerLocationListModel</h2>
 
@@ -9200,11 +9543,11 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|array[[CustomerLocationModel](#schemacustomerlocationmodel)]|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocScustomerlocationmodel">CustomerLocationModel</h2>
 
@@ -9225,13 +9568,13 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
-|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
-|`note`|string|Notes (free text). Must be at least 0 and no more than 2048 characters.|
-|`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
-|`renewal_date`|string(DateTime)|Renewal date. Must be a date in an ISO 8601 compatible format.|
-|`sales_rep`|string|Name of sales representative. Must be at least 1 and no more than 64 characters.|
-|`suspension_id`|integer(int64)|Suspension identifier. Must be valid resource identifier (integer).|
+|`id`|integer(int64)|Resource identifier.|
+|`is_commercial`|boolean|Commercial address if true, private if false.|
+|`note`|string|Notes (free text).|
+|`reference_number`|string|Reference number (free text).|
+|`renewal_date`|string(DateTime)|Renewal date.|
+|`sales_rep`|string|Name of sales representative.|
+|`suspension_id`|integer(int64)|Suspension identifier.|
 
 <h2 id="tocScustomermodel">CustomerModel</h2>
 
@@ -9255,22 +9598,22 @@ Update webhook.
   ],
   "contacts": [
     {
-      "email": "test@crosoftware.net",
+      "email": "john@crosoftware.net, jane@crosoftware.net",
       "fax": "+1 (360) 123-6543",
-      "name": "John Doe",
+      "name": "John Doe, Jane Smith",
       "notify_on_acknowledged_request": true,
       "notify_on_completed_request": true,
       "notify_on_dispatched_request": true,
       "notify_on_failed_request": true,
       "notify_on_new_request": true,
-      "number": "+1 (360) 123-6543"
+      "number": "+1 (360) 123-6543, +1 (706) 123-0987"
     }
   ],
   "customer_id": 1,
   "is_commercial": true,
   "name": "John Doe",
   "note": "A note about something",
-  "parent_id": 1,
+  "parent_id": 0,
   "reference_number": "A140",
   "renewal_date": "2049-10-31T11:32:38.390000",
   "sales_rep": "Jane Johnson",
@@ -9285,15 +9628,15 @@ Update webhook.
 |---|---|---|
 |`addresses`|array[[CreateCustomerAddressModel](#schemacreatecustomeraddressmodel)]|-|
 |`contacts`|array[[CreateCustomerContactModel](#schemacreatecustomercontactmodel)]|-|
-|`customer_id`|integer(int64)|Customer identifier. Must be valid resource identifier (integer).|
-|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
-|`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`note`|string|Notes (free text). Must be at least 0 and no more than 2048 characters.|
-|`parent_id`|integer(int64)|Parent record identifier (integer). Must be valid resource identifier (integer).|
-|`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
-|`renewal_date`|string(DateTime)|Renewal date. Must be a date in an ISO 8601 compatible format.|
-|`sales_rep`|string|Name of sales representative. Must be at least 1 and no more than 64 characters.|
-|`suspension_id`|integer(int64)|Suspension identifier. Must be valid resource identifier (integer).|
+|`customer_id`|integer(int64)|Customer identifier.|
+|`is_commercial`|boolean|Commercial address if true, private if false.|
+|`name`|string|Name (free text).|
+|`note`|string|Notes (free text).|
+|`parent_id`|integer(int64)|Parent record identifier.|
+|`reference_number`|string|Reference number (free text).|
+|`renewal_date`|string(DateTime)|Renewal date.|
+|`sales_rep`|string|Name of sales representative.|
+|`suspension_id`|integer(int64)|Suspension identifier.|
 
 <h2 id="tocSdriverlistmodel">DriverListModel</h2>
 
@@ -9331,11 +9674,11 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|array[[DriverModel](#schemadrivermodel)]|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocSdrivermodel">DriverModel</h2>
 
@@ -9365,22 +9708,100 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`address`|string|Street address. Must be at least 1 and no more than 256 characters.|
-|`can_convert_to_group`|boolean|Can driver convert to group. Must be one of 0, 1, True, False (case insensitive).|
-|`can_create_requests`|boolean|Can driver create requests. Must be one of 0, 1, True, False (case insensitive).|
-|`can_edit_requests`|boolean|Can driver edit requests. Must be one of 0, 1, True, False (case insensitive).|
-|`can_reposition_asset`|boolean|Can driver reposition asset. Must be one of 0, 1, True, False (case insensitive).|
-|`city`|string|Address locality (e.g. city). Must be at least 1 and no more than 86 characters.|
-|`disable_shift_tracking`|boolean|Disable shift tracking. Must be one of 0, 1, True, False (case insensitive).|
-|`email`|string(Email)|Email address. Must be a valid email address.|
-|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
-|`license_number`|string|Driver's license number. Must be at least 1 and no more than 100 characters.|
-|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
-|`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`phone_number`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
-|`state`|string|Address region (e.g. state). Must be at least 1 and no more than 32 characters.|
-|`third_party_hauler_id`|string(Uuid)|Third party hauler identifier. Must be a valid UUID.|
-|`zip`|string|Postal code (may include letters and symbols). Must be at least 1 and no more than 86 characters.|
+|`address`|string|Street address.|
+|`can_convert_to_group`|boolean|Can driver convert to group.|
+|`can_create_requests`|boolean|Can driver create requests.|
+|`can_edit_requests`|boolean|Can driver edit requests.|
+|`can_reposition_asset`|boolean|Can driver reposition asset.|
+|`city`|string|Address locality (e.g. city).|
+|`disable_shift_tracking`|boolean|Disable shift tracking.|
+|`email`|string(Email)|Email address.|
+|`id`|integer(int64)|Resource identifier.|
+|`license_number`|string|Driver's license number.|
+|`location_id`|integer(int64)|Location identifier.|
+|`name`|string|Name (free text).|
+|`phone_number`|string(PhoneNumber)|Phone number (free text).|
+|`state`|string|Address region (e.g. state).|
+|`third_party_hauler_id`|string(Uuid)|Third party hauler identifier.|
+|`zip`|string|Postal code (may include letters and symbols).|
+
+<h2 id="tocSdumpdestinationlistmodel">DumpDestinationListModel</h2>
+
+```json
+{
+  "current_limit": 100,
+  "current_page": 1,
+  "results": [
+    {
+      "address": "123 Some St.",
+      "city": "Sequim",
+      "contact_email": "test@crosoftware.net",
+      "contact_name": "John Doe",
+      "contact_phone": "+1 (360) 123-6543",
+      "description": "A user entered/human readable text description.",
+      "id": 1,
+      "is_holding_yard": true,
+      "latitude": 56.2,
+      "location_id": 1,
+      "longitude": 128.1,
+      "state": "WA",
+      "zip": "98368"
+    }
+  ],
+  "total_count": 1001,
+  "total_pages": 3
+}
+
+```
+
+<a id="schemadumpdestinationlistmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
+|`results`|array[[DumpDestinationModel](#schemadumpdestinationmodel)]|-|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
+
+<h2 id="tocSdumpdestinationmodel">DumpDestinationModel</h2>
+
+```json
+{
+  "address": "123 Some St.",
+  "city": "Sequim",
+  "contact_email": "test@crosoftware.net",
+  "contact_name": "John Doe",
+  "contact_phone": "+1 (360) 123-6543",
+  "description": "A user entered/human readable text description.",
+  "id": 1,
+  "is_holding_yard": true,
+  "latitude": 56.2,
+  "location_id": 1,
+  "longitude": 128.1,
+  "state": "WA",
+  "zip": "98368"
+}
+
+```
+
+<a id="schemadumpdestinationmodel"></a>
+
+|Name|Type|Description|
+|---|---|---|
+|`address`|string|Street address.|
+|`city`|string|Address locality (e.g. city).|
+|`contact_email`|string(Email)|Email address.|
+|`contact_name`|string|Name (free text).|
+|`contact_phone`|string(PhoneNumber)|Phone number (free text).|
+|`description`|string|Free-form text description.|
+|`id`|integer(int64)|Resource identifier.|
+|`is_holding_yard`|boolean|Location is holding yard.|
+|`latitude`|number(float)|Latitude.|
+|`location_id`|integer(int64)|Location identifier.|
+|`longitude`|number(float)|longitude.|
+|`state`|string|Address region (e.g. state).|
+|`zip`|string|Postal code (may include letters and symbols).|
 
 <h2 id="tocSerrorresponsemodel">ErrorResponseModel</h2>
 
@@ -9397,9 +9818,9 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`detail`|string|Error message details. Must be a string.|
-|`explanation`|string|Error message general explanation. Must be a string.|
-|`title`|string|Error message data identifier. Must be a string.|
+|`detail`|string|Error message details.|
+|`explanation`|string|Error message general explanation.|
+|`title`|string|Error message data identifier.|
 
 <h2 id="tocSgpseventcoordsprofilemodel">GpsEventCoordsProfileModel</h2>
 
@@ -9417,10 +9838,10 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`heading`|number(float)|Direction of travel at time of measurement. Must be float greater than or equal to 0. Must be float less than 360.|
-|`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
-|`longitude`|number(float)|longitude. Must be float greater than or equal to -180. Must be float less than or equal to 180.|
-|`speed`|number(float)|Rate of travel at time of measurement. Must be float greater than or equal to 0.|
+|`heading`|number(float)|Direction of travel at time of measurement.|
+|`latitude`|number(float)|Latitude.|
+|`longitude`|number(float)|longitude.|
+|`speed`|number(float)|Rate of travel at time of measurement.|
 
 <h2 id="tocSgpseventlocationprofilemodel">GpsEventLocationProfileModel</h2>
 
@@ -9442,7 +9863,7 @@ Update webhook.
 |Name|Type|Description|
 |---|---|---|
 |`coords`|[GpsEventCoordsProfileModel](#schemagpseventcoordsprofilemodel)|-|
-|`timestamp`|string(DateTime)|Timestamp of creation (must be in past). Must be a date occurring in the past in an ISO 8601 compatible format.|
+|`timestamp`|string(DateTime)|Timestamp of creation (must be in past).|
 
 <h2 id="tocSgpseventprofilemodel">GpsEventProfileModel</h2>
 
@@ -9488,15 +9909,15 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`bearing`|number(float)|Direction of travel at time of measurement. Must be float greater than or equal to 0. Must be float less than 360.|
-|`created_on`|string(DateTime)|Timestamp of creation (must be in past). Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`device_name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`driver_id`|integer(int64)|Driver identifier. Must be valid resource identifier (integer).|
-|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
-|`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
-|`longitude`|number(float)|longitude. Must be float greater than or equal to -180. Must be float less than or equal to 180.|
-|`truck_id`|integer(int64)|Truck identifier. Must be valid resource identifier (integer).|
-|`velocity`|number(float)|Rate of travel at time of measurement. Must be float greater than or equal to 0.|
+|`bearing`|number(float)|Direction of travel at time of measurement.|
+|`created_on`|string(DateTime)|Timestamp of creation (must be in past).|
+|`device_name`|string|Name (free text).|
+|`driver_id`|integer(int64)|Driver identifier.|
+|`id`|integer(int64)|Resource identifier.|
+|`latitude`|number(float)|Latitude.|
+|`longitude`|number(float)|longitude.|
+|`truck_id`|integer(int64)|Truck identifier.|
+|`velocity`|number(float)|Rate of travel at time of measurement.|
 
 <h2 id="tocSjoblistmodel">JobListModel</h2>
 
@@ -9578,22 +9999,22 @@ Update webhook.
         ],
         "contacts": [
           {
-            "email": "test@crosoftware.net",
+            "email": "john@crosoftware.net, jane@crosoftware.net",
             "fax": "+1 (360) 123-6543",
-            "name": "John Doe",
+            "name": "John Doe, Jane Smith",
             "notify_on_acknowledged_request": true,
             "notify_on_completed_request": true,
             "notify_on_dispatched_request": true,
             "notify_on_failed_request": true,
             "notify_on_new_request": true,
-            "number": "+1 (360) 123-6543"
+            "number": "+1 (360) 123-6543, +1 (706) 123-0987"
           }
         ],
         "customer_id": 1,
         "is_commercial": true,
         "name": "John Doe",
         "note": "A note about something",
-        "parent_id": 1,
+        "parent_id": 0,
         "reference_number": "A140",
         "renewal_date": "2049-10-31T11:32:38.390000",
         "sales_rep": "Jane Johnson",
@@ -9668,11 +10089,11 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|array[[JobModel](#schemajobmodel)]|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocSjobmodel">JobModel</h2>
 
@@ -9750,22 +10171,22 @@ Update webhook.
     ],
     "contacts": [
       {
-        "email": "test@crosoftware.net",
+        "email": "john@crosoftware.net, jane@crosoftware.net",
         "fax": "+1 (360) 123-6543",
-        "name": "John Doe",
+        "name": "John Doe, Jane Smith",
         "notify_on_acknowledged_request": true,
         "notify_on_completed_request": true,
         "notify_on_dispatched_request": true,
         "notify_on_failed_request": true,
         "notify_on_new_request": true,
-        "number": "+1 (360) 123-6543"
+        "number": "+1 (360) 123-6543, +1 (706) 123-0987"
       }
     ],
     "customer_id": 1,
     "is_commercial": true,
     "name": "John Doe",
     "note": "A note about something",
-    "parent_id": 1,
+    "parent_id": 0,
     "reference_number": "A140",
     "renewal_date": "2049-10-31T11:32:38.390000",
     "sales_rep": "Jane Johnson",
@@ -9836,65 +10257,65 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`arrived_at_dest`|string(DateTime)|Entered by driver for dispatcher and customer. Asset arrival at destination time. Only applicable for jobs with a valid dump destination. Must be a date in an ISO 8601 compatible format.|
-|`arrived_on`|string(DateTime)|Drive start time entered by driver for dispatcher and customer (arrived at job slider). Must be a date in an ISO 8601 compatible format.|
+|`arrived_at_dest`|string(DateTime)|Entered by driver for dispatcher and customer. Asset arrival at destination time. Only applicable for jobs with a valid dump destination.|
+|`arrived_on`|string(DateTime)|Drive start time entered by driver for dispatcher and customer (arrived at job slider).|
 |`asset`|[AssetModel](#schemaassetmodel)|-|
-|`asset_dropped`|integer(int64)|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types 'D', 'E'. Must be integer greater than or equal to 0. Must be integer less than or equal to 10000.|
-|`asset_id`|integer(int64)|Job asset identifier. Applicable to job types 'E', 'P', 'R'. Must be valid resource identifier (integer).|
-|`asset_quantity`|integer(int64)|How many assets are being serviced within a cluster (for jobs assigned to an asset cluster). For jobs dispatched by routes, or manually dispatched route stops, this value is 0 or 1. Must be integer greater than or equal to 0.|
+|`asset_dropped`|integer(int64)|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types 'D', 'E'.|
+|`asset_id`|integer(int64)|Job asset identifier. Applicable to job types 'E', 'P', 'R'.|
+|`asset_quantity`|integer(int64)|How many assets are being serviced within a cluster (for jobs assigned to an asset cluster). For jobs dispatched by routes, or manually dispatched route stops, this value is 0 or 1.|
 |`asset_type`|[AssetTypeModel](#schemaassettypemodel)|-|
-|`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E'). Must be valid resource identifier (integer).|
-|`completed_by`|integer(int64)|Dispatcher or driver id. Must be valid resource identifier (integer).|
-|`completed_by_driver`|boolean|If TRUE, completed by driver. If FALSE, completed by dispatcher. Must be one of 0, 1, True, False (case insensitive).|
-|`completed_on`|string(DateTime)|Job completion time. Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`confirmed_on`|string(DateTime)|Job confirmation date. Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`created_by_id`|integer(int64)|Customer, dispatcher, or driver id. Must be valid resource identifier (integer).|
+|`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E').|
+|`completed_by`|integer(int64)|Dispatcher or driver id.|
+|`completed_by_driver`|boolean|If TRUE, completed by driver. If FALSE, completed by dispatcher.|
+|`completed_on`|string(DateTime)|Job completion time.|
+|`confirmed_on`|string(DateTime)|Job confirmation date.|
+|`created_by_id`|integer(int64)|Customer, dispatcher, or driver id.|
 |`customer`|[CustomerModel](#schemacustomermodel)|-|
-|`customer_id`|integer(int64)|Customer identifier. Must be valid resource identifier (integer).|
-|`customer_notes`|string|Notes entered by customers to communicate with dispatchers. Must be at least 0 and no more than 2048 characters.|
-|`desired_asset_desc`|string|Free-form text entered by dispatchers and drivers to be used as the future asset description. Must be at least 1 and no more than 2048 characters.|
-|`dispatch_priority`|string|Entered by dispatchers to determine dispatch order. Must be one of: 'H', 'M', 'L' (where 'H'='High', 'M'='Medium', 'L'='Low').|
-|`dispatched_by_route`|integer(int64)|Route id of dispatching route (or NULL if not dispatched by a route). Must be valid resource identifier (integer).|
-|`dispatched_on`|string(DateTime)|Time the job is assigned to a truck. Must be a date in an ISO 8601 compatible format.|
-|`dispatcher_notes`|string|Entered by dispatchers, read by drivers and dispatchers. Must be at least 0 and no more than 2048 characters.|
-|`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched. Must be one of 0, 1, True, False (case insensitive).|
-|`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers. Must be at least 0 and no more than 2048 characters.|
+|`customer_id`|integer(int64)|Customer identifier.|
+|`customer_notes`|string|Notes entered by customers to communicate with dispatchers.|
+|`desired_asset_desc`|string|Free-form text entered by dispatchers and drivers to be used as the future asset description.|
+|`dispatch_priority`|string|Entered by dispatchers to determine dispatch order.|
+|`dispatched_by_route`|integer(int64)|Route id of dispatching route (or NULL if not dispatched by a route).|
+|`dispatched_on`|string(DateTime)|Time the job is assigned to a truck.|
+|`dispatcher_notes`|string|Entered by dispatchers, read by drivers and dispatchers.|
+|`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched.|
+|`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers.|
 |`dump_location`|[LocationModel](#schemalocationmodel)|-|
-|`dump_location_id`|integer(int64)|Asset or asset cluster dump location identifier (e.g. trash bin needs dumped before returning from customer). Must be valid resource identifier (integer).|
-|`dumped_on`|string(DateTime)|Dump request completion date. Must be a date in an ISO 8601 compatible format.|
-|`end_time`|string(DateTime)|Future estimated time of job completion. Must be a date in an ISO 8601 compatible format.|
-|`fail_reason`|string|Failure description selected by a driver for use by dispatchers. Must be at least 0 and no more than 64 characters.|
+|`dump_location_id`|integer(int64)|Asset or asset cluster dump location identifier (e.g. trash bin needs dumped before returning from customer).|
+|`dumped_on`|string(DateTime)|Dump request completion date.|
+|`end_time`|string(DateTime)|Future estimated time of job completion.|
+|`fail_reason`|string|Failure description selected by a driver for use by dispatchers.|
 |`final_location`|[LocationModel](#schemalocationmodel)|-|
-|`final_location_id`|integer(int64)|Final location identifier. Used by dispatchers for prioritizing jobs. Used by drivers to know where to leave the asset on job completion. Must be valid resource identifier (integer).|
-|`flags`|string|Job notes. Must be at least 0 and no more than 64 characters.|
-|`invoice_notes`|string|Invoice notes from the billing system. Must be at least 0 and no more than 2048 characters.|
-|`is_completed`|boolean|Job completion flag set by dispatchers and drivers. Must be one of 0, 1, True, False (case insensitive).|
-|`is_declined`|boolean|Job completion flag set by dispatchers and drivers. Must be one of 0, 1, True, False (case insensitive).|
-|`is_deleted`|boolean|Indicates whether job is still valid. Must be one of 0, 1, True, False (case insensitive).|
-|`is_failed`|boolean|Set by drivers and dispatchers to indicate a failed job. Must be one of 0, 1, True, False (case insensitive).|
-|`job_group_id`|integer(int64)|Job group identifier for group jobs (vs service, exchange, etc.). Must be valid resource identifier (integer).|
-|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
-|`merged_with_route`|integer(int64)|Assigned by dispatchers for dispatchers and drivers. Must be valid resource identifier (integer).|
-|`original_schedule_date`|string(DateTime)|Original scheduling date. Must be a date in an ISO 8601 compatible format.|
-|`pickup_date`|string(DateTime)|A pickup job is scheduled for this date upon job completion. If the asset or cluster is assigned to a route stop, the route stop will be deleted. Must be in the future. Must be a date in an ISO 8601 compatible format.|
-|`priority`|integer(int64)|Assigned by dispatchers for job order completion determination for drivers. Must be integer greater than or equal to -999999. Must be integer less than or equal to -1.|
-|`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
-|`requested_on`|string(DateTime)|Requested date. Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`require_image`|boolean|Set by dispatchers and drivers, requires drivers to upload one or more job images before completion. Must be one of 0, 1, True, False (case insensitive).|
-|`require_material`|boolean|Set by dispatchers and drivers, requires drivers to set a material before completing a job. Must be one of 0, 1, True, False (case insensitive).|
-|`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion. Must be one of 0, 1, True, False (case insensitive).|
-|`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion. Must be one of 0, 1, True, False (case insensitive).|
-|`scale_ticket`|string|Scale ticket. Must be at least 0 and no more than 64 characters.|
-|`schedule_date`|string(DateTime)|Scheduled job completion date. Must be a date in an ISO 8601 compatible format.|
+|`final_location_id`|integer(int64)|Final location identifier. Used by dispatchers for prioritizing jobs. Used by drivers to know where to leave the asset on job completion.|
+|`flags`|string|Job notes.|
+|`invoice_notes`|string|Invoice notes from the billing system.|
+|`is_completed`|boolean|Job completion flag set by dispatchers and drivers.|
+|`is_declined`|boolean|Job completion flag set by dispatchers and drivers.|
+|`is_deleted`|boolean|Indicates whether job is still valid.|
+|`is_failed`|boolean|Set by drivers and dispatchers to indicate a failed job.|
+|`job_group_id`|integer(int64)|Job group identifier for group jobs (vs service, exchange, etc.).|
+|`location_id`|integer(int64)|Location identifier.|
+|`merged_with_route`|integer(int64)|Assigned by dispatchers for dispatchers and drivers.|
+|`original_schedule_date`|string(DateTime)|Original scheduling date.|
+|`pickup_date`|string(DateTime)|A pickup job is scheduled for this date upon job completion. If the asset or cluster is assigned to a route stop, the route stop will be deleted. Must be in the future.|
+|`priority`|integer(int64)|Assigned by dispatchers for job order completion determination for drivers.|
+|`reference_number`|string|Reference number (free text).|
+|`requested_on`|string(DateTime)|Requested date.|
+|`require_image`|boolean|Set by dispatchers and drivers, requires drivers to upload one or more job images before completion.|
+|`require_material`|boolean|Set by dispatchers and drivers, requires drivers to set a material before completing a job.|
+|`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion.|
+|`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion.|
+|`scale_ticket`|string|Scale ticket.|
+|`schedule_date`|string(DateTime)|Scheduled job completion date.|
 |`start_location`|[LocationModel](#schemalocationmodel)|-|
-|`start_location_id`|integer(int64)|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers. Must be valid resource identifier (integer).|
-|`start_time`|string(DateTime)|Time customer has requested job start, set by dispatchers for dispatchers and drivers. Must be a date in an ISO 8601 compatible format.|
-|`third_party_hauler_id`|string(Uuid)|Third party hauler identifier. Must be a valid UUID.|
-|`times_failed`|integer(int64)|Number of times a job has been attempted and failed. Must be integer greater than or equal to 0.|
-|`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers. Must be integer greater than or equal to 0.|
-|`truck_id`|integer(int64)|Truck identifier. Must be valid resource identifier (integer).|
-|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'E', 'L', 'P', 'D', 'R'.|
-|`weighed_on`|string(DateTime)|Time of truck weight entry. Must be a date occurring in the past in an ISO 8601 compatible format.|
+|`start_location_id`|integer(int64)|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers.|
+|`start_time`|string(DateTime)|Time customer has requested job start, set by dispatchers for dispatchers and drivers.|
+|`third_party_hauler_id`|string(Uuid)|Third party hauler identifier.|
+|`times_failed`|integer(int64)|Number of times a job has been attempted and failed.|
+|`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers.|
+|`truck_id`|integer(int64)|Truck identifier.|
+|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start.|
+|`weighed_on`|string(DateTime)|Time of truck weight entry.|
 
 <h2 id="tocSlocationlistmodel">LocationListModel</h2>
 
@@ -9919,11 +10340,11 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|array[[LocationModel](#schemalocationmodel)]|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocSlocationmodel">LocationModel</h2>
 
@@ -9940,9 +10361,9 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
-|`is_active`|boolean|Records marked inactive are treated as deleted (soft delete). Must be one of 0, 1, True, False (case insensitive).|
-|`name`|string|Name for a location. Must be at least 1 and no more than 64 characters.|
+|`id`|integer(int64)|Location identifier.|
+|`is_active`|boolean|Records marked inactive are treated as deleted (soft delete).|
+|`name`|string|Name for a location.|
 
 <h2 id="tocSmateriallistmodel">MaterialListModel</h2>
 
@@ -9971,11 +10392,11 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|array[[MaterialModel](#schemamaterialmodel)]|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocSmaterialmodel">MaterialModel</h2>
 
@@ -9996,13 +10417,13 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`created_on`|string(DateTime)|Timestamp of creation (must be in past). Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`description`|string|Free-form text description. Must be at least 0 and no more than 200 characters.|
-|`factor`|number(float)|Must me a float.|
-|`group_description`|string|Free-form text description. Must be at least 0 and no more than 100 characters.|
-|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
-|`line_item_id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
-|`uom`|string|Unit of Measure. Must be at least 0 and no more than 25 characters.|
+|`created_on`|string(DateTime)|Timestamp of creation (must be in past).|
+|`description`|string|Free-form text description.|
+|`factor`|number(float)|-|
+|`group_description`|string|Free-form text description.|
+|`id`|integer(int64)|Resource identifier.|
+|`line_item_id`|integer(int64)|Resource identifier.|
+|`uom`|string|Unit of Measure.|
 
 <h2 id="tocStenantlistmodel">TenantListModel</h2>
 
@@ -10036,11 +10457,11 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|array[[TenantModel](#schematenantmodel)]|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocStenantmodel">TenantModel</h2>
 
@@ -10066,18 +10487,18 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`address`|string|Street address. Must be at least 1 and no more than 256 characters.|
-|`city`|string|Address locality (e.g. city). Must be at least 1 and no more than 86 characters.|
-|`code`|string|Facility identifier. Must be at least 1 and no more than 64 characters.|
-|`created_on`|string(DateTime)|Timestamp of creation (must be in past). Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`email`|string(Email)|Email address. Must be a valid email address.|
-|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
-|`is_active`|boolean|Records marked inactive are treated as deleted (soft delete). Must be one of 0, 1, True, False (case insensitive).|
-|`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`phone`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
-|`state`|string|Address region (e.g. state). Must be at least 1 and no more than 32 characters.|
-|`truck_limit`|integer(int64)|Maximum trucks configurable for tenant. Must be integer greater than or equal to 0.|
-|`zip`|string|Postal code (may include letters and symbols). Must be at least 1 and no more than 86 characters.|
+|`address`|string|Street address.|
+|`city`|string|Address locality (e.g. city).|
+|`code`|string|Facility identifier.|
+|`created_on`|string(DateTime)|Timestamp of creation (must be in past).|
+|`email`|string(Email)|Email address.|
+|`id`|integer(int64)|Resource identifier.|
+|`is_active`|boolean|Records marked inactive are treated as deleted (soft delete).|
+|`name`|string|Name (free text).|
+|`phone`|string(PhoneNumber)|Phone number (free text).|
+|`state`|string|Address region (e.g. state).|
+|`truck_limit`|integer(int64)|Maximum trucks configurable for tenant.|
+|`zip`|string|Postal code (may include letters and symbols).|
 
 <h2 id="tocSthirdpartyhaulerconnectionlistmodel">ThirdPartyHaulerConnectionListModel</h2>
 
@@ -10107,11 +10528,11 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|[ThirdPartyHaulerConnectionModel](#schemathirdpartyhaulerconnectionmodel)|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocSthirdpartyhaulerconnectionmodel">ThirdPartyHaulerConnectionModel</h2>
 
@@ -10135,16 +10556,16 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`approved_by`|integer(int64)|Approved by. Must be valid resource identifier (integer).|
-|`approved_on`|string(DateTime)|Approval date. Must be a date in an ISO 8601 compatible format.|
-|`denied_on`|string(DateTime)|Denial date. Must be a date in an ISO 8601 compatible format.|
-|`is_approved`|boolean|Approved record state. Must be one of 0, 1, True, False (case insensitive).|
-|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
-|`provider_email`|string(Email)|Email address. Must be a valid email address.|
-|`provider_id`|integer(int64)|Bin provider identifier (integer). Must be valid resource identifier (integer).|
-|`provider_name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`provider_phone`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
-|`requested_on`|string(DateTime)|Requested date. Must be a date occurring in the past in an ISO 8601 compatible format.|
+|`approved_by`|integer(int64)|Approved by.|
+|`approved_on`|string(DateTime)|Approval date.|
+|`denied_on`|string(DateTime)|Denial date.|
+|`is_approved`|boolean|Approved record state.|
+|`location_id`|integer(int64)|Location identifier.|
+|`provider_email`|string(Email)|Email address.|
+|`provider_id`|integer(int64)|Bin provider identifier.|
+|`provider_name`|string|Name (free text).|
+|`provider_phone`|string(PhoneNumber)|Phone number (free text).|
+|`requested_on`|string(DateTime)|Requested date.|
 
 <h2 id="tocSthirdpartyhaulerlistmodel">ThirdPartyHaulerListModel</h2>
 
@@ -10168,11 +10589,11 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|array[[ThirdPartyHaulerModel](#schemathirdpartyhaulermodel)]|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocSthirdpartyhaulermodel">ThirdPartyHaulerModel</h2>
 
@@ -10188,8 +10609,8 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`id`|string(Uuid)|Third party hauler identifier. Must be a valid UUID.|
-|`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
+|`id`|string(Uuid)|Third party hauler identifier.|
+|`name`|string|Name (free text).|
 
 <h2 id="tocStrucklistmodel">TruckListModel</h2>
 
@@ -10221,11 +10642,11 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|array[[TruckModel](#schematruckmodel)]|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocStruckmodel">TruckModel</h2>
 
@@ -10249,16 +10670,16 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`driver_id`|integer(int64)|Driver identifier. Must be valid resource identifier (integer).|
-|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
-|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
-|`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`notes`|string|Notes (free text). Must be at least 0 and no more than 2048 characters.|
-|`out_of_service`|boolean|Truck out of service. Must be one of 0, 1, True, False (case insensitive).|
-|`require_odometer`|boolean|Require odometer. Must be one of 0, 1, True, False (case insensitive).|
-|`third_party_hauler_id`|string(Uuid)|Third party hauler identifier. Must be a valid UUID.|
-|`type`|string|Truck type (free text). Must be at least 1 and no more than 50 characters.|
-|`weight`|number(float)|Truck empty weight. Must be float greater than or equal to 0. Must be float less than or equal to 10000000.|
+|`driver_id`|integer(int64)|Driver identifier.|
+|`id`|integer(int64)|Resource identifier.|
+|`location_id`|integer(int64)|Location identifier.|
+|`name`|string|Name (free text).|
+|`notes`|string|Notes (free text).|
+|`out_of_service`|boolean|Truck out of service.|
+|`require_odometer`|boolean|Require odometer.|
+|`third_party_hauler_id`|string(Uuid)|Third party hauler identifier.|
+|`type`|string|Truck type (free text).|
+|`weight`|number(float)|Truck empty weight.|
 
 <h2 id="tocSupdatecustomeraddressmodel">UpdateCustomerAddressModel</h2>
 
@@ -10284,32 +10705,32 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`country`|string|Country code (ISO 3166-1 alpha 2). Must be a 2 character country code.|
-|`is_billing`|boolean|If true, this is the customer's billing address. Must be one of 0, 1, True, False (case insensitive).|
-|`is_shipping`|boolean|Customer's shipping address if true. Must be one of 0, 1, True, False (case insensitive).|
-|`latitude`|number(float)|Latitude. Must be float greater than or equal to -90. Must be float less than or equal to 90.|
-|`line_1`|string|Street address. Must be at least 1 and no more than 256 characters.|
-|`line_2`|string|Street address line 2. Must be at least 0 and no more than 256 characters.|
-|`line_3`|string|Street address line 3. Must be at least 0 and no more than 256 characters.|
-|`line_4`|string|Street address line 4 (doubles as county). Must be at least 0 and no more than 256 characters.|
-|`locality`|string|Address locality (e.g. city). Must be at least 1 and no more than 86 characters.|
-|`longitude`|number(float)|longitude. Must be float greater than or equal to -180. Must be float less than or equal to 180.|
-|`postcode`|string|Postal code (may include letters and symbols). Must be at least 1 and no more than 86 characters.|
-|`region`|string|Address region (e.g. state). Must be at least 1 and no more than 32 characters.|
+|`country`|string|Country code (ISO 3166-1 alpha 2).|
+|`is_billing`|boolean|If true, this is the customer's billing address.|
+|`is_shipping`|boolean|Customer's shipping address if true.|
+|`latitude`|number(float)|Latitude.|
+|`line_1`|string|Street address.|
+|`line_2`|string|Street address line 2.|
+|`line_3`|string|Street address line 3.|
+|`line_4`|string|Street address line 4 (doubles as county).|
+|`locality`|string|Address locality (e.g. city).|
+|`longitude`|number(float)|longitude.|
+|`postcode`|string|Postal code (may include letters and symbols).|
+|`region`|string|Address region (e.g. state).|
 
 <h2 id="tocSupdatecustomercontactmodel">UpdateCustomerContactModel</h2>
 
 ```json
 {
-  "email": "test@crosoftware.net",
+  "email": "john@crosoftware.net, jane@crosoftware.net",
   "fax": "+1 (360) 123-6543",
-  "name": "John Doe",
+  "name": "John Doe, Jane Smith",
   "notify_on_acknowledged_request": true,
   "notify_on_completed_request": true,
   "notify_on_dispatched_request": true,
   "notify_on_failed_request": true,
   "notify_on_new_request": true,
-  "number": "+1 (360) 123-6543"
+  "number": "+1 (360) 123-6543, +1 (706) 123-0987"
 }
 
 ```
@@ -10318,20 +10739,21 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`email`|string(Email)|Email address. Must be a valid email address.|
-|`fax`|string(PhoneNumber)|Fax number (free text). At least 7 characters, not more than 15.|
-|`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`notify_on_acknowledged_request`|boolean|Notify on acknowledge request. Must be one of 0, 1, True, False (case insensitive).|
-|`notify_on_completed_request`|boolean|Notify on completed request. Must be one of 0, 1, True, False (case insensitive).|
-|`notify_on_dispatched_request`|boolean|Notify on dispatched request. Must be one of 0, 1, True, False (case insensitive).|
-|`notify_on_failed_request`|boolean|Notify on failed request. Must be one of 0, 1, True, False (case insensitive).|
-|`notify_on_new_request`|boolean|Notify on new request. Must be one of 0, 1, True, False (case insensitive).|
-|`number`|string(PhoneNumber)|Phone number (free text). At least 7 characters, not more than 15.|
+|`email`|string(Email)|Email address list.|
+|`fax`|string(PhoneNumber)|Fax number (free text).|
+|`name`|string|Name list.|
+|`notify_on_acknowledged_request`|boolean|Notify on acknowledge request.|
+|`notify_on_completed_request`|boolean|Notify on completed request.|
+|`notify_on_dispatched_request`|boolean|Notify on dispatched request.|
+|`notify_on_failed_request`|boolean|Notify on failed request.|
+|`notify_on_new_request`|boolean|Notify on new request.|
+|`number`|string|Phone number list.|
 
 <h2 id="tocSupdatecustomerlocationmodel">UpdateCustomerLocationModel</h2>
 
 ```json
 {
+  "is_active": true,
   "is_commercial": true,
   "note": "A note about something",
   "reference_number": "A140",
@@ -10346,19 +10768,20 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`is_commercial`|boolean|Commercial address if true, private if false. Must be one of 0, 1, True, False (case insensitive).|
-|`note`|string|Notes (free text). Must be at least 0 and no more than 2048 characters.|
-|`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
-|`renewal_date`|string(DateTime)|Renewal date. Must be a date in an ISO 8601 compatible format.|
-|`sales_rep`|string|Name of sales representative. Must be at least 1 and no more than 64 characters.|
-|`suspension_id`|integer(int64)|Suspension identifier. Must be valid resource identifier (integer).|
+|`is_active`|boolean|Records marked inactive are treated as deleted (soft delete).|
+|`is_commercial`|boolean|Commercial address if true, private if false.|
+|`note`|string|Notes (free text).|
+|`reference_number`|string|Reference number (free text).|
+|`renewal_date`|string(DateTime)|Renewal date.|
+|`sales_rep`|string|Name of sales representative.|
+|`suspension_id`|integer(int64)|Suspension identifier.|
 
 <h2 id="tocSupdatecustomermodel">UpdateCustomerModel</h2>
 
 ```json
 {
   "name": "John Doe",
-  "parent_id": 1
+  "parent_id": 0
 }
 
 ```
@@ -10367,8 +10790,8 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`name`|string|Name (free text). Must be at least 1 and no more than 64 characters.|
-|`parent_id`|integer(int64)|Parent record identifier (integer). Must be valid resource identifier (integer).|
+|`name`|string|Name (free text).|
+|`parent_id`|integer(int64)|Parent record identifier.|
 
 <h2 id="tocSupdatewebhookmodel">UpdateWebhookModel</h2>
 
@@ -10387,9 +10810,9 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`events`|array[string]|Hook event. Must be a valid hook event (one of: Ping, Customer, CustomerLocation, Job, Truck).|
-|`secret`|string|Response body HMAC signing key. Must match expression ^\s*[a-zA-Z0-9\/\+=]{11,270}\s*$ Base64 encoded string.|
-|`url`|string(Url)|Callback URL. URL conforming to RFC 1738.|
+|`events`|array[string]|Hook event.|
+|`secret`|string|Response body HMAC signing key.|
+|`url`|string(Url)|Callback URL.|
 
 <h2 id="tocSupdatedjobmodel">UpdatedJobModel</h2>
 
@@ -10457,60 +10880,60 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`arrived_at_dest`|string(DateTime)|Entered by driver for dispatcher and customer. Asset arrival at destination time. Only applicable for jobs with a valid dump destination. Must be a date in an ISO 8601 compatible format.|
-|`arrived_on`|string(DateTime)|Drive start time entered by driver for dispatcher and customer (arrived at job slider). Must be a date in an ISO 8601 compatible format.|
-|`asset_dropped`|integer(int64)|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types 'D', 'E'. Must be integer greater than or equal to 0. Must be integer less than or equal to 10000.|
-|`asset_id`|integer(int64)|Job asset identifier. Applicable to job types 'E', 'P', 'R'. Must be valid resource identifier (integer).|
-|`asset_quantity`|integer(int64)|How many assets are being serviced within a cluster (for jobs assigned to an asset cluster). For jobs dispatched by routes, or manually dispatched route stops, this value is 0 or 1. Must be integer greater than or equal to 0.|
-|`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E'). Must be valid resource identifier (integer).|
-|`completed_by`|integer(int64)|Dispatcher or driver id. Must be valid resource identifier (integer).|
-|`completed_by_driver`|boolean|If TRUE, completed by driver. If FALSE, completed by dispatcher. Must be one of 0, 1, True, False (case insensitive).|
-|`completed_on`|string(DateTime)|Job completion time. Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`confirmed_on`|string(DateTime)|Job confirmation date. Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`created_by_id`|integer(int64)|Customer, dispatcher, or driver id. Must be valid resource identifier (integer).|
-|`customer_id`|integer(int64)|Customer identifier. Must be valid resource identifier (integer).|
-|`customer_notes`|string|Notes entered by customers to communicate with dispatchers. Must be at least 0 and no more than 2048 characters.|
-|`desired_asset_desc`|string|Free-form text entered by dispatchers and drivers to be used as the future asset description. Must be at least 1 and no more than 2048 characters.|
-|`dispatch_priority`|string|Entered by dispatchers to determine dispatch order. Must be one of: 'H', 'M', 'L' (where 'H'='High', 'M'='Medium', 'L'='Low').|
-|`dispatched_by_route`|integer(int64)|Route id of dispatching route (or NULL if not dispatched by a route). Must be valid resource identifier (integer).|
-|`dispatched_on`|string(DateTime)|Time the job is assigned to a truck. Must be a date in an ISO 8601 compatible format.|
-|`dispatcher_notes`|string|Entered by dispatchers, read by drivers and dispatchers. Must be at least 0 and no more than 2048 characters.|
-|`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched. Must be one of 0, 1, True, False (case insensitive).|
-|`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers. Must be at least 0 and no more than 2048 characters.|
-|`dump_location_id`|integer(int64)|Asset or asset cluster dump location identifier (e.g. trash bin needs dumped before returning from customer). Must be valid resource identifier (integer).|
-|`dumped_on`|string(DateTime)|Dump request completion date. Must be a date in an ISO 8601 compatible format.|
-|`end_time`|string(DateTime)|Future estimated time of job completion. Must be a date in an ISO 8601 compatible format.|
-|`fail_reason`|string|Failure description selected by a driver for use by dispatchers. Must be at least 0 and no more than 64 characters.|
-|`final_location_id`|integer(int64)|Final location identifier. Used by dispatchers for prioritizing jobs. Used by drivers to know where to leave the asset on job completion. Must be valid resource identifier (integer).|
-|`flags`|string|Job notes. Must be at least 0 and no more than 64 characters.|
-|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
-|`invoice_notes`|string|Invoice notes from the billing system. Must be at least 0 and no more than 2048 characters.|
-|`is_completed`|boolean|Job completion flag set by dispatchers and drivers. Must be one of 0, 1, True, False (case insensitive).|
-|`is_declined`|boolean|Job completion flag set by dispatchers and drivers. Must be one of 0, 1, True, False (case insensitive).|
-|`is_deleted`|boolean|Indicates whether job is still valid. Must be one of 0, 1, True, False (case insensitive).|
-|`is_failed`|boolean|Set by drivers and dispatchers to indicate a failed job. Must be one of 0, 1, True, False (case insensitive).|
-|`job_group_id`|integer(int64)|Job group identifier for group jobs (vs service, exchange, etc.). Must be valid resource identifier (integer).|
-|`location_id`|integer(int64)|Location identifier (integer). Must be valid resource identifier (integer).|
-|`merged_with_route`|integer(int64)|Assigned by dispatchers for dispatchers and drivers. Must be valid resource identifier (integer).|
-|`original_schedule_date`|string(DateTime)|Original scheduling date. Must be a date in an ISO 8601 compatible format.|
-|`pickup_date`|string(DateTime)|A pickup job is scheduled for this date upon job completion. If the asset or cluster is assigned to a route stop, the route stop will be deleted. Must be in the future. Must be a date in an ISO 8601 compatible format.|
-|`priority`|integer(int64)|Assigned by dispatchers for job order completion determination for drivers. Must be integer greater than or equal to -999999. Must be integer less than or equal to -1.|
-|`reference_number`|string|Reference number (free text). Must be at least 1 and no more than 256 characters.|
-|`requested_on`|string(DateTime)|Requested date. Must be a date occurring in the past in an ISO 8601 compatible format.|
-|`require_image`|boolean|Set by dispatchers and drivers, requires drivers to upload one or more job images before completion. Must be one of 0, 1, True, False (case insensitive).|
-|`require_material`|boolean|Set by dispatchers and drivers, requires drivers to set a material before completing a job. Must be one of 0, 1, True, False (case insensitive).|
-|`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion. Must be one of 0, 1, True, False (case insensitive).|
-|`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion. Must be one of 0, 1, True, False (case insensitive).|
-|`scale_ticket`|string|Scale ticket. Must be at least 0 and no more than 64 characters.|
-|`schedule_date`|string(DateTime)|Scheduled job completion date. Must be a date in an ISO 8601 compatible format.|
-|`start_location_id`|integer(int64)|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers. Must be valid resource identifier (integer).|
-|`start_time`|string(DateTime)|Time customer has requested job start, set by dispatchers for dispatchers and drivers. Must be a date in an ISO 8601 compatible format.|
-|`third_party_hauler_id`|string(Uuid)|Third party hauler identifier. Must be a valid UUID.|
-|`times_failed`|integer(int64)|Number of times a job has been attempted and failed. Must be integer greater than or equal to 0.|
-|`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers. Must be integer greater than or equal to 0.|
-|`truck_id`|integer(int64)|Truck identifier. Must be valid resource identifier (integer).|
-|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start. Must be one of: 'E', 'L', 'P', 'D', 'R'.|
-|`weighed_on`|string(DateTime)|Time of truck weight entry. Must be a date occurring in the past in an ISO 8601 compatible format.|
+|`arrived_at_dest`|string(DateTime)|Entered by driver for dispatcher and customer. Asset arrival at destination time. Only applicable for jobs with a valid dump destination.|
+|`arrived_on`|string(DateTime)|Drive start time entered by driver for dispatcher and customer (arrived at job slider).|
+|`asset_dropped`|integer(int64)|Reference to deployed asset entered by driver for customer, dispatcher applicable to job types 'D', 'E'.|
+|`asset_id`|integer(int64)|Job asset identifier. Applicable to job types 'E', 'P', 'R'.|
+|`asset_quantity`|integer(int64)|How many assets are being serviced within a cluster (for jobs assigned to an asset cluster). For jobs dispatched by routes, or manually dispatched route stops, this value is 0 or 1.|
+|`asset_type_id`|integer(int64)|Selected asset for the job (job types 'D', 'L', 'E').|
+|`completed_by`|integer(int64)|Dispatcher or driver id.|
+|`completed_by_driver`|boolean|If TRUE, completed by driver. If FALSE, completed by dispatcher.|
+|`completed_on`|string(DateTime)|Job completion time.|
+|`confirmed_on`|string(DateTime)|Job confirmation date.|
+|`created_by_id`|integer(int64)|Customer, dispatcher, or driver id.|
+|`customer_id`|integer(int64)|Customer identifier.|
+|`customer_notes`|string|Notes entered by customers to communicate with dispatchers.|
+|`desired_asset_desc`|string|Free-form text entered by dispatchers and drivers to be used as the future asset description.|
+|`dispatch_priority`|string|Entered by dispatchers to determine dispatch order.|
+|`dispatched_by_route`|integer(int64)|Route id of dispatching route (or NULL if not dispatched by a route).|
+|`dispatched_on`|string(DateTime)|Time the job is assigned to a truck.|
+|`dispatcher_notes`|string|Entered by dispatchers, read by drivers and dispatchers.|
+|`do_confirm`|boolean|Tell dispatcher that a customer should be contacted before job is dispatched.|
+|`driver_notes`|string|Entered by drivers when completing or failing a job for dispatchers.|
+|`dump_location_id`|integer(int64)|Asset or asset cluster dump location identifier (e.g. trash bin needs dumped before returning from customer).|
+|`dumped_on`|string(DateTime)|Dump request completion date.|
+|`end_time`|string(DateTime)|Future estimated time of job completion.|
+|`fail_reason`|string|Failure description selected by a driver for use by dispatchers.|
+|`final_location_id`|integer(int64)|Final location identifier. Used by dispatchers for prioritizing jobs. Used by drivers to know where to leave the asset on job completion.|
+|`flags`|string|Job notes.|
+|`id`|integer(int64)|Resource identifier.|
+|`invoice_notes`|string|Invoice notes from the billing system.|
+|`is_completed`|boolean|Job completion flag set by dispatchers and drivers.|
+|`is_declined`|boolean|Job completion flag set by dispatchers and drivers.|
+|`is_deleted`|boolean|Indicates whether job is still valid.|
+|`is_failed`|boolean|Set by drivers and dispatchers to indicate a failed job.|
+|`job_group_id`|integer(int64)|Job group identifier for group jobs (vs service, exchange, etc.).|
+|`location_id`|integer(int64)|Location identifier.|
+|`merged_with_route`|integer(int64)|Assigned by dispatchers for dispatchers and drivers.|
+|`original_schedule_date`|string(DateTime)|Original scheduling date.|
+|`pickup_date`|string(DateTime)|A pickup job is scheduled for this date upon job completion. If the asset or cluster is assigned to a route stop, the route stop will be deleted. Must be in the future.|
+|`priority`|integer(int64)|Assigned by dispatchers for job order completion determination for drivers.|
+|`reference_number`|string|Reference number (free text).|
+|`requested_on`|string(DateTime)|Requested date.|
+|`require_image`|boolean|Set by dispatchers and drivers, requires drivers to upload one or more job images before completion.|
+|`require_material`|boolean|Set by dispatchers and drivers, requires drivers to set a material before completing a job.|
+|`require_signature`|boolean|Set by dispatchers and drivers, requires drivers to get a customer signature before job completion.|
+|`require_weights`|boolean|Set by disptachers and drivers, requires drivers to set material weights before job completion.|
+|`scale_ticket`|string|Scale ticket.|
+|`schedule_date`|string(DateTime)|Scheduled job completion date.|
+|`start_location_id`|integer(int64)|Pickup location for asset or asset cluster Set by dispatchers and drivers for drivers.|
+|`start_time`|string(DateTime)|Time customer has requested job start, set by dispatchers for dispatchers and drivers.|
+|`third_party_hauler_id`|string(Uuid)|Third party hauler identifier.|
+|`times_failed`|integer(int64)|Number of times a job has been attempted and failed.|
+|`times_rolled_over`|integer(int64)|Tracks job age in days for dispatchers.|
+|`truck_id`|integer(int64)|Truck identifier.|
+|`type`|string|Set by dispatchers and customers. Represents physical actions to execute on job start.|
+|`weighed_on`|string(DateTime)|Time of truck weight entry.|
 
 <h2 id="tocSuserlistresultsmodel">UserListResultsModel</h2>
 
@@ -10537,11 +10960,11 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|array[[UserModel](#schemausermodel)]|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocSusermodel">UserModel</h2>
 
@@ -10560,9 +10983,9 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`id`|integer(int64)|User identifier. Must be valid resource identifier (integer).|
-|`roles`|array[string]|User role. Must be one of: 'ThirdPartyAdmin', 'Public', 'Dispatcher', 'Admin', 'ThirdPartyDriver', 'Driver', 'ThirdPartyDispatcher'.|
-|`username`|string|Username. Must be at least 1 characters long. Must be no longer than 64 characters.|
+|`id`|integer(int64)|User identifier.|
+|`roles`|array[string]|User role.|
+|`username`|string|Username.|
 
 <h2 id="tocSwebhooklistmodel">WebhookListModel</h2>
 
@@ -10576,8 +10999,8 @@ Update webhook.
         "Customer"
       ],
       "id": 1,
-      "last_http_fail": "2049-10-31T11:32:38.390000",
-      "last_http_success": "2049-10-31T11:32:38.390000",
+      "last_http_fail": "1",
+      "last_http_success": "1",
       "url": "https://test.url"
     }
   ],
@@ -10591,11 +11014,11 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`current_limit`|integer(int64)|Maximun number of results per page. Must be integer greater than or equal to 1. Must be integer less than or equal to 1000.|
-|`current_page`|integer(int64)|Paged results page index (starting from 1). Must be integer greater than or equal to 1. Must be integer less than or equal to 10000.|
+|`current_limit`|integer(int64)|Maximun number of results per page.|
+|`current_page`|integer(int64)|Paged results page index (starting from 1).|
 |`results`|array[[WebhookModel](#schemawebhookmodel)]|-|
-|`total_count`|integer(int64)|Paged results total viewable records. Must be integer greater than or equal to 0. Must be integer less than or equal to 100000.|
-|`total_pages`|integer(int64)|Paged results total pages. Must be integer greater than or equal to 0. Must be integer less than or equal to 1000.|
+|`total_count`|integer(int64)|Paged results total viewable records.|
+|`total_pages`|integer(int64)|Paged results total pages.|
 
 <h2 id="tocSwebhookmodel">WebhookModel</h2>
 
@@ -10605,8 +11028,8 @@ Update webhook.
     "Customer"
   ],
   "id": 1,
-  "last_http_fail": "2049-10-31T11:32:38.390000",
-  "last_http_success": "2049-10-31T11:32:38.390000",
+  "last_http_fail": "1",
+  "last_http_success": "1",
   "url": "https://test.url"
 }
 
@@ -10616,17 +11039,17 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`events`|array[string]|Hook event. Must be a valid hook event (one of: Ping, Customer, CustomerLocation, Job, Truck).|
-|`id`|integer(int64)|Resource identifier (integer). Must be valid resource identifier (integer).|
-|`last_http_fail`|string(DateTime)|Last time of url webhook execution failure. Must be a date in an ISO 8601 compatible format.|
-|`last_http_success`|string(DateTime)|Last time of url webhook execution success. Must be a date in an ISO 8601 compatible format.|
-|`url`|string(Url)|Callback URL. URL conforming to RFC 1738.|
+|`events`|array[string]|Hook event.|
+|`id`|integer(int64)|Resource identifier.|
+|`last_http_fail`|string(DateTime)|Last time of url webhook execution failure.|
+|`last_http_success`|string(DateTime)|Last time of url webhook execution success.|
+|`url`|string(Url)|Callback URL.|
 
 <h2 id="tocSwebhookpingresultmodel">WebhookPingResultModel</h2>
 
 ```json
 {
-  "delivery_id": "9f34f340-54d2-4403-a53b-d8017a64734f",
+  "delivery_id": "1",
   "http_status": 200
 }
 
@@ -10636,6 +11059,6 @@ Update webhook.
 
 |Name|Type|Description|
 |---|---|---|
-|`delivery_id`|string(Uuid)|Hook execution identifier. Must be a valid UUID.|
-|`http_status`|integer(int64)|HTTP status return code. Must be a valid HTTP status code 1xx-5xx or -1. Status -1 means the HTTP call did not succeed/complete.|
+|`delivery_id`|string(Uuid)|Hook execution identifier.|
+|`http_status`|integer(int64)|HTTP status return code.|
 
