@@ -26,6 +26,21 @@ Base URLs:
 Email: <a href="mailto:develop@crosoftware.net">Support</a> 
 
 # Changelog
+## [1.0.4] - 2020/05/09
+
+### Added
+- Email, name, & phone number inputs as csv to POST /locations/{location_id}/customers.
+- completed_by_driver filter to GET /locations/{location_id}/jobs.
+- Job materials data to GET /locations/{location_id}/jobs.
+- Field is_active to PATCH /customers/{customer_id}/locations/{location_id}.
+- GET locations/{location_id}/dump_destinations.
+- GET locations/{location_id}/dump_destinations/{dump_destination_id}.
+- Customer dupe detection logic (name & address).
+
+### Changed
+- Changed POST /locations/{location_id}/customers to allow omitted and/or NULL renewal_date.
+- Limited job dispatch to Dispatchers.
+
 ## [1.0.3] - 2019/10/21
 
 ### Added
