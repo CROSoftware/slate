@@ -1,0 +1,42 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Deploy API Documentation
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy_github_pages:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    steps:
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.7'
+    
+    - name: Cache Bundler
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+    
+    - name: Install & Run Slate Build
+      run: |
+        gem install bundler
+        bundle update --bundler
+        bundle install
+        ./deploy.sh
+    
+    - name: Artifact build directory
+      uses: actions/upload-artifact@v1
+      with:
+        name: docs-static-bundle
+        path: slate/build
