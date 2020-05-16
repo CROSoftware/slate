@@ -38,4 +38,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: docs-static-bundle
-        path: slate/build
+        path: build

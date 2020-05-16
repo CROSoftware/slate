@@ -17,7 +17,7 @@ headingLevel: 2
 
 <h1 id="cro-software-api">CRO Software API v1.0.3</h1>
 
-Build on & integrate with CRO Software.
+Build on & Integrate with CRO Software.
 
 Base URLs:
 
