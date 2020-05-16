@@ -46,6 +46,9 @@ parse_args() {
     elif [[ ( $1 = "-m" || $1 = "--message" ) && -n $2 ]]; then
       commit_message=$2
       shift 2
+    elif [[ ( $1 = "-r" || $1 = "--repo" ) && -n $2 ]]; then
+      repo=$2
+      shift 2
     elif [[ $1 = "-n" || $1 = "--no-hash" ]]; then
       GIT_DEPLOY_APPEND_HASH=false
       shift
@@ -66,7 +69,7 @@ parse_args() {
   default_email=${GIT_DEPLOY_EMAIL:-}
 
   #repository to deploy to. must be readable and writable.
-  repo=origin
+  #repo=origin
 
   #append commit hash to the end of message by default
   append_hash=${GIT_DEPLOY_APPEND_HASH:-true}
@@ -84,6 +87,11 @@ main() {
 
   commit_title=`git log -n 1 --format="%s" HEAD`
   commit_hash=` git log -n 1 --format="%H" HEAD`
+
+  #default repo if a custom one is not supplied
+  if [[ -z $repo ]]; then
+    repo=origin
+  fi
 
   #default commit message uses last title if a custom one is not supplied
   if [[ -z $commit_message ]]; then
