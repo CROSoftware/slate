@@ -18,7 +18,7 @@ jobs:
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: '2.7'
-    
+
     - name: Cache Bundler
       uses: actions/cache@v1
       with:
@@ -26,16 +26,25 @@ jobs:
         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-gems-
-    
-    - name: Install & Run Slate Build
+
+    - name: Install Dependencies
       run: |
         gem install bundler
         bundle update --bundler
         bundle install
-        ./deploy.sh
-    
+
+    - name: Build docs
+      run: |
+        bundle exec middleman build --clean
+
     - name: Artifact build directory
       uses: actions/upload-artifact@v1
       with:
         name: docs-static-bundle
         path: build
+
+    - name: Deploy docs
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GH_TOKEN }}
+        publish_dir: ./build
