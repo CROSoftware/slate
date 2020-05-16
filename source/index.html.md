@@ -17,7 +17,7 @@ headingLevel: 2
 
 <h1 id="cro-software-api">CRO Software API v1.0.3</h1>
 
-Build on & use CRO Software.
+Build on & integrate with CRO Software.
 
 Base URLs:
 
@@ -202,15 +202,15 @@ To obtain an access token, your CRO API client must complete an OAuth 2.0 flow.
 The access token must be passed as an [Authorization: Bearer &lt;token&gt;] header with each request.
 
 - Flow: authorizationCode
-    - Authorization URL = [https://auth.crosandbox.com/oauth2/auth](https://auth.crosandbox.com/oauth2/auth)
-    - Token URL = [https://auth.crosandbox.com/oauth2/token](https://auth.crosandbox.com/oauth2/token)
+    - Authorization URL = [https://idp.crobins.net/oauth2/auth](https://idp.crobins.net/oauth2/auth)
+    - Token URL = [https://idp.crobins.net/oauth2/token](https://idp.crobins.net/oauth2/token)
 
 |Scope|Scope Description|
 |---|---|
 |api|CRO API access|
 
 - Flow: implicit
-    - Authorization URL = [https://auth.crosandbox.com/oauth2/auth](https://auth.crosandbox.com/oauth2/auth)
+    - Authorization URL = [https://idp.crobins.net/oauth2/auth](https://idp.crobins.net/oauth2/auth)
 
 |Scope|Scope Description|
 |---|---|
@@ -218,7 +218,7 @@ The access token must be passed as an [Authorization: Bearer &lt;token&gt;] head
 
 - Flow: password
 
-    - Token URL = [https://auth.crosandbox.com/oauth2/token](https://auth.crosandbox.com/oauth2/token)
+    - Token URL = [https://idp.crobins.net/oauth2/token](https://idp.crobins.net/oauth2/token)
 
 |Scope|Scope Description|
 |---|---|
