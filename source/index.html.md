@@ -26,6 +26,11 @@ Base URLs:
 Email: <a href="mailto:develop@crosoftware.net">Support</a> 
 
 # Changelog
+## [1.0.5] - 2020/05/20
+
+### Changed
+- Changed POST /locations/{location_id}/customers to allow omitted and/or NULL contact name, email, number, and fax.
+
 ## [1.0.4] - 2020/05/09
 
 ### Added
