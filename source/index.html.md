@@ -26,6 +26,10 @@ Base URLs:
 Email: <a href="mailto:develop@crosoftware.net">Support</a> 
 
 # Changelog
+## [1.0.6] - 2020/06/04
+### Changed
+- Changed customer address create to accept null for country, region, locality, & postcode if line_1 is null.
+
 ## [1.0.5] - 2020/05/20
 
 ### Changed
@@ -381,7 +385,7 @@ Add customer addresses.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`body`|body|[CreateCustomerAddressModel](#schemacreatecustomeraddressmodel)|true||
@@ -551,7 +555,7 @@ Deactivate a customer address.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`customer_address_id`|path|integer(int64)|true|Customer address identifier.|
@@ -721,7 +725,7 @@ Get a customer address.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`customer_address_id`|path|integer(int64)|true|Customer address identifier.|
@@ -891,7 +895,7 @@ List customer addresses.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`filter_active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all.|
@@ -1094,7 +1098,7 @@ Update a customer address.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`customer_address_id`|path|integer(int64)|true|Customer address identifier.|
@@ -1287,7 +1291,7 @@ Create new customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`body`|body|[CreateCustomerContactModel](#schemacreatecustomercontactmodel)|true||
@@ -1453,7 +1457,7 @@ Get a customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`customer_contact_id`|path|integer(int64)|true|Customer contact identifier.|
@@ -1619,7 +1623,7 @@ List customer contacts.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
@@ -1814,7 +1818,7 @@ Update a customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`customer_contact_id`|path|integer(int64)|true|Customer contact identifier.|
@@ -2000,7 +2004,7 @@ Add customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`customer_location_id`|path|integer(int64)|true|Customer location identifier|
@@ -2164,7 +2168,7 @@ Deactivate (soft delete) customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`customer_location_id`|path|integer(int64)|true|Customer location identifier|
@@ -2327,7 +2331,7 @@ Get a customer contact.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`customer_location_id`|path|integer(int64)|true|Customer location identifier|
@@ -2490,7 +2494,7 @@ Update customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`filter_active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all.|
@@ -2681,7 +2685,7 @@ Update customer location profile.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`customer_location_id`|path|integer(int64)|true|Customer location identifier|
@@ -2895,7 +2899,7 @@ Create customer for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`max_address_edit_distance`|query|integer(int64)|false|Maximum address edit distance (levenshtein).|
@@ -3089,7 +3093,7 @@ Customer model.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 
@@ -3282,7 +3286,7 @@ Get customer for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`location_customer_id`|path|integer(int64)|true|Location customer identifier.|
@@ -3452,7 +3456,7 @@ List of customers.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`name`|query|string|false|If specified, return only records with matching names. If unspecified, return all. Wildcard is &#039;*&#039;.|
 |`last_updated_gte`|query|string(DateTime)|true|Return only records updated after (must be in past). If unspecified, return all.|
@@ -3657,7 +3661,7 @@ List customers for location.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`name`|query|string|false|Name (free text).|
@@ -3843,7 +3847,7 @@ Customer model.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
 |`body`|body|[UpdateCustomerModel](#schemaupdatecustomermodel)|true||
@@ -4039,7 +4043,7 @@ Get driver.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`driver_id`|path|integer(int64)|true|Driver identifier.|
@@ -4211,7 +4215,7 @@ List drivers.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
@@ -4394,7 +4398,7 @@ Get dump destination.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`dump_destination_id`|path|integer(int64)|true|Dump destination identifier.|
@@ -4563,7 +4567,7 @@ List dump destinations.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
@@ -4763,7 +4767,7 @@ Log a GPS event.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`body`|body|[GpsEventProfileModel](#schemagpseventprofilemodel)|true||
@@ -4935,7 +4939,7 @@ Create third party connection.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`hauler_uuid`|path|string(Uuid)|true|Third party hauler identifier.|
 |`tenant_code`|query|string|true|Confirmation code for hauler creation.|
@@ -5122,7 +5126,7 @@ This operation does not require authentication
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`company_name`|query|string|true|Company name (free text).|
 |`username`|query|string|true|Username.|
@@ -5296,7 +5300,7 @@ Get third party hauler.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`hauler_uuid`|path|string(Uuid)|true|Third party hauler identifier.|
 
@@ -5453,7 +5457,7 @@ List third party hauler connections.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`hauler_uuid`|path|string(Uuid)|true|Third party hauler identifier.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
@@ -5626,7 +5630,7 @@ List third party haulers.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
 |`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
@@ -5794,7 +5798,7 @@ Dispatch a job by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`job_id`|path|integer(int64)|true|Job identifier.|
@@ -6006,7 +6010,7 @@ Get job by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`job_id`|path|integer(int64)|true|Job identifier.|
@@ -6319,7 +6323,7 @@ List jobs.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
@@ -6646,7 +6650,7 @@ Get location by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 
@@ -6804,7 +6808,7 @@ List locations for this user.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
 |`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
@@ -6973,7 +6977,7 @@ List all job materials.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
@@ -7147,7 +7151,7 @@ List tenants for this user.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
 |`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
@@ -7325,7 +7329,7 @@ Get truck.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`truck_id`|path|integer(int64)|true|Truck identifier.|
@@ -7491,7 +7495,7 @@ List trucks.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
@@ -7671,7 +7675,7 @@ Set driver for truck.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`truck_id`|path|integer(int64)|true|Truck identifier.|
@@ -7840,7 +7844,7 @@ Get user.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`user_id`|path|integer(int64)|true|User identifier.|
@@ -8001,7 +8005,7 @@ List users.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
@@ -8190,7 +8194,7 @@ Create new webhook.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`body`|body|[CreateWebhookModel](#schemacreatewebhookmodel)|true||
 
@@ -8350,7 +8354,7 @@ Deactivate (soft delete) webhook by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`hook_id`|path|integer(int64)|true|Webhook identifier.|
 
@@ -8512,7 +8516,7 @@ Get webhook by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`hook_id`|path|integer(int64)|true|Webhook identifier.|
 
@@ -8674,7 +8678,7 @@ List webhooks.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`deleted`|query|boolean|false|Is record deleted (soft delete).|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
@@ -8846,7 +8850,7 @@ Ping webhook by id.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`hook_id`|path|integer(int64)|true|Webhook identifier.|
 
@@ -9019,7 +9023,7 @@ Update webhook.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|`authorization`|header|string|true|Authorization header.|
+|`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`hook_id`|path|integer(int64)|true|Webhook identifier.|
 |`body`|body|[UpdateWebhookModel](#schemaupdatewebhookmodel)|true||
