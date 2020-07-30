@@ -26,6 +26,28 @@ Base URLs:
 Email: <a href="mailto:develop@crosoftware.net">Support</a> 
 
 # Changelog
+## [1.0.7] - 2020/07/31
+### Changed
+- Removed role Public from user role list when listing users.
+- Changed list-customer operations to return results based on role (GET /customers, etc.).
+- Updated billing/shipping address logic to be based on parent_id.
+
+### Added
+- Added active, last_updated_gte, created_on_gte, is_parent, parent_id filters to GET location/x/customers.
+- Added company_id filter to user list DAL functions
+- Added active filter to list_users.
+- Added filter parent_id to /customers.
+- Added Dispatcher to Administrator roles results.
+- Added is_parent, location_id, is_active filters to GET /customers.
+- Added is_dispatched to list job filters.
+- Added CrmUser role.
+
+### Fixed
+- Corrected UserModel.id to UserModel.dispatcher_id for provider_id filter.
+- Fixed issue with suspension_id nullability.
+- Fixed incorrect location id column logic for all location-specific resources.
+- Fixed Dispatcher role validation for null location_id for all endpoints.
+
 ## [1.0.6] - 2020/06/04
 ### Changed
 - Changed customer address create to accept null for country, region, locality, & postcode if line_1 is null.
