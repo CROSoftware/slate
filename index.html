@@ -1912,7 +1912,7 @@ curl -X GET https://api.crosoftware.net/v0/customers/<span class="o">{</span>cus
 <td>Customer identifier.</td>
 </tr>
 <tr>
-<td><code>filter_active</code></td>
+<td><code>active</code></td>
 <td>query</td>
 <td>boolean</td>
 <td>false</td>
@@ -4232,11 +4232,18 @@ curl -X GET https://api.crosoftware.net/v0/customers/<span class="o">{</span>cus
 <td>Customer identifier.</td>
 </tr>
 <tr>
-<td><code>filter_active</code></td>
+<td><code>active</code></td>
 <td>query</td>
 <td>boolean</td>
 <td>false</td>
 <td>If true, return only active records (default). If false, return only inactive records. If unspecified, return all.</td>
+</tr>
+<tr>
+<td><code>parent_id</code></td>
+<td>query</td>
+<td>integer(int64)</td>
+<td>false</td>
+<td>If specified, return only children of the specified parent_id.</td>
 </tr>
 <tr>
 <td><code>page_limit</code></td>
@@ -5476,18 +5483,13 @@ curl -X GET https://api.crosoftware.net/v0/locations/<span class="o">{</span>loc
           <span class="n">client</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"bearer VGhlIGxhenkgYnJvd24gZm94"</span><span class="p">);</span>
           <span class="n">client</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"x-tenant-id"</span><span class="p">,</span> <span class="s">"1"</span><span class="p">);</span>
 
-          <span class="c1">// Parameters</span>
-          <span class="n">NameValueCollection</span> <span class="n">parameters</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">NameValueCollection</span><span class="p">();</span>
-          <span class="n">parameters</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"last_updated_gte"</span><span class="p">,</span> <span class="s">"2049-10-31T11:32:38.390000"</span><span class="p">);</span>
-          <span class="n">parameters</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"created_on_gte"</span><span class="p">,</span> <span class="s">"2049-10-31T11:32:38.390000"</span><span class="p">);</span>
-
           <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
           <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
       <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X GET https://api.crosoftware.net/v0/customers?last_updated_gte<span class="o">=</span>2049-10-31T11%3A32%3A38.390000&amp;created_on_gte<span class="o">=</span>2049-10-31T11%3A32%3A38.390000 <span class="se">\</span>
+curl -X GET https://api.crosoftware.net/v0/customers <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'authorization: bearer VGhlIGxhenkgYnJvd24gZm94'</span> <span class="se">\</span>
   -H <span class="s1">'x-tenant-id: 1'</span>
@@ -5502,7 +5504,7 @@ curl -X GET https://api.crosoftware.net/v0/customers?last_updated_gte<span class
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.crosoftware.net/v0/customers'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-  <span class="na">data</span><span class="p">:</span> <span class="s1">'?last_updated_gte=2049-10-31T11%3A32%3A38.390000&amp;created_on_gte=2049-10-31T11%3A32%3A38.390000'</span><span class="p">,</span>
+
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -5520,9 +5522,7 @@ curl -X GET https://api.crosoftware.net/v0/customers?last_updated_gte<span class
 
 <span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api.crosoftware.net/v0/customers'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
-  <span class="s1">'last_updated_gte'</span> <span class="o">=&gt;</span> <span class="s1">'string(DateTime)'</span><span class="p">,</span>
-<span class="s1">'created_on_gte'</span> <span class="o">=&gt;</span> <span class="s1">'string(DateTime)'</span>
-<span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
 <span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
@@ -5534,12 +5534,12 @@ curl -X GET https://api.crosoftware.net/v0/customers?last_updated_gte<span class
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.crosoftware.net/v0/customers'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-  <span class="s">'last_updated_gte'</span><span class="p">:</span> <span class="s">'2049-10-31T11:32:38.390000'</span><span class="p">,</span>  <span class="s">'created_on_gte'</span><span class="p">:</span> <span class="s">'2049-10-31T11:32:38.390000'</span>
+
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.crosoftware.net/v0/customers?last_updated_gte=2049-10-31T11%3A32%3A38.390000&amp;created_on_gte=2049-10-31T11%3A32%3A38.390000"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.crosoftware.net/v0/customers"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -5590,21 +5590,42 @@ curl -X GET https://api.crosoftware.net/v0/customers?last_updated_gte<span class
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>If specified, return only records with matching names. If unspecified, return all. Wildcard is &#039;*&#039;.</td>
+<td>If specified, return only records with matching names. Wildcard is &#039;*&#039;.</td>
+</tr>
+<tr>
+<td><code>active</code></td>
+<td>query</td>
+<td>boolean</td>
+<td>false</td>
+<td>If true, return only active records (default). If false, return only inactive records. If unspecified, return all.</td>
 </tr>
 <tr>
 <td><code>last_updated_gte</code></td>
 <td>query</td>
 <td>string(DateTime)</td>
-<td>true</td>
+<td>false</td>
 <td>Return only records updated after (must be in past). If unspecified, return all.</td>
 </tr>
 <tr>
 <td><code>created_on_gte</code></td>
 <td>query</td>
 <td>string(DateTime)</td>
-<td>true</td>
+<td>false</td>
 <td>Return records created on or after the specified date. If unspecified, return all.</td>
+</tr>
+<tr>
+<td><code>is_parent</code></td>
+<td>query</td>
+<td>boolean</td>
+<td>false</td>
+<td>If true, return accounts with no parent. If false, return accounts with a parent. If null, all records returned.</td>
+</tr>
+<tr>
+<td><code>parent_id</code></td>
+<td>query</td>
+<td>integer(int64)</td>
+<td>false</td>
+<td>If specified, return only children of the specified parent_id.</td>
 </tr>
 <tr>
 <td><code>page_limit</code></td>
@@ -5897,7 +5918,42 @@ curl -X GET https://api.crosoftware.net/v0/locations/<span class="o">{</span>loc
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>Name (free text).</td>
+<td>If specified, return only records with matching names. Wildcard is &#039;*&#039;.</td>
+</tr>
+<tr>
+<td><code>active</code></td>
+<td>query</td>
+<td>boolean</td>
+<td>false</td>
+<td>If true, return only active records (default). If false, return only inactive records. If unspecified, return all.</td>
+</tr>
+<tr>
+<td><code>last_updated_gte</code></td>
+<td>query</td>
+<td>string(DateTime)</td>
+<td>false</td>
+<td>Return only records updated after (must be in past). If unspecified, return all.</td>
+</tr>
+<tr>
+<td><code>created_on_gte</code></td>
+<td>query</td>
+<td>string(DateTime)</td>
+<td>false</td>
+<td>Return records created on or after the specified date. If unspecified, return all.</td>
+</tr>
+<tr>
+<td><code>is_parent</code></td>
+<td>query</td>
+<td>boolean</td>
+<td>false</td>
+<td>If true, return accounts with no parent. If false, return accounts with a parent. If null, all records returned.</td>
+</tr>
+<tr>
+<td><code>parent_id</code></td>
+<td>query</td>
+<td>integer(int64)</td>
+<td>false</td>
+<td>If specified, return only children of the specified parent_id.</td>
 </tr>
 <tr>
 <td><code>page_limit</code></td>
@@ -9552,18 +9608,13 @@ curl -X GET https://api.crosoftware.net/v0/locations/<span class="o">{</span>loc
           <span class="n">client</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"authorization"</span><span class="p">,</span> <span class="s">"bearer VGhlIGxhenkgYnJvd24gZm94"</span><span class="p">);</span>
           <span class="n">client</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"x-tenant-id"</span><span class="p">,</span> <span class="s">"1"</span><span class="p">);</span>
 
-          <span class="c1">// Parameters</span>
-          <span class="n">NameValueCollection</span> <span class="n">parameters</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">NameValueCollection</span><span class="p">();</span>
-          <span class="n">parameters</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"last_updated_gte"</span><span class="p">,</span> <span class="s">"2049-10-31T11:32:38.390000"</span><span class="p">);</span>
-          <span class="n">parameters</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"created_on_gte"</span><span class="p">,</span> <span class="s">"2049-10-31T11:32:38.390000"</span><span class="p">);</span>
-
           <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
           <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
       <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X GET https://api.crosoftware.net/v0/locations/<span class="o">{</span>location_id<span class="o">}</span>/jobs?last_updated_gte<span class="o">=</span>2049-10-31T11%3A32%3A38.390000&amp;created_on_gte<span class="o">=</span>2049-10-31T11%3A32%3A38.390000 <span class="se">\</span>
+curl -X GET https://api.crosoftware.net/v0/locations/<span class="o">{</span>location_id<span class="o">}</span>/jobs <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'authorization: bearer VGhlIGxhenkgYnJvd24gZm94'</span> <span class="se">\</span>
   -H <span class="s1">'x-tenant-id: 1'</span>
@@ -9578,7 +9629,7 @@ curl -X GET https://api.crosoftware.net/v0/locations/<span class="o">{</span>loc
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.crosoftware.net/v0/locations/{location_id}/jobs'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-  <span class="na">data</span><span class="p">:</span> <span class="s1">'?last_updated_gte=2049-10-31T11%3A32%3A38.390000&amp;created_on_gte=2049-10-31T11%3A32%3A38.390000'</span><span class="p">,</span>
+
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -9596,9 +9647,7 @@ curl -X GET https://api.crosoftware.net/v0/locations/<span class="o">{</span>loc
 
 <span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api.crosoftware.net/v0/locations/{location_id}/jobs'</span><span class="p">,</span>
   <span class="ss">params: </span><span class="p">{</span>
-  <span class="s1">'last_updated_gte'</span> <span class="o">=&gt;</span> <span class="s1">'string(DateTime)'</span><span class="p">,</span>
-<span class="s1">'created_on_gte'</span> <span class="o">=&gt;</span> <span class="s1">'string(DateTime)'</span>
-<span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
 
 <span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
@@ -9610,12 +9659,12 @@ curl -X GET https://api.crosoftware.net/v0/locations/<span class="o">{</span>loc
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.crosoftware.net/v0/locations/{location_id}/jobs'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-  <span class="s">'last_updated_gte'</span><span class="p">:</span> <span class="s">'2049-10-31T11:32:38.390000'</span><span class="p">,</span>  <span class="s">'created_on_gte'</span><span class="p">:</span> <span class="s">'2049-10-31T11:32:38.390000'</span>
+
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.crosoftware.net/v0/locations/{location_id}/jobs?last_updated_gte=2049-10-31T11%3A32%3A38.390000&amp;created_on_gte=2049-10-31T11%3A32%3A38.390000"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.crosoftware.net/v0/locations/{location_id}/jobs"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -9742,15 +9791,22 @@ curl -X GET https://api.crosoftware.net/v0/locations/<span class="o">{</span>loc
 <td><code>last_updated_gte</code></td>
 <td>query</td>
 <td>string(DateTime)</td>
-<td>true</td>
+<td>false</td>
 <td>Return only records updated after (must be in past). If unspecified, return all.</td>
 </tr>
 <tr>
 <td><code>created_on_gte</code></td>
 <td>query</td>
 <td>string(DateTime)</td>
-<td>true</td>
+<td>false</td>
 <td>Return records created on or after the specified date. If unspecified, return all.</td>
+</tr>
+<tr>
+<td><code>is_dispatched</code></td>
+<td>query</td>
+<td>boolean</td>
+<td>false</td>
+<td>Filter jobs based on dispatch status. If true, records with a valid truck_id (dispatched) are returned. If false, records with no truck_id (not dispatched) are returned. If null, all records are returned.</td>
 </tr>
 </tbody></table>
 
@@ -12112,6 +12168,20 @@ curl -X GET https://api.crosoftware.net/v0/locations/<span class="o">{</span>loc
 <td>Location identifier.</td>
 </tr>
 <tr>
+<td><code>username</code></td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>If specified, return only records with matching usernames. If unspecified, return all. Wildcard is &#039;*&#039;.</td>
+</tr>
+<tr>
+<td><code>active</code></td>
+<td>query</td>
+<td>boolean</td>
+<td>false</td>
+<td>If true, return only active records (default). If false, return only inactive records. If unspecified, return all.</td>
+</tr>
+<tr>
 <td><code>page_limit</code></td>
 <td>query</td>
 <td>integer(int64)</td>
@@ -12124,13 +12194,6 @@ curl -X GET https://api.crosoftware.net/v0/locations/<span class="o">{</span>loc
 <td>integer(int64)</td>
 <td>false</td>
 <td>Paged results page index (starting from 1).</td>
-</tr>
-<tr>
-<td><code>username</code></td>
-<td>query</td>
-<td>string</td>
-<td>false</td>
-<td>If specified, return only records with matching usernames. If unspecified, return all. Wildcard is &#039;*&#039;.</td>
 </tr>
 </tbody></table>
 
