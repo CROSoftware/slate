@@ -898,7 +898,7 @@ List customer addresses.
 |`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
-|`filter_active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all.|
+|`active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
 |`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
@@ -2497,7 +2497,8 @@ Update customer location profile.
 |`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`customer_id`|path|integer(int64)|true|Customer identifier.|
-|`filter_active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all.|
+|`active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all.|
+|`parent_id`|query|integer(int64)|false|If specified, return only children of the specified parent_id.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
 |`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
@@ -3350,11 +3351,6 @@ namespace CROSoftware
           client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
-          // Parameters
-          NameValueCollection parameters = new NameValueCollection();
-          parameters.Add("last_updated_gte", "2049-10-31T11:32:38.390000");
-          parameters.Add("created_on_gte", "2049-10-31T11:32:38.390000");
-          
           string json = client.DownloadString(url);
           Console.WriteLine(json);
       }
@@ -3364,7 +3360,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/v0/customers?last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000 \
+curl -X GET https://api.crosoftware.net/v0/customers \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
@@ -3382,7 +3378,7 @@ var headers = {
 $.ajax({
   url: 'https://api.crosoftware.net/v0/customers',
   method: 'get',
-  data: '?last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000',
+
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -3403,9 +3399,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/v0/customers',
   params: {
-  'last_updated_gte' => 'string(DateTime)',
-'created_on_gte' => 'string(DateTime)'
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -3420,7 +3414,7 @@ headers = {
 }
 
 r = requests.get('https://api.crosoftware.net/v0/customers', params={
-  'last_updated_gte': '2049-10-31T11:32:38.390000',  'created_on_gte': '2049-10-31T11:32:38.390000'
+
 }, headers = headers)
 
 print r.json()
@@ -3428,7 +3422,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/v0/customers?last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000");
+URL obj = new URL("https://api.crosoftware.net/v0/customers");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3458,9 +3452,12 @@ List of customers.
 |---|---|---|---|---|
 |`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
-|`name`|query|string|false|If specified, return only records with matching names. If unspecified, return all. Wildcard is &#039;*&#039;.|
-|`last_updated_gte`|query|string(DateTime)|true|Return only records updated after (must be in past). If unspecified, return all.|
-|`created_on_gte`|query|string(DateTime)|true|Return records created on or after the specified date. If unspecified, return all.|
+|`name`|query|string|false|If specified, return only records with matching names. Wildcard is &#039;*&#039;.|
+|`active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all.|
+|`last_updated_gte`|query|string(DateTime)|false|Return only records updated after (must be in past). If unspecified, return all.|
+|`created_on_gte`|query|string(DateTime)|false|Return records created on or after the specified date. If unspecified, return all.|
+|`is_parent`|query|boolean|false|If true, return accounts with no parent. If false, return accounts with a parent. If null, all records returned.|
+|`parent_id`|query|integer(int64)|false|If specified, return only children of the specified parent_id.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
 |`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
@@ -3664,7 +3661,12 @@ List customers for location.
 |`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
-|`name`|query|string|false|Name (free text).|
+|`name`|query|string|false|If specified, return only records with matching names. Wildcard is &#039;*&#039;.|
+|`active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all.|
+|`last_updated_gte`|query|string(DateTime)|false|Return only records updated after (must be in past). If unspecified, return all.|
+|`created_on_gte`|query|string(DateTime)|false|Return records created on or after the specified date. If unspecified, return all.|
+|`is_parent`|query|boolean|false|If true, return accounts with no parent. If false, return accounts with a parent. If null, all records returned.|
+|`parent_id`|query|integer(int64)|false|If specified, return only children of the specified parent_id.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
 |`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
 
@@ -6217,11 +6219,6 @@ namespace CROSoftware
           client.Headers.Add("authorization", "bearer VGhlIGxhenkgYnJvd24gZm94");
           client.Headers.Add("x-tenant-id", "1");
           
-          // Parameters
-          NameValueCollection parameters = new NameValueCollection();
-          parameters.Add("last_updated_gte", "2049-10-31T11:32:38.390000");
-          parameters.Add("created_on_gte", "2049-10-31T11:32:38.390000");
-          
           string json = client.DownloadString(url);
           Console.WriteLine(json);
       }
@@ -6231,7 +6228,7 @@ namespace CROSoftware
 
 ```shell
 # You can also use wget
-curl -X GET https://api.crosoftware.net/v0/locations/{location_id}/jobs?last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000 \
+curl -X GET https://api.crosoftware.net/v0/locations/{location_id}/jobs \
   -H 'Accept: application/json' \
   -H 'authorization: bearer VGhlIGxhenkgYnJvd24gZm94' \
   -H 'x-tenant-id: 1'
@@ -6249,7 +6246,7 @@ var headers = {
 $.ajax({
   url: 'https://api.crosoftware.net/v0/locations/{location_id}/jobs',
   method: 'get',
-  data: '?last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000',
+
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -6270,9 +6267,7 @@ headers = {
 
 result = RestClient.get 'https://api.crosoftware.net/v0/locations/{location_id}/jobs',
   params: {
-  'last_updated_gte' => 'string(DateTime)',
-'created_on_gte' => 'string(DateTime)'
-}, headers: headers
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -6287,7 +6282,7 @@ headers = {
 }
 
 r = requests.get('https://api.crosoftware.net/v0/locations/{location_id}/jobs', params={
-  'last_updated_gte': '2049-10-31T11:32:38.390000',  'created_on_gte': '2049-10-31T11:32:38.390000'
+
 }, headers = headers)
 
 print r.json()
@@ -6295,7 +6290,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.crosoftware.net/v0/locations/{location_id}/jobs?last_updated_gte=2049-10-31T11%3A32%3A38.390000&created_on_gte=2049-10-31T11%3A32%3A38.390000");
+URL obj = new URL("https://api.crosoftware.net/v0/locations/{location_id}/jobs");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6336,8 +6331,9 @@ List jobs.
 |`failed`|query|boolean|false|If true, return only records marked deleted. If false, return only records marked as deleted. If unspecified, return all.|
 |`driver_id`|query|boolean|false|If specified, return only records matching this driver (default). If unspecified, return all.|
 |`truck_id`|query|boolean|false|If specified, return only records matching this truck (default). If unspecified, return all.|
-|`last_updated_gte`|query|string(DateTime)|true|Return only records updated after (must be in past). If unspecified, return all.|
-|`created_on_gte`|query|string(DateTime)|true|Return records created on or after the specified date. If unspecified, return all.|
+|`last_updated_gte`|query|string(DateTime)|false|Return only records updated after (must be in past). If unspecified, return all.|
+|`created_on_gte`|query|string(DateTime)|false|Return records created on or after the specified date. If unspecified, return all.|
+|`is_dispatched`|query|boolean|false|Filter jobs based on dispatch status. If true, records with a valid truck_id (dispatched) are returned. If false, records with no truck_id (not dispatched) are returned. If null, all records are returned.|
 
 > Example responses
 
@@ -8008,9 +8004,10 @@ List users.
 |`authorization`|header|string|false|Authorization header.|
 |`x-tenant-id`|header|integer(int64)|true|Tenant identifier.|
 |`location_id`|path|integer(int64)|true|Location identifier.|
+|`username`|query|string|false|If specified, return only records with matching usernames. If unspecified, return all. Wildcard is &#039;*&#039;.|
+|`active`|query|boolean|false|If true, return only active records (default). If false, return only inactive records. If unspecified, return all.|
 |`page_limit`|query|integer(int64)|false|Maximun number of results per page.|
 |`page_index`|query|integer(int64)|false|Paged results page index (starting from 1).|
-|`username`|query|string|false|If specified, return only records with matching usernames. If unspecified, return all. Wildcard is &#039;*&#039;.|
 
 > Example responses
 
